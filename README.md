@@ -202,81 +202,81 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 ```
 {
-  id: Number,             // Уникальный ID
-  current: Boolean,       // Является ли сборка текущей
-  createDate: Date,       // Дата создания сборки
-  title: String,          // Название сборки
-  cpu: {
+ id: Number,             // Уникальный ID
+ current: Boolean,       // Является ли сборка текущей
+ createDate: Date,       // Дата создания сборки
+ title: String,          // Название сборки
+ cpu: {
+  title: String,
+  link: String
+ },
+ cpuCooler: {
+  title: String,
+  link: String
+ },
+ thermalCompund: String, // Название используемой термопасты
+ motherboard: {
+  title: String,
+  link: String
+ },
+ ram: {
+  title: String,
+  link: String
+ },
+ gpu: {
+  title: String,
+  link: String
+ },
+ storage: [
+  {
    title: String,
    link: String
   },
-  cpuCooler: {
-   title: String,
-   link: String
-  },
-  thermalCompund: String, // Название используемой термопасты
-  motherboard: {
-   title: String,
-   link: String
-  },
-  ram: {
-   title: String,
-   link: String
-  },
-  gpu: {
-   title: String,
-   link: String
-  },
-  storage: [
-   {
-    title: String,
-    link: String
-   },
-   {
-    title: String,
-    link: String
-   }
-   ...
-  ],
-  power: {
-   title: String,
-   link: String
-  },
-  case: {
-   title: String,
-   link: String
-  },
-  monitor: {
-   title: String,
-   link: String
-  },
-  keyboard: {
-   title: String,
-   link: String
-  },
-  mouse: {
-   title: String,
-   link: String
-  },
-  mousePad: {
-   title: String,
-   link: String
-  },
-  headphones: {
-   title: String,
-   link: String
-  },
-  speakers: {
-   title: String,
-   link: String
-  },
-  ups: {
-   title: String,
-   link: String
-  },
-  controller: {
+  {
    title: String,
    link: String
   }
+  ...
+ ],
+ power: {
+  title: String,
+  link: String
+ },
+ case: {
+  title: String,
+  link: String
+ },
+ monitor: {
+  title: String,
+  link: String
+ },
+ keyboard: {
+  title: String,
+  link: String
+ },
+ mouse: {
+  title: String,
+  link: String
+ },
+ mousePad: {
+  title: String,
+  link: String
+ },
+ headphones: {
+  title: String,
+  link: String
+ },
+ speakers: {
+  title: String,
+  link: String
+ },
+ ups: {
+  title: String,
+  link: String
+ },
+ controller: {
+  title: String,
+  link: String
+ }
 }
 ```
