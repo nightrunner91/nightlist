@@ -29,6 +29,10 @@ Front-end часть будет выполнена на Vue.js. Хранение
 - [pcpartpicker.com](https://pcpartpicker.com/) (комплектующие ПК)
 - [pchound.com](https://pchound.com/) (комплектующие ПК)
 
+Главным источником вдохновения по части дизайна выступает GOG Galaxy 2.0, можно сказать, что будущий проект будет очень похож на стилистике и функционалу на него. 
+
+[!GOG Galaxy 2.0](https://items.gog.com/news/GLX-friendslist.jpg "GOG Galazy 2.0")
+
 # Планируемое к реализации
 
 ## Общее
