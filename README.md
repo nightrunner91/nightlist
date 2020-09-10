@@ -14,7 +14,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 - [GOG Galaxy 2.0](https://www.gog.com/galaxy) (дизайнерские решения)
 - [myvideogamelist.com](https://myvideogamelist.com/) (игры)
-- [steam.com](https://steam.com/) (игры)
+- [store.steampowered.com](https://store.steampowered.com/) (игры)
 - [ag.ru](https://ag.ru/) (игры и дизайнерские решения)
 - [kanobu.ru](https://kanobu.ru/) (игры)
 - [metacritic.com](https://metacritic.com/) (игры, сериалы и фильмы)
