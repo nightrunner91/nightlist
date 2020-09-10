@@ -14,6 +14,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 - [GOG Galaxy 2.0](https://www.gog.com/galaxy) (дизайнерские решения)
 - [myvideogamelist.com](https://myvideogamelist.com/) (игры)
+- [steam.com](https://steam.com/) (игры)
 - [ag.ru](https://ag.ru/) (игры и дизайнерские решения)
 - [kanobu.ru](https://kanobu.ru/) (игры)
 - [metacritic.com](https://metacritic.com/) (игры, сериалы и фильмы)
@@ -24,6 +25,8 @@ Front-end часть будет выполнена на Vue.js. Хранение
 - [kinopoisk.ru](https://kinopoisk.ru/) (фильмы и сериалы)
 - [shikimori.org](https://shikimori.org/) (аниме)
 - [readly.ru](http://readly.ru/) (книги)
+- [pcpartpicker.com](https://pcpartpicker.com/) (комплектующие ПК)
+- [pchound.com](https://pchound.com/) (комплектующие ПК)
 
 # Планируемое к реализации
 
