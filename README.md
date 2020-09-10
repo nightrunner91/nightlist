@@ -17,26 +17,26 @@ Front-end часть будет выполнена на Vue.js. Хранение
 Источниками для реализации функционала будут служить следующие ресурсы:
 
 ### Игры:
-[myvideogamelist.com](https://myvideogamelist.com/)
-[ag.ru](https://ag.ru/)
-[kanobu.ru](https://kanobu.ru/)
-[metacritic.com](https://metacritic.com/)
+- [myvideogamelist.com](https://myvideogamelist.com/)
+- [ag.ru](https://ag.ru/)
+- [kanobu.ru](https://kanobu.ru/)
+- [metacritic.com](https://metacritic.com/)
 
 ### Сериалы:
-[myshows.me](https://myshows.me/)
-[kinopoisk.ru](https://kinopoisk.ru/)
-[imdb.com](https://imdb.com/)
+- [myshows.me](https://myshows.me/)
+- [kinopoisk.ru](https://kinopoisk.ru/)
+- [imdb.com](https://imdb.com/)
 
 ### Аниме:
-[shikimori.org](https://shikimori.org/)
+- [shikimori.org](https://shikimori.org/)
 
 ### Фильмы:
-[letterboxd.com](https://letterboxd.com/)
-[kinopoisk.ru](https://kinopoisk.ru/)
-[imdb.com](https://imdb.com/)
+- [letterboxd.com](https://letterboxd.com/)
+- [kinopoisk.ru](https://kinopoisk.ru/)
+- [imdb.com](https://imdb.com/)
 
 ### Книги:
-[readly.ru](http://readly.ru/)
+- [readly.ru](http://readly.ru/)
 
 ## Общее
 
