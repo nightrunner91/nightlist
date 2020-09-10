@@ -102,7 +102,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   viewedSeasons: Number,   // Количество полностью просмотренных сезонов
   totalEpisodes: Number,   // Общее количество серий в сериале
   viewedEpisodes: Number,  // Количество просмотренных серий в сериале
-  averageDuration: Humber, // Средняя продолжительность одной серии
+  averageDuration: Number, // Средняя продолжительность одной серии
   favourite: Boolean,      // Является ли сериал избранным?
   link: String | null      // Ссылка на сериал на любом желаемом ресурсе
 }
@@ -157,7 +157,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   viewedSeasons: Number,   // Количество полностью просмотренных сезонов
   totalEpisodes: Number,   // Общее количество серий в сериале
   viewedEpisodes: Number,  // Количество просмотренных серий в сериале
-  averageDuration: Humber, // Средняя продолжительность одной серии
+  averageDuration: Number, // Средняя продолжительность одной серии
   favourite: Boolean,      // Является ли аниме избранным?
   link: String | null      // Ссылка на аниме на любом желаемом ресурсе
 }
