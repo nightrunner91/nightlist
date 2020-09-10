@@ -202,32 +202,32 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 ```
 {
- id: Number,             // Уникальный ID
- current: Boolean,       // Является ли сборка текущей
- createDate: Date,       // Дата создания сборки
- title: String,          // Название сборки
- cpu: {
+ id: Number,               // Уникальный ID
+ current: Boolean,         // Является ли сборка текущей
+ createDate: Date,         // Дата создания сборки
+ title: String,            // Название сборки
+ cpu: {                    // Название процессора и ссылка на него
   title: String,
   link: String
  },
- cpuCooler: {
+ cpuCooler: {              // Название кулера процессора и ссылка на него
   title: String,
   link: String
  },
- thermalCompund: String, // Название используемой термопасты
- motherboard: {
+ thermalCompund: String,   // Название используемой термопасты
+ motherboard: {            // Название материнской платы и ссылка на неё
   title: String,
   link: String
  },
- ram: {
+ ram: {                    // Название оперативной памяти и ссылка на неё
   title: String,
   link: String
  },
- gpu: {
+ gpu: {                    // Название видеокарты и ссылка на неё
   title: String,
   link: String
  },
- storage: [
+ storage: [                // Используемые в сборке накопители (HDD, SSD), из названия и ссылка на них
   {
    title: String,
    link: String
@@ -238,43 +238,43 @@ Front-end часть будет выполнена на Vue.js. Хранение
   }
   ...
  ],
- power: {
+ power: {                  // Название блока питания и ссылка на него
   title: String,
   link: String
  },
- case: {
+ case: {                   // Название корпуса и ссылка на него
   title: String,
   link: String
  },
- monitor: {
+ monitor: {                // Название монитора и ссылка на него
   title: String,
   link: String
  },
- keyboard: {
+ keyboard: {               // Название клавиатуры и ссылка на неё
   title: String,
   link: String
  },
- mouse: {
+ mouse: {                  // Название мыши и ссылка на неё
   title: String,
   link: String
  },
- mousePad: {
+ mousePad: {               // Название коврика для мыши и ссылка на неё
   title: String,
   link: String
  },
- headphones: {
+ headphones: {             // Название наушников для мыши и ссылка на неё
   title: String,
   link: String
  },
- speakers: {
+ speakers: {               // Название колонок для мыши и ссылка на них
   title: String,
   link: String
  },
- ups: {
+ ups: {                    // Название источника бесперебойного питания и ссылка на него
   title: String,
   link: String
  },
- controller: {
+ controller: {             // Название контроллера (геймпада, например) и ссылка на него
   title: String,
   link: String
  }
