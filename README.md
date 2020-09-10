@@ -31,7 +31,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 Главным источником вдохновения по части дизайна выступает GOG Galaxy 2.0, можно сказать, что будущий проект будет очень похож на стилистике и функционалу на него. 
 
-[!GOG Galaxy 2.0](https://items.gog.com/news/GLX-friendslist.jpg "GOG Galazy 2.0")
+![GOG Galaxy 2.0](https://i.imgur.com/K1kRZpk.jpg "GOG Galazy 2.0")
 
 # Планируемое к реализации
 
