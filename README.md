@@ -18,18 +18,25 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 ### Игры:
 [myvideogamelist.com](https://myvideogamelist.com/)
+[ag.ru](https://ag.ru/)
+[kanobu.ru](https://kanobu.ru/)
+[metacritic.com](https://metacritic.com/)
 
 ### Сериалы:
-[myvideogamelist.com](https://myshows.me/)
+[myshows.me](https://myshows.me/)
+[kinopoisk.ru](https://kinopoisk.ru/)
+[imdb.com](https://imdb.com/)
 
 ### Аниме:
-[myvideogamelist.com](https://shikimori.org/)
+[shikimori.org](https://shikimori.org/)
 
 ### Фильмы:
-[myvideogamelist.com](https://letterboxd.com/)
+[letterboxd.com](https://letterboxd.com/)
+[kinopoisk.ru](https://kinopoisk.ru/)
+[imdb.com](https://imdb.com/)
 
 ### Книги:
-[myvideogamelist.com](http://readly.ru/)
+[readly.ru](http://readly.ru/)
 
 ## Общее
 
