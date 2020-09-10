@@ -8,37 +8,26 @@
 
 # На чём будет базироваться проект?
 
-Front-end часть будет выполнена на Vue.js. Хранение и редактирование базы данных будет реализовано с помощью JSON-файла, синхронизируемого в Google Cloud. У проекта не будет никакой "изначальной" базы данных, откуда пользователь сможет добавлять в свой профайл объекты. Всё будет осуществляться вручную.
+Front-end часть будет выполнена на Vue.js. Хранение и редактирование базы данных будет реализовано с помощью JSON-файла, синхронизируемого в Google Cloud. У проекта не будет никакой "изначальной" базы данных, откуда пользователь сможет добавлять в свой профайл тайтлы. Всё будет осуществляться вручную.
  
-# Источники вдохновения 
+# Источники вдохновения
 
-Источником вдохновения для дизайна будет служить [GOG Galaxy 2.0](https://www.gog.com/galaxy).
+- [GOG Galaxy 2.0](https://www.gog.com/galaxy) (дизайнерские решения)
+- [myvideogamelist.com](https://myvideogamelist.com/) (игры)
+- [ag.ru](https://ag.ru/) (игры и дизайнерские решения)
+- [kanobu.ru](https://kanobu.ru/) (игры)
+- [metacritic.com](https://metacritic.com/) (игры, сериалы и фильмы)
+- [myshows.me](https://myshows.me/) (сериалы)
+- [kinopoisk.ru](https://kinopoisk.ru/) (сериалы и фильмы)
+- [imdb.com](https://imdb.com/) (сериалы и фильмы)
+- [letterboxd.com](https://letterboxd.com/) (фильмы и дизайнерские решения)
+- [kinopoisk.ru](https://kinopoisk.ru/) (фильмы и сериалы)
+- [shikimori.org](https://shikimori.org/) (аниме)
+- [readly.ru](http://readly.ru/) (книги)
 
-Источниками для реализации функционала будут служить следующие ресурсы:
+# Планируемое к реализации
 
-### Игры:
-- [myvideogamelist.com](https://myvideogamelist.com/)
-- [ag.ru](https://ag.ru/)
-- [kanobu.ru](https://kanobu.ru/)
-- [metacritic.com](https://metacritic.com/)
-
-### Сериалы:
-- [myshows.me](https://myshows.me/)
-- [kinopoisk.ru](https://kinopoisk.ru/)
-- [imdb.com](https://imdb.com/)
-
-### Аниме:
-- [shikimori.org](https://shikimori.org/)
-
-### Фильмы:
-- [letterboxd.com](https://letterboxd.com/)
-- [kinopoisk.ru](https://kinopoisk.ru/)
-- [imdb.com](https://imdb.com/)
-
-### Книги:
-- [readly.ru](http://readly.ru/)
-
-## Общее
+### Общее
 
 * Создание дизайна
 * Написание SPA приложения на базе vue.js
@@ -46,7 +35,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
 * Покупка подходящего доменного имени
 * Развёртка проекта на хостинге
 
-## Игры:
+### Игры:
 
 * Добавление новой игры в БД
 * Редактирование добавленной игры в БД
@@ -70,7 +59,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
 }
 ```
 
-## Сериалы:
+### Сериалы:
 
 * Добавление нового сериала в БД
 * Редактирование добавленного сериала в БД
