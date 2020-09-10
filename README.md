@@ -258,11 +258,11 @@ Front-end часть будет выполнена на Vue.js. Хранение
   title: String,
   link: String
  },
- mousePad: {               // Название коврика для мыши и ссылка на неё
+ mousePad: {               // Название коврика для мыши и ссылка на него
   title: String,
   link: String
  },
- headphones: {             // Название наушников для мыши и ссылка на неё
+ headphones: {             // Название наушников для мыши и ссылка на них
   title: String,
   link: String
  },
