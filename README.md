@@ -227,7 +227,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   title: String,
   link: String
  },
- storage: [                // Используемые в сборке накопители (HDD, SSD), их названия и ссылка на них
+ storage: [                // Названия и ссылки на используемые в сборке накопители (HDD, SSD)
   {
    title: String,
    link: String
