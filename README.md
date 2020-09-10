@@ -70,10 +70,10 @@ Front-end часть будет выполнена на Vue.js. Хранение
   title: String,              // Название игры
   status: String,             // Играю/Пройдено/Брошено/Отложено/Буду играть
   ownership: String,          // Куплено/Спирачено
-  hours: Number,              // Количество затраченных часов,
-  hoursApproximate: Boolean,  // Точное или нет количество часов?
+  hours: Number,              // Количество затраченных часов
+  hoursApproximate: Boolean,  // Точное или нет количество затраченных часов?
   rating: Number,             // 1-10, персональный рейтинг
-  favourite: Boolean          // Является ли игра избранной
+  favourite: Boolean          // Является ли игра избранной?
   link: String | null         // Ссылка на игру на любом желаемом ресурсе
 }
 ```
@@ -103,7 +103,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   totalEpisodes: Number,   // Общее количество серий в сериале
   viewedEpisodes: Number,  // Количество просмотренных серий в сериале
   averageDuration: Humber, // Средняя продолжительность одной серии
-  favourite: Boolean,      // Является ли сериал избранным
+  favourite: Boolean,      // Является ли сериал избранным?
   link: String | null      // Ссылка на сериал на любом желаемом ресурсе
 }
 ```
@@ -128,7 +128,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   viewCount: Number,      // Количество просмотров (по умолчанию 1)
   duration: Number,       // Продолжительность фильма
   rating: Number,         // 1-10, персональный рейтинг
-  favourite: Boolean,     // Является ли фильм избранным
+  favourite: Boolean,     // Является ли фильм избранным?
   link: String | null     // Ссылка на сериал на любом желаемом ресурсе
 }
 ```
@@ -158,7 +158,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   totalEpisodes: Number,   // Общее количество серий в сериале
   viewedEpisodes: Number,  // Количество просмотренных серий в сериале
   averageDuration: Humber, // Средняя продолжительность одной серии
-  favourite: Boolean,      // Является ли аниме избранным
+  favourite: Boolean,      // Является ли аниме избранным?
   link: String | null      // Ссылка на аниме на любом желаемом ресурсе
 }
 ```
@@ -183,7 +183,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   author: String          // Имя автора книги
   status: String,         // Читаю/Прочитано/Брошено/Буду читать
   rating: Number,         // 1-10, персональный рейтинг
-  favourite: Boolean,     // Является ли книга избранной
+  favourite: Boolean,     // Является ли книга избранной?
   link: String | null     // Ссылка на книгу на любом желаемом ресурсе
 }
 ```
