@@ -12,12 +12,12 @@ Front-end часть будет выполнена на Vue.js. Хранение
  
 # Источники вдохновения
 
-- [GOG Galaxy 2.0](https://www.gog.com/galaxy) (дизайнерские решения)
+- [GOG Galaxy 2.0](https://www.gog.com/galaxy) (игры и дизайнерские решения)
+- [ag.ru](https://ag.ru/) (игры и дизайнерские решения)
+- [metacritic.com](https://metacritic.com/) (игры, сериалы и фильмы)
 - [myvideogamelist.com](https://myvideogamelist.com/) (игры)
 - [store.steampowered.com](https://store.steampowered.com/) (игры)
-- [ag.ru](https://ag.ru/) (игры и дизайнерские решения)
 - [kanobu.ru](https://kanobu.ru/) (игры)
-- [metacritic.com](https://metacritic.com/) (игры, сериалы и фильмы)
 - [myshows.me](https://myshows.me/) (сериалы)
 - [kinopoisk.ru](https://kinopoisk.ru/) (сериалы и фильмы)
 - [imdb.com](https://imdb.com/) (сериалы и фильмы)
