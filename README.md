@@ -128,7 +128,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   viewCount: Number,      // Количество просмотров (по умолчанию 1)
   duration: Number,       // Продолжительность фильма
   rating: Number,         // 1-10, персональный рейтинг
-  favourite: Boolean      // Является ли фильм избранным
+  favourite: Boolean,     // Является ли фильм избранным
   link: String | null     // Ссылка на сериал на любом желаемом ресурсе
 }
 ```
@@ -158,7 +158,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   totalEpisodes: Number,   // Общее количество серий в сериале
   viewedEpisodes: Number,  // Количество просмотренных серий в сериале
   averageDuration: Humber, // Средняя продолжительность одной серии
-  favourite: Boolean       // Является ли аниме избранным
+  favourite: Boolean,      // Является ли аниме избранным
   link: String | null      // Ссылка на аниме на любом желаемом ресурсе
 }
 ```
@@ -183,7 +183,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
   author: String          // Имя автора книги
   status: String,         // Читаю/Прочитано/Брошено/Буду читать
   rating: Number,         // 1-10, персональный рейтинг
-  favourite: Boolean      // Является ли книга избранной
+  favourite: Boolean,     // Является ли книга избранной
   link: String | null     // Ссылка на книгу на любом желаемом ресурсе
 }
 ```
@@ -199,6 +199,7 @@ Front-end часть будет выполнена на Vue.js. Хранение
 ```
 {
   id: Number,             // уникальный ID
+  current: Boolean,       // является ли сборка текущей
   title: String,          // Название сборки
   cpu: String,            // Название процессора
   cpuCooler: String,      // Название кулера процессора
