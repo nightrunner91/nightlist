@@ -65,14 +65,15 @@ Front-end часть будет выполнена на Vue.js. Хранение
 
 ```
 {
-  id: Number,          // уникальный ID
-  title: String,       // Название игры
-  status: String,      // Играю/Пройдено/Брошено/Отложено/Буду играть
-  ownership: String,   // Куплено/Спирачено
-  hours: Number,       // Количество затраченных часов,
-  rating: Number,      // 1-10, персональный рейтинг
-  favourite: Boolean   // Является ли игра избранной
-  link: String | null  // Ссылка на игру на любом желаемом ресурсе
+  id: Number,                 // уникальный ID
+  title: String,              // Название игры
+  status: String,             // Играю/Пройдено/Брошено/Отложено/Буду играть
+  ownership: String,          // Куплено/Спирачено
+  hours: Number,              // Количество затраченных часов,
+  hoursApproximate: Boolean,  // Точное или нет количество часов?
+  rating: Number,             // 1-10, персональный рейтинг
+  favourite: Boolean          // Является ли игра избранной
+  link: String | null          // Ссылка на игру на любом желаемом ресурсе
 }
 ```
 
