@@ -204,18 +204,19 @@ Front-end часть будет выполнена на Vue.js. Хранение
 {
   id: Number,             // Уникальный ID
   current: Boolean,       // Является ли сборка текущей
+  createDate: Date,       // Дата создания сборки
   title: String,          // Название сборки
   cpu: String,            // Название процессора
   cpuCooler: String,      // Название кулера процессора
   thermalCompund: String, // Название используемой термопасты
   motherboard: String,    // Название материнской платы
   ram: String,            // Название оперативной памяти
+  gpu: String,            // Название видеокарты
   storage: {
    storage_1: String,     // Используемые в сборке 
    storage_2: String      // жесткие и твердотепльные накопители
    ...
   },
-  gpu: String,            // Название видеокарты
   power: String,          // Название блока питания
   case: String,           // Название корпуса
   monitor: String,        // Название монитора
