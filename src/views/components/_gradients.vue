@@ -3,7 +3,7 @@
     div(
       v-for='page in pages'
       class='gradients__item'
-      :class='["gradients__item--" + page, {"gradients__item--active" : current == page}]')
+      :class='["gradients__item--" + page, {"gradients__item--active" : current.toLowerCase() == page}]')
 </template>
 
 <script>

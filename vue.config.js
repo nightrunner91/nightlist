@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 
 module.exports = {
+  publicPath: './',
   configureWebpack: {
     plugins: [
       new webpack.optimize.LimitChunkCountPlugin({
@@ -21,5 +22,5 @@ module.exports = {
   css: {
     extract: false
   },
-  filenameHashing: false
+  filenameHashing: false,
 }

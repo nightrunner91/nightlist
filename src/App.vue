@@ -23,7 +23,7 @@ export default {
     }
   },
   computed: {
-    currentPage() {return this.$route.name.toLowerCase()}
+    currentPage() {return this.$route.name}
   },
   mounted() {
 
