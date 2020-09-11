@@ -11,13 +11,11 @@ Vue.config.productionTip = false
 export const eventBus = new Vue();
 
 // Import and regitser components
-import appHeader from "./views/components/_header";
-import appFooter from "./views/components/_footer";
-import appComponent from "./views/components/_component.vue";
+import appSidebar from "./views/components/_sidebar";
+import appGradients from "./views/components/_gradients";
 
-Vue.component('app-component', appComponent);
-Vue.component('app-header', appHeader);
-Vue.component('app-footer', appFooter);
+Vue.component('app-sidebar', appSidebar);
+Vue.component('app-gradients', appGradients);
 
 // SVG Sprite
 import sprite from './assets/sprite.svg';

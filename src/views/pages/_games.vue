@@ -1,9 +1,9 @@
 <template lang='pug'>
-  section(class='section')
+  section(class='section') Games
 </template>
 
 <script>
 export default {
-  name: 'Page'
+  name: 'Games'
 }
 </script>

@@ -1,18 +1,15 @@
 <template lang='pug'>
 
-  div(id='app')
-
-    app-header
-
+  div(id='app' class='page')
+    app-gradients(:current='currentPage')
+    app-sidebar
     main(class='main')
-      router-view
-      
-    app-footer
+      transition(name="fade" mode="out-in")
+        router-view
 
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { eventBus } from "./main";
 
 export default {
@@ -23,9 +20,7 @@ export default {
     }
   },
   computed: {
-    someData() {return this.$store.state.foo},
-
-    ...mapState(['vuexFoo'])
+    currentPage() {return this.$route.name.toLowerCase()}
   },
   mounted() {
 

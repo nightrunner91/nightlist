@@ -1,0 +1,38 @@
+.gradients
+  @extend .pos-fixed
+
+  width: 100vw
+  height: 100vh
+
+  z-index: 1
+
+  &__item
+    @extend .pos-absolute
+    @extend .slow-transition
+
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    opacity: 0
+
+    &--games
+      +gradient($clr-games)
+
+    &--tvshows
+      +gradient($clr-tvshows)
+
+    &--films
+      +gradient($clr-films)
+
+    &--anime
+      +gradient($clr-anime)
+
+    &--books
+      +gradient($clr-books)
+
+    &--hardware
+      +gradient($clr-hardware)
+
+    &--active
+      opacity: 1

@@ -1,0 +1,37 @@
+.sidebar
+  @extend .pos-relative
+  @extend .flex-column
+
+  width: 25%
+  height: 100%
+  min-width: 320px
+  max-width: 360px
+  padding: $gutter-width*2 $gutter-width
+  background: rgba($clr-black, 0.1)
+  z-index: 3
+
+  &__link
+    @extend .pos-relative
+    @extend .flex
+    @extend .align-center
+    @extend .weight-light
+
+    height: 36px
+    color: rgba($clr-white, 0.7)
+    z-index: 2
+
+    &:hover
+      color: $clr-white
+
+    &--exact
+      color: $clr-white
+
+      .sidebar
+        &__icon
+          @include svg-icon(24, 24, 'bookmark-active')
+
+  &__icon
+    @include svg-icon(24, 24, 'bookmark-passive')
+    @extend .base-transition
+
+    margin-right: $gutter-width/3
