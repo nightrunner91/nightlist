@@ -23,15 +23,47 @@
     &:hover
       color: $clr-white
 
+    &--dashboard
+      margin-bottom: $gutter-width
+
     &--exact
+      @extend .weight-medium
+      
       color: $clr-white
 
       .sidebar
         &__icon
-          @include svg-icon(24, 24, 'bookmark-active')
+          &--dashboard
+            @include svg-icon(24, 24, 'dashboard-active')
+
+          &--bookmark
+            @include svg-icon(24, 24, 'bookmark-active')
 
   &__icon
-    @include svg-icon(24, 24, 'bookmark-passive')
     @extend .base-transition
 
     margin-right: $gutter-width/3
+
+    &--dashboard
+      @include svg-icon(24, 24, 'dashboard-passive')
+
+    &--bookmark
+      @include svg-icon(24, 24, 'bookmark-passive')
+
+  &__name
+    line-height: 1
+
+  &__counter
+    @extend .flex-center
+    @extend .small
+    @extend .clr-white
+    @extend .font-roboto
+    @extend .weight-medium
+
+    border-radius: 10px
+    height: 20px
+    line-height: 1
+    padding: 0 10px
+    margin-left: auto
+    line-height: 1
+    background: rgba($clr-white, 0.05)

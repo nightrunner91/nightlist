@@ -14,14 +14,14 @@ export default {
   },
   data() {
     return {
-      pages: ['games', 'tvshows', 'films', 'anime', 'books', 'hardware']
+      pages: ['dashboard', 'games', 'tvshows', 'films', 'anime', 'books', 'hardware']
     }
   },
   methods: {
 
   },
   mounted() {
-    //console.log(this.prop1, this.prop2);
+    
   }
 }
 </script>

@@ -8,6 +8,7 @@ import Films from './views/pages/_films.vue'
 import Anime from './views/pages/_anime.vue'
 import Books from './views/pages/_books.vue'
 import Hardware from './views/pages/_hardware.vue'
+import Dashboard from './views/pages/_dashboard.vue'
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    redirect: '/games'
+    redirect: '/dashboard'
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   },
   {
     path: '/games',

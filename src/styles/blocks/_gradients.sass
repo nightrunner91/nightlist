@@ -8,13 +8,16 @@
 
   &__item
     @extend .pos-absolute
-    @extend .slow-transition
+    @extend .lazy-transition
 
     width: 100%
     height: 100%
     top: 0
     left: 0
     opacity: 0
+
+    &--dashboard
+      +gradient($clr-dashboard)
 
     &--games
       +gradient($clr-games)

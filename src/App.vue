@@ -5,7 +5,10 @@
     app-sidebar
     main(class='main')
       transition(name="fade" mode="out-in")
-        router-view
+        div(class='container')
+          div(class='row')
+            div(class='col mb-12')
+              router-view
 
 </template>
 
