@@ -4,10 +4,10 @@
     app-gradients(:current='currentPage')
     app-sidebar
     main(class='main')
-      transition(name="fade" mode="out-in")
-        div(class='container')
-          div(class='row')
-            div(class='col mb-12')
+      div(class='container')
+        div(class='row')
+          div(class='col mb-12')
+            transition(name="fade" mode="out-in")
               router-view
 
 </template>
@@ -23,7 +23,7 @@ export default {
     }
   },
   computed: {
-    currentPage() {return this.$route.name}
+    currentPage() {return this.$route.name.toLowerCase()}
   },
   mounted() {
 

@@ -1,0 +1,44 @@
+.table
+  margin-bottom: $gutter-width
+
+  &__header,
+  &__item
+    @extend .flex
+    @extend .align-center
+
+  &__item
+    margin-bottom: $gutter-width/3
+
+  &__cell
+    @extend .flex
+
+    height: 30px
+
+    &--index
+      @extend .align-center
+
+      width: 25px
+      color: rgba($clr-white, 0.5)
+
+    &--title
+      @extend .flex-column
+      @extend .justify-center
+      @extend .weight-bold
+
+      width: 40%
+
+    &--rating
+      @extend .align-center
+
+      width: 20%
+
+    &--hours
+      @extend .align-center
+
+      width: 20%
+
+    &--action
+      @extend .align-center
+      @extend .justify-end
+
+      flex: 1
