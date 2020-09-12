@@ -22,7 +22,8 @@
         div(class='table__item' v-for='(item, index) in 10')
           div(class='table__cell table__cell--3') {{index + 1}}
           div(class='table__cell table__cell--42') Some Fancy Title
-          div(class='table__cell table__cell--15') {{randomNumber(5)}}
+          div(class='table__cell table__cell--15')  
+            div(class='table__rating table__rating--3')
           div(class='table__cell table__cell--15') {{randomNumber(101)}}
           div(class='table__cell table__cell--25 table__cell--right') edit
 

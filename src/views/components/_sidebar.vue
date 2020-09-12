@@ -8,7 +8,7 @@
         i(class='sidebar__share')
 
     div(class='sidebar__menu')
-      router-link(to='/' class='sidebar__link sidebar__link--dashboard')
+      router-link(to='/dashboard' class='sidebar__link sidebar__link--dashboard')
         div(class='sidebar__icon')
           svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
           svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')

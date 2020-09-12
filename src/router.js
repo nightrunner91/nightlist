@@ -57,8 +57,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
-  base: '/nightlist/',
+  mode: 'history',
+  //base: '/nightlist/',
   linkActiveClass: '',
   linkExactActiveClass: 'sidebar__link--active',
   routes
