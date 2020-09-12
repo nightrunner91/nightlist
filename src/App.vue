@@ -3,12 +3,13 @@
   div(id='app' class='page')
     app-gradients(:current='currentPage')
     app-sidebar
-    main(class='main')
-      div(class='container')
-        div(class='row')
-          div(class='col mb-12')
-            transition(name="fade" mode="out-in")
-              router-view
+    div(v-scrollbar)
+      main(class='main')
+        div(class='container')
+          div(class='row')
+            div(class='col mb-12')
+              transition(name="fade" mode="out-in")
+                router-view
 
 </template>
 

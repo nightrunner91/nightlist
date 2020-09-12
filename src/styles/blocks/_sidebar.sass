@@ -28,6 +28,7 @@
     margin-bottom: $gutter-width/2
 
   &__username
+    @extend .pos-relative
     @extend .flex
     @extend .align-center
     @extend .fz3
@@ -35,11 +36,15 @@
     line-height: 1
 
   &__share
-    @include svg-icon(24, 24, 'share')
+    @include svg-icon(18, 18, 'share')
+    @extend .pos-absolute
     @extend .cursor-pointer
     @extend .base-transition
 
-    margin-left: $gutter-width/3
+    top: 0
+    bottom: 0
+    margin: auto
+    right: - 18px - $gutter-width/2
     opacity: 0.6
 
     &:hover

@@ -1,0 +1,51 @@
+::-webkit-scrollbar {
+  width: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.vb {
+  flex: 1;
+
+  .vb-dragger {
+    z-index: 99;
+    width: 4px;
+    right: 3px;
+    .scrollbar-container {
+      display: flex !important;
+      flex-direction: column;
+    }
+
+    .vb-dragger-styler {
+      backface-visibility: hidden;
+      transform: rotate3d(0, 0, 0, 0);
+      transition: opacity 100ms ease-out, margin 100ms ease-out, height 100ms ease-out;
+      background-color: $clr-black;
+      margin: 0;
+      height: 100%;
+      display: block;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+    .vb.vb-scrolling-phantom .vb-dragger .vb-dragger-styler {
+      opacity: 0.75;
+    }
+    &:hover > .vb-dragger-styler {
+      margin: 0px;
+      height: 100%;
+      opacity: 0.75;
+    }
+    .vb.vb-dragging .vb-dragger .vb-dragger-styler {
+      opacity: 0.75;
+      margin: 0px;
+      height: 100%;
+    }
+  }
+  &.vb-dragging-phantom .vb-dragger .vb-dragger-styler {
+    opacity: 0.75;
+  }
+  &.vb-visible .vb-content {
+    box-sizing: border-box;
+    padding-right: 0;
+    text-align: justify;
+  }
+}

@@ -5,7 +5,8 @@ import router from './router'
 import store from './store'
 
 // Disable annoying messages in console
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 // Create global event
 export const eventBus = new Vue();
@@ -14,8 +15,12 @@ export const eventBus = new Vue();
 import appSidebar from "./views/components/_sidebar";
 import appGradients from "./views/components/_gradients";
 
+import Vuebar from './directives/_scrollbar';
+
 Vue.component('app-sidebar', appSidebar);
 Vue.component('app-gradients', appGradients);
+
+Vue.use(Vuebar);
 
 // SVG Sprite
 import sprite from './assets/sprite.svg';
