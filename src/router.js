@@ -59,8 +59,8 @@ const routes = [
 const router = new VueRouter({
   mode: 'hash',
   base: '/nightlist/',
-  linkActiveClass: 'sidebar__link--active',
-  linkExactActiveClass: 'sidebar__link--exact',
+  linkActiveClass: '',
+  linkExactActiveClass: 'sidebar__link--active',
   routes
 })
 

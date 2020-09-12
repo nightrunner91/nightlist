@@ -5,14 +5,20 @@
   &__item
     @extend .flex
     @extend .align-center
+    @extend .base-radius
+
+    padding: 0 $gutter-width/2
 
   &__item
-    margin-bottom: $gutter-width/3
+    @extend .base-transition
+
+    &:hover
+      background: rgba($clr-white, 0.05)
 
   &__cell
     @extend .flex
 
-    height: 30px
+    height: 40px
 
     &--index
       @extend .align-center

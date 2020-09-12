@@ -1,11 +1,25 @@
 .title
   @extend .flex
   @extend .align-center
+  @extend .cursor-pointer
+  @extend .base-transition
+  @extend .base-radius
 
-  margin-bottom: $gutter-width
+  height: 60px
+    
+  &:hover
+    background: rgba($clr-white, 0.05)
+
+  padding: 0 $gutter-width/2
+  margin-bottom: $gutter-width/2
 
   &__name
     @extend .no-mg
 
   &__badge
-    margin-left: $gutter-width/2
+    margin: 0 $gutter-width/2
+
+  &__chevron
+    @include svg-icon(24, 24, 'chevron-down')
+
+    margin-left: auto

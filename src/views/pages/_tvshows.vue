@@ -4,13 +4,16 @@
     div(class='title')
       h3(class='title__name') Currently playing
       span(class='title__badge badge badge--medium') 4
+      i(class='title__chevron')
 
     div(class='table')
 
       div(class='table__header')
         div(class='table__cell table__cell--index')
         div(class='table__cell table__cell--title') Title
-        div(class='table__cell table__cell--rating') Rating
+        div(class='table__cell table__cell--rating') 
+          span Rating
+          i(class='title__chevron')
         div(class='table__cell table__cell--hours') Hours
         div(class='table__cell table__cell--action')
 

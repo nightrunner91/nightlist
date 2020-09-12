@@ -14,6 +14,37 @@
 
   z-index: 3
 
+  &__profile
+    @extend .flex-column
+    @extend .align-center
+
+    margin-bottom: $gutter-width * 2
+
+  &__avatar
+    @include icon-size(100, 100)
+    @extend .round-radius
+    @extend .no-select
+
+    margin-bottom: $gutter-width/2
+
+  &__username
+    @extend .flex
+    @extend .align-center
+    @extend .fz3
+
+    line-height: 1
+
+  &__share
+    @include svg-icon(24, 24, 'share')
+    @extend .cursor-pointer
+    @extend .base-transition
+
+    margin-left: $gutter-width/3
+    opacity: 0.6
+
+    &:hover
+      opacity: 1
+
   &__link
     @extend .pos-relative
     @extend .flex
@@ -28,9 +59,9 @@
       color: $clr-white
 
     &--dashboard
-      margin-bottom: $gutter-width
+      margin-bottom: $gutter-width/2
 
-    &--exact
+    &--active
       @extend .weight-medium
       
       color: $clr-white
