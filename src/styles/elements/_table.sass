@@ -9,42 +9,57 @@
 
     padding: 0 $gutter-width/2
 
+  &__header
+    .table
+      &__cell
+        @extend .weight-regular
+        @extend .txt-uppercase
+        @extend .small
+
+        color: rgba($clr-white, 0.5)
+
+        &--functional
+          @extend .cursor-pointer
+          @extend .base-transition
+
+          &:hover
+            color: $clr-white
+
+            .table
+              &__chevron
+                opacity: 1
+
   &__item
     @extend .base-transition
 
     &:hover
       background: rgba($clr-white, 0.05)
 
+  &__chevron
+    @extend .pos-relative
+    @extend .base-transition
+    @include svg-icon(18, 18, 'chevron-down')
+
+    top: -2px
+
+    opacity: 0.5
+
   &__cell
     @extend .flex
+    @extend .align-center
 
     height: 40px
 
-    &--index
-      @extend .align-center
+    $i: 1
+    @while $i <= 100
+      $perc: unquote($i + "%")
+      &--#{$i}
+        width: $perc
 
-      width: 25px
+      $i: $i + 1
+
+    &:first-child
       color: rgba($clr-white, 0.5)
 
-    &--title
-      @extend .flex-column
-      @extend .justify-center
-      @extend .weight-bold
-
-      width: 40%
-
-    &--rating
-      @extend .align-center
-
-      width: 20%
-
-    &--hours
-      @extend .align-center
-
-      width: 20%
-
-    &--action
-      @extend .align-center
+    &--right
       @extend .justify-end
-
-      flex: 1

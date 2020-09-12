@@ -67,28 +67,35 @@
       margin-bottom: $gutter-width/2
 
     &--active
-      @extend .weight-medium
-      
       color: $clr-white
 
       .sidebar
-        &__icon
-          &--dashboard
-            @include svg-icon(24, 24, 'dashboard-active')
+        &__bookmark
+          &--passive
+            opacity: 0
 
-          &--bookmark
-            @include svg-icon(24, 24, 'bookmark-active')
+          &--active
+            opacity: 1
 
   &__icon
-    @extend .base-transition
+    @extend .pos-relative
+    @include icon-size(24, 24)
 
     margin-right: $gutter-width/3
 
-    &--dashboard
-      @include svg-icon(24, 24, 'dashboard-passive')
+  &__bookmark
+    @extend .pos-absolute
+    @extend .base-transition
+    @include icon-size(24, 24)
 
-    &--bookmark
-      @include svg-icon(24, 24, 'bookmark-passive')
+    top: 0
+    left: 0
+
+    &--passive
+      opacity: 1
+
+    &--active
+      opacity: 0
 
   &__name
     line-height: 1

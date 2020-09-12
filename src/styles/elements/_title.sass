@@ -4,17 +4,17 @@
   @extend .cursor-pointer
   @extend .base-transition
   @extend .base-radius
-
-  height: 60px
     
   &:hover
     background: rgba($clr-white, 0.05)
 
-  padding: 0 $gutter-width/2
+  padding: $gutter-width/2
   margin-bottom: $gutter-width/2
 
   &__name
     @extend .no-mg
+
+    line-height: 1
 
   &__badge
     margin: 0 $gutter-width/2

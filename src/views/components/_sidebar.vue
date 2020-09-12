@@ -5,35 +5,49 @@
       img(src='img/avatar.png' alt='' class='sidebar__avatar')
       div(class='sidebar__username') 
         span Nightrunner
-        i(class='sidebar__share') 
+        i(class='sidebar__share')
 
     div(class='sidebar__menu')
       router-link(to='/' class='sidebar__link sidebar__link--dashboard')
-        i(class='sidebar__icon sidebar__icon--dashboard')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span(class='sidebar__name') Dashboard
         span(class='sidebar__badge badge badge--small') 999
       router-link(to='/games' class='sidebar__link')
-        i(class='sidebar__icon sidebar__icon--bookmark')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span(class='sidebar__name') Games
         span(class='sidebar__badge badge badge--small') 124
       router-link(to='/tvshows' class='sidebar__link') 
-        i(class='sidebar__icon sidebar__icon--bookmark')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span TV Shows
         span(class='sidebar__badge badge badge--small') 43
       router-link(to='/films' class='sidebar__link') 
-        i(class='sidebar__icon sidebar__icon--bookmark')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span Films
         span(class='sidebar__badge badge badge--small') 364
       router-link(to='/anime' class='sidebar__link') 
-        i(class='sidebar__icon sidebar__icon--bookmark')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span Anime
         span(class='sidebar__badge badge badge--small') 77
       router-link(to='/books' class='sidebar__link') 
-        i(class='sidebar__icon sidebar__icon--bookmark')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span Books
         span(class='sidebar__badge badge badge--small') 18
       router-link(to='/hardware' class='sidebar__link') 
-        i(class='sidebar__icon sidebar__icon--bookmark')
+        div(class='sidebar__icon')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span Hardware
         span(class='sidebar__badge badge badge--small') 3
 </template>
