@@ -1,15 +1,20 @@
 .title
   @extend .flex
   @extend .align-center
-  @extend .cursor-pointer
-  @extend .base-transition
-  @extend .base-radius
-    
-  &:hover
-    background: rgba($clr-white, 0.05)
-
+  
   padding: $gutter-width/2
   margin-bottom: $gutter-width/2
+
+  &--main
+
+
+  &--secondary
+    @extend .cursor-pointer
+    @extend .base-transition
+    @extend .base-radius
+
+    &:hover
+      background: rgba($clr-white, 0.05)
 
   &__name
     @extend .no-mg
@@ -20,6 +25,6 @@
     margin: 0 $gutter-width/2
 
   &__chevron
-    @include svg-icon(24, 24, 'chevron-down')
+    @include icon-size(24, 24)
 
     margin-left: auto

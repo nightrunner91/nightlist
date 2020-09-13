@@ -5,7 +5,7 @@
       img(src='img/avatar.png' alt='' class='sidebar__avatar')
       div(class='sidebar__username') 
         span Nightrunner
-        i(class='sidebar__share')
+        svg(class='sidebar__share'): use(xlink:href='#share')
 
     div(class='sidebar__menu')
       router-link(to='/dashboard' class='sidebar__link sidebar__link--dashboard')
@@ -53,11 +53,10 @@
 </template>
 
 <script>
-import avatar from "../../assets/avatar.png"
+import "../../assets/avatar.png"
 
 export default {
   name: 'Sidebar',
-  components: [avatar],
   props: {
     prop1: String,
     prop2: Boolean
