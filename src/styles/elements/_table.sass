@@ -10,6 +10,8 @@
     padding: 0 $gutter-width/2
 
   &__header
+    @extend .no-select
+    
     .table
       &__cell
         @extend .weight-regular
@@ -31,6 +33,7 @@
 
   &__item
     @extend .base-transition
+    @extend .cursor-pointer
 
     &:hover
       background: rgba($clr-white, 0.05)
@@ -40,10 +43,10 @@
     @extend .base-transition
     @include icon-size(18, 18)
 
-    top: -2px
     opacity: 0.5
 
   &__cell
+    @extend .pos-relative
     @extend .flex
     @extend .align-center
 
@@ -123,7 +126,14 @@
       opacity: 1
 
   &__tilda
-    @extend .pos-relative
-    @include icon-size(18, 18)
+    @extend .pos-absolute
+    @include icon-size(16, 16)
 
     top: -2px
+    bottom: 0
+    left: -16px
+    margin: auto
+    opacity: 0.5
+
+  &__favourite
+    @include icon-size(18, 18)

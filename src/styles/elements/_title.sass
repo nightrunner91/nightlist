@@ -1,6 +1,7 @@
 .title
   @extend .flex
   @extend .align-center
+  @extend .no-select
   
   padding: $gutter-width/2
   margin-bottom: $gutter-width/2
@@ -14,7 +15,9 @@
     @extend .base-radius
 
     &:hover
-      background: rgba($clr-white, 0.05)
+      .title
+        &__chevron
+          opacity: 1
 
   &__name
     @extend .no-mg
@@ -25,6 +28,35 @@
     margin: 0 $gutter-width/2
 
   &__chevron
+    @extend .pos-relative
     @include icon-size(24, 24)
+    @extend .base-transition
 
+    left: -4px
+    margin-right: $gutter-width/4
+    opacity: 0.5
+
+  &__button
     margin-left: auto
+
+    &--games
+      .button
+        &__text
+          @extend .clr-games
+
+        &__icon
+          &--plus
+            &::before,
+            &::after
+              @extend .bg-games
+
+    &--tvshows
+      .button
+        &__text
+          @extend .clr-tvshows
+
+        &__icon
+          &--plus
+            &::before,
+            &::after
+              @extend .bg-tvshows

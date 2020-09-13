@@ -4,7 +4,7 @@
     app-gradients(:current='currentPage')
     app-sidebar
     div(v-scrollbar)
-      main(class='main')
+      main(class='main main--custom')
         div(class='container')
           div(class='row')
             div(class='col mb-12')

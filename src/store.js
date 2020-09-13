@@ -5,7 +5,140 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    vuexFoo: 'Foo'
+    games: [
+      {
+        id: 123,
+        title: "Assassin's Creed",
+        status: "completed",
+        ownership: 'own',
+        hours: undefined,
+        hoursApproximate: false,
+        rating: 4,
+        favourite: true,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Assassin's Creed 2",
+        status: "completed",
+        ownership: 'own',
+        hours: 78,
+        hoursApproximate: false,
+        rating: 4,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Assassin's Creed: Brotherhood",
+        status: "completed",
+        ownership: 'own',
+        hours: 86,
+        hoursApproximate: false,
+        rating: 5,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: undefined,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: true,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: true,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+      {
+        id: 123,
+        title: "Some Game Title",
+        status: "completed",
+        ownership: 'own',
+        hours: 26,
+        hoursApproximate: true,
+        rating: 3,
+        favourite: false,
+        priority: undefined,
+        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+      },
+    ]
   },
   mutations: {
 
