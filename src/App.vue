@@ -5,11 +5,8 @@
     app-sidebar
     div(v-scrollbar)
       main(class='main main--custom')
-        div(class='container')
-          div(class='row')
-            div(class='col mb-12')
-              transition(name="fade" mode="out-in")
-                router-view
+        transition(name="fade" mode="out-in")
+          router-view
 
 </template>
 
@@ -65,5 +62,5 @@ export default {
 </script>
 
 <style lang="sass">
-  @import "styles/main"
+  @import "styles/styles"
 </style>

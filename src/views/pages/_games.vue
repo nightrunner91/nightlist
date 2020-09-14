@@ -31,7 +31,10 @@
       div(class='table__body')
         div(class='table__item' v-for='(item, index) in games')
           div(class='table__cell table__cell--3') {{index + 1}}
-          div(class='table__cell table__cell--55') {{item.title}}
+          div(class='table__cell table__cell--55') 
+            span {{item.title}}
+            a(:href="item.link" target="_blank" class='table__link' v-if='item.link != undefined')
+              svg(class='table__redirect'): use(xlink:href='#link')
           div(class='table__cell table__cell--10') 
             svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
           div(class='table__cell table__cell--17')  
@@ -39,74 +42,6 @@
           div(class='table__cell table__cell--15') 
             svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
             span(v-if='item.hours != undefined') {{item.hours}}
-
-    div(class='title title--secondary')
-      svg(class='title__chevron'): use(xlink:href='#chevron-down')
-      h2(class='title__name') Plan to play
-      span(class='title__badge badge badge--medium') 4
-
-    div(class='table')
-
-      div(class='table__header')
-        div(class='table__cell table__cell--3 table__cell--functional')
-        div(class='table__cell table__cell--65 table__cell--functional') 
-          span Title
-          svg(class='table__chevron'): use(xlink:href='#chevron-down')
-        div(class='table__cell table__cell--17 table__cell--functional') 
-          span Rating
-        div(class='table__cell table__cell--15 table__cell--functional') Hours
-
-      div(class='table__body')
-        div(class='table__item' v-for='(item, index) in games')
-          div(class='table__cell table__cell--3') {{index + 1}}
-          div(class='table__cell table__cell--65') {{item.title}}
-          div(class='table__cell table__cell--17')  
-            div(class='table__rating' :class='"table__rating--" + item.rating')
-          div(class='table__cell table__cell--15') 
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span {{item.hours}}
-
-    div(class='title title--secondary')
-      svg(class='title__chevron'): use(xlink:href='#chevron-down')
-      h2(class='title__name') Completed
-      span(class='title__badge badge badge--medium') 65
-
-    div(class='table')
-
-      div(class='table__header')
-        div(class='table__cell table__cell--3 table__cell--functional')
-        div(class='table__cell table__cell--65 table__cell--functional') 
-          span Title
-          svg(class='table__chevron'): use(xlink:href='#chevron-down')
-        div(class='table__cell table__cell--17 table__cell--functional') 
-          span Rating
-        div(class='table__cell table__cell--15 table__cell--functional') Hours
-
-      div(class='table__body')
-        div(class='table__item' v-for='(item, index) in games')
-          div(class='table__cell table__cell--3') {{index + 1}}
-          div(class='table__cell table__cell--65') {{item.title}}
-          div(class='table__cell table__cell--17')  
-            div(class='table__rating' :class='"table__rating--" + item.rating')
-          div(class='table__cell table__cell--15') 
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span {{item.hours}}
-        div(class='table__item' v-for='(item, index) in games')
-          div(class='table__cell table__cell--3') {{index + 1}}
-          div(class='table__cell table__cell--65') {{item.title}}
-          div(class='table__cell table__cell--17')  
-            div(class='table__rating' :class='"table__rating--" + item.rating')
-          div(class='table__cell table__cell--15') 
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span {{item.hours}}
-        div(class='table__item' v-for='(item, index) in games')
-          div(class='table__cell table__cell--3') {{index + 1}}
-          div(class='table__cell table__cell--65') {{item.title}}
-          div(class='table__cell table__cell--17')  
-            div(class='table__rating' :class='"table__rating--" + item.rating')
-          div(class='table__cell table__cell--15') 
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span {{item.hours}}
 
 </template>
 

@@ -38,6 +38,10 @@
     &:hover
       background: rgba($clr-white, 0.05)
 
+      .table
+        &__link
+          opacity: 1
+
   &__chevron
     @extend .pos-relative
     @extend .base-transition
@@ -66,8 +70,8 @@
     &:first-child
       color: rgba($clr-white, 0.5)
 
-    &--right
-      @extend .justify-end
+    &:last-child
+      //@extend .justify-end
 
   &__rating
     $star-width: 24px
@@ -137,3 +141,19 @@
 
   &__favourite
     @include icon-size(18, 18)
+
+  &__link
+    @extend .flex-center
+    @include icon-size(18, 18)
+
+    margin-left: $gutter-width/3
+    opacity: 0
+
+  &__redirect
+    @include icon-size(18, 18)
+    @extend .base-transition
+
+    opacity: 0.5
+
+    &:hover
+      opacity: 1
