@@ -27,7 +27,7 @@
         div(class='table__cell table__cell--8 table__cell--functional') Favourite
         div(class='table__cell table__cell--20 table__cell--functional') Progress
         div(class='table__cell table__cell--17 table__cell--functional') Rating
-        div(class='table__cell table__cell--15 table__cell--functional') Hours
+        div(class='table__cell table__cell--15 table__cell--functional') Spent time
 
       div(class='table__body')
         div(class='table__item' v-for='(item, index) in tvshows')

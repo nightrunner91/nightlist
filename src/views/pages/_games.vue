@@ -25,8 +25,8 @@
           span Title
           svg(class='table__chevron'): use(xlink:href='#chevron-down')
         div(class='table__cell table__cell--10 table__cell--functional') Favourite
-        div(class='table__cell table__cell--17 table__cell--functional')  Rating
-        div(class='table__cell table__cell--15 table__cell--functional') Hours
+        div(class='table__cell table__cell--17 table__cell--functional') Rating
+        div(class='table__cell table__cell--15 table__cell--functional') Spent time
 
       div(class='table__body')
         div(class='table__item' v-for='(item, index) in games')
