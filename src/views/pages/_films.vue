@@ -21,12 +21,13 @@
 
       div(class='table__header')
         div(class='table__cell table__cell--3 table__cell--functional')
-        div(class='table__cell table__cell--60 table__cell--functional') 
+        div(class='table__cell table__cell--57 table__cell--functional') 
           span Title
           svg(class='table__chevron'): use(xlink:href='#chevron-down')
         div(class='table__cell table__cell--8 table__cell--functional') Favourite
         div(class='table__cell table__cell--17 table__cell--functional') Rating
         div(class='table__cell table__cell--15 table__cell--functional') Spent time
+        div(class='table__cell table__cell--3')
 
       div(class='table__body')
         div(class='table__item' v-for='(item, index) in films')
@@ -41,6 +42,8 @@
             div(class='table__rating' :class='"table__rating--" + item.rating')
           div(class='table__cell table__cell--15')
             span(v-if='item.viewCount != undefined && item.duration != undefined') {{Math.floor((item.duration * item.viewCount) / 60)}}
+          div(class='table__cell table__cell--3')
+            svg(class='table__edit'): use(xlink:href='#edit')
 
 </template>
 

@@ -33,7 +33,6 @@
 
   &__item
     @extend .base-transition
-    @extend .cursor-pointer
 
     &:hover
       background: rgba($clr-white, 0.05)
@@ -154,6 +153,17 @@
     @extend .base-transition
 
     opacity: 0.5
+
+    &:hover
+      opacity: 1
+
+  &__edit
+    @include icon-size(24,24)
+    @extend .cursor-pointer
+    @extend .base-transition
+
+    margin-left: auto
+    opacity: 0.3
 
     &:hover
       opacity: 1

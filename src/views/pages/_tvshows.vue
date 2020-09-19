@@ -21,18 +21,19 @@
 
       div(class='table__header')
         div(class='table__cell table__cell--3 table__cell--functional')
-        div(class='table__cell table__cell--40 table__cell--functional') 
+        div(class='table__cell table__cell--37 table__cell--functional') 
           span Title
           svg(class='table__chevron'): use(xlink:href='#chevron-down')
         div(class='table__cell table__cell--8 table__cell--functional') Favourite
         div(class='table__cell table__cell--20 table__cell--functional') Progress
         div(class='table__cell table__cell--17 table__cell--functional') Rating
         div(class='table__cell table__cell--15 table__cell--functional') Spent time
+        div(class='table__cell table__cell--3')
 
       div(class='table__body')
         div(class='table__item' v-for='(item, index) in tvshows')
           div(class='table__cell table__cell--3') {{index + 1}}
-          div(class='table__cell table__cell--40') 
+          div(class='table__cell table__cell--37') 
             span {{item.title}}
             a(:href="item.link" target="_blank" class='table__link' v-if='item.link != undefined')
               svg(class='table__redirect'): use(xlink:href='#link')
@@ -58,6 +59,8 @@
           div(class='table__cell table__cell--15') 
             svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
             span(v-if='item.totalEpisodes != undefined && item.averageDuration != undefined') {{Math.floor((item.averageDuration * item.totalEpisodes) / 60)}}
+          div(class='table__cell table__cell--3 table__cell--functional')
+            svg(class='table__edit'): use(xlink:href='#edit')
 
 </template>
 

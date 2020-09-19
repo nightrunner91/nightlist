@@ -491,6 +491,44 @@ export default new Vuex.Store({
         link: 'https://www.imdb.com/title/tt0903747/'
       },
     ],
+    books: [
+      {
+        id: 32435,
+        title: 'Цветы для Элджернона',
+        author: 'Дэниел Киз',
+        status: 'read',
+        rating: 5,
+        favourite: true,
+        link: 'http://readly.ru/book/57621/'
+      },
+      {
+        id: 32435,
+        title: 'Цветы для Элджернона',
+        author: 'Дэниел Киз',
+        status: 'read',
+        rating: 3,
+        favourite: true,
+        link: 'http://readly.ru/book/57621/'
+      },
+      {
+        id: 32435,
+        title: 'Цветы для Элджернона',
+        author: 'Дэниел Киз',
+        status: 'read',
+        rating: 4,
+        favourite: true,
+        link: 'http://readly.ru/book/57621/'
+      },
+      {
+        id: 32435,
+        title: 'Цветы для Элджернона',
+        author: 'Дэниел Киз',
+        status: 'read',
+        rating: 5,
+        favourite: false,
+        link: 'http://readly.ru/book/57621/'
+      }
+    ]
   },
   mutations: {
 
