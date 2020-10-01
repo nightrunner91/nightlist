@@ -314,40 +314,62 @@ Front-end часть будет выполнена на Vue.js в виде SPA-�
 
 ### Игры
 ```
-title              | input
+title              | input (type Text)
 status             | dropdown
 ownership          | selector
-hours              | input
+hours              | input (type Number)
 hoursApproximate   | checkbox 
 rating             | stars
 favourite          | checkbox
 priority           | dropdown (if status == 'Буду играть')
-link               | input
+link               | input (type Text)
 ```
 ### Сериалы
 viewedSeasons/totalSeasons и viewedEpisodes/totalEpisodes должны быть "спаренными" для удобства. 
 ```
-title              | input
+title              | input (type Text)
 status             | dropdown
 rating             | stars
-viewCount          | input
-totalSeasons       | input
-viewedSeasons      | input
-totalEpisodes      | input
-viewedEpisodes     | input
-averageDuration    | input
+viewCount          | input (type Number)
+totalSeasons       | input (type Number)
+viewedSeasons      | input (type Number)
+totalEpisodes      | input (type Number)
+viewedEpisodes     | input (type Number)
+averageDuration    | input (type Number)
 favourite          | checkbox
 link               | input
 ```
 ### Фильмы
 ```
-title              | input
+title              | input (type Text)
 status             | dropdown
-viewCount          | input
-duration           | input
+viewCount          | input (type Number)
+duration           | input (type Number)
 rating             | stars
 favourite          | checkbox
-link               | input
+link               | input (type Text)
 ```
-
-
+### Аниме
+viewedSeasons/totalSeasons и viewedEpisodes/totalEpisodes должны быть "спаренными" для удобства. 
+```
+title              | input (type Text)
+status             | dropdown
+rating             | stars
+viewCount          | input (type Number)
+totalSeasons       | input (type Number)
+viewedSeasons      | input (type Number)
+totalEpisodes      | input (type Number)
+viewedEpisodes     | input (type Number)
+averageDuration    | input (type Number)
+favourite          | checkbox
+link               | input (type Text)
+```
+### Книги
+```
+title              | input (type Text)
+author             | input (type Text)
+status             | dropdown
+rating             | stars
+favourite          | checkbox
+link               | input (type Text)
+```
