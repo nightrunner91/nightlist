@@ -310,16 +310,37 @@ Front-end часть будет выполнена на Vue.js в виде SPA-�
 
 # Реализация модальных окон для добавления и редактирования тайтлов
 
+Из каких элементов UI будут состоять модальные окна?
+
 ### Игры
 
 ```
-title            | input
-status           | dropdown
-ownership        | selector
-hours            | input
-hoursApproximate | checkbox 
-rating           | stars
-favourite        | checkbox
-priority         | dropdown (if status == 'Буду играть')
-link             | input
+title              | input
+status             | dropdown
+ownership          | selector
+hours              | input
+hoursApproximate   | checkbox 
+rating             | stars
+favourite          | checkbox
+priority           | dropdown (if status == 'Буду играть')
+link               | input
 ```
+
+### Сериалы
+
+```
+title              | input
+status             | dropdown
+rating             | stars
+viewCount          | input
+totalSeasons       | input
+viewedSeasons      | input
+totalEpisodes      | input
+viewedEpisodes     | input
+averageDuration    | input
+favourite          | checkbox
+link               | input
+```
+
+
+
