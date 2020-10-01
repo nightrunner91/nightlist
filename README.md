@@ -325,6 +325,7 @@ priority           | dropdown (if status == 'Буду играть')
 link               | input
 ```
 ### Сериалы
+viewedSeasons/totalSeasons и viewedEpisodes/totalEpisodes должны быть "спаренными" для удобства. 
 ```
 title              | input
 status             | dropdown
@@ -338,6 +339,15 @@ averageDuration    | input
 favourite          | checkbox
 link               | input
 ```
-
+### Фильмы
+```
+title              | input
+status             | dropdown
+viewCount          | input
+duration           | input
+rating             | stars
+favourite          | checkbox
+link               | input
+```
 
 
