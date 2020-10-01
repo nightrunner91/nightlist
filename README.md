@@ -307,3 +307,19 @@ Front-end часть будет выполнена на Vue.js в виде SPA-�
  }
 }
 ```
+
+## Реализация модальных окон для добавления и редактирования тайтлов
+
+### Игры
+
+```
+input    | title
+dropdown | status
+selector | ownership
+input    | hours
+checkbox | hoursApproximate
+stars    | rating
+checkbox | favourite
+dropdown | priority (if status == 'Буду играть')
+input    | link
+```
