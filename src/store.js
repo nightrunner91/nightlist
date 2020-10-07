@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    modalVisible: false,
+    gamesStatuses: ["Currently playing", "Completed", "Plan to play", "Dropped"],
     games: [
       {
         id: 123,
@@ -540,6 +542,10 @@ export default new Vuex.Store({
       state.foo1 = param1;
       state.foo2 = param2;
       state.foo3 = param3;
+    },
+
+    changeModalState(state, data) {
+      state.modalVisible = data;
     }
 
   },

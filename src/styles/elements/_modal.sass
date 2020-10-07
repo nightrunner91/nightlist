@@ -1,0 +1,69 @@
+$close-button-size: 36px
+
+@function strip-unit($number) 
+  @if type-of($number) == 'number' and not unitless($number)
+    @return $number / ($number * 0 + 1);
+
+  @return $number
+
+.modal-backdrop
+  @extend .pos-fixed
+  @extend .flex-center
+  
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  background: rgba($clr-black, 0.5)
+  z-index: 9
+
+.modal
+  @extend .pos-relative
+  @extend .bg-white
+  @extend .clr-black
+  @extend .base-radius
+  @extend .base-shadow
+
+  width: 50vw
+
+  &-fade-enter,
+  &-fade-leave-active
+    opacity: 0
+
+  &-fade-enter-active,
+  &-fade-leave-active
+    @extend .base-transition
+
+  &--games
+    .modal
+      &__close
+        background: $clr-games
+
+        &:hover
+          .modal
+            &__cross
+              opacity: 0.7
+
+  &__close
+    @extend .pos-absolute
+    @extend .cursor-pointer
+    @extend .base-transition
+    @extend .base-shadow
+    @extend .round-radius
+    @extend .flex-center
+
+    width: $close-button-size
+    height: $close-button-size
+    top: -$close-button-size/2
+    right: -$close-button-size/2
+    z-index: 100
+
+  &__cross
+    @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
+    @extend .base-transition
+
+  &__content
+    height: 400px
+
+  &__fields
+    padding: $gutter-width !important

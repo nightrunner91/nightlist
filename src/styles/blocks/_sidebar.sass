@@ -1,6 +1,7 @@
 .sidebar
   @extend .pos-relative
   @extend .flex-column
+  @extend .base-transition
 
   width: 25%
   height: 100%
@@ -12,6 +13,9 @@
   background: linear-gradient(to bottom,  rgba(0,0,0,.3) 0%,rgba(125,185,232,0) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#007db9e8',GradientType=0 )
   z-index: 3
+
+  &--blured
+    filter: blur(2px)
 
   &__profile
     @extend .flex-column

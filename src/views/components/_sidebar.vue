@@ -1,5 +1,7 @@
 <template lang='pug'>
-  aside(class='sidebar')
+  aside(
+    class='sidebar'
+    :class='{"sidebar--blured" : modalVisible}')
 
     div(class='sidebar__profile')
       img(src='img/avatar.png' alt='' class='sidebar__avatar')
@@ -65,6 +67,9 @@ export default {
     return {
       foo: 'foo'
     }
+  },
+  computed: {
+    modalVisible() {return this.$store.state.modalVisible}
   },
   methods: {
 

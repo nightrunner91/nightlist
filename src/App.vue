@@ -2,6 +2,7 @@
 
   div(id='app' class='page')
     app-gradients(:current='currentPage')
+    div(class='page__blur' v-if='modalVisible')
     app-sidebar
     div(v-scrollbar)
       main(class='main main--custom')
@@ -21,7 +22,15 @@ export default {
     }
   },
   computed: {
-    currentPage() {return this.$route.name.toLowerCase()}
+    currentPage() {
+      let rName = this.$route.name
+      if (rName != null) return rName.toLowerCase()
+      else return 
+    },
+
+    modalVisible() {
+      return this.$store.state.modalVisible
+    }
   },
   mounted() {
 
