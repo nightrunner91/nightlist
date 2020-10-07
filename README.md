@@ -301,10 +301,16 @@ Front-end часть будет выполнена на Vue.js в виде SPA-�
   title: String,
   link: String
  },
- controller: {             // Название контроллера (геймпада, например) и ссылка на него
-  title: String,
-  link: String
- }
+ controllers: [             // Название контроллера (геймпада, например) и ссылка на него
+   {
+    title: String,
+    link: String
+   },
+   {
+    title: String,
+    link: String
+   }
+ ]
 }
 ```
 
@@ -372,4 +378,61 @@ status             | dropdown
 rating             | stars
 favourite          | checkbox
 link               | input (type Text)
+```
+### Комплектующие ПК
+```
+title                | input (type Text)
+current              | checkbox
+createDate           | datepicker
+
+cpu.title            | input (type Text)
+cpu.link             | input (type Text)
+
+cpuCooler.title      | input (type Text)
+cpuCooler.link       | input (type Text)
+
+thermalCompund.title | input (type Text)
+thermalCompund.link  | input (type Text)
+
+motherboard.title    | input (type Text)
+motherboard.link     | input (type Text)
+
+ram.title            | input (type Text)
+ram.link             | input (type Text)
+
+gpu.title            | input (type Text)
+gpu.link             | input (type Text)
+
+storage.title        | input (type Text) --- внизу должна быть кнопка +, если носителей несколько
+storage.link         | input (type Text)
+
+power.title          | input (type Text)
+power.link           | input (type Text)
+
+case.title           | input (type Text)
+case.link            | input (type Text)
+
+monitor.title        | input (type Text) --- внизу должна быть кнопка +, если мониторов несколько
+monitor.link         | input (type Text)
+
+keyboard.title       | input (type Text)
+keyboard.link        | input (type Text)
+
+mouse.title          | input (type Text)
+mouse.link           | input (type Text)
+
+mousePad.title       | input (type Text)
+mousePad.link        | input (type Text)
+
+headphones.title     | input (type Text)
+headphones.link      | input (type Text)
+
+speakers.title       | input (type Text)
+speakers.link        | input (type Text)
+
+ups.title            | input (type Text)
+ups.link             | input (type Text)
+
+controller.title     | input (type Text) --- внизу должна быть кнопка +, если контроллеров несколько
+controller.link      | input (type Text)
 ```
