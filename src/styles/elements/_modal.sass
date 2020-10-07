@@ -24,7 +24,9 @@ $close-button-size: 36px
   @extend .base-radius
   @extend .base-shadow
 
-  width: 50vw
+  width: 30vw
+  max-width: 600px
+  min-width: 320px
 
   &-fade-enter,
   &-fade-leave-active
@@ -43,6 +45,9 @@ $close-button-size: 36px
           .modal
             &__cross
               opacity: 0.7
+
+      &__footer
+        background: $clr-games
 
   &__close
     @extend .pos-absolute
@@ -63,7 +68,14 @@ $close-button-size: 36px
     @extend .base-transition
 
   &__content
-    height: 400px
+    height: 50vh
 
   &__fields
     padding: $gutter-width !important
+
+  &__footer
+    @extend .flex
+    @extend .justify-end
+    @extend .align-center
+
+    padding: $gutter-width/2 $gutter-width

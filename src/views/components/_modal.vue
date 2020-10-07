@@ -10,6 +10,10 @@
         class='modal'
         :class='"modal--" + type')
 
+        div(class='modal__header')
+
+          h3(class='modal__title') Add New Game
+
         div(
           class='modal__close'
           @click='close')
@@ -23,7 +27,43 @@
 
             div(class='input')
               label(class='input__label' for='title') Title
-              input(class='input__field' id='title' v-model='title')
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
+
+            div(class='input')
+              label(class='input__label' for='title') Title
+              input(class='input__field' autocomplete='off' id='title' v-model='title')
 
             app-dropdown
               span(slot="toggler")
@@ -33,6 +73,13 @@
                   v-for='status in gamesStatuses'
                   @click='setCurrency(currency)')
                   span {{status}}
+
+        div(
+          class='modal__footer')
+
+          div(
+            class='button button--main')
+            span(class='button__text') Add New
 
 </template>
 
