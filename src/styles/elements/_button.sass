@@ -13,10 +13,17 @@
   
   &--main
     background: rgba($clr-white, 0.8)
-    color: $clr-games
 
     &:hover
       background: $clr-white
+
+  &--secondary
+    background: transparent
+    box-shadow: inset 0px 0px 0px 2px $clr-black
+
+    &:hover
+      background: $clr-black
+      color: $clr-white
 
   &__icon
     @extend .pos-relative

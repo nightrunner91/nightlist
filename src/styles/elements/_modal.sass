@@ -47,7 +47,18 @@ $close-button-size: 36px
               opacity: 0.7
 
       &__footer
-        background: $clr-games
+        .button
+          &--main
+            background: $clr-games
+            color: $clr-white
+
+  &__header
+    @extend .down-shadow
+
+    padding: $gutter-width/2 $gutter-width
+
+  &__title
+    @extend .no-mg
 
   &__close
     @extend .pos-absolute
@@ -75,7 +86,8 @@ $close-button-size: 36px
 
   &__footer
     @extend .flex
-    @extend .justify-end
+    @extend .justify-between
     @extend .align-center
+    @extend .upper-shadow
 
     padding: $gutter-width/2 $gutter-width

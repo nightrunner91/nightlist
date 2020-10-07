@@ -78,8 +78,12 @@
           class='modal__footer')
 
           div(
+            class='button button--secondary')
+            span(class='button__text') Cancel
+
+          div(
             class='button button--main')
-            span(class='button__text') Add New
+            span(class='button__text') Save
 
 </template>
 
