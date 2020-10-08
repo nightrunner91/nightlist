@@ -52,10 +52,11 @@
     background: $clr-white
     border: 1px solid rgba($clr-black, $tiny-opacity)
     border-top: none
-    border-bottom-left-radius: 4px !important
-    border-bottom-right-radius: 4px !important
+    border-bottom-left-radius: $base-radius !important
+    border-bottom-right-radius: $base-radius !important
 
   &__item
+    @extend .pos-relative
     @extend .flex
     @extend .align-center
     @extend .cursor-pointer
@@ -63,13 +64,14 @@
 
     height: 40px
     padding: 0 $gutter-width/2
+    border-top: 1px solid $clr-grey
 
     &:first-child
       border-top: none
 
     &:last-child
-      border-bottom-left-radius: 4px !important
-      border-bottom-right-radius: 4px !important
+      border-bottom-left-radius: $base-radius !important
+      border-bottom-right-radius: $base-radius !important
 
     &:hover
       background: rgba($clr-black, $tiny-opacity)
