@@ -6,6 +6,32 @@ $close-button-size: 36px
 
   @return $number
 
+@mixin themed-colors($category-color)
+  .modal
+    &__close
+      background: $category-color
+
+      &:hover
+        background: lighten($category-color, $hover-intensity)
+
+    &__footer
+      .button
+        &--main
+          background: $category-color
+          color: $clr-white
+          
+          &:hover
+            background: lighten($category-color, $hover-intensity)
+
+        &--secondary
+          background: $clr-white
+          box-shadow: inset 0px 0px 0px 2px rgba($category-color, $passive-opacity)
+          color: rgba($category-color, $passive-opacity)
+
+          &:hover
+            box-shadow: inset 0px 0px 0px 2px $category-color
+            color: $category-color
+
 .modal-backdrop
   @extend .pos-fixed
   @extend .flex-center
@@ -14,7 +40,7 @@ $close-button-size: 36px
   bottom: 0
   left: 0
   right: 0
-  background: rgba($clr-black, 0.5)
+  background: rgba($clr-black, $half-opacity)
   z-index: 9
 
 .modal
@@ -22,10 +48,10 @@ $close-button-size: 36px
   @extend .bg-white
   @extend .clr-black
   @extend .base-radius
-  @extend .base-shadow
+  @extend .shadow-3
 
-  width: 30vw
-  max-width: 600px
+  width: 50vw
+  max-width: 800px
   min-width: 320px
 
   &-fade-enter,
@@ -37,34 +63,27 @@ $close-button-size: 36px
     @extend .base-transition
 
   &--games
-    .modal
-      &__close
-        background: $clr-games
+    @include themed-colors($clr-games)
 
-        &:hover
-          .modal
-            &__cross
-              opacity: 0.7
+  &--tvshows
+    @include themed-colors($clr-tvshows)
 
-      &__footer
-        .button
-          &--main
-            background: $clr-games
-            color: $clr-white
+  &--films
+    @include themed-colors($clr-films)
 
-  &__header
-    @extend .down-shadow
+  &--anime
+    @include themed-colors($clr-anime)
 
-    padding: $gutter-width/2 $gutter-width
+  &--books
+    @include themed-colors($clr-books)
 
-  &__title
-    @extend .no-mg
+  &--hardware
+    @include themed-colors($clr-hardware)
 
   &__close
     @extend .pos-absolute
     @extend .cursor-pointer
     @extend .base-transition
-    @extend .base-shadow
     @extend .round-radius
     @extend .flex-center
 
@@ -74,20 +93,24 @@ $close-button-size: 36px
     right: -$close-button-size/2
     z-index: 100
 
+    &:hover
+      box-shadow: $shadow-3
+
   &__cross
     @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
     @extend .base-transition
 
   &__content
-    height: 50vh
+    height: 70vh
+    max-height: 600px
 
   &__fields
-    padding: $gutter-width !important
+    padding: $gutter-width/2 $gutter-width/1.5 !important
 
   &__footer
     @extend .flex
     @extend .justify-between
     @extend .align-center
-    @extend .upper-shadow
 
-    padding: $gutter-width/2 $gutter-width
+    padding: $gutter-width/2 $gutter-width/1.5
+    border-top: 1px solid rgba($clr-black, 0.2)

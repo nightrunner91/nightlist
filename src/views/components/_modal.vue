@@ -10,10 +10,6 @@
         class='modal'
         :class='"modal--" + type')
 
-        div(class='modal__header')
-
-          h3(class='modal__title') Add New Game
-
         div(
           class='modal__close'
           @click='close')
@@ -78,7 +74,8 @@
           class='modal__footer')
 
           div(
-            class='button button--secondary')
+            class='button button--secondary'
+            @click='close')
             span(class='button__text') Cancel
 
           div(

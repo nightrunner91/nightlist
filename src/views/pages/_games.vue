@@ -54,7 +54,7 @@
 
     app-modal(
       :type='"games"'
-      :purpose='"edit"'
+      :purpose='"add"'
       v-show='modalVisible'
       @close='hideModal()')
 
@@ -71,6 +71,7 @@ export default {
   computed: {
     games() {return this.$store.state.games},
     gamesStatuses() {return this.$store.state.gamesStatuses},
+    
     modalVisible() {return this.$store.state.modalVisible},
   },
   methods : {

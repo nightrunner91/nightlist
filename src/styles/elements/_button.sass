@@ -10,23 +10,13 @@
 
   height: 40px
   padding: 0 $gutter-width/2
-  
-  &--main
-    background: rgba($clr-white, 0.8)
 
-    &:hover
-      background: $clr-white
-
-  &--secondary
-    background: transparent
-    box-shadow: inset 0px 0px 0px 2px $clr-black
-
-    &:hover
-      background: $clr-black
-      color: $clr-white
+  &:hover
+    box-shadow: $shadow-3
 
   &__icon
     @extend .pos-relative
+    @extend .slow-transition
     @include icon-size(16, 16)
 
     margin-right: $gutter-width/4
