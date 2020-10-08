@@ -50,22 +50,38 @@
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
             div(class='table__cell table__cell--3')
-              svg(class='table__edit'): use(xlink:href='#edit')
+              svg(
+                class='table__edit'
+                @click='editSlot(item.id)'): use(xlink:href='#edit')
 
     app-modal(
       :type='"games"'
-      :purpose='"add"'
+      :payload='currentSlot'
       v-show='modalVisible'
-      @close='hideModal()')
+      @close='hideModal(), resetCurrentSlot()'
+      @save='updateData(), hideModal()')
 
 </template>
 
 <script>
+import { eventBus } from "../../main";
+
 export default {
   name: 'Games',
   data() {
     return {
-      
+      currentSlot: {
+        id: '',
+        title: '',
+        status: '',
+        ownership: '',
+        hours: '',
+        hoursApproximate: '',
+        rating: '',
+        favourite: '',
+        priority: '',
+        link: ''
+      }
     };
   },
   computed: {
@@ -77,6 +93,7 @@ export default {
   methods : {
     showModal() {
       this.$store.commit('changeModalState', true);
+      eventBus.$emit('modalOpened');
     },
 
     hideModal() {
@@ -85,6 +102,24 @@ export default {
 
     addNewGame() {
       this.showModal();
+    },
+
+    editSlot(id) {
+      let target = Object.assign(
+        this.currentSlot, 
+        this.games.filter(item => item.id == id)[0]);
+
+      this.currentSlot = target;
+
+      this.showModal();
+    },
+
+    resetCurrentSlot() {
+      let that = this;
+
+      Object.keys(this.currentSlot).forEach(key => {
+        that.currentSlot[key] = ''
+      });
     }
   }
 }

@@ -12,7 +12,8 @@
 
         div(
           class='modal__close'
-          @click='close')
+          @click='close'
+          v-ripple)
           svg(class='modal__cross'): use(xlink:href='#close')
 
         div(class='modal__content' v-scrollbar)
@@ -22,53 +23,27 @@
             v-if='type == "games"')
 
             div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
+              label(
+                class='input__label' 
+                for='title') Title
+              input(
+                class='input__field' 
+                autocomplete='off' 
+                v-model='gameData.title')
 
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            div(class='input')
-              label(class='input__label' for='title') Title
-              input(class='input__field' autocomplete='off' id='title' v-model='title')
-
-            app-dropdown
-              span(slot="toggler")
-                span Status
-              ul(slot="menu")
-                li(
-                  v-for='status in gamesStatuses'
-                  @click='setCurrency(currency)')
-                  span {{status}}
+            app-dropdown(
+              :label='"Status"'
+              :currentValue='gameData.status'
+              :defaultValue='gamesStatuses[0]')
+              input(
+                slot='dropdown-input' 
+                v-model='gameData.status' 
+                type='text')
+              li(
+                slot='dropdown-menu'
+                class='dropdown__item'
+                v-for='status in gamesStatuses'
+                @click='setGameStatus(status)') {{status}}
 
         div(
           class='modal__footer')
@@ -79,30 +54,51 @@
             span(class='button__text') Cancel
 
           div(
-            class='button button--main')
+            class='button button--main'
+            v-ripple)
             span(class='button__text') Save
 
 </template>
 
 <script>
+import { eventBus } from "../../main";
+
 export default {
   name: 'modal',
   props: {
-    id: Number,
     type: String,
-    purpose: String,
-    title: String,
-    payload: []
+    payload: Object
   },
   data() {
     return {
-      
+      gameData: {
+        id: '',
+        title: '',
+        status: '',
+        ownership: '',
+        hours: '',
+        hoursApproximate: '',
+        rating: '',
+        favourite: '',
+        priority: '',
+        link: ''
+      }
     }
   },
   methods: {
     close() {
       this.$emit('close');
     },
+
+    assignGameData() {
+      let importedData = Object.assign(this.gameData, this.payload);
+
+      this.gameData = importedData;
+    },
+
+    setGameStatus(status) {
+      this.gameData.status = status;
+    }
   },
   computed: {
     gamesStatuses() {return this.$store.state.gamesStatuses}
@@ -110,7 +106,11 @@ export default {
   mounted() {
     document.addEventListener('click', (e) => {
       if(e.target == this.$refs.backdrop) this.close();
-    })
+    });
+
+    eventBus.$on('modalOpened', () => {
+      this.assignGameData()
+    });
   }
 };
 </script>

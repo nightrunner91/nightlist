@@ -19,14 +19,16 @@ import appDropdown from "./views/components/_dropdown";
 
 import VTooltip from 'v-tooltip';
 import Vuebar from './directives/_scrollbar';
+import Ripple from './directives/_ripple';
 
 Vue.component('app-sidebar', appSidebar);
 Vue.component('app-gradients', appGradients);
 Vue.component('app-modal', appModal);
 Vue.component('app-dropdown', appDropdown);
 
-Vue.use(Vuebar);
 Vue.use(VTooltip);
+Vue.use(Vuebar);
+Vue.directive('ripple', Ripple);
 
 // SVG Sprite
 import sprite from './assets/sprite.svg';

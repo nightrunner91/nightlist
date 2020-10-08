@@ -51,7 +51,7 @@ $close-button-size: 36px
   @extend .shadow-3
 
   width: 50vw
-  max-width: 800px
+  max-width: 400px
   min-width: 320px
 
   &-fade-enter,
@@ -81,12 +81,12 @@ $close-button-size: 36px
     @include themed-colors($clr-hardware)
 
   &__close
-    @extend .pos-absolute
     @extend .cursor-pointer
     @extend .base-transition
     @extend .round-radius
     @extend .flex-center
 
+    position: absolute !important
     width: $close-button-size
     height: $close-button-size
     top: -$close-button-size/2
@@ -113,4 +113,4 @@ $close-button-size: 36px
     @extend .align-center
 
     padding: $gutter-width/2 $gutter-width/1.5
-    border-top: 1px solid rgba($clr-black, 0.2)
+    border-top: 1px solid rgba($clr-black, $light-opacity)

@@ -9,9 +9,9 @@ export default new Vuex.Store({
     gamesStatuses: ["Currently playing", "Completed", "Plan to play", "Dropped"],
     games: [
       {
-        id: 123,
+        id: 1,
         title: "Assassin's Creed",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: undefined,
         hoursApproximate: false,
@@ -21,9 +21,9 @@ export default new Vuex.Store({
         link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
       },
       {
-        id: 123,
+        id: 2,
         title: "Assassin's Creed 2",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 78,
         hoursApproximate: false,
@@ -33,9 +33,9 @@ export default new Vuex.Store({
         link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
       },
       {
-        id: 123,
+        id: 3,
         title: "Assassin's Creed: Brotherhood",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 86,
         hoursApproximate: false,
@@ -45,9 +45,9 @@ export default new Vuex.Store({
         link: undefined
       },
       {
-        id: 123,
+        id: 4,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 26,
         hoursApproximate: true,
@@ -57,9 +57,9 @@ export default new Vuex.Store({
         link: undefined
       },
       {
-        id: 123,
+        id: 5,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 26,
         hoursApproximate: true,
@@ -69,9 +69,9 @@ export default new Vuex.Store({
         link: undefined
       },
       {
-        id: 123,
+        id: 6,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 553,
         hoursApproximate: false,
@@ -81,9 +81,9 @@ export default new Vuex.Store({
         link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
       },
       {
-        id: 123,
+        id: 7,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 26,
         hoursApproximate: true,
@@ -93,9 +93,9 @@ export default new Vuex.Store({
         link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
       },
       {
-        id: 123,
+        id: 8,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 166,
         hoursApproximate: false,
@@ -105,9 +105,9 @@ export default new Vuex.Store({
         link: undefined
       },
       {
-        id: 123,
+        id: 9,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 26,
         hoursApproximate: true,
@@ -117,9 +117,9 @@ export default new Vuex.Store({
         link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
       },
       {
-        id: 123,
+        id: 10,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 26,
         hoursApproximate: true,
@@ -129,9 +129,9 @@ export default new Vuex.Store({
         link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
       },
       {
-        id: 123,
+        id: 11,
         title: "Some Game Title",
-        status: "completed",
+        status: "Completed",
         ownership: 'own',
         hours: 26,
         hoursApproximate: true,
