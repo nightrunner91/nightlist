@@ -74,7 +74,7 @@ export default {
         id: '',
         title: '',
         status: '',
-        ownership: '',
+        platform: '',
         hours: '',
         hoursApproximate: '',
         rating: '',

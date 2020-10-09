@@ -45,6 +45,20 @@
                 v-for='status in gamesStatuses'
                 @click='setGameStatus(status)') {{status}}
 
+            app-dropdown(
+              :label='"Platform"'
+              :currentValue='gameData.platform'
+              :defaultValue='gamesPlatforms[0]')
+              input(
+                slot='dropdown-input' 
+                v-model='gameData.platform' 
+                type='text')
+              li(
+                slot='dropdown-menu'
+                class='dropdown__item'
+                v-for='platform in gamesPlatforms'
+                @click='setGamePlatform(platform)') {{platform}}
+
         div(
           class='modal__footer')
 
@@ -75,7 +89,7 @@ export default {
         id: '',
         title: '',
         status: '',
-        ownership: '',
+        platform: '',
         hours: '',
         hoursApproximate: '',
         rating: '',
@@ -96,12 +110,12 @@ export default {
       this.gameData = importedData;
     },
 
-    setGameStatus(status) {
-      this.gameData.status = status;
-    }
+    setGameStatus(status) { this.gameData.status = status; },
+    setGamePlatform(platform) { this.gameData.platform = platform; }
   },
   computed: {
-    gamesStatuses() {return this.$store.state.gamesStatuses}
+    gamesStatuses() {return this.$store.state.gamesStatuses},
+    gamesPlatforms() {return this.$store.state.gamesPlatforms},
   },
   mounted() {
     document.addEventListener('click', (e) => {
