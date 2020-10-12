@@ -34,7 +34,8 @@
             app-dropdown(
               :label='"Status"'
               :currentValue='gameData.status'
-              :defaultValue='gamesStatuses[0]')
+              :defaultValue='gamesStatuses[0]'
+              :itemsCount='gamesStatuses.length')
               input(
                 slot='dropdown-input' 
                 v-model='gameData.status' 
@@ -48,7 +49,8 @@
             app-dropdown(
               :label='"Platform"'
               :currentValue='gameData.platform'
-              :defaultValue='gamesPlatforms[0]')
+              :defaultValue='gamesPlatforms[0]'
+              :itemsCount='gamesPlatforms.length')
               input(
                 slot='dropdown-input' 
                 v-model='gameData.platform' 
