@@ -7,8 +7,9 @@
   max-height: $height + px !important
   min-height: $height + px !important
   overflow: hidden !important
-  background-image: url('./assets/' + $icon + '.svg') !important
+  background-image: url('assets/sprite.svg#' + $icon) !important
   background-size: $width + px $height + px !important
+  background-repeat: no-repeat
 
 @mixin icon-size($width, $height) 
   display: inline-block !important
@@ -44,12 +45,14 @@
   background: -webkit-linear-gradient(left, darken($color, 20%) 0%, $color 100%)
   background: linear-gradient(to right, darken($color, 20%) 0%, $color 100%)
 
+
 @mixin blur($radius)
 	-webkit-filter: blur($radius+px)
 	-ms-filter: blur($radius+px)
 	filter: url("data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"blur\"><feGaussianBlur stdDeviation=\"#{$radius}\" /></filter></svg>#blur"); /* Firefox, Safari, Chrome*/
 	filter: progid:DXImageTransform.Microsoft.Blur(Strength=$radius)
 
+  
 @function strip-unit($number) 
   @if type-of($number) == 'number' and not unitless($number)
     @return $number / ($number * 0 + 1);

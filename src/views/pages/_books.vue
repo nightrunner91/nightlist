@@ -14,6 +14,7 @@
 
       div(class='search')
         div(class='input')
+          svg(class='input__icon'): use(xlink:href='#search')
           input(class='input__field' type='text' placeholder='Search')
 
       div(class='title title--secondary')
@@ -44,7 +45,15 @@
             div(class='table__cell table__cell--8') 
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
             div(class='table__cell table__cell--17')  
-              div(class='table__rating' :class='"table__rating--" + item.rating')
+              div(class='table__rating')
+                svg(
+                  class='table__star table__star--active' 
+                  :class='"table__star--" + (index + 1)'
+                  v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
+                svg(
+                  class='table__star table__star--passive' 
+                  :class='"table__star--" + (index + 1)'
+                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             div(class='table__cell table__cell--3')  
               svg(class='table__edit'): use(xlink:href='#edit')
 

@@ -6,7 +6,7 @@
     app-sidebar
     div(v-scrollbar)
       main(class='main main--custom')
-        transition(name="fade" mode="out-in")
+        transition(name="page" mode="out-in")
           router-view
 
 </template>

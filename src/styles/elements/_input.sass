@@ -3,6 +3,17 @@
 
   margin-bottom: $gutter-width/2
 
+  &__icon
+    @include icon-size(24,24)
+    @extend .pos-absolute
+    @extend .base-transition
+
+    left: $gutter-width/3
+    top: 0
+    bottom: 0
+    margin: auto
+    opacity: $half-opacity
+
   &__field
     @extend .base-radius
 

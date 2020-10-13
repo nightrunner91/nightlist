@@ -1,3 +1,5 @@
+$star-size: 24px
+  
 .table
   margin-bottom: $gutter-width
 
@@ -73,50 +75,70 @@
       //@extend .justify-end
 
   &__rating
-    $star-width: 24px
-
     @extend .pos-relative
 
-    width: $star-width * 5
-    height: $star-width
+    width: $star-size * 5
+    height: $star-size
 
-    &::before,
-    &::after
-      @extend .pseudoelem
+    // &::before,
+    // &::after
+    //   @extend .pseudoelem
 
-      height: 100%
-      top: 0
-      left: 0
-      background-repeat: repeat-x
-      background-size: $star-width
+    //   height: 100%
+    //   top: 0
+    //   left: 0
+    //   background-repeat: repeat-x
+    //   background-size: $star-width
 
-    &::before
-      background-image: url("./assets/rating-active.svg")
+    // &::before
+    //   background-image: url("./assets/rating-active.svg")
 
-    &::after
-      width: 100%
-      background-image: url("./assets/rating-passive.svg")
-      opacity: 0.15
+    // &::after
+    //   width: 100%
+    //   background-image: url("./assets/rating-passive.svg")
+    //   opacity: 0.15
+
+    // &--1
+    //   &::before
+    //     width: $star-width
+
+    // &--2
+    //   &::before
+    //     width: $star-width * 2
+
+    // &--3
+    //   &::before
+    //     width: $star-width * 3
+
+    // &--4
+    //   &::before
+    //     width: $star-width * 4
+
+    // &--5
+    //   &::before
+    //     width: $star-width * 5
+
+  &__star
+    @extend .pos-absolute
+    @include icon-size(strip-unit($star-size), strip-unit($star-size))
 
     &--1
-      &::before
-        width: $star-width
+      left: 0
 
     &--2
-      &::before
-        width: $star-width * 2
+      left: $star-size
 
     &--3
-      &::before
-        width: $star-width * 3
+      left: $star-size * 2
 
     &--4
-      &::before
-        width: $star-width * 4
+      left: $star-size * 3
 
     &--5
-      &::before
-        width: $star-width * 5
+      left: $star-size * 4
+
+    &--passive
+      @extend .tiny-opacity
 
   &__icon
     @include icon-size(24, 24)

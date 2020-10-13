@@ -1,4 +1,4 @@
-$main-size: 36px
+$star-size: 40px
   
 .rating
   @extend .pos-relative
@@ -15,8 +15,8 @@ $main-size: 36px
   &__body
     @extend .pos-relative
 
-    width: $main-size * 5
-    height: $main-size
+    width: $star-size * 5
+    height: $star-size
 
   &__bar
     @extend .pos-absolute
@@ -38,23 +38,23 @@ $main-size: 36px
 
     &--passive,
     &--excluded
-      @include svg-icon(strip-unit($main-size), strip-unit($main-size), 'rating-passive-black')
+      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-b')
 
     &--active,
     &--included
-      @include svg-icon(strip-unit($main-size), strip-unit($main-size), 'rating-active-black')
+      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-active-b')
 
     &--1
       left: 0
 
     &--2
-      left: $main-size
+      left: $star-size
 
     &--3
-      left: $main-size * 2
+      left: $star-size * 2
 
     &--4
-      left: $main-size * 3
+      left: $star-size * 3
 
     &--5
-      left: $main-size * 4
+      left: $star-size * 4

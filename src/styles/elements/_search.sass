@@ -3,23 +3,10 @@
   margin-bottom: $gutter-width
 
   .input
-    &::before
-      @extend .pseudoelem
-      @extend .base-transition
-      @include icon-size(24, 24)
-
-      background-image: url(./assets/search.svg)
-      background-size: 24px
-      left: $gutter-width/3
-      top: 0
-      bottom: 0
-      margin: auto
-      opacity: 0.5
-
     &__field
       padding-left: $gutter-width/3 * 2 + 24px
 
   &:hover
     .input
-      &::before
+      &__icon
         opacity: 1
