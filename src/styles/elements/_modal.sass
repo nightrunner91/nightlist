@@ -1,11 +1,5 @@
 $close-button-size: 36px
 
-@function strip-unit($number) 
-  @if type-of($number) == 'number' and not unitless($number)
-    @return $number / ($number * 0 + 1);
-
-  @return $number
-
 @mixin themed-colors($category-color)
   .modal
     &__close

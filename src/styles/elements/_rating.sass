@@ -1,0 +1,60 @@
+$main-size: 36px
+  
+.rating
+  @extend .pos-relative
+  @extend .no-select
+
+  margin-bottom: $gutter-width/2
+
+  &__label
+    @extend .small
+
+    display: block
+    margin-bottom: $gutter-width/5
+
+  &__body
+    @extend .pos-relative
+
+    width: $main-size * 5
+    height: $main-size
+
+  &__bar
+    @extend .pos-absolute
+
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+
+    &--active
+      z-index: 1
+
+    &--passive
+      z-index: 2
+
+  &__star
+    @extend .pos-absolute
+    @extend .cursor-pointer
+
+    &--passive,
+    &--excluded
+      @include svg-icon(strip-unit($main-size), strip-unit($main-size), 'rating-passive-black')
+
+    &--active,
+    &--included
+      @include svg-icon(strip-unit($main-size), strip-unit($main-size), 'rating-active-black')
+
+    &--1
+      left: 0
+
+    &--2
+      left: $main-size
+
+    &--3
+      left: $main-size * 2
+
+    &--4
+      left: $main-size * 3
+
+    &--5
+      left: $main-size * 4

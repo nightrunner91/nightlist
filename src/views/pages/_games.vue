@@ -77,7 +77,7 @@ export default {
         platform: '',
         hours: '',
         hoursApproximate: '',
-        rating: '',
+        rating: 0,
         favourite: '',
         priority: '',
         link: ''

@@ -5,7 +5,7 @@
     div(
       class='dropdown__shadow'
       v-if='dropdownOpened'
-      :style='dropdownHeight')  
+      :style='dropdownHeight')
     div(
       class='dropdown__toggle'
       @click="dropdownOpened = !dropdownOpened"

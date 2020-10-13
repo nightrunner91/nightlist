@@ -31,6 +31,8 @@
                 autocomplete='off' 
                 v-model='gameData.title')
 
+            app-rating(:currentRating='gameData.rating')
+
             app-dropdown(
               :label='"Status"'
               :currentValue='gameData.status'
@@ -60,6 +62,8 @@
                 class='dropdown__item'
                 v-for='platform in gamesPlatforms'
                 @click='setGamePlatform(platform)') {{platform}}
+
+            
 
         div(
           class='modal__footer')
@@ -94,7 +98,7 @@ export default {
         platform: '',
         hours: '',
         hoursApproximate: '',
-        rating: '',
+        rating: 0,
         favourite: '',
         priority: '',
         link: ''
@@ -113,7 +117,8 @@ export default {
     },
 
     setGameStatus(status) { this.gameData.status = status; },
-    setGamePlatform(platform) { this.gameData.platform = platform; }
+    setGamePlatform(platform) { this.gameData.platform = platform; },
+    setGameRating(rating) { this.gameData.rating = rating; }
   },
   computed: {
     gamesStatuses() {return this.$store.state.gamesStatuses},
@@ -127,6 +132,10 @@ export default {
     eventBus.$on('modalOpened', () => {
       this.assignGameData()
     });
+
+    eventBus.$on('rated', rating => {
+      this.setGameRating(rating)
+    })
   }
 };
 </script>
