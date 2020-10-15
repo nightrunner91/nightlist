@@ -31,7 +31,7 @@ $star-size: 24px
 
             .table
               &__chevron
-                opacity: 1
+                opacity: $active-opacity
 
   &__item
     @extend .base-transition
@@ -41,14 +41,14 @@ $star-size: 24px
 
       .table
         &__link
-          opacity: 1
+          opacity: $active-opacity
 
   &__chevron
     @extend .pos-relative
     @extend .base-transition
     @include icon-size(18, 18)
 
-    opacity: 0.5
+    opacity: $half-opacity
 
   &__cell
     @extend .pos-relative
@@ -80,44 +80,6 @@ $star-size: 24px
     width: $star-size * 5
     height: $star-size
 
-    // &::before,
-    // &::after
-    //   @extend .pseudoelem
-
-    //   height: 100%
-    //   top: 0
-    //   left: 0
-    //   background-repeat: repeat-x
-    //   background-size: $star-width
-
-    // &::before
-    //   background-image: url("./assets/rating-active.svg")
-
-    // &::after
-    //   width: 100%
-    //   background-image: url("./assets/rating-passive.svg")
-    //   opacity: 0.15
-
-    // &--1
-    //   &::before
-    //     width: $star-width
-
-    // &--2
-    //   &::before
-    //     width: $star-width * 2
-
-    // &--3
-    //   &::before
-    //     width: $star-width * 3
-
-    // &--4
-    //   &::before
-    //     width: $star-width * 4
-
-    // &--5
-    //   &::before
-    //     width: $star-width * 5
-
   &__star
     @extend .pos-absolute
     @include icon-size(strip-unit($star-size), strip-unit($star-size))
@@ -145,10 +107,10 @@ $star-size: 24px
     @extend .base-transition
     @extend .cursor-pointer
 
-    opacity: 0.25
+    opacity: $light-opacity
 
     &:hover
-      opacity: 1
+      opacity: $active-opacity
 
   &__tilda
     @extend .pos-absolute
@@ -158,7 +120,7 @@ $star-size: 24px
     bottom: 0
     left: -16px
     margin: auto
-    opacity: 0.5
+    opacity: $half-opacity
 
   &__favourite
     @include icon-size(18, 18)
@@ -174,10 +136,10 @@ $star-size: 24px
     @include icon-size(18, 18)
     @extend .base-transition
 
-    opacity: 0.5
+    opacity: $half-opacity
 
     &:hover
-      opacity: 1
+      opacity: $active-opacity
 
   &__edit
     @include icon-size(18,18)
@@ -185,7 +147,7 @@ $star-size: 24px
     @extend .base-transition
 
     margin-left: auto
-    opacity: 0.3
+    opacity: $half-opacity
 
     &:hover
-      opacity: 1
+      opacity: $active-opacity
