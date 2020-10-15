@@ -3,21 +3,21 @@
   div(class='dropdown')
     div(class='dropdown__label') {{label}}
     div(
-      class='dropdown__shadow'
-      v-if='dropdownOpened'
-      :style='dropdownHeight')
-    div(
       class='dropdown__toggle'
       @click="dropdownOpened = !dropdownOpened"
       :class="{'dropdown__toggle--active': dropdownOpened}")
         span(v-if='currentValue != undefined && currentValue.length > 0') {{currentValue}}
         span(v-else) {{defaultValue}}
         svg(class='dropdown__chevron'): use(xlink:href='#chevron-down-black')
-    ul(
-      class='dropdown__menu'
-      @click="dropdownOpened = false"
-      v-if="dropdownOpened")
-      slot(name='dropdown-menu')
+    div(
+      class='dropdown__body'
+      :class='{"dropdown__body--active" : dropdownOpened}')
+      div(class='dropdown__sliding')
+        ul(
+          class='dropdown__menu'
+          :class='{"dropdown__menu--opened" : dropdownOpened}'
+          @click="dropdownOpened = false")
+          slot(name='dropdown-menu')
 
 </template>
 

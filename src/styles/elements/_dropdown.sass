@@ -1,6 +1,7 @@
+$dropdown-height: 40px
+  
 .dropdown
   @extend .pos-relative
-  @extend .no-select
 
   margin-bottom: $gutter-width/2
 
@@ -30,9 +31,10 @@
     width: 100%
     border: 0
     outline: 0
-    height: 40px
+    height: $dropdown-height
     padding: 0 $gutter-width/2
-    background: rgba($clr-black, $tiny-opacity)
+    background: $clr-grey
+    z-index: 2
 
     &::before 
       @extend .pseudoelem
@@ -56,9 +58,21 @@
 
     margin-left: auto
 
-  &__menu
-    @extend .pos-absolute
+  &__body
+    @extend .pos-relative
+    @extend .no-select
 
+    &--active
+      z-index: 200
+
+  &__sliding
+    @extend .pos-absolute
+    @extend .no-overflow
+
+    width: 100%
+    top: 0
+
+  &__menu
     width: 100%
     top: 100%
     left: 0
@@ -67,7 +81,14 @@
     border-top: none
     border-bottom-left-radius: $base-radius !important
     border-bottom-right-radius: $base-radius !important
-    z-index: 100
+    z-index: 1
+    transform: translateY(-100%)
+    transition: none
+    
+
+    &--opened
+      transform: translateY(0)
+      transition: transform .45s ease
 
   &__item
     @extend .pos-relative
@@ -76,7 +97,7 @@
     @extend .cursor-pointer
     @extend .base-transition
 
-    height: 40px
+    height: $dropdown-height
     padding: 0 $gutter-width/2
     border-top: 1px solid $clr-grey
 
