@@ -39,31 +39,35 @@ export default {
   },
   methods: {
     setRating(rating) {
-      eventBus.$emit('rated', rating);
+      if (this.currentRating != rating) {
+        eventBus.$emit('rated', rating);
+      } else {
+        eventBus.$emit('rated', 0);
+      }
     },
 
     starClass(rating, index) {
-      let className= "rating__star "
+      let className= "rating__star ";
 
-      className += 'rating__star--' + (index + 1)
+      className += 'rating__star--' + (index + 1);
 
       if (rating > this.currentHover) {
-        className += " rating__star--excluded"
+        className += " rating__star--excluded";
       }
 
       else if (rating <= this.currentHover) {
-        className += " rating__star--included"
+        className += " rating__star--included";
       }
 
       return className
     },
 
     setHover(index) {
-      this.currentHover = index;
+      this.currentHover = index
     },
 
     removeHover() {
-      this.currentHover = undefined;
+      this.currentHover = undefined
     }
   },
   created() {
