@@ -2,22 +2,14 @@
 
   div(class='rating')
     div(class='rating__label') Rating
-    div(
-      class='rating__body'
-      @mouseleave='removeHover()')
-      div(class='rating__bar rating__bar--active')
-        div(
-          v-for='(rating, index) in currentRating'
-          v-if='currentHover == undefined'
-          class='rating__star--active'
-          :class="starClass(rating, index)")
-      div(class='rating__bar rating__bar--passive')
-        div(
-          v-for='(rating, index) in 5'
-          class='rating__star--passive'
-          :class="starClass(rating, index)"
-          @mouseover='setHover(index + 1)'
-          @click='setRating(rating)')
+    div(class='rating__body')
+      div(
+        v-for='(rating, index) in 5'
+        class='rating__star'
+        :class="starClass(rating, index)"
+        @mouseover='setHover(index + 1)'
+        @mouseleave='removeHover()'
+        @click='setRating(rating), justRated = !justRated')
 
 </template>
 
@@ -31,7 +23,8 @@ export default {
   },
   data() {
     return {
-      currentHover: undefined
+      currentHover: undefined,
+      justRated: false
     };
   },
   computed: {
@@ -47,7 +40,7 @@ export default {
     },
 
     starClass(rating, index) {
-      let className= "rating__star ";
+      let className = '';
 
       className += 'rating__star--' + (index + 1);
 
@@ -59,6 +52,14 @@ export default {
         className += " rating__star--included";
       }
 
+      if (rating <= this.currentRating) {
+        className += " rating__star--active";
+      }
+
+      if (this.currentHover != undefined && this.justRated == false) {
+        className = className.replace('rating__star--active', '')
+      }
+
       return className
     },
 
@@ -68,6 +69,7 @@ export default {
 
     removeHover() {
       this.currentHover = undefined
+      this.justRated = false
     }
   },
   created() {

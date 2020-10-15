@@ -18,9 +18,10 @@
 
         div(class='modal__content' v-scrollbar)
 
-          div(
-            class='modal__fields' 
-            v-if='type == "games"')
+          //- ===== //
+          //- GAMES //
+          //- ===== //
+          div(class='modal__fields' v-if='type == "games"')
 
             div(class='input')
               label(
@@ -31,7 +32,11 @@
                 autocomplete='off' 
                 v-model='gameData.title')
 
-            app-rating(:currentRating='gameData.rating')
+            div(class='grid__row')
+              div(class='grid__col grid__col--60')
+                app-rating(:currentRating='gameData.rating')
+              div(class='grid__col grid__col--40 grid__col--right')
+                app-favourite()
 
             app-dropdown(
               :label='"Status"'
@@ -63,10 +68,7 @@
                 v-for='platform in gamesPlatforms'
                 @click='setGamePlatform(platform)') {{platform}}
 
-            
-
-        div(
-          class='modal__footer')
+        div(class='modal__footer')
 
           div(
             class='button button--secondary'

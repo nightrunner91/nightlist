@@ -25,26 +25,26 @@
       div(class='table')
 
         div(class='table__header')
-          div(class='table__cell table__cell--3 table__cell--functional')
-          div(class='table__cell table__cell--37 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--3 table__cell--functional')
+          div(class='table__cell grid__col grid__col--37 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
-          div(class='table__cell table__cell--32 table__cell--functional') Author
-          div(class='table__cell table__cell--8 table__cell--functional') Favourite
-          div(class='table__cell table__cell--17 table__cell--functional') Rating
-          div(class='table__cell table__cell--3')
+          div(class='table__cell grid__col grid__col--32 table__cell--functional') Author
+          div(class='table__cell grid__col grid__col--8 table__cell--functional') Favourite
+          div(class='table__cell grid__col grid__col--17 table__cell--functional') Rating
+          div(class='table__cell grid__col grid__col--3')
 
         div(class='table__body')
           div(class='table__item' v-for='(item, index) in books')
-            div(class='table__cell table__cell--3') {{index + 1}}
-            div(class='table__cell table__cell--37') 
+            div(class='table__cell grid__col grid__col--3') {{index + 1}}
+            div(class='table__cell grid__col grid__col--37') 
               span {{item.title}}
               a(:href="item.link" target="_blank" class='table__link' v-if='item.link != undefined')
                 svg(class='table__redirect'): use(xlink:href='#link')
-            div(class='table__cell table__cell--32') {{item.author}}
-            div(class='table__cell table__cell--8') 
+            div(class='table__cell grid__col grid__col--32') {{item.author}}
+            div(class='table__cell grid__col grid__col--8') 
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
-            div(class='table__cell table__cell--17')  
+            div(class='table__cell grid__col grid__col--17')  
               div(class='table__rating')
                 svg(
                   class='table__star table__star--active' 
@@ -54,7 +54,7 @@
                   class='table__star table__star--passive' 
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-            div(class='table__cell table__cell--3')  
+            div(class='table__cell grid__col grid__col--3')  
               svg(class='table__edit'): use(xlink:href='#edit')
 
 </template>
