@@ -1,4 +1,5 @@
 <template lang='pug'>
+  
   section(class='section')
 
     div(
@@ -10,7 +11,8 @@
         span(class='title__badge badge badge--medium') {{games.length}}
         div(
           class='title__button title__button--games button button--main'
-          @click='addNewGame()')
+          @click='addSlot()'
+          v-ripple)
           div(class='button__icon button__icon--plus')
           span(class='button__text') Add New
 
@@ -21,7 +23,7 @@
 
       div(class='title title--secondary')
         svg(class='title__chevron'): use(xlink:href='#chevron-down')
-        h2(class='title__name') {{gamesStatuses[0]}}
+        h2(class='title__name') {{games.statuses.filter(i => i.default)[0].name}}
         span(class='title__badge badge badge--medium') 10
 
       div(class='table')
@@ -37,7 +39,7 @@
           div(class='table__cell grid__col grid__col--3')
 
         div(class='table__body')
-          div(class='table__item' v-for='(item, index) in games')
+          div(class='table__item' v-for='(item, index) in games.collection')
             div(class='table__cell grid__col grid__col--3') {{index + 1}}
             div(class='table__cell grid__col grid__col--55') 
               span {{item.title}}
@@ -65,9 +67,8 @@
 
     app-modal(
       :type='"games"'
-      :payload='currentSlot'
       v-show='modalVisible'
-      @close='hideModal(), resetCurrentSlot()'
+      @closeModal='hideModal()'
       @save='updateData(), hideModal()')
 
 </template>
@@ -79,27 +80,16 @@ export default {
   name: 'Games',
   data() {
     return {
-      currentSlot: {
-        id: '',
-        title: '',
-        status: '',
-        platform: '',
-        hours: '',
-        hoursApproximate: '',
-        rating: 0,
-        favourite: '',
-        priority: '',
-        link: ''
-      }
+      
     };
   },
   computed: {
     games() {return this.$store.state.games},
-    gamesStatuses() {return this.$store.state.gamesStatuses},
+    payload()  { return this.$store.state.payload },
     
     modalVisible() {return this.$store.state.modalVisible},
   },
-  methods : {
+  methods: {
     showModal() {
       this.$store.commit('changeModalState', true);
       eventBus.$emit('modalOpened');
@@ -109,27 +99,22 @@ export default {
       this.$store.commit('changeModalState', false);
     },
 
-    addNewGame() {
+    addSlot() {
+      this.$store.commit('changePayload', {});
       this.showModal();
     },
 
     editSlot(id) {
-      let target = Object.assign(
-        this.currentSlot, 
-        this.games.filter(item => item.id == id)[0]);
-
-      this.currentSlot = target;
-
+      this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
       this.showModal();
     },
 
-    resetCurrentSlot() {
-      let that = this;
-
-      Object.keys(this.currentSlot).forEach(key => {
-        that.currentSlot[key] = ''
-      });
+    updateData() {
+      console.log('send to backend ===> ', this.payload)
     }
+  },
+  mounted() {
+    
   }
 }
 </script>

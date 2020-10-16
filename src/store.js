@@ -6,142 +6,146 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     modalVisible: false,
-    gamesStatuses: ["Currently playing", "Completed", "Plan to play", "Dropped"],
-    gamesPlatforms: ["Don't own game", "Steam", "Origin", "Uplay", "Battle.net", "Epic Games Store", "GOG.com"],
-    games: [
-      {
-        id: 1,
-        title: "Assassin's Creed",
-        status: "Completed",
-        platform: 'own',
-        hours: undefined,
+
+    payload: {},
+
+    games: {
+      statuses: [
+        {
+          name: "Currently playing",
+          default: true
+        },
+        {
+          name: "Completed",
+          default: false
+        },
+        {
+          name: "Plan to play",
+          default: false
+        },
+        {
+          name: "Dropped",
+          default: false
+        },
+      ],
+      platforms: [
+        {
+          name: "Don't own game",
+          default: true
+        },
+        {
+          name: "Steam",
+          default: false
+        },
+        {
+          name: "Origin",
+          default: false
+        },
+        {
+          name: "Uplay",
+          default: false
+        },
+        {
+          name: "Battle.net",
+          default: false
+        },
+        {
+          name: "Epic Games Store",
+          default: false
+        },
+        {
+          name: "GOG.com",
+          default: false
+        },
+      ],
+      default: {
+        id: 0,
+        title: "",
+        status: "",
+        platform: "",
+        hours: 0,
         hoursApproximate: false,
-        rating: 4,
-        favourite: true,
-        priority: undefined,
-        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
-      },
-      {
-        id: 2,
-        title: "Assassin's Creed 2",
-        status: "Completed",
-        platform: 'own',
-        hours: 78,
-        hoursApproximate: false,
-        rating: 4,
+        rating: 0,
         favourite: false,
-        priority: undefined,
-        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
+        priority: 0,
+        link: ""
       },
-      {
-        id: 3,
-        title: "Assassin's Creed: Brotherhood",
-        status: "Completed",
-        platform: 'own',
-        hours: 86,
-        hoursApproximate: false,
-        rating: 5,
-        favourite: false,
-        priority: undefined,
-        link: undefined
-      },
-      {
-        id: 4,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 26,
-        hoursApproximate: true,
-        rating: undefined,
-        favourite: false,
-        priority: undefined,
-        link: undefined
-      },
-      {
-        id: 5,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 26,
-        hoursApproximate: true,
-        rating: 4,
-        favourite: true,
-        priority: undefined,
-        link: undefined
-      },
-      {
-        id: 6,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 553,
-        hoursApproximate: false,
-        rating: 4,
-        favourite: true,
-        priority: undefined,
-        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
-      },
-      {
-        id: 7,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 26,
-        hoursApproximate: true,
-        rating: 5,
-        favourite: false,
-        priority: undefined,
-        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
-      },
-      {
-        id: 8,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 166,
-        hoursApproximate: false,
-        rating: 5,
-        favourite: true,
-        priority: undefined,
-        link: undefined
-      },
-      {
-        id: 9,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 26,
-        hoursApproximate: true,
-        rating: 3,
-        favourite: false,
-        priority: undefined,
-        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
-      },
-      {
-        id: 10,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 26,
-        hoursApproximate: true,
-        rating: 3,
-        favourite: false,
-        priority: undefined,
-        link: 'https://ru.wikipedia.org/wiki/Assassin%E2%80%99s_Creed'
-      },
-      {
-        id: 11,
-        title: "Some Game Title",
-        status: "Completed",
-        platform: 'own',
-        hours: 26,
-        hoursApproximate: true,
-        rating: 3,
-        favourite: false,
-        priority: undefined,
-        link: undefined
-      },
-    ],
+      collection: [
+        {
+          id: 4365367457,
+          title: "Dishonored: Death of the Outsider",
+          status: "Currently playing",
+          platform: "Steam",
+          hours: 18,
+          hoursApproximate: false,
+          rating: 4,
+          favourite: false,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/18573/Dishonored:_Death_of_the_Outsider"
+        },
+        {
+          id: 2564576537,
+          title: "Metro Exodus",
+          status: "Currently playing",
+          platform: "Don't own game",
+          hours: 4,
+          hoursApproximate: true,
+          rating: 0,
+          favourite: false,
+          priority: 0,
+          link: ""
+        },
+        {
+          id: 3574468557,
+          title: "Subnautica",
+          status: "Currently playing",
+          platform: "Steam",
+          hours: 27,
+          hoursApproximate: false,
+          rating: 5,
+          favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/15610/Subnautica"
+        },
+        {
+          id: 9535744573,
+          title: "A Plague Tale: Innocence",
+          status: "Completed",
+          platform: "Steam",
+          hours: 12,
+          hoursApproximate: false,
+          rating: 4,
+          favourite: false,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/25131/A_Plague_Tale:_Innocence"
+        },
+        {
+          id: 5426578641,
+          title: "Batman: Arkham Knight",
+          status: "Completed",
+          platform: "Steam",
+          hours: 34,
+          hoursApproximate: false,
+          rating: 5,
+          favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/7828/Batman:_Arkham_Knight"
+        },
+        {
+          id: 3467890345,
+          title: "BioShock Infinite",
+          status: "Completed",
+          platform: "Steam",
+          hours: 19,
+          hoursApproximate: false,
+          rating: 5,
+          favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/970/BioShock_Infinite"
+        },
+      ]
+    },
+
     tvshows: [
       {
         id: 335,
@@ -535,32 +539,18 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    setSimpleFoo(state, data) {
-      state.fooSimple = data;
-    },
-
-    setManyFoo(state, { param1, param2, param3 }) {
-      state.foo1 = param1;
-      state.foo2 = param2;
-      state.foo3 = param3;
-    },
-
     changeModalState(state, data) {
       state.modalVisible = data;
+    },
+
+    changePayload(state, data) {
+      state.payload = data;
     }
 
   },
   actions: {
 
-    DO_A_THING({commit, state}) {
-      commit('setSimpleFoo', 'data');
-      commit('setManyFoo', {
-        param1: 'param1',
-        param2: 'param2',
-        param3: 'param3'
-      });
-      console.log(state);
-    }
+    
 
   }
 })

@@ -12,7 +12,7 @@
 
         div(
           class='modal__close'
-          @click='close'
+          @click='closeModal()'
           v-ripple)
           svg(class='modal__cross'): use(xlink:href='#close')
 
@@ -30,49 +30,49 @@
               input(
                 class='input__field' 
                 autocomplete='off' 
-                v-model='gameData.title')
+                v-model='current.title')
 
             div(class='grid__row')
               div(class='grid__col grid__col--60')
-                app-rating(:currentRating='gameData.rating')
+                app-rating(:currentRating='current.rating')
               div(class='grid__col grid__col--40 grid__col--right')
                 app-favourite()
 
             app-dropdown(
               :label='"Status"'
-              :currentValue='gameData.status'
-              :defaultValue='gamesStatuses[0]'
-              :itemsCount='gamesStatuses.length')
+              :currentValue='current.status'
+              :defaultValue='games.statuses.filter(i => i.default)[0].name'
+              :itemsCount='games.statuses.length')
               input(
                 slot='dropdown-input' 
-                v-model='gameData.status' 
+                v-model='current.status' 
                 type='text')
               li(
                 slot='dropdown-menu'
                 class='dropdown__item'
-                v-for='status in gamesStatuses'
-                @click='setGameStatus(status)') {{status}}
+                v-for='status in games.statuses'
+                @click='setGameStatus(status.name)') {{status.name}}
 
             app-dropdown(
-              :label='"Platform"'
-              :currentValue='gameData.platform'
-              :defaultValue='gamesPlatforms[0]'
-              :itemsCount='gamesPlatforms.length')
+              :label='"Status"'
+              :currentValue='current.platform'
+              :defaultValue='games.platforms.filter(i => i.default)[0].name'
+              :itemsCount='games.platforms.length')
               input(
                 slot='dropdown-input' 
-                v-model='gameData.platform' 
+                v-model='current.platform' 
                 type='text')
               li(
                 slot='dropdown-menu'
                 class='dropdown__item'
-                v-for='platform in gamesPlatforms'
-                @click='setGamePlatform(platform)') {{platform}}
+                v-for='platform in games.platforms'
+                @click='setGamePlatform(platform.name)') {{platform.name}}
 
         div(class='modal__footer')
 
           div(
             class='button button--secondary'
-            @click='close')
+            @click='closeModal()')
             span(class='button__text') Cancel
 
           div(
@@ -88,55 +88,41 @@ import { eventBus } from "../../main";
 export default {
   name: 'modal',
   props: {
-    type: String,
-    payload: Object
+    type: String
   },
   data() {
     return {
-      gameData: {
-        id: '',
-        title: '',
-        status: '',
-        platform: '',
-        hours: '',
-        hoursApproximate: '',
-        rating: 0,
-        favourite: '',
-        priority: '',
-        link: ''
-      }
+      current: {}
     }
   },
   methods: {
-    close() {
-      this.$emit('close');
-    },
+    closeModal() { this.$emit('closeModal') },
 
-    assignGameData() {
-      let importedData = Object.assign(this.gameData, this.payload);
+    assignPayload() { this.current = this.payload; },
 
-      this.gameData = importedData;
-    },
-
-    setGameStatus(status) { this.gameData.status = status; },
-    setGamePlatform(platform) { this.gameData.platform = platform; },
-    setGameRating(rating) { this.gameData.rating = rating; }
+    setGameStatus(status)     { this.current.status = status; },
+    setGamePlatform(platform) { this.current.platform = platform; },
+    setGameRating(rating)     { this.current.rating = rating; }
   },
   computed: {
-    gamesStatuses() {return this.$store.state.gamesStatuses},
-    gamesPlatforms() {return this.$store.state.gamesPlatforms},
+    games()    { return this.$store.state.games },
+    tvshows()  { return this.$store.state.tvshows },
+    films()    { return this.$store.state.films },
+    anime()    { return this.$store.state.anime },
+    books()    { return this.$store.state.books },
+    hardware() { return this.$store.state.hardware },
+
+    payload()  { return this.$store.state.payload },
   },
   mounted() {
     document.addEventListener('click', (e) => {
-      if(e.target == this.$refs.backdrop) this.close();
+      if(e.target == this.$refs.backdrop) this.closeModal();
     });
 
-    eventBus.$on('modalOpened', () => {
-      this.assignGameData()
-    });
+    eventBus.$on('modalOpened', () => { this.assignPayload() });
 
     eventBus.$on('rated', rating => {
-      this.setGameRating(rating)
+      this.setGameRating(rating);
     })
   }
 };
