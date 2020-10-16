@@ -4,8 +4,8 @@
     div(class='favourite__label') Favourite
     div(
       class='favourite__icon'
-      :class='[{"favourite__icon--active" : isFavourite == true},{"favourite__icon--passive" : isFavourite == false}]'
-      @click='isFavourite = !isFavourite')
+      :class='[{"favourite__icon--active" : currentFavourite == true},{"favourite__icon--passive" : currentFavourite == false}]'
+      @click='currentFavourite = !currentFavourite')
 
 </template>
 
@@ -15,11 +15,11 @@ import { eventBus } from "../../main";
 export default {
   name: "Favourite",
   props: {
-    currentFavourite: false
+    currentFavourite: Boolean
   },
   data() {
     return {
-      isFavourite: false
+      
     };
   },
   computed: {
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     changeFavourite() {
-      
+      this.currentFavourite = !this.currentFavourite
     }
   },
   created() {
