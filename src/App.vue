@@ -8,6 +8,9 @@
       main(class='main main--custom')
         transition(name="page" mode="out-in")
           router-view
+    app-modal(
+      :type='currentPage'
+      v-show='modalVisible')
 
 </template>
 
@@ -31,10 +34,19 @@ export default {
     modalVisible() { return this.$store.state.modalVisible }
   },
   methods: {
-    
+    showModal() {
+      this.$store.commit('changeModalState', true);
+      eventBus.$emit('modalOpened');
+    },
+
+    closeModal() {
+      this.$store.commit('changeModalState', false);
+      eventBus.$emit('modalClosed');
+    },
   },
   mounted() {
-    
+    eventBus.$on('openModal', () => { this.showModal() });
+    eventBus.$on('closeModal', () => { this.closeModal() });
   }
 }
 </script>

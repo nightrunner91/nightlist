@@ -96,7 +96,7 @@ export default {
     }
   },
   methods: {
-    closeModal() { this.$emit('closeModal') },
+    closeModal() { eventBus.$emit('closeModal') },
 
     assignPayload() { this.current = this.payload; },
 

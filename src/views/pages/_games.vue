@@ -65,12 +65,6 @@
                 class='table__edit'
                 @click='editSlot(item.id)'): use(xlink:href='#edit')
 
-    app-modal(
-      :type='"games"'
-      v-show='modalVisible'
-      @closeModal='hideModal()'
-      @save='updateData(), hideModal()')
-
 </template>
 
 <script>
@@ -86,31 +80,21 @@ export default {
   computed: {
     games() {return this.$store.state.games},
     payload()  { return this.$store.state.payload },
-    
     modalVisible() {return this.$store.state.modalVisible},
   },
   methods: {
-    showModal() {
-      this.$store.commit('changeModalState', true);
-      eventBus.$emit('modalOpened');
-    },
-
-    hideModal() {
-      this.$store.commit('changeModalState', false);
-    },
-
     addSlot() {
       this.$store.commit('changePayload', {});
-      this.showModal();
+      eventBus.$emit('openModal');
     },
 
     editSlot(id) {
       this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
-      this.showModal();
+      eventBus.$emit('openModal');
     },
 
     updateData() {
-      console.log('send to backend ===> ', this.payload)
+      console.log('send to backend');
     }
   },
   mounted() {
