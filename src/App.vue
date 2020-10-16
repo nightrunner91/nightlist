@@ -42,7 +42,7 @@ export default {
     closeModal() {
       this.$store.commit('changeModalState', false);
       eventBus.$emit('modalClosed');
-    },
+    }
   },
   mounted() {
     eventBus.$on('openModal', () => { this.showModal() });

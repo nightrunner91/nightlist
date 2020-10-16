@@ -2,13 +2,9 @@
 
   transition(name='modal-fade')
 
-    div(
-      class='modal-backdrop' 
-      ref='backdrop')
+    div(class='modal-backdrop' ref='backdrop')
 
-      div(
-        class='modal'
-        :class='"modal--" + type')
+      div(class='modal' :class='"modal--" + type')
 
         div(
           class='modal__close'
@@ -97,9 +93,9 @@ export default {
   },
   methods: {
     closeModal() { eventBus.$emit('closeModal') },
+    assignPayload() { this.current = Object.assign({}, this.payload); },
 
-    assignPayload() { this.current = this.payload; },
-
+    // Games
     setGameStatus(status)     { this.current.status = status; },
     setGamePlatform(platform) { this.current.platform = platform; },
     setGameRating(rating)     { this.current.rating = rating; }
@@ -112,18 +108,19 @@ export default {
     books()    { return this.$store.state.books },
     hardware() { return this.$store.state.hardware },
 
-    payload()  { return this.$store.state.payload },
+    payload()  { return this.$store.state.payload }
   },
   mounted() {
-    document.addEventListener('click', (e) => {
-      if(e.target == this.$refs.backdrop) this.closeModal();
+    document.addEventListener('click', e => {
+      if (e.target == this.$refs.backdrop) this.closeModal();
+    });
+
+    document.addEventListener('keyup', e => {
+      if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal();
     });
 
     eventBus.$on('modalOpened', () => { this.assignPayload() });
-
-    eventBus.$on('rated', rating => {
-      this.setGameRating(rating);
-    })
+    eventBus.$on('rated', rating => { this.setGameRating(rating); });
   }
 };
 </script>

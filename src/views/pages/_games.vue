@@ -79,7 +79,6 @@ export default {
   },
   computed: {
     games() {return this.$store.state.games},
-    payload()  { return this.$store.state.payload },
     modalVisible() {return this.$store.state.modalVisible},
   },
   methods: {
