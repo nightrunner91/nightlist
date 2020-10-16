@@ -13,19 +13,23 @@ export default new Vuex.Store({
       statuses: [
         {
           name: "Currently playing",
-          default: true
+          default: true,
+          id: 'currently_playing'
         },
         {
           name: "Completed",
-          default: false
+          default: false,
+          id: 'completed'
         },
         {
           name: "Plan to play",
-          default: false
+          default: false,
+          id: 'plan_to_play'
         },
         {
           name: "Dropped",
-          default: false
+          default: false,
+          id: 'dropped'
         },
       ],
       platforms: [

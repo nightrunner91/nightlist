@@ -25,10 +25,17 @@ export default {
     }
   },
   computed: {
+    games()    { return this.$store.state.games },
+    tvshows()  { return this.$store.state.tvshows },
+    films()    { return this.$store.state.films },
+    anime()    { return this.$store.state.anime },
+    books()    { return this.$store.state.books },
+    hardware() { return this.$store.state.hardware },
+
     currentPage() {
-      let rName = this.$route.name
-      if (rName != null) return rName.toLowerCase()
-      else return 
+      let rName = this.$route.name;
+      if (rName != null) return rName.toLowerCase();
+      else return
     },
 
     modalVisible() { return this.$store.state.modalVisible }
@@ -41,6 +48,7 @@ export default {
 
     closeModal() {
       this.$store.commit('changeModalState', false);
+      this.$store.commit('changePayload', this.games.default);
       eventBus.$emit('modalClosed');
     }
   },

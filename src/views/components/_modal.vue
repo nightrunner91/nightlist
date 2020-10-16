@@ -120,6 +120,7 @@ export default {
     });
 
     eventBus.$on('modalOpened', () => { this.assignPayload() });
+    eventBus.$on('modalClosed', () => { this.assignPayload() });
     eventBus.$on('rated', rating => { this.setGameRating(rating); });
   }
 };
