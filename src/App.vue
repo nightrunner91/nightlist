@@ -25,13 +25,6 @@ export default {
     }
   },
   computed: {
-    games()    { return this.$store.state.games },
-    tvshows()  { return this.$store.state.tvshows },
-    films()    { return this.$store.state.films },
-    anime()    { return this.$store.state.anime },
-    books()    { return this.$store.state.books },
-    hardware() { return this.$store.state.hardware },
-
     currentPage() {
       let rName = this.$route.name;
       if (rName != null) return rName.toLowerCase();
@@ -41,20 +34,26 @@ export default {
     modalVisible() { return this.$store.state.modalVisible }
   },
   methods: {
-    showModal() {
+    openModal() {
       this.$store.commit('changeModalState', true);
       eventBus.$emit('modalOpened');
     },
 
     closeModal() {
       this.$store.commit('changeModalState', false);
-      this.$store.commit('changePayload', this.games.default);
       eventBus.$emit('modalClosed');
+    },
+
+    setDefaultPayload() {
+      this.$store.commit('changePayload', this.$store.state[this.currentPage].default);
     }
   },
   mounted() {
-    eventBus.$on('openModal', () => { this.showModal() });
-    eventBus.$on('closeModal', () => { this.closeModal() });
+    eventBus.$on('openModal',  () => this.openModal());
+    eventBus.$on('closeModal', () => { 
+      this.closeModal();
+      this.setDefaultPayload();
+    });
   }
 }
 </script>

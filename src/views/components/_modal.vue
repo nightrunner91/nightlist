@@ -47,7 +47,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='status in games.statuses'
-                @click='setGameStatus(status.name)') {{status.name}}
+                @click='setStatus(status.name)') {{status.name}}
 
             app-dropdown(
               :label='"Status"'
@@ -62,7 +62,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='platform in games.platforms'
-                @click='setGamePlatform(platform.name)') {{platform.name}}
+                @click='setPlatform(platform.name)') {{platform.name}}
 
         div(class='modal__footer')
 
@@ -92,14 +92,23 @@ export default {
     }
   },
   methods: {
-    closeModal() { eventBus.$emit('closeModal') },
-    assignPayload() { this.current = Object.assign({}, this.payload); },
+    bindOutsideClick() {
+      document.addEventListener('click', e => {
+        if (e.target == this.$refs.backdrop) this.closeModal();
+      });
 
-    // Games
-    setGameStatus(status)     { this.current.status = status; },
-    setGamePlatform(platform) { this.current.platform = platform; },
-    setGameRating(rating)     { this.current.rating = rating; },
-    setGameFavourite(favourite)     { this.current.favourite = favourite; }
+      document.addEventListener('keyup', e => {
+        if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal();
+      });
+    },
+
+    closeModal()    { eventBus.$emit('closeModal') },
+    assignPayload() { this.current = Object.assign({}, this.payload) },
+
+    setStatus(data)     { this.current.status = data },
+    setPlatform(data)   { this.current.platform = data },
+    setRating(data)     { this.current.rating = data },
+    setFavourite(data)  { this.current.favourite = data }
   },
   computed: {
     games()    { return this.$store.state.games },
@@ -112,18 +121,13 @@ export default {
     payload()  { return this.$store.state.payload }
   },
   mounted() {
-    document.addEventListener('click', e => {
-      if (e.target == this.$refs.backdrop) this.closeModal();
-    });
+    this.bindOutsideClick();
 
-    document.addEventListener('keyup', e => {
-      if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal();
-    });
+    eventBus.$on('modalOpened', () => this.assignPayload());
+    eventBus.$on('modalClosed', () => this.assignPayload());
 
-    eventBus.$on('modalOpened', () => { this.assignPayload() });
-    eventBus.$on('modalClosed', () => { this.assignPayload() });
-    eventBus.$on('rated', rating => { this.setGameRating(rating); });
-    eventBus.$on('favourite', favourite => { this.setGameFavourite(favourite); });
+    eventBus.$on('rated',     data => this.setRating(data));
+    eventBus.$on('favourite', data => this.setFavourite(data));
   }
 };
 </script>
