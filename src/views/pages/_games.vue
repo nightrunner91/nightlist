@@ -123,14 +123,24 @@ export default {
   },
   computed: {
     games() {return this.$store.state.games},
-    
     modalVisible() {return this.$store.state.modalVisible},
   },
   methods: {
-    totalGames() {return this.games.collection.length},
-    categoryName(id) { return this.games.statuses.filter(i => i.id == id)[0].name },
-    categoryLength(id) { return this.games.collection.filter(i => i.status == this.categoryName(id)).length },
-    sortedGames(id) { return this.games.collection.filter(i => i.status == this.categoryName(id)) },
+    totalGames() {
+      return this.games.collection.length
+    },
+
+    categoryName(id) { 
+      return this.games.statuses.filter(i => i.id == id)[0].name 
+    },
+
+    categoryLength(id) {
+      return this.games.collection.filter(i => i.status == this.categoryName(id)).length 
+    },
+
+    sortedGames(id) {
+      return this.games.collection.filter(i => i.status == this.categoryName(id))
+    },
 
     addSlot() {
       this.$store.commit('changePayload', this.games.default);
