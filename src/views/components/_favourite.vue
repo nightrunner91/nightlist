@@ -5,7 +5,7 @@
     div(
       class='favourite__icon'
       :class='[{"favourite__icon--active" : currentFavourite == true},{"favourite__icon--passive" : currentFavourite == false}]'
-      @click='currentFavourite = !currentFavourite')
+      @click='changeFavourite()')
 
 </template>
 
@@ -27,7 +27,11 @@ export default {
   },
   methods: {
     changeFavourite() {
-      this.currentFavourite = !this.currentFavourite
+      if (this.currentFavourite) {
+        eventBus.$emit('favourite', false);
+      } else {
+        eventBus.$emit('favourite', true);
+      }
     }
   },
   created() {

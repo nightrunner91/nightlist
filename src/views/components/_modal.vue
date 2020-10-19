@@ -32,7 +32,7 @@
               div(class='grid__col grid__col--60')
                 app-rating(:currentRating='current.rating')
               div(class='grid__col grid__col--40 grid__col--right')
-                app-favourite()
+                app-favourite(:currentFavourite='current.favourite')
 
             app-dropdown(
               :label='"Status"'
@@ -98,7 +98,8 @@ export default {
     // Games
     setGameStatus(status)     { this.current.status = status; },
     setGamePlatform(platform) { this.current.platform = platform; },
-    setGameRating(rating)     { this.current.rating = rating; }
+    setGameRating(rating)     { this.current.rating = rating; },
+    setGameFavourite(favourite)     { this.current.favourite = favourite; }
   },
   computed: {
     games()    { return this.$store.state.games },
@@ -122,6 +123,7 @@ export default {
     eventBus.$on('modalOpened', () => { this.assignPayload() });
     eventBus.$on('modalClosed', () => { this.assignPayload() });
     eventBus.$on('rated', rating => { this.setGameRating(rating); });
+    eventBus.$on('favourite', favourite => { this.setGameFavourite(favourite); });
   }
 };
 </script>
