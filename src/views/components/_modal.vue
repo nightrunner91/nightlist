@@ -50,7 +50,7 @@
                 @click='setStatus(status.name)') {{status.name}}
 
             app-dropdown(
-              :label='"Status"'
+              :label='"Platform"'
               :currentValue='current.platform'
               :defaultValue='games.platforms.filter(i => i.default)[0].name'
               :itemsCount='games.platforms.length')
