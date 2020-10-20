@@ -4,7 +4,7 @@
 
     div(
       class='section__content'
-      :class='{"section__content--blured" : modalVisible}')
+      :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
         h1(class='title__name') My Games
@@ -30,20 +30,27 @@
 
         div(class='table__header')
           div(class='table__cell grid__col grid__col--3 table__cell--functional')
-          div(class='table__cell grid__col grid__col--55 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--58 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
           div(class='table__cell grid__col grid__col--10 table__cell--functional') Favourite
           div(class='table__cell grid__col grid__col--17 table__cell--functional') Rating
           div(class='table__cell grid__col grid__col--12 table__cell--functional') Spent time
-          div(class='table__cell grid__col grid__col--3')
 
         div(class='table__body')
-          div(class='table__item' v-for='(item, index) in sortedGames("currently_playing")')
+          div(
+            class='table__item' v-for='(item, index) in sortedGames("currently_playing")'
+            @click='editSlot(item.id, $event)')
             div(class='table__cell grid__col grid__col--3') {{index + 1}}
-            div(class='table__cell grid__col grid__col--55') 
+            div(class='table__cell grid__col grid__col--58') 
               span {{item.title}}
-              a(:href="item.link" target="_blank" class='table__link' v-if='item.link != undefined')
+              a(
+                :ref='"redirect"'
+                rel='nofollow'
+                :href='item.link'
+                target='_blank"'
+                class='table__link'
+                v-if='item.link.length')
                 svg(class='table__redirect'): use(xlink:href='#link')
             div(class='table__cell grid__col grid__col--10') 
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
@@ -60,10 +67,6 @@
             div(class='table__cell grid__col grid__col--12') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
-            div(class='table__cell grid__col grid__col--3')
-              svg(
-                class='table__edit'
-                @click='editSlot(item.id)'): use(xlink:href='#edit')
 
       div(class='title title--secondary')
         svg(class='title__chevron'): use(xlink:href='#chevron-down')
@@ -74,20 +77,26 @@
 
         div(class='table__header')
           div(class='table__cell grid__col grid__col--3 table__cell--functional')
-          div(class='table__cell grid__col grid__col--55 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--58 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
           div(class='table__cell grid__col grid__col--10 table__cell--functional') Favourite
           div(class='table__cell grid__col grid__col--17 table__cell--functional') Rating
           div(class='table__cell grid__col grid__col--12 table__cell--functional') Spent time
-          div(class='table__cell grid__col grid__col--3')
 
         div(class='table__body')
-          div(class='table__item' v-for='(item, index) in sortedGames("completed")')
+          div(
+            class='table__item' v-for='(item, index) in sortedGames("completed")'
+            @click='editSlot(item.id, $event)')
             div(class='table__cell grid__col grid__col--3') {{index + 1}}
-            div(class='table__cell grid__col grid__col--55') 
+            div(class='table__cell grid__col grid__col--58') 
               span {{item.title}}
-              a(:href="item.link" target="_blank" class='table__link' v-if='item.link != undefined')
+              a(
+                rel='nofollow'
+                :href='item.link'
+                target='_blank"'
+                class='table__link' 
+                v-if='item.link.length')
                 svg(class='table__redirect'): use(xlink:href='#link')
             div(class='table__cell grid__col grid__col--10') 
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
@@ -104,10 +113,6 @@
             div(class='table__cell grid__col grid__col--12') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
-            div(class='table__cell grid__col grid__col--3')
-              svg(
-                class='table__edit'
-                @click='editSlot(item.id)'): use(xlink:href='#edit')
 
 </template>
 
@@ -123,7 +128,7 @@ export default {
   },
   computed: {
     games() {return this.$store.state.games},
-    modalVisible() {return this.$store.state.modalVisible},
+    modalState() {return this.$store.state.modalState},
   },
   methods: {
     totalGames() {
@@ -144,17 +149,16 @@ export default {
 
     addSlot() {
       this.$store.commit('changePayload', this.games.default);
-      eventBus.$emit('openModal');
+      eventBus.$emit('openModal', 'add');
     },
 
-    editSlot(id) {
-      this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
-      eventBus.$emit('openModal');
+    editSlot(id, event) {
+      if (event.target.className == 'table__link') return
+      else {
+        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
+        eventBus.$emit('openModal', 'edit');
+      }
     },
-
-    updateData() {
-      console.log('send to backend');
-    }
   },
   mounted() {
 

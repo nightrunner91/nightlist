@@ -3,16 +3,17 @@
   @extend .align-center
   @extend .no-select
   
-  padding: $gutter-width/2
-  margin-bottom: $gutter-width/2
+  padding: 0 $gutter-width/2
 
   &--main
-
+    margin-bottom: $gutter-width
 
   &--secondary
     @extend .cursor-pointer
     @extend .base-transition
     @extend .base-radius
+
+    margin-bottom: $gutter-width/2
 
     &:hover
       .title

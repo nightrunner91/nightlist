@@ -5,7 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    modalVisible: false,
+    modalState: {
+      visibility: false,
+      purpose: undefined
+    },
 
     payload: {},
 
@@ -543,8 +546,13 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    changeModalState(state, data) {
-      state.modalVisible = data;
+    changeModalState(state, { visibility, purpose }) {
+      state.modalState.visibility = visibility;
+      if (purpose != undefined) state.modalState.purpose = purpose;
+    },
+
+    changeConfirmState(state, data) {
+      state.confirmVisible = data;
     },
 
     changePayload(state, data) {

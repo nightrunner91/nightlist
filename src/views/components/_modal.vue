@@ -64,12 +64,34 @@
                 v-for='platform in games.platforms'
                 @click='setPlatform(platform.name)') {{platform.name}}
 
+            div(class='input')
+              label(
+                class='input__label' 
+                for='title') Link #[sup (optional)]
+              input(
+                class='input__field' 
+                autocomplete='off' 
+                v-model='current.link')
+
         div(class='modal__footer')
 
-          div(
-            class='button button--secondary'
-            @click='closeModal()')
-            span(class='button__text') Cancel
+          div(v-if='purpose == "edit"')
+
+            div(
+              class='button button--secondary'
+              v-if='confirmActive == false'
+              @click='confirmDeleting()')
+              svg(class='button__icon'): use(xlink:href='#delete')
+              span(class='button__text') Delete
+
+            div(v-else) You sure?
+
+          div(v-else-if='purpose == "add"')
+
+            div(
+              class='button button--secondary'
+              @click='closeModal()')
+              span(class='button__text') Cancel
 
           div(
             class='button button--main'
@@ -84,11 +106,13 @@ import { eventBus } from "../../main";
 export default {
   name: 'modal',
   props: {
-    type: String
+    type: String,
+    purpose: String
   },
   data() {
     return {
-      current: {}
+      current: {},
+      confirmActive: false
     }
   },
   methods: {
@@ -104,6 +128,10 @@ export default {
 
     closeModal()    { eventBus.$emit('closeModal') },
     assignPayload() { this.current = Object.assign({}, this.payload) },
+
+    confirmDeleting() {
+      this.confirmActive = true
+    },
 
     setStatus(data)     { this.current.status = data },
     setPlatform(data)   { this.current.platform = data },

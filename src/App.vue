@@ -1,16 +1,29 @@
 <template lang='pug'>
 
-  div(id='app' class='page')
+  div(
+    id='app'
+    class='page')
+
     app-gradients(:current='currentPage')
-    div(class='page__blur' v-if='modalVisible')
-    app-sidebar
-    div(v-scrollbar)
-      main(class='main main--custom')
-        transition(name="page" mode="out-in")
+
+    app-sidebar()
+
+    main(
+      class='content' 
+      v-scrollbar)
+
+      div(class='content__inner')
+
+        transition(
+          name='page'
+          mode='out-in')
+          
           router-view
+
     app-modal(
       :type='currentPage'
-      v-show='modalVisible')
+      :purpose='modalState.purpose'
+      v-show='modalState.visibility')
 
 </template>
 
@@ -31,16 +44,21 @@ export default {
       else return
     },
 
-    modalVisible() { return this.$store.state.modalVisible }
+    modalState()   { return this.$store.state.modalState }
   },
   methods: {
-    openModal() {
-      this.$store.commit('changeModalState', true);
+    openModal(purpose) {
+      this.$store.commit('changeModalState', {
+        visibility: true,
+        purpose: purpose
+      });
       eventBus.$emit('modalOpened');
     },
 
     closeModal() {
-      this.$store.commit('changeModalState', false);
+      this.$store.commit('changeModalState', {
+        visibility: false
+      });
       eventBus.$emit('modalClosed');
     },
 
@@ -49,7 +67,7 @@ export default {
     }
   },
   mounted() {
-    eventBus.$on('openModal',  () => this.openModal());
+    eventBus.$on('openModal',  purpose => this.openModal(purpose));
     eventBus.$on('closeModal', () => { 
       this.closeModal();
       this.setDefaultPayload();
