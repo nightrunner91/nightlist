@@ -2,9 +2,11 @@
 
   transition(name='modal-fade')
 
-    div(class='modal-backdrop' ref='backdrop')
+    div(class='modal-backdrop')
 
-      div(class='modal' :class='"modal--" + type')
+      div(
+        class='modal' 
+        :class='"modal--" + type')
 
         div(
           class='modal__close'
@@ -116,16 +118,6 @@ export default {
     }
   },
   methods: {
-    bindOutsideClick() {
-      document.addEventListener('click', e => {
-        if (e.target == this.$refs.backdrop) this.closeModal();
-      });
-
-      document.addEventListener('keyup', e => {
-        if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal();
-      });
-    },
-
     closeModal()    { eventBus.$emit('closeModal') },
     assignPayload() { this.current = Object.assign({}, this.payload) },
 
@@ -149,7 +141,9 @@ export default {
     payload()  { return this.$store.state.payload }
   },
   mounted() {
-    this.bindOutsideClick();
+    document.addEventListener('keyup', e => {
+      if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal();
+    });
 
     eventBus.$on('modalOpened', () => this.assignPayload());
     eventBus.$on('modalClosed', () => this.assignPayload());
