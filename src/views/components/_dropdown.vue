@@ -12,12 +12,23 @@
     div(
       class='dropdown__body'
       :class='{"dropdown__body--active" : dropdownOpened}')
-      div(class='dropdown__sliding')
+      div(
+        v-if='itemsCount > 4'
+        class='dropdown__sliding' 
+        v-scrollbar='{ preventParentScroll: true }')
         ul(
           class='dropdown__menu'
           :class='{"dropdown__menu--opened" : dropdownOpened}'
           @click="dropdownOpened = false")
-          slot(name='dropdown-menu')
+            slot(name='dropdown-menu')
+      div(
+        v-else
+        class='dropdown__sliding' )
+        ul(
+          class='dropdown__menu'
+          :class='{"dropdown__menu--opened" : dropdownOpened}'
+          @click="dropdownOpened = false")
+            slot(name='dropdown-menu')
 
 </template>
 
@@ -36,9 +47,7 @@ export default {
     };
   },
   computed: {
-    dropdownHeight() {
-      return 'height: ' + (this.itemsCount + 1) * 40 + 'px'
-    }
+
   },
   methods: {
     documentClick(event) {

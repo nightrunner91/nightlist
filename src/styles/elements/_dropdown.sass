@@ -1,4 +1,5 @@
 $dropdown-height: 40px
+$visible-items: 4
   
 .dropdown
   @extend .pos-relative
@@ -63,15 +64,29 @@ $dropdown-height: 40px
     @extend .pos-relative
     @extend .no-select
 
+    .vb-dragger
+      @extend .half-opacity
+
+      transform: translateY(-100%)
+      transition: none
+      max-height: 0
+
     &--active
       z-index: 200
 
+      .vb-dragger
+        transform: translateY(0)
+        transition: transform .45s ease
+        max-height: initial
+
   &__sliding
-    @extend .pos-absolute
     @extend .no-overflow
 
+    position: absolute !important
     width: 100%
     top: 0
+    height: $dropdown-height * $visible-items
+    max-height: $dropdown-height * $visible-items
 
   &__menu
     width: 100%
@@ -85,7 +100,7 @@ $dropdown-height: 40px
     z-index: 1
     transform: translateY(-100%)
     transition: none
-    
+    padding-right: 0 !important
 
     &--opened
       transform: translateY(0)
