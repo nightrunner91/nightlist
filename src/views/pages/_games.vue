@@ -13,7 +13,7 @@
           class='title__button title__button--games button button--main'
           @click='addSlot()'
           v-ripple)
-          div(class='button__icon button__icon--plus')
+          svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
 
       div(class='search')

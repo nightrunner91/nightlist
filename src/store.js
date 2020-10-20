@@ -557,6 +557,11 @@ export default new Vuex.Store({
 
     changePayload(state, data) {
       state.payload = data;
+    },
+
+    deleteSlot(state, { type, id }) {
+      let target = state[type].collection.map(i => i.id).indexOf(id);
+      state[type].collection.splice(target, 1);
     }
 
   },

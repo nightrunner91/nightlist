@@ -10,7 +10,7 @@
 
         div(
           class='modal__close'
-          @click='closeModal()'
+          @click='closeModal(), changeConfirmState(false)'
           v-ripple)
           svg(class='modal__cross'): use(xlink:href='#close')
 
@@ -82,17 +82,30 @@
             div(
               class='button button--secondary'
               v-if='confirmActive == false'
-              @click='confirmDeleting()')
+              @click='changeConfirmState(true)')
               svg(class='button__icon'): use(xlink:href='#delete')
               span(class='button__text') Delete
 
-            div(v-else) You sure?
+            div(
+              v-else
+              class='modal__confirmation')
+
+                div(
+                  class='button button--secondary'
+                  @click='deleteSlot(type, current.id), closeModal(), changeConfirmState(false)')
+                  svg(class='button__icon'): use(xlink:href='#confirm')
+                  span(class='button__text') Confirm
+
+                div(
+                  class='button button--secondary button--iconed'
+                  @click='changeConfirmState(false)')
+                  svg(class='button__icon'): use(xlink:href='#close')
 
           div(v-else-if='purpose == "add"')
 
             div(
               class='button button--secondary'
-              @click='closeModal()')
+              @click='closeModal(), changeConfirmState(false)')
               span(class='button__text') Cancel
 
           div(
@@ -121,9 +134,8 @@ export default {
     closeModal()    { eventBus.$emit('closeModal') },
     assignPayload() { this.current = Object.assign({}, this.payload) },
 
-    confirmDeleting() {
-      this.confirmActive = true
-    },
+    changeConfirmState(state) { this.confirmActive = state },
+    deleteSlot(type, id)      { this.$store.commit('deleteSlot', { type: type, id: id }); },
 
     setStatus(data)     { this.current.status = data },
     setPlatform(data)   { this.current.platform = data },
