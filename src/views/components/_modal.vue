@@ -24,10 +24,16 @@
             div(class='input')
               label(class='input__label') Title
               input(
+                pattern='_[a-zA-Z0-9]+'
+                minlength='3'
+                maxlength='50'
                 type='text'
                 class='input__field' 
+                :class='{"input__field--invalid" : valid == false }'
                 autocomplete='off' 
-                v-model='current.title')
+                @input='removeValidation'
+                v-model='current.title'
+                required)
 
             app-dropdown(
               :label='"Status"'
@@ -127,7 +133,7 @@
 
           div(
             class='button button--main'
-            @click='applySlot(type, current.id), closeModal(), changeConfirm(false)'
+            @click='applySlot(type, current.id)'
             v-ripple)
             span(class='button__text' v-if='purpose == "edit"') Save
             span(class='button__text' v-else-if='purpose == "add"') Add
@@ -145,6 +151,7 @@ export default {
   },
   data() {
     return {
+      valid: undefined,
       current: {},
       confirmActive: false
     }
@@ -154,10 +161,43 @@ export default {
     assignPayload() { this.current = Object.assign({}, this.payload) },
 
     changeConfirm(state) { this.confirmActive = state },
-    applySlot(type, id)  {
-      if (this.purpose == 'add') this.current.id = Math.floor(Math.random() * 10000000000);
-      this.$store.commit('applySlot', { type: type , payload: this.current }) 
+
+    removeValidation() {
+      this.valid = undefined
     },
+
+    validateModal() {
+      return new Promise(resolve => {
+        if (this.purpose == 'add') {
+          this.current.id = Math.floor(Math.random() * 10000000000);
+        }
+
+        if (this.current.status.length == 0) {
+          this.current.status = this.$store.state[this.type].statuses.filter(i => i.default)[0].name
+        }
+
+        if (this.current.title.length == 0) {
+          this.valid = false
+        }
+
+        if (this.valid == false) {
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      })
+    },
+
+    applySlot(type, id)  {
+      this.validateModal().then(result => {
+        if (result) {
+          this.$store.commit('applySlot', { type: type , payload: this.current });
+          this.closeModal();
+          this.changeConfirm(false);
+        }
+      })
+    },
+
     deleteSlot(type, id) { this.$store.commit('deleteSlot', { type: type, id: id }); },
 
     fieldsCondition() {

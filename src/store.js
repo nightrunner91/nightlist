@@ -71,15 +71,15 @@ export default new Vuex.Store({
       ],
       default: {
         id: 0,
-        title: "",
-        status: "",
-        platform: "",
+        title: '',
+        status: '',
+        platform: '',
         hours: 0,
         hoursApproximate: false,
         rating: 0,
         favourite: false,
         priority: 0,
-        link: ""
+        link: ''
       },
       collection: [
         {
