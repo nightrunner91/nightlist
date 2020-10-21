@@ -29,20 +29,22 @@
       div(class='table')
 
         div(class='table__header')
-          div(class='table__cell grid__col grid__col--3 table__cell--functional')
-          div(class='table__cell grid__col grid__col--58 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--lg-1 table__cell--functional')
+          div(class='table__cell grid__col grid__col--lg-22 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
-          div(class='table__cell grid__col grid__col--10 table__cell--functional') Favourite
-          div(class='table__cell grid__col grid__col--17 table__cell--functional') Rating
-          div(class='table__cell grid__col grid__col--12 table__cell--functional') Spent time
+          div(class='table__cell grid__col grid__col--lg-3 table__cell--functional') Favourite
+          div(class='table__cell grid__col grid__col--lg-6 table__cell--functional') Rating
+          div(class='table__cell grid__col grid__col--lg-4 table__cell--functional') Hours played
 
         div(class='table__body')
           div(
-            class='table__item' v-for='(item, index) in sortedGames("currently_playing")'
+            class='table__item' 
+            :class='{"table__item--refreshed" : item.refreshed }'
+            v-for='(item, index) in sortedGames("currently_playing")'
             @click='editSlot(item.id, $event)')
-            div(class='table__cell grid__col grid__col--3') {{index + 1}}
-            div(class='table__cell grid__col grid__col--58') 
+            div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
+            div(class='table__cell grid__col grid__col--lg-22') 
               span {{item.title}}
               a(
                 :ref='"redirect"'
@@ -52,9 +54,9 @@
                 class='table__link'
                 v-if='item.link.length')
                 svg(class='table__redirect'): use(xlink:href='#link')
-            div(class='table__cell grid__col grid__col--10') 
+            div(class='table__cell grid__col grid__col--lg-3') 
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
-            div(class='table__cell grid__col grid__col--17')
+            div(class='table__cell grid__col grid__col--lg-6')
               div(class='table__rating')
                 svg(
                   class='table__star table__star--active' 
@@ -64,7 +66,7 @@
                   class='table__star table__star--passive' 
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-            div(class='table__cell grid__col grid__col--12') 
+            div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
 
@@ -76,20 +78,22 @@
       div(class='table')
 
         div(class='table__header')
-          div(class='table__cell grid__col grid__col--3 table__cell--functional')
-          div(class='table__cell grid__col grid__col--58 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--lg-1 table__cell--functional')
+          div(class='table__cell grid__col grid__col--lg-22 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
-          div(class='table__cell grid__col grid__col--10 table__cell--functional') Favourite
-          div(class='table__cell grid__col grid__col--17 table__cell--functional') Rating
-          div(class='table__cell grid__col grid__col--12 table__cell--functional') Spent time
+          div(class='table__cell grid__col grid__col--lg-3 table__cell--functional') Favourite
+          div(class='table__cell grid__col grid__col--lg-6 table__cell--functional') Rating
+          div(class='table__cell grid__col grid__col--lg-4 table__cell--functional') Hours played
 
         div(class='table__body')
           div(
-            class='table__item' v-for='(item, index) in sortedGames("completed")'
+            class='table__item' 
+            :class='{"table__item--refreshed" : item.refreshed }'
+            v-for='(item, index) in sortedGames("completed")'
             @click='editSlot(item.id, $event)')
-            div(class='table__cell grid__col grid__col--3') {{index + 1}}
-            div(class='table__cell grid__col grid__col--58') 
+            div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
+            div(class='table__cell grid__col grid__col--lg-22') 
               span {{item.title}}
               a(
                 rel='nofollow'
@@ -98,9 +102,9 @@
                 class='table__link' 
                 v-if='item.link.length')
                 svg(class='table__redirect'): use(xlink:href='#link')
-            div(class='table__cell grid__col grid__col--10') 
+            div(class='table__cell grid__col grid__col--lg-3') 
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
-            div(class='table__cell grid__col grid__col--17')
+            div(class='table__cell grid__col grid__col--lg-6')
               div(class='table__rating')
                 svg(
                   class='table__star table__star--active' 
@@ -110,7 +114,7 @@
                   class='table__star table__star--passive' 
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-            div(class='table__cell grid__col grid__col--12') 
+            div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
 

@@ -79,7 +79,8 @@ export default new Vuex.Store({
         rating: 0,
         favourite: false,
         priority: 0,
-        link: ''
+        link: '',
+        refreshed: false
       },
       collection: [
         {
@@ -92,7 +93,8 @@ export default new Vuex.Store({
           rating: 4,
           favourite: false,
           priority: 0,
-          link: "https://myvideogamelist.com/gameprofile/18573/Dishonored:_Death_of_the_Outsider"
+          link: "https://myvideogamelist.com/gameprofile/18573/Dishonored:_Death_of_the_Outsider",
+          refreshed: false
         },
         {
           id: 2564576537,
@@ -104,7 +106,8 @@ export default new Vuex.Store({
           rating: 0,
           favourite: false,
           priority: 0,
-          link: ""
+          link: "",
+          refreshed: false
         },
         {
           id: 3574468557,
@@ -116,7 +119,8 @@ export default new Vuex.Store({
           rating: 5,
           favourite: true,
           priority: 0,
-          link: "https://myvideogamelist.com/gameprofile/15610/Subnautica"
+          link: "https://myvideogamelist.com/gameprofile/15610/Subnautica",
+          refreshed: false
         },
         {
           id: 9535744573,
@@ -128,7 +132,8 @@ export default new Vuex.Store({
           rating: 4,
           favourite: false,
           priority: 0,
-          link: "https://myvideogamelist.com/gameprofile/25131/A_Plague_Tale:_Innocence"
+          link: "https://myvideogamelist.com/gameprofile/25131/A_Plague_Tale:_Innocence",
+          refreshed: false
         },
         {
           id: 5426578641,
@@ -140,7 +145,8 @@ export default new Vuex.Store({
           rating: 5,
           favourite: true,
           priority: 0,
-          link: "https://myvideogamelist.com/gameprofile/7828/Batman:_Arkham_Knight"
+          link: "https://myvideogamelist.com/gameprofile/7828/Batman:_Arkham_Knight",
+          refreshed: false
         },
         {
           id: 3467890345,
@@ -152,7 +158,8 @@ export default new Vuex.Store({
           rating: 5,
           favourite: true,
           priority: 0,
-          link: "https://myvideogamelist.com/gameprofile/970/BioShock_Infinite"
+          link: "https://myvideogamelist.com/gameprofile/970/BioShock_Infinite",
+          refreshed: false
         },
       ]
     },
@@ -569,6 +576,10 @@ export default new Vuex.Store({
 
       if (target != undefined) Object.assign(target, payload);
       else collection.push(payload);
+
+      setTimeout(() => {
+        collection.filter(i => i.id == payload.id)[0].refreshed = false
+      }, 1000);
     },
 
     deleteSlot(state, { type, id }) {

@@ -51,9 +51,9 @@
                 @click='setStatus(status.name)') {{status.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
-              div(class='grid__col grid__col--60')
+              div(class='grid__col grid__col--lg-24')
                 app-rating(:currentRating='current.rating')
-              div(class='grid__col grid__col--40 grid__col--right')
+              div(class='grid__col grid__col--lg-12 grid__col--right')
                 app-favourite(:currentFavourite='current.favourite')
 
             app-dropdown(
@@ -73,7 +73,7 @@
                 @click='setPlatform(platform.name)') {{platform.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
-              div(class='grid__col grid__col--45')
+              div(class='grid__col grid__col--lg-16')
                 div(class='input')
                   label(class='input__label') Hours played
                   input(
@@ -84,7 +84,7 @@
                     v-model='current.hours'
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                     @wheel='changeVal($event, "hours")')
-              div(class='grid__col grid__col--55 grid__col--right')
+              div(class='grid__col grid__col--lg-20 grid__col--right')
                 app-checkbox(
                   :label='"Approximate value"'
                   :currentCheckbox='current.hoursApproximate'
@@ -191,6 +191,7 @@ export default {
     applySlot(type, id)  {
       this.validateModal().then(result => {
         if (result) {
+          this.current.refreshed = true;
           this.$store.commit('applySlot', { type: type , payload: this.current });
           this.closeModal();
           this.changeConfirm(false);

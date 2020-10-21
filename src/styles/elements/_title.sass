@@ -2,11 +2,10 @@
   @extend .flex
   @extend .align-center
   @extend .no-select
-  
-  padding: 0 $gutter-width/2
 
   &--main
     margin-bottom: $gutter-width
+    padding: 0 $gutter-width/2
 
   &--secondary
     @extend .cursor-pointer
@@ -14,11 +13,12 @@
     @extend .base-radius
 
     margin-bottom: $gutter-width/2
+    padding: 0 $gutter-width
 
     &:hover
       .title
         &__chevron
-          opacity: 1
+          opacity: $active-opacity
 
   &__name
     @extend .no-mg
@@ -33,9 +33,9 @@
     @include icon-size(24, 24)
     @extend .base-transition
 
-    left: -4px
+    left: -$gutter-width/4
     margin-right: $gutter-width/4
-    opacity: 0.5
+    opacity: $half-opacity
 
   &__button
     margin-left: auto

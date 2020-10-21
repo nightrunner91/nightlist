@@ -13,6 +13,8 @@ $star-size: 24px
 
   &__header
     @extend .no-select
+
+    padding: 0 $gutter-width
     
     .table
       &__cell
@@ -33,12 +35,33 @@ $star-size: 24px
               &__chevron
                 opacity: $active-opacity
 
+  &__body
+    padding: 0 $gutter-width/2
+
   &__item
+    @extend .pos-relative
     @extend .cursor-pointer
     @extend .base-transition
+    @extend .no-overflow
+
+    &::after
+      @extend .pseudoelem
+      @extend .tiny-opacity
+      @extend .bg-white
+
+      top: 0
+      left: 0
+      z-index: -1
+      width: 100%
+      height: 100%
+      opacity: 0
+
+    &--refreshed
+      &::after
+        @include animation(shine, 1s, 0s, 1, ease, normal)
 
     &:hover
-      background: rgba($clr-white, 0.05)
+      background: rgba($clr-black, $tiny-opacity)
 
       .table
         &__link
