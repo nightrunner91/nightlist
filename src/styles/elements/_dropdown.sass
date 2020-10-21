@@ -26,6 +26,7 @@ $visible-items: 4
     @extend .pos-relative
     @extend .base-radius
     @extend .flex
+    @extend .justify-between
     @extend .align-center
     @extend .cursor-pointer
     @extend .no-select
@@ -58,8 +59,6 @@ $visible-items: 4
     @extend .base-transition
     @include icon-size(18,18)
 
-    margin-left: auto
-
   &__body
     @extend .pos-relative
     @extend .no-select
@@ -85,8 +84,6 @@ $visible-items: 4
     position: absolute !important
     width: 100%
     top: 0
-    height: $dropdown-height * $visible-items
-    max-height: $dropdown-height * $visible-items
 
   &__menu
     width: 100%

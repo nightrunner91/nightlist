@@ -4,7 +4,7 @@
     div(class='dropdown__label') {{label}}
     div(
       class='dropdown__toggle'
-      @click="dropdownOpened = !dropdownOpened"
+      @click="switchDropdown()"
       :class="{'dropdown__toggle--active': dropdownOpened}")
         span(v-if='currentValue != undefined && currentValue.length > 0') {{currentValue}}
         span(v-else) {{defaultValue}}
@@ -13,17 +13,9 @@
       class='dropdown__body'
       :class='{"dropdown__body--active" : dropdownOpened}')
       div(
-        v-if='itemsCount > 4'
-        class='dropdown__sliding' 
-        v-scrollbar='{ preventParentScroll: true }')
-        ul(
-          class='dropdown__menu'
-          :class='{"dropdown__menu--opened" : dropdownOpened}'
-          @click="dropdownOpened = false")
-            slot(name='dropdown-menu')
-      div(
-        v-else
-        class='dropdown__sliding' )
+        class='dropdown__sliding'
+        :style='dropdownHeight'
+        ref='dropdown')
         ul(
           class='dropdown__menu'
           :class='{"dropdown__menu--opened" : dropdownOpened}'
@@ -43,7 +35,13 @@ export default {
   },
   data() {
     return {
-      dropdownOpened: false
+      dropdownOpened: false,
+      visibleItems: 4,
+      itemHeight: 40,
+      dropdownHeight: {
+        'height': undefined,
+        'max-height': undefined
+      }
     };
   },
   computed: {
@@ -54,7 +52,29 @@ export default {
       if (this.$el !== event.target && !this.$el.contains(event.target)) {
         this.dropdownOpened = false;
       }
-    }
+    },
+
+    setHeight() {
+      let limit = this.visibleItems * this.itemHeight + 1 + 'px';
+      this.dropdownHeight['height'] = limit;
+      this.dropdownHeight['max-height'] = limit;
+    },
+
+    switchDropdown() {
+      this.setHeight();
+
+      if (this.dropdownOpened) {
+        this.dropdownOpened = false;
+        if (this.itemsCount > this.visibleItems) {
+          this.$vuebar.destroyScrollbar(this.$refs.dropdown)
+        }
+      } else {
+        this.dropdownOpened = true;
+        if (this.itemsCount > this.visibleItems) {
+          this.$vuebar.initScrollbar(this.$refs.dropdown, { preventParentScroll: true })
+        }
+      }
+    },
   },
   created() {
     document.addEventListener("click", this.documentClick);
