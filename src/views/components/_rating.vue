@@ -9,7 +9,7 @@
         :class="starClass(rating, index)"
         @mouseover='setHover(index + 1)'
         @mouseleave='removeHover()'
-        @click='setRating(rating), justRated = !justRated')
+        @click='setRating(rating)')
 
 </template>
 
@@ -32,6 +32,8 @@ export default {
   },
   methods: {
     setRating(rating) {
+      this.justRated = !this.justRated;
+      
       if (this.currentRating != rating) {
         eventBus.$emit('rated', rating);
       } else {

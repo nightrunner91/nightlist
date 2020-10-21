@@ -17,22 +17,26 @@ export default new Vuex.Store({
         {
           name: "Currently playing",
           default: true,
-          id: 'currently_playing'
+          id: 'currently_playing',
+          excludeFields: false
         },
         {
           name: "Completed",
           default: false,
-          id: 'completed'
-        },
-        {
-          name: "Plan to play",
-          default: false,
-          id: 'plan_to_play'
+          id: 'completed',
+          excludeFields: false
         },
         {
           name: "Dropped",
           default: false,
-          id: 'dropped'
+          id: 'dropped',
+          excludeFields: false
+        },
+        {
+          name: "Plan to play",
+          default: false,
+          id: 'plan_to_play',
+          excludeFields: true
         },
       ],
       platforms: [

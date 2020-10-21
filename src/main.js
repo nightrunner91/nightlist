@@ -16,6 +16,7 @@ import appSidebar from "./views/components/_sidebar";
 import appGradients from "./views/components/_gradients";
 import appModal from "./views/components/_modal";
 import appDropdown from "./views/components/_dropdown";
+import appCheckbox from "./views/components/_checkbox";
 import appRating from "./views/components/_rating";
 import appFavourite from "./views/components/_favourite";
 
@@ -27,6 +28,7 @@ Vue.component('app-sidebar', appSidebar);
 Vue.component('app-gradients', appGradients);
 Vue.component('app-modal', appModal);
 Vue.component('app-dropdown', appDropdown);
+Vue.component('app-checkbox', appCheckbox);
 Vue.component('app-rating', appRating);
 Vue.component('app-favourite', appFavourite);
 

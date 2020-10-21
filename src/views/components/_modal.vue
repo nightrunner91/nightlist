@@ -14,7 +14,7 @@
           v-ripple)
           svg(class='modal__cross'): use(xlink:href='#close')
 
-        div(class='modal__content' v-scrollbar)
+        div(class='modal__content')
 
           //- ===== //
           //- GAMES //
@@ -22,19 +22,12 @@
           div(class='modal__fields' v-if='type == "games"')
 
             div(class='input')
-              label(
-                class='input__label' 
-                for='title') Title
+              label(class='input__label') Title
               input(
+                type='text'
                 class='input__field' 
                 autocomplete='off' 
                 v-model='current.title')
-
-            div(class='grid__row')
-              div(class='grid__col grid__col--60')
-                app-rating(:currentRating='current.rating')
-              div(class='grid__col grid__col--40 grid__col--right')
-                app-favourite(:currentFavourite='current.favourite')
 
             app-dropdown(
               :label='"Status"'
@@ -51,7 +44,14 @@
                 v-for='status in games.statuses'
                 @click='setStatus(status.name)') {{status.name}}
 
+            div(class='grid__row' v-if='fieldsCondition()')
+              div(class='grid__col grid__col--60')
+                app-rating(:currentRating='current.rating')
+              div(class='grid__col grid__col--40 grid__col--right')
+                app-favourite(:currentFavourite='current.favourite')
+
             app-dropdown(
+              v-if='fieldsCondition()'
               :label='"Platform"'
               :currentValue='current.platform'
               :defaultValue='games.platforms.filter(i => i.default)[0].name'
@@ -66,11 +66,28 @@
                 v-for='platform in games.platforms'
                 @click='setPlatform(platform.name)') {{platform.name}}
 
+            div(class='grid__row' v-if='fieldsCondition()')
+              div(class='grid__col grid__col--45')
+                div(class='input')
+                  label(class='input__label') Hours played
+                  input(
+                    type='number'
+                    min='0'
+                    class='input__field' 
+                    autocomplete='off' 
+                    v-model='current.hours'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeVal($event, "hours")')
+              div(class='grid__col grid__col--55 grid__col--right')
+                app-checkbox(
+                  :label='"Approximate value"'
+                  :currentCheckbox='current.hoursApproximate'
+                  :event='"hoursApproximate"')
+
             div(class='input')
-              label(
-                class='input__label' 
-                for='title') Link #[sup (optional)]
+              label(class='input__label') Link #[sup (optional)]
               input(
+                type='text'
                 class='input__field' 
                 autocomplete='off' 
                 v-model='current.link')
@@ -81,13 +98,13 @@
 
             div(
               class='button button--secondary'
-              v-if='confirmActive == false'
+              v-show='confirmActive == false'
               @click='changeConfirmState(true)')
               svg(class='button__icon'): use(xlink:href='#delete')
               span(class='button__text') Delete
 
             div(
-              v-else
+              v-show='confirmActive == true'
               class='modal__confirmation')
 
                 div(
@@ -99,7 +116,7 @@
                 div(
                   class='button button--secondary button--iconed'
                   @click='changeConfirmState(false)')
-                  svg(class='button__icon'): use(xlink:href='#close')
+                  svg(class='button__icon'): use(xlink:href='#cancel')
 
           div(v-else-if='purpose == "add"')
 
@@ -137,10 +154,33 @@ export default {
     changeConfirmState(state) { this.confirmActive = state },
     deleteSlot(type, id)      { this.$store.commit('deleteSlot', { type: type, id: id }); },
 
-    setStatus(data)     { this.current.status = data },
-    setPlatform(data)   { this.current.platform = data },
-    setRating(data)     { this.current.rating = data },
-    setFavourite(data)  { this.current.favourite = data }
+    fieldsCondition() {
+      if (
+        this.current.status != undefined && 
+        this.current.status == this.excludingCategory) return false
+      else return true
+    },
+
+    changeVal(event, prop) {
+      event.preventDefault();
+      let target = event.target;
+      let interval = 1;
+      let prevVal = Number(target.value);
+      let newVal;
+      if (event.deltaY < 0) {
+        newVal = prevVal + interval
+      } else if (event.deltaY > 0) {
+        if (prevVal == 0) { newVal = 0 }
+        else { newVal = prevVal - interval }
+      }
+      this.current[prop] = newVal
+    },
+
+    setStatus(data)           { this.current.status = data },
+    setPlatform(data)         { this.current.platform = data },
+    setRating(data)           { this.current.rating = data },
+    setFavourite(data)        { this.current.favourite = data },
+    sethoursApproximate(data) { this.current.hoursApproximate = data }
   },
   computed: {
     games()    { return this.$store.state.games },
@@ -150,7 +190,8 @@ export default {
     books()    { return this.$store.state.books },
     hardware() { return this.$store.state.hardware },
 
-    payload()  { return this.$store.state.payload }
+    payload()  { return this.$store.state.payload },
+    excludingCategory() { return this.$store.state[this.type].statuses.filter(i => i.excludeFields)[0].name; }
   },
   mounted() {
     document.addEventListener('keyup', e => {
@@ -160,8 +201,9 @@ export default {
     eventBus.$on('modalOpened', () => this.assignPayload());
     eventBus.$on('modalClosed', () => this.assignPayload());
 
-    eventBus.$on('rated',     data => this.setRating(data));
-    eventBus.$on('favourite', data => this.setFavourite(data));
+    eventBus.$on('rated',            data => this.setRating(data));
+    eventBus.$on('favourite',        data => this.setFavourite(data));
+    eventBus.$on('hoursApproximate', data => this.sethoursApproximate(data));
   }
 };
 </script>

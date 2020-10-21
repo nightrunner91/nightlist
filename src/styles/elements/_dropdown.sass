@@ -63,6 +63,9 @@ $visible-items: 4
     @extend .pos-relative
     @extend .no-select
 
+    overflow: hidden
+    z-index: -99
+
     .vb-dragger
       @extend .half-opacity
 
@@ -71,6 +74,7 @@ $visible-items: 4
       max-height: 0
 
     &--active
+      overflow: initial
       z-index: 200
 
       .vb-dragger
