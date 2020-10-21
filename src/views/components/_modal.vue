@@ -10,7 +10,7 @@
 
         div(
           class='modal__close'
-          @click='closeModal(), changeConfirmState(false)'
+          @click='closeModal(), changeConfirm(false)'
           v-ripple)
           svg(class='modal__cross'): use(xlink:href='#close')
 
@@ -99,7 +99,7 @@
             div(
               class='button button--secondary'
               v-show='confirmActive == false'
-              @click='changeConfirmState(true)')
+              @click='changeConfirm(true)')
               svg(class='button__icon'): use(xlink:href='#delete')
               span(class='button__text') Delete
 
@@ -109,26 +109,28 @@
 
                 div(
                   class='button button--secondary'
-                  @click='deleteSlot(type, current.id), closeModal(), changeConfirmState(false)')
+                  @click='deleteSlot(type, current.id), closeModal(), changeConfirm(false)')
                   svg(class='button__icon'): use(xlink:href='#confirm')
                   span(class='button__text') Confirm
 
                 div(
                   class='button button--secondary button--iconed'
-                  @click='changeConfirmState(false)')
+                  @click='changeConfirm(false)')
                   svg(class='button__icon'): use(xlink:href='#cancel')
 
           div(v-else-if='purpose == "add"')
 
             div(
               class='button button--secondary'
-              @click='closeModal(), changeConfirmState(false)')
+              @click='closeModal(), changeConfirm(false)')
               span(class='button__text') Cancel
 
           div(
             class='button button--main'
+            @click='applySlot(type, current.id), closeModal(), changeConfirm(false)'
             v-ripple)
-            span(class='button__text') Save
+            span(class='button__text' v-if='purpose == "edit"') Save
+            span(class='button__text' v-else-if='purpose == "add"') Add
 
 </template>
 
@@ -151,8 +153,12 @@ export default {
     closeModal()    { eventBus.$emit('closeModal') },
     assignPayload() { this.current = Object.assign({}, this.payload) },
 
-    changeConfirmState(state) { this.confirmActive = state },
-    deleteSlot(type, id)      { this.$store.commit('deleteSlot', { type: type, id: id }); },
+    changeConfirm(state) { this.confirmActive = state },
+    applySlot(type, id)  {
+      if (this.purpose == 'add') this.current.id = Math.floor(Math.random() * 10000000000);
+      this.$store.commit('applySlot', { type: type , payload: this.current }) 
+    },
+    deleteSlot(type, id) { this.$store.commit('deleteSlot', { type: type, id: id }); },
 
     fieldsCondition() {
       if (

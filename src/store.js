@@ -563,6 +563,14 @@ export default new Vuex.Store({
       state.payload = data;
     },
 
+    applySlot(state, {type, payload}) {
+      let collection = state[type].collection;
+      let target = collection.filter(i => i.id == payload.id)[0];
+
+      if (target != undefined) Object.assign(target, payload);
+      else collection.push(payload);
+    },
+
     deleteSlot(state, { type, id }) {
       let target = state[type].collection.map(i => i.id).indexOf(id);
       state[type].collection.splice(target, 1);
