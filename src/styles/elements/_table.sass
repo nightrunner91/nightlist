@@ -65,7 +65,7 @@ $star-size: 24px
 
       .table
         &__link
-          opacity: $active-opacity
+          opacity: $half-opacity
 
   &__chevron
     @extend .pos-relative
@@ -147,6 +147,9 @@ $star-size: 24px
     @extend .flex-center
     @include icon-size(18, 18)
 
+    margin-left: $gutter-width/3
+    opacity: $transparent-opacity
+
     &::before
       @extend .pseudoelem
 
@@ -156,17 +159,12 @@ $star-size: 24px
       left: 0
       z-index: 10
 
-    margin-left: $gutter-width/3
-    opacity: 0
+    &:hover
+      opacity: $active-opacity
 
   &__redirect
     @include icon-size(18, 18)
     @extend .base-transition
-
-    opacity: $half-opacity
-
-    &:hover
-      opacity: $active-opacity
 
   &__control
     @include icon-size(18,18)
