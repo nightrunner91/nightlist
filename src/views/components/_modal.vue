@@ -50,7 +50,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='status in games.statuses'
-                @click='games_setStatus(status.name)') {{status.name}}
+                @click='games_setStatus(status.name, status.id)') {{status.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
               //- RATING -//
@@ -62,7 +62,6 @@
 
             //- PLATFORM -//
             app-dropdown(
-              v-if='fieldsCondition()'
               :label='"Platform"'
               :currentValue='current.platform'
               :currentId='getPlatformId(current.platform)'
@@ -180,7 +179,7 @@ export default {
       this.current = Object.assign({}, this.payload) 
     },
 
-    changeConfirm(state) { 
+    changeConfirm(state) {
       this.confirmActive = state 
     },
 
@@ -204,6 +203,14 @@ export default {
 
         if (this.current.status.length == 0) {
           this.current.status = this.$store.state[this.type].statuses.filter(i => i.default)[0].name
+        }
+
+        if (this.current.statusId == 'plan_to_play') {
+          this.current.hours = this.$store.state[this.type].default.hours;
+          this.current.hoursApproximate = this.$store.state[this.type].default.hoursApproximate;
+          this.current.rating = this.$store.state[this.type].default.rating;
+          this.current.favourite = this.$store.state[this.type].default.favourite;
+          this.current.priority = this.$store.state[this.type].default.priority;
         }
 
         if (this.current.platform.length == 0) {
@@ -270,8 +277,9 @@ export default {
       this.current[prop] = newVal
     },
 
-    games_setStatus(data) { 
-      this.current.status = data
+    games_setStatus(name, id) { 
+      this.current.status = name
+      this.current.statusId = id
     },
 
     games_setPlatform(name, id) { 
