@@ -1,6 +1,5 @@
 <template lang='pug'>
-  section(class='section')
-    app-component
+  
 </template>
 
 <script>

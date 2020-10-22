@@ -1,13 +1,33 @@
 <template lang='pug'>
-  section(class='section') Hardware
+  section(class='section')
 
     div(
-        class='section__content'
-        :class='{"section__content--blured" : modalVisible}')
+      class='section__content'
+      :class='{"section__content--blured" : modalState.visibility}')
+
+      div(class='title title--main')
+        h1(class='title__name') My Hardware
+        span(class='title__badge badge badge--medium') 3
+        div(
+          class='title__button title__button--games button button--main'
+          @click='addSlot()'
+          v-ripple)
+          svg(class='button__icon'): use(xlink:href='#add')
+          span(class='button__text') Add New
+
+      div(class='search')
+        div(class='input')
+          svg(class='input__icon'): use(xlink:href='#search')
+          input(class='input__field' type='text' placeholder='Search')
+
 </template>
 
 <script>
 export default {
-  name: 'Hardware'
+  name: 'Hardware',
+  computed: {
+    hardware() {return this.$store.state.hardware},
+    modalState() {return this.$store.state.modalState},
+  },
 }
 </script>

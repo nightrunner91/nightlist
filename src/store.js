@@ -105,7 +105,7 @@ export default new Vuex.Store({
         },
         {
           id: 3495367246,
-          title: "Battlefield 4",
+          title: "Battlefield 1",
           status: "Currently playing",
           platform: "Origin",
           hours: 18,
@@ -281,6 +281,32 @@ export default new Vuex.Store({
           hoursApproximate: false,
           rating: 5,
           favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/970/BioShock_Infinite",
+          refreshed: false
+        },
+        {
+          id: 8763567546,
+          title: "Batman: Arkham Origins",
+          status: "Dropped",
+          platform: "Steam",
+          hours: 6,
+          hoursApproximate: false,
+          rating: 3,
+          favourite: false,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/970/BioShock_Infinite",
+          refreshed: false
+        },
+        {
+          id: 354445707,
+          title: "Far Cry 2",
+          status: "Dropped",
+          platform: "Steam",
+          hours: 3,
+          hoursApproximate: false,
+          rating: 1,
+          favourite: false,
           priority: 0,
           link: "https://myvideogamelist.com/gameprofile/970/BioShock_Infinite",
           refreshed: false
