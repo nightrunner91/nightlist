@@ -6,6 +6,9 @@
       class='dropdown__toggle'
       @click="switchDropdown()"
       :class="{'dropdown__toggle--active': dropdownOpened}")
+        svg(
+          class='dropdown__icon'
+          v-if='currentId'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentId")
         span(v-if='currentValue != undefined && currentValue.length > 0') {{currentValue}}
         span(v-else) {{defaultValue}}
         svg(class='dropdown__chevron'): use(xlink:href='#chevron-down-black')
@@ -30,6 +33,7 @@ export default {
   props: {
     label: String,
     currentValue: String,
+    currentId: String,
     defaultValue: String,
     itemsCount: Number
   },

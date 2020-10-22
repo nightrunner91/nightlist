@@ -21,6 +21,7 @@
           //- ===== //
           div(class='modal__fields' v-if='type == "games"')
 
+            //- TITLE -//
             div(class='input')
               label(class='input__label') Title
               input(
@@ -35,6 +36,7 @@
                 v-model='current.title'
                 required)
 
+            //- STATUS -//
             app-dropdown(
               :label='"Status"'
               :currentValue='current.status'
@@ -51,15 +53,19 @@
                 @click='setStatus(status.name)') {{status.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
+              //- RATING -//
               div(class='grid__col grid__col--lg-24')
                 app-rating(:currentRating='current.rating')
+              //- FAVOURITE -//
               div(class='grid__col grid__col--lg-12 grid__col--right')
                 app-favourite(:currentFavourite='current.favourite')
 
+            //- PLATFORM -//
             app-dropdown(
               v-if='fieldsCondition()'
               :label='"Platform"'
               :currentValue='current.platform'
+              :currentId='getPlatformId(current.platform)'
               :defaultValue='games.platforms.filter(i => i.default)[0].name'
               :itemsCount='games.platforms.length')
               input(
@@ -70,9 +76,12 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='platform in games.platforms'
-                @click='setPlatform(platform.name)') {{platform.name}}
+                @click='setPlatform(platform.name)')
+                svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
+                span {{platform.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
+              //- HOURS -//
               div(class='grid__col grid__col--lg-16')
                 div(class='input')
                   label(class='input__label') Hours played
@@ -84,12 +93,14 @@
                     v-model='current.hours'
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                     @wheel='changeVal($event, "hours")')
+              //- HOURS APPROXIMATE -//
               div(class='grid__col grid__col--lg-20 grid__col--right')
                 app-checkbox(
                   :label='"Approximate value"'
                   :currentCheckbox='current.hoursApproximate'
                   :event='"hoursApproximate"')
 
+            //- LINK -//
             div(class='input')
               label(class='input__label') Link #[sup (optional)]
               input(
@@ -166,6 +177,13 @@ export default {
       this.valid = undefined
     },
 
+    getPlatformId(name) {
+      if (this.current.platform) {
+        return this.games.platforms.filter(i => i.name == this.current.platform)[0].id
+      }
+      else { return 'pirate' }
+    },
+
     validateModal() {
       return new Promise(resolve => {
         if (this.purpose == 'add') {
@@ -238,7 +256,10 @@ export default {
     hardware() { return this.$store.state.hardware },
 
     payload()  { return this.$store.state.payload },
-    excludingCategory() { return this.$store.state[this.type].statuses.filter(i => i.excludeFields)[0].name; }
+    
+    excludingCategory() { 
+      return this.$store.state[this.type].statuses.filter(i => i.excludeFields)[0].name; 
+    },
   },
   mounted() {
     document.addEventListener('keyup', e => {

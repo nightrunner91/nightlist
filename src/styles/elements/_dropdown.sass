@@ -26,7 +26,6 @@ $visible-items: 4
     @extend .pos-relative
     @extend .base-radius
     @extend .flex
-    @extend .justify-between
     @extend .align-center
     @extend .cursor-pointer
     @extend .no-select
@@ -58,6 +57,8 @@ $visible-items: 4
   &__chevron
     @extend .base-transition
     @include icon-size(18,18)
+
+    margin-left: auto
 
   &__body
     @extend .pos-relative
@@ -127,3 +128,9 @@ $visible-items: 4
 
     &:hover
       background: rgba($clr-black, $tiny-opacity)
+
+  &__icon
+    @include icon-size(24,24)
+    @extend .half-opacity
+
+    margin-right: $gutter-width/6

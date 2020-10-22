@@ -30,11 +30,12 @@
 
         div(class='table__header')
           div(class='table__cell grid__col grid__col--lg-1 table__cell--functional')
-          div(class='table__cell grid__col grid__col--lg-22 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--lg-19 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
           div(class='table__cell grid__col grid__col--lg-3 table__cell--functional') Favourite
           div(class='table__cell grid__col grid__col--lg-6 table__cell--functional') Rating
+          div(class='table__cell grid__col grid__col--lg-3 table__cell--functional') Platform
           div(class='table__cell grid__col grid__col--lg-4 table__cell--functional') Hours played
 
         div(class='table__body')
@@ -44,7 +45,7 @@
             v-for='(item, index) in sortedGames("currently_playing")'
             @click='editSlot(item.id, $event)')
             div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
-            div(class='table__cell grid__col grid__col--lg-22') 
+            div(class='table__cell grid__col grid__col--lg-19') 
               span {{item.title}}
               a(
                 :ref='"redirect"'
@@ -66,6 +67,8 @@
                   class='table__star table__star--passive' 
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+            div(class='table__cell grid__col grid__col--lg-3')
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platformId(item.platform)")
             div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
@@ -79,11 +82,12 @@
 
         div(class='table__header')
           div(class='table__cell grid__col grid__col--lg-1 table__cell--functional')
-          div(class='table__cell grid__col grid__col--lg-22 table__cell--functional') 
+          div(class='table__cell grid__col grid__col--lg-19 table__cell--functional') 
             span Title
             svg(class='table__chevron'): use(xlink:href='#chevron-down')
           div(class='table__cell grid__col grid__col--lg-3 table__cell--functional') Favourite
           div(class='table__cell grid__col grid__col--lg-6 table__cell--functional') Rating
+          div(class='table__cell grid__col grid__col--lg-3 table__cell--functional') Platform
           div(class='table__cell grid__col grid__col--lg-4 table__cell--functional') Hours played
 
         div(class='table__body')
@@ -93,7 +97,7 @@
             v-for='(item, index) in sortedGames("completed")'
             @click='editSlot(item.id, $event)')
             div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
-            div(class='table__cell grid__col grid__col--lg-22') 
+            div(class='table__cell grid__col grid__col--lg-19') 
               span {{item.title}}
               a(
                 rel='nofollow'
@@ -114,6 +118,8 @@
                   class='table__star table__star--passive' 
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+            div(class='table__cell grid__col grid__col--lg-3')
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platformId(item.platform)")
             div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
@@ -135,6 +141,10 @@ export default {
     modalState() {return this.$store.state.modalState},
   },
   methods: {
+    platformId(platformName) {
+      return this.games.platforms.filter(i => i.name == platformName)[0].id
+    },
+
     totalGames() {
       return this.games.collection.length
     },

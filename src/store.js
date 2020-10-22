@@ -42,30 +42,37 @@ export default new Vuex.Store({
       platforms: [
         {
           name: "Don't own game",
+          id: 'pirate',
           default: true
         },
         {
           name: "Steam",
+          id: 'steam',
           default: false
         },
         {
           name: "Origin",
+          id: 'origin',
           default: false
         },
         {
           name: "Uplay",
+          id: 'uplay',
           default: false
         },
         {
           name: "Battle.net",
+          id: 'battlenet',
           default: false
         },
         {
           name: "Epic Games Store",
+          id: 'egs',
           default: false
         },
         {
           name: "GOG.com",
+          id: 'gog',
           default: false
         },
       ],
@@ -97,6 +104,45 @@ export default new Vuex.Store({
           refreshed: false
         },
         {
+          id: 3495367246,
+          title: "Battlefield 4",
+          status: "Currently playing",
+          platform: "Origin",
+          hours: 18,
+          hoursApproximate: false,
+          rating: 4,
+          favourite: false,
+          priority: 0,
+          link: "",
+          refreshed: false
+        },
+        {
+          id: 6574434681,
+          title: "Assassin's Creed: Unity",
+          status: "Completed",
+          platform: "Uplay",
+          hours: 61,
+          hoursApproximate: false,
+          rating: 4,
+          favourite: false,
+          priority: 0,
+          link: "",
+          refreshed: false
+        },
+        {
+          id: 3455546897,
+          title: "Assassin's Creed: Syndicate",
+          status: "Completed",
+          platform: "Epic Games Store",
+          hours: 1,
+          hoursApproximate: false,
+          rating: 3,
+          favourite: false,
+          priority: 0,
+          link: "",
+          refreshed: false
+        },
+        {
           id: 2564576537,
           title: "Metro Exodus",
           status: "Currently playing",
@@ -104,6 +150,19 @@ export default new Vuex.Store({
           hours: 4,
           hoursApproximate: true,
           rating: 0,
+          favourite: false,
+          priority: 0,
+          link: "",
+          refreshed: false
+        },
+        {
+          id: 1234367895,
+          title: "GWENT",
+          status: "Completed",
+          platform: "GOG.com",
+          hours: 65,
+          hoursApproximate: false,
+          rating: 3,
           favourite: false,
           priority: 0,
           link: "",
@@ -123,12 +182,77 @@ export default new Vuex.Store({
           refreshed: false
         },
         {
+          id: 5356679205,
+          title: "Warframe",
+          status: "Currently playing",
+          platform: "Steam",
+          hours: 2934,
+          hoursApproximate: false,
+          rating: 4,
+          favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/15610/Subnautica",
+          refreshed: false
+        },
+        {
+          id: 1757907546,
+          title: "Dota 2",
+          status: "Completed",
+          platform: "Steam",
+          hours: 833,
+          hoursApproximate: false,
+          rating: 3,
+          favourite: false,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/15610/Subnautica",
+          refreshed: false
+        },
+        {
+          id: 6334542996,
+          title: "Terraria",
+          status: "Completed",
+          platform: "Steam",
+          hours: 418,
+          hoursApproximate: false,
+          rating: 5,
+          favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/15610/Subnautica",
+          refreshed: false
+        },
+        {
           id: 9535744573,
           title: "A Plague Tale: Innocence",
           status: "Completed",
           platform: "Steam",
           hours: 12,
           hoursApproximate: false,
+          rating: 4,
+          favourite: false,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/25131/A_Plague_Tale:_Innocence",
+          refreshed: false
+        },
+        {
+          id: 4686647905,
+          title: "The Elder Scrolls V: Skyrim",
+          status: "Completed",
+          platform: "Steam",
+          hours: 225,
+          hoursApproximate: false,
+          rating: 4,
+          favourite: true,
+          priority: 0,
+          link: "https://myvideogamelist.com/gameprofile/25131/A_Plague_Tale:_Innocence",
+          refreshed: false
+        },
+        {
+          id: 7556863680,
+          title: "Overwatch",
+          status: "Completed",
+          platform: "Battle.net",
+          hours: 470,
+          hoursApproximate: true,
           rating: 4,
           favourite: false,
           priority: 0,
