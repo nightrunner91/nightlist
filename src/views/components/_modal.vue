@@ -50,7 +50,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='status in games.statuses'
-                @click='setStatus(status.name)') {{status.name}}
+                @click='games_setStatus(status.name)') {{status.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
               //- RATING -//
@@ -76,7 +76,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='platform in games.platforms'
-                @click='setPlatform(platform.name)')
+                @click='games_setPlatform(platform.name, platform.id)')
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
                 span {{platform.name}}
 
@@ -92,7 +92,7 @@
                     autocomplete='off' 
                     v-model='current.hours'
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    @wheel='changeVal($event, "hours")')
+                    @wheel='changeNumberVal($event, "hours")')
               //- HOURS APPROXIMATE -//
               div(class='grid__col grid__col--lg-20 grid__col--right')
                 app-checkbox(
@@ -109,6 +109,10 @@
                 autocomplete='off' 
                 v-model='current.link')
 
+
+        //- ====== -//
+        //- FOOTER -//
+        //- ====== -//
         div(class='modal__footer')
 
           div(v-if='purpose == "edit"')
@@ -168,10 +172,17 @@ export default {
     }
   },
   methods: {
-    closeModal()    { eventBus.$emit('closeModal') },
-    assignPayload() { this.current = Object.assign({}, this.payload) },
+    closeModal()    { 
+      eventBus.$emit('closeModal') 
+    },
 
-    changeConfirm(state) { this.confirmActive = state },
+    assignPayload() { 
+      this.current = Object.assign({}, this.payload) 
+    },
+
+    changeConfirm(state) { 
+      this.confirmActive = state 
+    },
 
     removeValidation() {
       this.valid = undefined
@@ -180,8 +191,9 @@ export default {
     getPlatformId(name) {
       if (this.current.platform) {
         return this.games.platforms.filter(i => i.name == this.current.platform)[0].id
+      } else { 
+        return 'pirate' 
       }
-      else { return 'pirate' }
     },
 
     validateModal() {
@@ -192,6 +204,12 @@ export default {
 
         if (this.current.status.length == 0) {
           this.current.status = this.$store.state[this.type].statuses.filter(i => i.default)[0].name
+        }
+
+        if (this.current.platform.length == 0) {
+          let defaultPlatform = this.$store.state[this.type].platforms.filter(i => i.default)[0]
+          this.current.platform = defaultPlatform.name;
+          this.current.platformId = defaultPlatform.id;
         }
 
         if (this.current.title.length == 0) {
@@ -217,35 +235,61 @@ export default {
       })
     },
 
-    deleteSlot(type, id) { this.$store.commit('deleteSlot', { type: type, id: id }); },
+    deleteSlot(type, id) { 
+      this.$store.commit('deleteSlot', { type: type, id: id }); 
+    },
 
     fieldsCondition() {
       if (
         this.current.status != undefined && 
-        this.current.status == this.excludingCategory) return false
-      else return true
+        this.current.status == this.excludingCategory) {
+          return false
+        } else {
+          return true
+        }
     },
 
-    changeVal(event, prop) {
+    changeNumberVal(event, prop) {
       event.preventDefault();
+
       let target = event.target;
       let interval = 1;
       let prevVal = Number(target.value);
       let newVal;
+
       if (event.deltaY < 0) {
         newVal = prevVal + interval
       } else if (event.deltaY > 0) {
-        if (prevVal == 0) { newVal = 0 }
-        else { newVal = prevVal - interval }
+        if (prevVal == 0) { 
+          newVal = 0 
+        } else { 
+          newVal = prevVal - interval 
+        }
       }
+
       this.current[prop] = newVal
     },
 
-    setStatus(data)           { this.current.status = data },
-    setPlatform(data)         { this.current.platform = data },
-    setRating(data)           { this.current.rating = data },
-    setFavourite(data)        { this.current.favourite = data },
-    sethoursApproximate(data) { this.current.hoursApproximate = data }
+    games_setStatus(data) { 
+      this.current.status = data
+    },
+
+    games_setPlatform(name, id) { 
+      this.current.platform = name
+      this.current.platformId = id
+    },
+
+    games_setRating(data) { 
+      this.current.rating = data 
+    },
+
+    games_setFavourite(data) {
+      this.current.favourite = data 
+    },
+
+    games_sethoursApproximate(data) {
+      this.current.hoursApproximate = data
+    }
   },
   computed: {
     games()    { return this.$store.state.games },
@@ -257,7 +301,7 @@ export default {
 
     payload()  { return this.$store.state.payload },
     
-    excludingCategory() { 
+    excludingCategory() {
       return this.$store.state[this.type].statuses.filter(i => i.excludeFields)[0].name; 
     },
   },
@@ -269,9 +313,9 @@ export default {
     eventBus.$on('modalOpened', () => this.assignPayload());
     eventBus.$on('modalClosed', () => this.assignPayload());
 
-    eventBus.$on('rated',            data => this.setRating(data));
-    eventBus.$on('favourite',        data => this.setFavourite(data));
-    eventBus.$on('hoursApproximate', data => this.sethoursApproximate(data));
+    eventBus.$on('rated', data => this.games_setRating(data));
+    eventBus.$on('favourite', data => this.games_setFavourite(data));
+    eventBus.$on('hoursApproximate', data => this.games_sethoursApproximate(data));
   }
 };
 </script>

@@ -81,6 +81,7 @@ export default new Vuex.Store({
         title: '',
         status: '',
         platform: '',
+        platformId: '',
         hours: 0,
         hoursApproximate: false,
         rating: 0,
@@ -95,6 +96,7 @@ export default new Vuex.Store({
           title: "Dishonored: Death of the Outsider",
           status: "Currently playing",
           platform: "Steam",
+          platformId: 'steam',
           hours: 18,
           hoursApproximate: false,
           rating: 4,
@@ -108,6 +110,7 @@ export default new Vuex.Store({
           title: "Battlefield 1",
           status: "Currently playing",
           platform: "Origin",
+          platformId: 'origin',
           hours: 18,
           hoursApproximate: false,
           rating: 4,
@@ -121,6 +124,7 @@ export default new Vuex.Store({
           title: "Assassin's Creed: Unity",
           status: "Completed",
           platform: "Uplay",
+          platformId: 'uplay',
           hours: 61,
           hoursApproximate: false,
           rating: 4,
@@ -134,6 +138,7 @@ export default new Vuex.Store({
           title: "Assassin's Creed: Syndicate",
           status: "Completed",
           platform: "Epic Games Store",
+          platformId: 'egs',
           hours: 1,
           hoursApproximate: false,
           rating: 3,
@@ -147,6 +152,7 @@ export default new Vuex.Store({
           title: "Metro Exodus",
           status: "Currently playing",
           platform: "Don't own game",
+          platformId: 'pirate',
           hours: 4,
           hoursApproximate: true,
           rating: 0,
@@ -160,6 +166,7 @@ export default new Vuex.Store({
           title: "GWENT",
           status: "Completed",
           platform: "GOG.com",
+          platformId: 'gog',
           hours: 65,
           hoursApproximate: false,
           rating: 3,
@@ -173,6 +180,7 @@ export default new Vuex.Store({
           title: "Subnautica",
           status: "Currently playing",
           platform: "Steam",
+          platformId: 'steam',
           hours: 27,
           hoursApproximate: false,
           rating: 5,
@@ -186,6 +194,7 @@ export default new Vuex.Store({
           title: "Warframe",
           status: "Currently playing",
           platform: "Steam",
+          platformId: 'steam',
           hours: 2934,
           hoursApproximate: false,
           rating: 4,
@@ -199,6 +208,7 @@ export default new Vuex.Store({
           title: "Dota 2",
           status: "Completed",
           platform: "Steam",
+          platformId: 'steam',
           hours: 833,
           hoursApproximate: false,
           rating: 3,
@@ -212,6 +222,7 @@ export default new Vuex.Store({
           title: "Terraria",
           status: "Completed",
           platform: "Steam",
+          platformId: 'steam',
           hours: 418,
           hoursApproximate: false,
           rating: 5,
@@ -225,6 +236,7 @@ export default new Vuex.Store({
           title: "A Plague Tale: Innocence",
           status: "Completed",
           platform: "Steam",
+          platformId: 'steam',
           hours: 12,
           hoursApproximate: false,
           rating: 4,
@@ -238,6 +250,7 @@ export default new Vuex.Store({
           title: "The Elder Scrolls V: Skyrim",
           status: "Completed",
           platform: "Steam",
+          platformId: 'steam',
           hours: 225,
           hoursApproximate: false,
           rating: 4,
@@ -251,6 +264,7 @@ export default new Vuex.Store({
           title: "Overwatch",
           status: "Completed",
           platform: "Battle.net",
+          platformId: 'battlenet',
           hours: 470,
           hoursApproximate: true,
           rating: 4,
@@ -264,6 +278,7 @@ export default new Vuex.Store({
           title: "Batman: Arkham Knight",
           status: "Completed",
           platform: "Steam",
+          platformId: 'steam',
           hours: 34,
           hoursApproximate: false,
           rating: 5,
@@ -277,6 +292,7 @@ export default new Vuex.Store({
           title: "BioShock Infinite",
           status: "Completed",
           platform: "Steam",
+          platformId: 'steam',
           hours: 19,
           hoursApproximate: false,
           rating: 5,
@@ -290,6 +306,7 @@ export default new Vuex.Store({
           title: "Batman: Arkham Origins",
           status: "Dropped",
           platform: "Steam",
+          platformId: 'steam',
           hours: 6,
           hoursApproximate: false,
           rating: 3,
@@ -303,6 +320,7 @@ export default new Vuex.Store({
           title: "Far Cry 2",
           status: "Dropped",
           platform: "Steam",
+          platformId: 'steam',
           hours: 3,
           hoursApproximate: false,
           rating: 1,
@@ -724,8 +742,13 @@ export default new Vuex.Store({
       let collection = state[type].collection;
       let target = collection.filter(i => i.id == payload.id)[0];
 
-      if (target != undefined) Object.assign(target, payload);
-      else collection.push(payload);
+      if (target != undefined) {
+        Object.keys(payload).forEach(key => {
+          Vue.set(target, key, payload[key])
+        })
+      } else {
+        collection.push(payload)
+      };
 
       setTimeout(() => {
         collection.filter(i => i.id == payload.id)[0].refreshed = false

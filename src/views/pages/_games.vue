@@ -68,7 +68,7 @@
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             div(class='table__cell grid__col grid__col--lg-3')
-              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platformId(item.platform)")
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
             div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
@@ -119,7 +119,7 @@
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             div(class='table__cell grid__col grid__col--lg-3')
-              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platformId(item.platform)")
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
             div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
@@ -171,7 +171,7 @@
                   :class='"table__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             div(class='table__cell grid__col grid__col--lg-3')
-              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platformId(item.platform)")
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
             div(class='table__cell grid__col grid__col--lg-4') 
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
@@ -193,10 +193,6 @@ export default {
     modalState() {return this.$store.state.modalState},
   },
   methods: {
-    platformId(platformName) {
-      return this.games.platforms.filter(i => i.name == platformName)[0].id
-    },
-
     totalGames() {
       return this.games.collection.length
     },
