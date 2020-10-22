@@ -5,12 +5,30 @@
   .input
     &__field
       background: rgba($clr-white, $tiny-opacity)
+      color: $clr-black
       padding-left: $gutter-width/3 * 2 + 24px
 
       &:focus
-        background: rgba($clr-white, $light-opacity)
+        @extend .shadow-2
+
+        background: rgba($clr-white, $active-opacity)
+
+    &__icon
+      fill: $clr-white
+
+  &--active
+    .input
+      &__field
+        @extend .shadow-3
+
+        background: $clr-white
+
+      &__icon
+        fill: $clr-black !important
+        opacity: $active-opacity
 
   &:hover
     .input
       &__icon
-        opacity: 1
+        fill: $clr-white
+        opacity: $active-opacity

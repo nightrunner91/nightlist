@@ -16,10 +16,10 @@
           svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
 
-      div(class='search')
+      div(class='search' :class='{"search--active" : searchQuery.length || searchActive}' )
         div(class='input')
           svg(class='input__icon'): use(xlink:href='#search')
-          input(class='input__field' type='text' placeholder='Search')
+          input(class='input__field' type='text' placeholder='Search' v-model='searchQuery' @focus='searchActive = true' @blur='searchActive = false')
 
       div(class='title title--secondary')
         svg(class='title__chevron'): use(xlink:href='#chevron-down')
@@ -219,7 +219,8 @@ export default {
   name: 'Games',
   data() {
     return {
-      
+      searchQuery: '',
+      searchActive: false
     };
   },
   computed: {

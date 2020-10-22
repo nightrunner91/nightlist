@@ -76,7 +76,7 @@
                 class='dropdown__item'
                 v-for='platform in games.platforms'
                 @click='games_setPlatform(platform.name, platform.id)')
-                svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
+                svg(class='dropdown__icon' v-if='platform.id != "pirate"'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
                 span {{platform.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
