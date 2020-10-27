@@ -9,7 +9,7 @@
         h1(class='title__name') My Hardware
         span(class='title__badge badge badge--medium') 3
         div(
-          class='title__button title__button--games button button--main'
+          class='button button--games title__button'
           @click='addSlot()'
           v-ripple)
           svg(class='button__icon'): use(xlink:href='#add')

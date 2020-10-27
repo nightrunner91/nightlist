@@ -7,6 +7,7 @@
   @extend .cursor-pointer
   @extend .base-radius
   @extend .no-select
+  @extend .bg-white
 
   height: 40px
   padding: 0 $gutter-width/2
@@ -32,3 +33,51 @@
 
     margin-right: $gutter-width/8
     top: -1px
+
+  &--games
+    .button
+      &__text
+        @extend .clr-games
+
+      &__icon
+        @extend .fill-games
+
+  &--tvshows
+    .button
+      &__text
+        @extend .clr-tvshows
+
+      &__icon
+        @extend .fill-tvshows
+
+  &--films
+    .button
+      &__text
+        @extend .clr-films
+
+      &__icon
+        @extend .fill-films
+
+  &--anime
+    .button
+      &__text
+        @extend .clr-anime
+
+      &__icon
+        @extend .fill-anime
+
+  &--books
+    .button
+      &__text
+        @extend .clr-books
+
+      &__icon
+        @extend .fill-books
+
+  &--hardware
+    .button
+      &__text
+        @extend .clr-hardware
+
+      &__icon
+        @extend .fill-hardware

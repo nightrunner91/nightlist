@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../main";
+import { eventBus } from "../../../main"
 
 export default {
   name: "Favourite",
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       
-    };
+    }
   },
   computed: {
 
@@ -28,9 +28,9 @@ export default {
   methods: {
     changeFavourite() {
       if (this.currentFavourite) {
-        eventBus.$emit('favourite', false);
+        eventBus.$emit('favourite', false)
       } else {
-        eventBus.$emit('favourite', true);
+        eventBus.$emit('favourite', true)
       }
     }
   },
@@ -40,5 +40,5 @@ export default {
   destroyed() {
     
   }
-};
+}
 </script>

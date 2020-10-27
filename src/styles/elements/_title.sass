@@ -1,7 +1,6 @@
 .title
   @extend .flex
   @extend .align-center
-  @extend .no-select
 
   &--main
     margin-bottom: $gutter-width
@@ -11,6 +10,7 @@
     @extend .cursor-pointer
     @extend .base-transition
     @extend .base-radius
+    @extend .no-select
 
     margin-bottom: $gutter-width/2
     padding: 0 $gutter-width
@@ -39,52 +39,3 @@
 
   &__button
     margin-left: auto
-    background: $clr-white
-
-    &--games
-      .button
-        &__text
-          @extend .clr-games
-
-        &__icon
-          @extend .fill-games
-
-    &--tvshows
-      .button
-        &__text
-          @extend .clr-tvshows
-
-        &__icon
-          @extend .fill-tvshows
-
-    &--films
-      .button
-        &__text
-          @extend .clr-films
-
-        &__icon
-          @extend .fill-films
-
-    &--anime
-      .button
-        &__text
-          @extend .clr-anime
-
-        &__icon
-          @extend .fill-anime
-
-    &--books
-      .button
-        &__text
-          @extend .clr-books
-
-        &__icon
-          @extend .fill-books
-
-    &--hardware
-      .button
-        &__text
-          @extend .clr-hardware
-
-        &__icon
-          @extend .fill-hardware

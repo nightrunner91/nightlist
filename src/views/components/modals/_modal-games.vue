@@ -4,9 +4,7 @@
 
     div(class='modal-backdrop')
 
-      div(
-        class='modal' 
-        :class='"modal--" + type')
+      div(class='modal modal--games')
 
         div(
           class='modal__close'
@@ -16,10 +14,7 @@
 
         div(class='modal__content')
 
-          //- ===== //
-          //- GAMES //
-          //- ===== //
-          div(class='modal__fields' v-if='type == "games"')
+          div(class='modal__fields')
 
             //- TITLE -//
             div(class='input')
@@ -50,7 +45,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='status in games.statuses'
-                @click='games_setStatus(status.name, status.id)') {{status.name}}
+                @click='setStatus(status.name, status.id)') {{status.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
               //- RATING -//
@@ -75,7 +70,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='platform in games.platforms'
-                @click='games_setPlatform(platform.name, platform.id)')
+                @click='setPlatform(platform.name, platform.id)')
                 svg(class='dropdown__icon' v-if='platform.id != "pirate"'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
                 span {{platform.name}}
 
@@ -108,10 +103,6 @@
                 autocomplete='off' 
                 v-model='current.link')
 
-
-        //- ====== -//
-        //- FOOTER -//
-        //- ====== -//
         div(class='modal__footer')
 
           div(v-if='purpose == "edit"')
@@ -129,7 +120,7 @@
 
                 div(
                   class='button button--secondary'
-                  @click='deleteSlot(type, current.id), closeModal(), changeConfirm(false)')
+                  @click='deleteSlot(current.id), closeModal(), changeConfirm(false)')
                   svg(class='button__icon'): use(xlink:href='#confirm')
                   span(class='button__text') Confirm
 
@@ -147,7 +138,7 @@
 
           div(
             class='button button--main'
-            @click='applySlot(type, current.id)'
+            @click='applySlot(current.id)'
             v-ripple)
             span(class='button__text' v-if='purpose == "edit"') Save
             span(class='button__text' v-else-if='purpose == "add"') Add
@@ -155,12 +146,11 @@
 </template>
 
 <script>
-import { eventBus } from "../../main";
+import { eventBus } from "../../../main"
 
 export default {
   name: 'modal',
   props: {
-    type: String,
     purpose: String
   },
   data() {
@@ -198,25 +188,25 @@ export default {
     validateModal() {
       return new Promise(resolve => {
         if (this.purpose == 'add') {
-          this.current.id = Math.floor(Math.random() * 10000000000);
+          this.current.id = Math.floor(Math.random() * 10000000000)
         }
 
         if (this.current.status.length == 0) {
-          this.current.status = this.$store.state[this.type].statuses.filter(i => i.default)[0].name
+          this.current.status = this.$store.state["games"].statuses.filter(i => i.default)[0].name
         }
 
         if (this.current.statusId == 'plan_to_play') {
-          this.current.hours = this.$store.state[this.type].default.hours;
-          this.current.hoursApproximate = this.$store.state[this.type].default.hoursApproximate;
-          this.current.rating = this.$store.state[this.type].default.rating;
-          this.current.favourite = this.$store.state[this.type].default.favourite;
-          this.current.priority = this.$store.state[this.type].default.priority;
+          this.current.hours = this.$store.state["games"].default.hours
+          this.current.hoursApproximate = this.$store.state["games"].default.hoursApproximate
+          this.current.rating = this.$store.state["games"].default.rating
+          this.current.favourite = this.$store.state["games"].default.favourite
+          this.current.priority = this.$store.state["games"].default.priority
         }
 
         if (this.current.platform.length == 0) {
-          let defaultPlatform = this.$store.state[this.type].platforms.filter(i => i.default)[0]
-          this.current.platform = defaultPlatform.name;
-          this.current.platformId = defaultPlatform.id;
+          let defaultPlatform = this.$store.state["games"].platforms.filter(i => i.default)[0]
+          this.current.platform = defaultPlatform.name
+          this.current.platformId = defaultPlatform.id
         }
 
         if (this.current.title.length == 0) {
@@ -231,19 +221,19 @@ export default {
       })
     },
 
-    applySlot(type, id)  {
+    applySlot(id)  {
       this.validateModal().then(result => {
         if (result) {
-          this.current.refreshed = true;
-          this.$store.commit('applySlot', { type: type , payload: this.current });
-          this.closeModal();
-          this.changeConfirm(false);
+          this.current.refreshed = true
+          this.$store.commit('applySlot', { type: "games" , payload: this.current })
+          this.closeModal()
+          this.changeConfirm(false)
         }
       })
     },
 
-    deleteSlot(type, id) { 
-      this.$store.commit('deleteSlot', { type: type, id: id }); 
+    deleteSlot(id) { 
+      this.$store.commit('deleteSlot', { type: "games", id: id }) 
     },
 
     fieldsCondition() {
@@ -257,12 +247,12 @@ export default {
     },
 
     changeNumberVal(event, prop) {
-      event.preventDefault();
+      event.preventDefault()
 
-      let target = event.target;
-      let interval = 1;
-      let prevVal = Number(target.value);
-      let newVal;
+      let target = event.target
+      let interval = 1
+      let prevVal = Number(target.value)
+      let newVal
 
       if (event.deltaY < 0) {
         newVal = prevVal + interval
@@ -277,53 +267,52 @@ export default {
       this.current[prop] = newVal
     },
 
-    games_setStatus(name, id) { 
+    setStatus(name, id) { 
       this.current.status = name
       this.current.statusId = id
     },
 
-    games_setPlatform(name, id) { 
+    setPlatform(name, id) { 
       this.current.platform = name
       this.current.platformId = id
     },
 
-    games_setRating(data) { 
+    setRating(data) { 
       this.current.rating = data 
     },
 
-    games_setFavourite(data) {
+    setFavourite(data) {
       this.current.favourite = data 
     },
 
-    games_sethoursApproximate(data) {
+    sethoursApproximate(data) {
       this.current.hoursApproximate = data
     }
   },
   computed: {
-    games()    { return this.$store.state.games },
-    tvshows()  { return this.$store.state.tvshows },
-    films()    { return this.$store.state.films },
-    anime()    { return this.$store.state.anime },
-    books()    { return this.$store.state.books },
-    hardware() { return this.$store.state.hardware },
-
-    payload()  { return this.$store.state.payload },
-    
-    excludingCategory() {
-      return this.$store.state[this.type].statuses.filter(i => i.excludeFields)[0].name; 
+    games() { 
+      return this.$store.state.games 
     },
+
+    payload() { 
+      return this.$store.state.payload 
+    },
+
+    excludingCategory() {
+      return this.$store.state["games"].statuses.filter(i => i.excludeFields)[0].name
+    }
   },
   mounted() {
     document.addEventListener('keyup', e => {
-      if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal();
-    });
+      if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal()
+    })
 
-    eventBus.$on('modalOpened', () => this.assignPayload());
-    eventBus.$on('modalClosed', () => this.assignPayload());
+    eventBus.$on('modalOpened', () => this.assignPayload())
+    eventBus.$on('modalClosed', () => this.assignPayload())
 
-    eventBus.$on('rated', data => this.games_setRating(data));
-    eventBus.$on('favourite', data => this.games_setFavourite(data));
-    eventBus.$on('hoursApproximate', data => this.games_sethoursApproximate(data));
+    eventBus.$on('rated', data => this.setRating(data))
+    eventBus.$on('favourite', data => this.setFavourite(data))
+    eventBus.$on('hoursApproximate', data => this.sethoursApproximate(data))
   }
-};
+}
 </script>

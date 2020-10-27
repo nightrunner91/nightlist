@@ -4,49 +4,64 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+
 // Disable annoying messages in console
-Vue.config.productionTip = false;
-Vue.config.devtools = true;
+Vue.config.productionTip = false
+Vue.config.devtools = true
+
 
 // Create global event
-export const eventBus = new Vue();
+export const eventBus = new Vue()
 
-// Import and regitser components
-import appSidebar from "./views/components/_sidebar";
-import appGradients from "./views/components/_gradients";
-import appModal from "./views/components/_modal";
-import appDropdown from "./views/components/_dropdown";
-import appCheckbox from "./views/components/_checkbox";
-import appRating from "./views/components/_rating";
-import appFavourite from "./views/components/_favourite";
 
-import VTooltip from 'v-tooltip';
-import Vuebar from './directives/_scrollbar';
-import Ripple from './directives/_ripple';
+// Import and regitser local components
+import appSidebar from "./views/components/global/_sidebar"
+import appGradients from "./views/components/global/_gradients"
 
-Vue.component('app-sidebar', appSidebar);
-Vue.component('app-gradients', appGradients);
-Vue.component('app-modal', appModal);
-Vue.component('app-dropdown', appDropdown);
-Vue.component('app-checkbox', appCheckbox);
-Vue.component('app-rating', appRating);
-Vue.component('app-favourite', appFavourite);
+import modalGames from "./views/components/modals/_modal-games"
 
-Vue.use(VTooltip);
-Vue.use(Vuebar);
-Vue.directive('ripple', Ripple);
+import tableGames from "./views/components/tables/_table-games"
+
+import appDropdown from "./views/components/ui/_dropdown"
+import appCheckbox from "./views/components/ui/_checkbox"
+import appRating from "./views/components/ui/_rating"
+import appFavourite from "./views/components/ui/_favourite"
+
+Vue.component('app-sidebar', appSidebar)
+Vue.component('app-gradients', appGradients)
+
+Vue.component('modal-games', modalGames)
+
+Vue.component('table-games', tableGames)
+
+Vue.component('app-dropdown', appDropdown)
+Vue.component('app-checkbox', appCheckbox)
+Vue.component('app-rating', appRating)
+Vue.component('app-favourite', appFavourite)
+
+
+// Import and regitser external components
+import VTooltip from 'v-tooltip'
+import Vuebar from './directives/_scrollbar'
+import Ripple from './directives/_ripple'
+
+Vue.use(VTooltip)
+Vue.use(Vuebar)
+Vue.directive('ripple', Ripple)
+
 
 // SVG Sprite
-import sprite from './assets/sprite.svg';
+import sprite from './assets/sprite.svg'
 
 fetch(sprite)
   .then(response => response.text())
   .then(svg => {
-    let div = document.createElement('div');
-    div.hidden = true;
-    div.insertAdjacentHTML('afterbegin', svg);
-    document.body.insertBefore(div, document.body.childNodes[0]);
-  });
+    let div = document.createElement('div')
+    div.hidden = true
+    div.insertAdjacentHTML('afterbegin', svg)
+    document.body.insertBefore(div, document.body.childNodes[0])
+  })
+
 
 // Init app
 new Vue({

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../main";
+import { eventBus } from "../../../main"
 
 export default {
   name: "Rating",
@@ -25,37 +25,37 @@ export default {
     return {
       currentHover: undefined,
       justRated: false
-    };
+    }
   },
   computed: {
 
   },
   methods: {
     setRating(rating) {
-      this.justRated = !this.justRated;
+      this.justRated = !this.justRated
       
       if (this.currentRating != rating) {
-        eventBus.$emit('rated', rating);
+        eventBus.$emit('rated', rating)
       } else {
-        eventBus.$emit('rated', 0);
+        eventBus.$emit('rated', 0)
       }
     },
 
     starClass(rating, index) {
-      let className = '';
+      let className = ''
 
-      className += 'rating__star--' + (index + 1);
+      className += 'rating__star--' + (index + 1)
 
       if (rating > this.currentHover) {
-        className += " rating__star--excluded";
+        className += " rating__star--excluded"
       }
 
       else if (rating <= this.currentHover) {
-        className += " rating__star--included";
+        className += " rating__star--included"
       }
 
       if (rating <= this.currentRating) {
-        className += " rating__star--active";
+        className += " rating__star--active"
       }
 
       if (this.currentHover != undefined && this.justRated == false) {
@@ -80,5 +80,5 @@ export default {
   destroyed() {
     
   }
-};
+}
 </script>

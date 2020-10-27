@@ -46,7 +46,7 @@ export default {
         'height': undefined,
         'max-height': undefined
       }
-    };
+    }
   },
   computed: {
 
@@ -54,26 +54,26 @@ export default {
   methods: {
     documentClick(event) {
       if (this.$el !== event.target && !this.$el.contains(event.target)) {
-        this.dropdownOpened = false;
+        this.dropdownOpened = false
       }
     },
 
     setHeight() {
-      let limit = this.visibleItems * this.itemHeight + 1 + 'px';
-      this.dropdownHeight['height'] = limit;
-      this.dropdownHeight['max-height'] = limit;
+      let limit = this.visibleItems * this.itemHeight + 1 + 'px'
+      this.dropdownHeight['height'] = limit
+      this.dropdownHeight['max-height'] = limit
     },
 
     switchDropdown() {
-      this.setHeight();
+      this.setHeight()
 
       if (this.dropdownOpened) {
-        this.dropdownOpened = false;
+        this.dropdownOpened = false
         if (this.itemsCount > this.visibleItems) {
           this.$vuebar.destroyScrollbar(this.$refs.dropdown)
         }
       } else {
-        this.dropdownOpened = true;
+        this.dropdownOpened = true
         if (this.itemsCount > this.visibleItems) {
           this.$vuebar.initScrollbar(this.$refs.dropdown, { preventParentScroll: true })
         }
@@ -81,10 +81,10 @@ export default {
     },
   },
   created() {
-    document.addEventListener("click", this.documentClick);
+    document.addEventListener("click", this.documentClick)
   },
   destroyed() {
-    document.removeEventListener("click", this.documentClick);
+    document.removeEventListener("click", this.documentClick)
   }
-};
+}
 </script>

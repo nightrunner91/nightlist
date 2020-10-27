@@ -758,21 +758,21 @@ export default new Vuex.Store({
   mutations: {
 
     changeModalState(state, { visibility, purpose }) {
-      state.modalState.visibility = visibility;
-      if (purpose != undefined) state.modalState.purpose = purpose;
+      state.modalState.visibility = visibility
+      if (purpose != undefined) state.modalState.purpose = purpose
     },
 
     changeConfirmState(state, data) {
-      state.confirmVisible = data;
+      state.confirmVisible = data
     },
 
     changePayload(state, data) {
-      state.payload = data;
+      state.payload = data
     },
 
     applySlot(state, {type, payload}) {
-      let collection = state[type].collection;
-      let target = collection.filter(i => i.id == payload.id)[0];
+      let collection = state[type].collection
+      let target = collection.filter(i => i.id == payload.id)[0]
 
       if (target != undefined) {
         Object.keys(payload).forEach(key => {
@@ -780,16 +780,16 @@ export default new Vuex.Store({
         })
       } else {
         collection.push(payload)
-      };
+      }
 
       setTimeout(() => {
         collection.filter(i => i.id == payload.id)[0].refreshed = false
-      }, 1000);
+      }, 1000)
     },
 
     deleteSlot(state, { type, id }) {
-      let target = state[type].collection.map(i => i.id).indexOf(id);
-      state[type].collection.splice(target, 1);
+      let target = state[type].collection.map(i => i.id).indexOf(id)
+      state[type].collection.splice(target, 1)
     }
 
   },

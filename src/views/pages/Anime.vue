@@ -6,10 +6,10 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') My TV Shows
+        h1(class='title__name') My Anime
         span(class='title__badge badge badge--medium') 150
         div(
-          class='title__button title__button--games button button--main'
+          class='button button--games title__button'
           @click='addSlot()'
           v-ripple)
           svg(class='button__icon'): use(xlink:href='#add')
@@ -24,9 +24,9 @@
 
 <script>
 export default {
-  name: 'TVshows',
+  name: 'Anime',
   computed: {
-    tvshows() {return this.$store.state.tvshows},
+    anime() {return this.$store.state.anime},
     modalState() {return this.$store.state.modalState},
   },
 }

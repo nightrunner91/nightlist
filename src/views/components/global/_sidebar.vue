@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import "../../assets/avatar.png"
+import "../../../assets/avatar.png"
 
 export default {
   name: 'Sidebar',
