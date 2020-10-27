@@ -5,7 +5,7 @@
     app-sidebar
     main(class='content' v-scrollbar)
       div(class='content__inner')
-        transition( name='page' mode='out-in')
+        transition(name='page' mode='out-in')
           router-view
 
 </template>
@@ -77,6 +77,7 @@ export default {
 
   // Elements
   @import "styles/elements/badge"
+  @import "styles/elements/data"
   @import "styles/elements/title"
   @import "styles/elements/table"
   @import "styles/elements/item"

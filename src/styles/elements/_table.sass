@@ -1,7 +1,11 @@
 $star-size: 24px
   
 .table
-  margin-bottom: $gutter-width * 2
+  @extend .base-transition
+  @extend .no-overflow
+
+  &--hidden
+    max-height: 0px !important
 
   &__header,
   &__item
@@ -22,7 +26,12 @@ $star-size: 24px
         @extend .txt-uppercase
         @extend .small
 
-        color: rgba($clr-white, 0.5)
+        color: rgba($clr-white, $half-opacity)
+
+        &:hover
+          .table
+            &__chevron
+              opacity: $active-opacity
 
         &--functional
           @extend .cursor-pointer
@@ -34,6 +43,13 @@ $star-size: 24px
             .table
               &__chevron
                 opacity: $active-opacity
+
+        &--active
+          color: $clr-white
+
+          .table
+            &__chevron
+              opacity: $half-opacity
 
   &__body
     padding: 0 $gutter-width/2
@@ -68,11 +84,14 @@ $star-size: 24px
           opacity: $half-opacity
 
   &__chevron
-    @extend .pos-relative
     @extend .base-transition
     @include icon-size(18, 18)
 
-    opacity: $half-opacity
+    &--ascending
+      transform: rotate(0deg)
+
+    &--descending
+      transform: rotate(180deg)
 
   &__cell
     @extend .pos-relative
@@ -86,10 +105,7 @@ $star-size: 24px
       line-height: 1
 
     &:first-child
-      color: rgba($clr-white, 0.5)
-
-    &:last-child
-      //@extend .justify-end
+      color: rgba($clr-white, $half-opacity)
 
   &__rating
     @extend .pos-relative

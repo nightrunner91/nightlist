@@ -166,7 +166,7 @@ export default {
     },
 
     assignPayload() { 
-      this.current = Object.assign({}, this.payload) 
+      this.current = Object.assign({}, this.payload)
     },
 
     changeConfirm(state) {
