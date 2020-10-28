@@ -30,8 +30,8 @@
 
   &__chevron
     @extend .pos-relative
-    @include icon-size(24, 24)
     @extend .base-transition
+    @include icon-size(24, 24)
 
     left: -$gutter-width/4
     margin-right: $gutter-width/4
@@ -39,6 +39,9 @@
 
     &--closed
       transform: rotate(-90deg)
+
+    &--notransition
+      @extend .no-transition
 
   &__button
     margin-left: auto

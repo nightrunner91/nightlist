@@ -44,10 +44,16 @@ Vue.component('app-favourite', appFavourite)
 import VTooltip from 'v-tooltip'
 import Vuebar from './directives/_scrollbar'
 import Ripple from './directives/_ripple'
+import {Vue2Storage} from 'vue2-storage'
 
 Vue.use(VTooltip)
 Vue.use(Vuebar)
 Vue.directive('ripple', Ripple)
+Vue.use(Vue2Storage, {
+  prefix: 'nightlist_',
+  driver: 'local',
+  ttl: 0
+})
 
 
 // SVG Sprite

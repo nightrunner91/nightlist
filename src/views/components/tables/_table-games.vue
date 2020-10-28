@@ -7,14 +7,14 @@
       @click='switchTable()')
       svg(
         class='title__chevron'
-        :class='{"title__chevron--closed" : !tableVisible}'): use(xlink:href='#chevron-down')
+        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron-down')
       h2(class='title__name') {{tableName(id)}}
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
 
     div(
       class='table' 
       :style='tableHeight'
-      :class='{"table--hidden" : !tableVisible}')
+      :class='[{"table--hidden" : !tableVisible}, {"table--notransition" : noTransition}]')
 
       div(class='table__header')
         div(class='table__cell grid__col grid__col--lg-1')
@@ -125,9 +125,11 @@ export default {
   data() {
     return {
       criteria: 'title',
+      storageName: 'games_' + this.id,
       direction: true,
       data: [],
-      tableVisible: true
+      tableVisible: true,
+      noTransition: true
     }
   },
   methods: {
@@ -145,6 +147,15 @@ export default {
 
     switchTable() {
       this.tableVisible = !this.tableVisible
+      this.$storage.set(this.storageName, { key: this.tableVisible })
+    },
+
+    setTableState() {
+      this.tableVisible = this.$storage.get(this.storageName).key
+    },
+
+    removeNoTransition() {
+      setTimeout(() => { this.noTransition = false }, 300);
     },
 
     sortData(criteria, situation) {
@@ -222,11 +233,13 @@ export default {
 
     titleWidth() {
       return ''
-    }
+    },
   },
   mounted() {
     this.stashData(this.id)
     this.sortData(this.criteria, 'default')
+    this.setTableState()
+    this.removeNoTransition()
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type == 'applySlot' || mutation.type == 'deleteSlot') {
