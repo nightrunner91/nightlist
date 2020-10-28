@@ -149,7 +149,7 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: 'modal',
+  name: 'gamesModal',
   props: {
     purpose: String
   },

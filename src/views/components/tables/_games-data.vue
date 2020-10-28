@@ -2,47 +2,38 @@
 
   div(class='data')
 
-    //- ====== -//
-    //- SEARCH -//
-    //- ====== -//
-    div(
-      class='search' 
-      :class='{"search--active" : searchQuery.length || searchActive}' )
-      div(class='input')
-        svg(class='input__icon'): use(xlink:href='#search')
-        input(
-          class='input__field' 
-          type='text' 
-          placeholder='Search' 
-          v-model='searchQuery'
-          @input='searchData()'
-          @focus='searchActive = true' 
-          @blur='searchActive = false')
-
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(class='title title--secondary title--inactive' v-if='searchQuery.length')
-      h2(class='title__name') Search results
-      span(class='title__badge badge badge--medium') {{resultsLength}}
+    div(
+      class='title title--secondary'
+      @click='switchTable()')
+      svg(
+        class='title__chevron'
+        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron-down')
+      h2(class='title__name') {{tableName(id)}}
+      span(class='title__badge badge badge--medium') {{tableLength(id)}}
 
     //- ===== -//
     //- TABLE -//
     //- ===== -//
-    div(class='table' v-if='searchQuery.length')
+    div(
+      class='table' 
+      :style='tableHeight'
+      :class='[{"table--hidden" : !tableVisible}, {"table--notransition" : noTransition}]')
 
       //- ====== -//
       //- HEADER -//
       //- ====== -//
-      div(class='table__header' v-if='searchQuery.length && resultsLength > 0')
+      div(class='table__header')
 
         //- ORDER
         div(class='table__cell grid__col grid__col--lg-1')
         
         //- TITLE
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-19'
-          :class='{"table__cell--active" : criteria == "title"}'
+          class='table__cell table__cell--functional grid__col'
+          :class='[{"table__cell--active" : criteria == "title"}, titleWidth]'
           @click='sortData("title", "switch")')
           span Title
           svg(
@@ -52,6 +43,7 @@
         
         //- FAVOURITE
         div(
+          v-if='id != "plan_to_play"'
           class='table__cell table__cell--functional grid__col grid__col--lg-3'
           :class='{"table__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
@@ -63,6 +55,7 @@
         
         //- RATING
         div(
+          v-if='id != "plan_to_play"'
           class='table__cell table__cell--functional grid__col grid__col--lg-6'
           :class='{"table__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
@@ -74,6 +67,7 @@
         
         //- HOURS
         div(
+          v-if='id != "plan_to_play"'
           class='table__cell table__cell--functional grid__col grid__col--lg-4'
           :class='{"table__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
@@ -101,14 +95,16 @@
           ref='tableItem'
           :key='item.title'
           :class='{"table__item--refreshed" : item.refreshed }'
-          v-for='(item, index) in searchedData'
+          v-for='(item, index) in data'
           @click='editSlot(item.id, $event)')
           
           //- ORDER
           div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
           
           //- TITLE
-          div(class='table__cell grid__col grid__col--lg-19')
+          div(
+            class='table__cell grid__col'
+            :class='titleWidth')
             span {{item.title}}
             a(
               :ref='"redirect"'
@@ -121,11 +117,13 @@
           
           //- FAVOURITE
           div(
+            v-if='id != "plan_to_play"'
             class='table__cell grid__col grid__col--lg-3')
             svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
           
           //- RATING
           div(
+            v-if='id != "plan_to_play"'
             class='table__cell grid__col grid__col--lg-6')
             div(class='table__rating')
               svg(
@@ -139,6 +137,7 @@
           
           //- HOURS
           div(
+            v-if='id != "plan_to_play"'
             class='table__cell grid__col grid__col--lg-4')
             svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
             span(v-if='item.hours != undefined') {{item.hours}}
@@ -153,37 +152,51 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: 'datatable-search',
+  name: 'gamesData',
   props: {
-    
+    id: String
   },
   data() {
     return {
-      searchQuery: '',
-      searchActive: false,
       criteria: 'title',
+      storageName: 'games_' + this.id + '_visible',
       direction: true,
-      stashedData: [],
-      searchedData: []
+      data: [],
+      tableVisible: true,
+      noTransition: true
     }
   },
   methods: {
-    stashData() {
-      this.stashedData = this.games.collection
+    tableName(id) { 
+      return this.games.statuses.filter(i => i.id == id)[0].name 
     },
 
-    searchData() {
-      this.searchedData = this.stashedData.filter(i => {
-        return i.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-      })
+    tableLength(id) {
+      return this.games.collection.filter(i => i.status == this.tableName(id)).length 
+    },
 
-      this.sortData(this.criteria)
-      
-      if (this.searchQuery.length > 0) {
-        this.$store.commit('changeSearchState', true)
-      } else {
-        this.$store.commit('changeSearchState', false)
+    stashData() {
+      this.data = this.games.collection.filter(i => i.status == this.tableName(this.id))
+    },
+
+    switchTable() {
+      this.tableVisible = !this.tableVisible
+      this.$storage.set(this.storageName, { key: this.tableVisible })
+    },
+
+    setDefaultTableState() {
+      this.tableVisible = true
+    },
+
+    setTableState() {
+      let storedState = this.$storage.get(this.storageName, this.setDefaultTableState())
+      if (storedState != null) {
+        this.tableVisible = storedState.key
       }
+    },
+
+    removeNoTransition() {
+      setTimeout(() => { this.noTransition = false }, 300)
     },
 
     sortData(criteria, situation) {
@@ -232,20 +245,19 @@ export default {
         }
       }
 
-      result = this.searchedData.sort((a, b) => {
+      result = this.data.sort((a, b) => {
         if (a[criteria] < b[criteria]) { return conditionOne }
         if (a[criteria] > b[criteria]) { return conditionTwo }
         return 0
       })
 
-      this.searchedData = result
+      this.data = result
     },
 
     subscribeToChanges() {
       this.$store.subscribe((mutation, state) => {
         if (mutation.type == 'applySlot' || mutation.type == 'deleteSlot') {
           this.stashData()
-          this.searchData()
           this.sortData(this.criteria)
         }
       })
@@ -257,7 +269,7 @@ export default {
         this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
         eventBus.$emit('openModal', 'edit');
       }
-    }
+    },
   },
   computed: {
     games() {
@@ -269,13 +281,23 @@ export default {
       else return 'table__chevron--descending'
     },
 
-    resultsLength() {
-      return this.searchedData.length
-    }
+    tableHeight() {
+      return 'max-height: ' + (40 * this.data.length + 40) + 'px'
+    },
+
+    titleWidth() {
+      if (this.id != 'plan_to_play') {
+        return 'grid__col--lg-19'
+      } else {
+        return 'grid__col--lg-32'
+      }
+    },
   },
   mounted() {
     this.stashData()
     this.sortData(this.criteria, 'default')
+    this.setTableState()
+    this.removeNoTransition()
     this.subscribeToChanges()
   }
 }

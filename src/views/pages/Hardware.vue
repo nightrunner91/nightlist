@@ -15,11 +15,6 @@
           svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
 
-      div(class='search')
-        div(class='input')
-          svg(class='input__icon'): use(xlink:href='#search')
-          input(class='input__field' type='text' placeholder='Search')
-
 </template>
 
 <script>

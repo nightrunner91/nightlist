@@ -2,7 +2,7 @@
   
   section(class='section')
 
-    modal-games(
+    games-modal(
       :purpose='modalState.purpose'
       v-show='modalState.visibility')
 
@@ -20,13 +20,13 @@
           svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
 
-      table-games-search
+      games-search
 
       div(class='dataset' v-if='!searchState')
-        table-games(:id='"currently_playing"')
-        table-games(:id='"completed"')
-        table-games(:id='"plan_to_play"')
-        table-games(:id='"dropped"')
+        games-data(:id='"currently_playing"')
+        games-data(:id='"completed"')
+        games-data(:id='"plan_to_play"')
+        games-data(:id='"dropped"')
 
 </template>
 

@@ -23,6 +23,12 @@
   &--inactive
     @extend .cursor-default
 
+    &::before
+      @include icon-size(24, 24)
+
+      content: ''
+      margin-right: $gutter-width/4
+
   &__name
     @extend .no-mg
 

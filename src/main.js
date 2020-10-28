@@ -1,40 +1,53 @@
-// Core
+// ============== //
+// Core component //
+// ============== //
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 
-// Disable annoying messages in console
+// ================= //
+// Vue configuration //
+// ================= //
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
 
-// Create global event
+// =================== //
+// Create global event //
+// =================== //
 export const eventBus = new Vue()
 
 
-// Import and regitser local components
+// ===================================== //
+// Import and regitser global components //
+// ===================================== //
+
+// main:
 import appSidebar from "./views/components/global/_sidebar"
 import appGradients from "./views/components/global/_gradients"
-
-import modalGames from "./views/components/modals/_modal-games"
-
-import tableGames from "./views/components/tables/_table-games"
-import tableGamesSearch from "./views/components/tables/_table-games-search"
-
-import appDropdown from "./views/components/ui/_dropdown"
-import appCheckbox from "./views/components/ui/_checkbox"
-import appRating from "./views/components/ui/_rating"
-import appFavourite from "./views/components/ui/_favourite"
 
 Vue.component('app-sidebar', appSidebar)
 Vue.component('app-gradients', appGradients)
 
-Vue.component('modal-games', modalGames)
+// modals:
+import gamesModal from "./views/components/modals/_games-modal"
 
-Vue.component('table-games', tableGames)
-Vue.component('table-games-search', tableGamesSearch)
+Vue.component('games-modal', gamesModal)
+
+// tables:
+import gamesData from "./views/components/tables/_games-data"
+import gamesSearch from "./views/components/tables/_games-search"
+
+Vue.component('games-data', gamesData)
+Vue.component('games-search', gamesSearch)
+
+// UI:
+import appDropdown from "./views/components/ui/_dropdown"
+import appCheckbox from "./views/components/ui/_checkbox"
+import appRating from "./views/components/ui/_rating"
+import appFavourite from "./views/components/ui/_favourite"
 
 Vue.component('app-dropdown', appDropdown)
 Vue.component('app-checkbox', appCheckbox)
@@ -42,7 +55,10 @@ Vue.component('app-rating', appRating)
 Vue.component('app-favourite', appFavourite)
 
 
-// Import and regitser external components
+// ======================================= //
+// Import and regitser external components //
+// ======================================= //
+
 import VTooltip from 'v-tooltip'
 import Vuebar from './directives/_scrollbar'
 import Ripple from './directives/_ripple'
@@ -51,14 +67,13 @@ import {Vue2Storage} from 'vue2-storage'
 Vue.use(VTooltip)
 Vue.use(Vuebar)
 Vue.directive('ripple', Ripple)
-Vue.use(Vue2Storage, {
-  prefix: 'nightlist_',
-  driver: 'local',
-  ttl: 0
-})
+Vue.use(Vue2Storage, {prefix: 'nightlist_'})
 
 
-// SVG Sprite
+// ========== //
+// SVG Sprite //
+// ========== //
+
 import sprite from './assets/sprite.svg'
 
 fetch(sprite)
@@ -71,7 +86,9 @@ fetch(sprite)
   })
 
 
-// Init app
+// ======== //
+// Init app //
+// ======== //
 new Vue({
   router,
   store,
