@@ -2,6 +2,9 @@
 
   div(class='data')
 
+    //- ===== -//
+    //- TITLE -//
+    //- ===== -//
     div(
       class='title title--secondary'
       @click='switchTable()')
@@ -11,16 +14,25 @@
       h2(class='title__name') {{tableName(id)}}
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
 
+    //- ===== -//
+    //- TABLE -//
+    //- ===== -//
     div(
       class='table' 
       :style='tableHeight'
       :class='[{"table--hidden" : !tableVisible}, {"table--notransition" : noTransition}]')
 
+      //- ====== -//
+      //- HEADER -//
+      //- ====== -//
       div(class='table__header')
+
+        //- ORDER
         div(class='table__cell grid__col grid__col--lg-1')
         
+        //- TITLE
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-19'
+          class='table__cell table__cell--functional'
           :class='[{"table__cell--active" : criteria == "title"}, titleWidth]'
           @click='sortData("title", "switch")')
           span Title
@@ -29,7 +41,9 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
         
+        //- FAVOURITE
         div(
+          v-if='id != "plan_to_play"'
           class='table__cell table__cell--functional grid__col grid__col--lg-3'
           :class='{"table__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
@@ -39,7 +53,9 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
         
+        //- RATING
         div(
+          v-if='id != "plan_to_play"'
           class='table__cell table__cell--functional grid__col grid__col--lg-6'
           :class='{"table__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
@@ -49,7 +65,9 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
         
+        //- HOURS
         div(
+          v-if='id != "plan_to_play"'
           class='table__cell table__cell--functional grid__col grid__col--lg-4'
           :class='{"table__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
@@ -59,6 +77,7 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
         
+        //- PLATFORM
         div(
           class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--right'
           :class='{"table__cell--active" : criteria == "platform"}'
@@ -69,6 +88,7 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
 
+      //- BODY
       div(class='table__body')
         div(
           class='table__item' 
@@ -78,9 +98,13 @@
           v-for='(item, index) in data'
           @click='editSlot(item.id, $event)')
           
+          //- ORDER
           div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
           
-          div(class='table__cell grid__col grid__col--lg-19')
+          //- TITLE
+          div(
+            class='table__cell grid__col'
+            :class='titleWidth')
             span {{item.title}}
             a(
               :ref='"redirect"'
@@ -91,10 +115,16 @@
               v-if='item.link.length')
               svg(class='table__redirect'): use(xlink:href='#link')
           
-          div(class='table__cell grid__col grid__col--lg-3')
+          //- FAVOURITE
+          div(
+            v-if='id != "plan_to_play"'
+            class='table__cell grid__col grid__col--lg-3')
             svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
           
-          div(class='table__cell grid__col grid__col--lg-6')
+          //- RATING
+          div(
+            v-if='id != "plan_to_play"'
+            class='table__cell grid__col grid__col--lg-6')
             div(class='table__rating')
               svg(
                 class='table__star table__star--active' 
@@ -105,10 +135,14 @@
                 :class='"table__star--" + (index + 1)'
                 v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
           
-          div(class='table__cell grid__col grid__col--lg-4')
+          //- HOURS
+          div(
+            v-if='id != "plan_to_play"'
+            class='table__cell grid__col grid__col--lg-4')
             svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
             span(v-if='item.hours != undefined') {{item.hours}}
           
+          //- PLATFORM
           div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
             svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
 
@@ -125,7 +159,7 @@ export default {
   data() {
     return {
       criteria: 'title',
-      storageName: 'games_' + this.id,
+      storageName: 'games_' + this.id + '_visible',
       direction: true,
       data: [],
       tableVisible: true,
@@ -150,8 +184,15 @@ export default {
       this.$storage.set(this.storageName, { key: this.tableVisible })
     },
 
+    setDefaultTableState() {
+      this.tableVisible = true
+    },
+
     setTableState() {
-      this.tableVisible = this.$storage.get(this.storageName).key
+      let storedState = this.$storage.get(this.storageName, this.setDefaultTableState())
+      if (storedState != null) {
+        this.tableVisible = storedState.key
+      }
     },
 
     removeNoTransition() {
@@ -232,7 +273,11 @@ export default {
     },
 
     titleWidth() {
-      return ''
+      if (this.id != 'plan_to_play') {
+        return 'grid__col--lg-19'
+      } else {
+        return 'grid__col--lg-32'
+      }
     },
   },
   mounted() {

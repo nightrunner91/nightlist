@@ -167,6 +167,21 @@ export default new Vuex.Store({
           refreshed: false
         },
         {
+          id: 7754578953,
+          title: "Subverse",
+          status: "Plan to play",
+          statusId: "plan_to_play",
+          platform: "Steam",
+          platformId: 'steam',
+          hours: 0,
+          hoursApproximate: false,
+          rating: 0,
+          favourite: false,
+          priority: 0,
+          link: "",
+          refreshed: false
+        },
+        {
           id: 2564576537,
           title: "Metro Exodus",
           status: "Currently playing",
@@ -784,7 +799,7 @@ export default new Vuex.Store({
 
       setTimeout(() => {
         collection.filter(i => i.id == payload.id)[0].refreshed = false
-      }, 1000)
+      }, 1500)
     },
 
     deleteSlot(state, { type, id }) {
