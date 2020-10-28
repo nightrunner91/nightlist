@@ -21,6 +21,7 @@ import appGradients from "./views/components/global/_gradients"
 import modalGames from "./views/components/modals/_modal-games"
 
 import tableGames from "./views/components/tables/_table-games"
+import tableGamesSearch from "./views/components/tables/_table-games-search"
 
 import appDropdown from "./views/components/ui/_dropdown"
 import appCheckbox from "./views/components/ui/_checkbox"
@@ -33,6 +34,7 @@ Vue.component('app-gradients', appGradients)
 Vue.component('modal-games', modalGames)
 
 Vue.component('table-games', tableGames)
+Vue.component('table-games-search', tableGamesSearch)
 
 Vue.component('app-dropdown', appDropdown)
 Vue.component('app-checkbox', appCheckbox)

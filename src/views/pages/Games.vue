@@ -12,7 +12,7 @@
 
       div(class='title title--main')
         h1(class='title__name') My Games
-        span(class='title__badge badge badge--medium') {{totalGames()}}
+        span(class='title__badge badge badge--medium') {{totalGames}}
         div(
           class='button button--games title__button'
           @click='addSlot()'
@@ -20,15 +20,13 @@
           svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
 
-      div(class='search' :class='{"search--active" : searchQuery.length || searchActive}' )
-        div(class='input')
-          svg(class='input__icon'): use(xlink:href='#search')
-          input(class='input__field' type='text' placeholder='Search' v-model='searchQuery' @focus='searchActive = true' @blur='searchActive = false')
+      table-games-search
 
-      table-games(:id='"currently_playing"')
-      table-games(:id='"completed"')
-      table-games(:id='"plan_to_play"')
-      table-games(:id='"dropped"')
+      div(class='dataset' v-if='!searchState')
+        table-games(:id='"currently_playing"')
+        table-games(:id='"completed"')
+        table-games(:id='"plan_to_play"')
+        table-games(:id='"dropped"')
 
 </template>
 
@@ -39,8 +37,7 @@ export default {
   name: 'Games',
   data() {
     return {
-      searchQuery: '',
-      searchActive: false
+      
     };
   },
   computed: {
@@ -48,30 +45,26 @@ export default {
       return this.$store.state.games
     },
 
-    modalState() {
-      return this.$store.state.modalState
-    }
-  },
-  methods: {
     totalGames() {
       return this.games.collection.length
     },
 
+    modalState() {
+      return this.$store.state.modalState
+    },
+
+    searchState() {
+      return this.$store.state.searchState
+    }
+  },
+  methods: {
     addSlot() {
       this.$store.commit('changePayload', this.games.default);
       eventBus.$emit('openModal', 'add');
-    },
-
-    editSlot(id, event) {
-      if (event.target.className == 'table__link') return
-      else {
-        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
-        eventBus.$emit('openModal', 'edit');
-      }
-    },
+    }
   },
   mounted() {
-    eventBus.$on('editSlot', data => this.editSlot(data.id, data.event));
+    
   }
 }
 </script>

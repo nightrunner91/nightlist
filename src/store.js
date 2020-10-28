@@ -12,6 +12,8 @@ export default new Vuex.Store({
 
     payload: {},
 
+    searchState: false,
+
     games: {
       statuses: [
         {
@@ -378,7 +380,6 @@ export default new Vuex.Store({
         },
       ]
     },
-
     tvshows: [
       {
         id: 335,
@@ -783,6 +784,10 @@ export default new Vuex.Store({
 
     changePayload(state, data) {
       state.payload = data
+    },
+
+    changeSearchState(state, data) {
+      state.searchState = data
     },
 
     applySlot(state, {type, payload}) {
