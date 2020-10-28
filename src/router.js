@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from './store.js'
 
 import Home from './views/pages/Home.vue'
 import Dashboard from './views/pages/Dashboard.vue'
@@ -62,6 +63,11 @@ const router = new VueRouter({
   linkActiveClass: '',
   linkExactActiveClass: 'sidebar__link--active',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  store.commit('changeSearchState', false)
+  next()
 })
 
 export default router
