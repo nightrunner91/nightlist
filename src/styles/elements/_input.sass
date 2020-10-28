@@ -28,6 +28,55 @@
     &--invalid
       box-shadow: inset 0px 0px 0px 1px $clr-error
 
+    &[type=number] 
+      -moz-appearance: textfield
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button
+      -webkit-appearance: none
+      margin: 0
+
+    &::placeholder 
+      opacity: $active-opacity !important
+      color: rgba($clr-white, $half-opacity) !important
+      transition: all 0.15s ease !important
+
+    &::-webkit-input-placeholder 
+      opacity: $active-opacity !important
+      color: rgba($clr-white, $half-opacity) !important
+      transition: all 0.15s ease !important
+
+    &::-moz-placeholder 
+      opacity: $active-opacity !important
+      color: rgba($clr-white, $half-opacity) !important
+      transition: all 0.15s ease !important
+
+    &:-ms-input-placeholder 
+      opacity: $active-opacity !important
+      color: rgba($clr-white, $half-opacity) !important
+      transition: all 0.15s ease !important
+
+    &:-moz-placeholder 
+      opacity: $active-opacity !important
+      color: rgba($clr-white, $half-opacity) !important
+      transition: all 0.15s ease !important
+    
+    &:focus 
+      &::placeholder 
+        opacity: $transparent-opacity !important
+
+      &::-webkit-input-placeholder 
+        opacity: $transparent-opacity !important
+      
+      &::-moz-placeholder 
+        opacity: $transparent-opacity !important
+      
+      &:-ms-input-placeholder 
+        opacity: $transparent-opacity !important
+      
+      &:-moz-placeholder 
+        opacity: $transparent-opacity !important
+
   &__label
     @extend .small
 

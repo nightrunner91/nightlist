@@ -5,7 +5,9 @@
     //- ====== -//
     //- SEARCH -//
     //- ====== -//
-    div(class='search' :class='{"search--active" : searchQuery.length || searchActive}' )
+    div(
+      class='search' 
+      :class='{"search--active" : searchQuery.length || searchActive}' )
       div(class='input')
         svg(class='input__icon'): use(xlink:href='#search')
         input(
@@ -20,9 +22,9 @@
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(class='title title--secondary' v-if='searchQuery.length')
+    div(class='title title--secondary title--inactive' v-if='searchQuery.length')
       h2(class='title__name') Search results
-      span(class='title__badge badge badge--medium') {{searchLength}}
+      span(class='title__badge badge badge--medium') {{resultsLength}}
 
     //- ===== -//
     //- TABLE -//
@@ -32,7 +34,7 @@
       //- ====== -//
       //- HEADER -//
       //- ====== -//
-      div(class='table__header')
+      div(class='table__header' v-if='searchQuery.length && resultsLength > 0')
 
         //- ORDER
         div(class='table__cell grid__col grid__col--lg-1')
@@ -267,7 +269,7 @@ export default {
       else return 'table__chevron--descending'
     },
 
-    searchLength() {
+    resultsLength() {
       return this.searchedData.length
     }
   },
