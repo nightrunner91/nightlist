@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  div(class='data')
+  div(class='data' v-if='data.length > 0')
 
     //- ===== -//
     //- TITLE -//
@@ -12,7 +12,7 @@
         class='title__chevron'
         :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron-down')
       h2(class='title__name') {{tableName(id)}}
-      svg(class='title__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#games_' + id")
+      svg(class='title__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + id")
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
 
     //- ===== -//
@@ -169,7 +169,7 @@ export default {
   },
   methods: {
     tableName(id) { 
-      return this.games.statuses.filter(i => i.id == id)[0].name 
+      return this.games.statuses.filter(i => i.id == id)[0].name
     },
 
     tableLength(id) {
@@ -267,8 +267,8 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
-        eventBus.$emit('openModal', 'edit');
+        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0])
+        eventBus.$emit('openModal', 'edit')
       }
     },
   },

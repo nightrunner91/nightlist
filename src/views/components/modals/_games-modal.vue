@@ -35,6 +35,7 @@
             app-dropdown(
               :label='"Status"'
               :currentValue='current.status'
+              :currentId='getStatusId(current.status)'
               :defaultValue='games.statuses.filter(i => i.default)[0].name'
               :itemsCount='games.statuses.length')
               input(
@@ -45,7 +46,9 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='status in games.statuses'
-                @click='setStatus(status.name, status.id)') {{status.name}}
+                @click='setStatus(status.name, status.id)') 
+                svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + status.id")
+                span {{status.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
               //- RATING -//
@@ -63,15 +66,15 @@
               :defaultValue='games.platforms.filter(i => i.default)[0].name'
               :itemsCount='games.platforms.length')
               input(
-                slot='dropdown-input' 
-                v-model='current.platform' 
+                slot='dropdown-input'
+                v-model='current.platform'
                 type='text')
               li(
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='platform in games.platforms'
                 @click='setPlatform(platform.name, platform.id)')
-                svg(class='dropdown__icon' v-if='platform.id != "pirate"'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
+                svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
                 span {{platform.name}}
 
             div(class='grid__row' v-if='fieldsCondition()')
@@ -181,7 +184,15 @@ export default {
       if (this.current.platform) {
         return this.games.platforms.filter(i => i.name == this.current.platform)[0].id
       } else { 
-        return 'pirate' 
+        return this.games.platforms.filter(i => i.default)[0].id
+      }
+    },
+
+    getStatusId(name) {
+      if (this.current.status) {
+        return this.games.statuses.filter(i => i.name == this.current.status)[0].id
+      } else { 
+        return this.games.statuses.filter(i => i.default)[0].id
       }
     },
 
@@ -308,7 +319,10 @@ export default {
     })
 
     eventBus.$on('modalOpened', () => this.assignPayload())
-    eventBus.$on('modalClosed', () => this.assignPayload())
+    eventBus.$on('modalClosed', () => {
+      this.assignPayload()
+      this.removeValidation()
+    })
 
     eventBus.$on('rated', data => this.setRating(data))
     eventBus.$on('favourite', data => this.setFavourite(data))

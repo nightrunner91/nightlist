@@ -17,9 +17,21 @@ export default new Vuex.Store({
     games: {
       statuses: [
         {
-          name: "Currently playing",
+          name: "Currently Playing",
           default: true,
           id: 'currently_playing',
+          excludeFields: false
+        },
+        {
+          name: "Continuously Playing",
+          default: false,
+          id: 'continuously_playing',
+          excludeFields: false
+        },
+        {
+          name: "On Hold",
+          default: false,
+          id: 'on_hold',
           excludeFields: false
         },
         {
@@ -29,17 +41,17 @@ export default new Vuex.Store({
           excludeFields: false
         },
         {
-          name: "Dropped",
-          default: false,
-          id: 'dropped',
-          excludeFields: false
-        },
-        {
-          name: "Plan to play",
+          name: "Plan to Play",
           default: false,
           id: 'plan_to_play',
           excludeFields: true
         },
+        {
+          name: "Dropped",
+          default: false,
+          id: 'dropped',
+          excludeFields: false
+        }
       ],
       platforms: [
         {
@@ -96,7 +108,7 @@ export default new Vuex.Store({
         {
           id: 4365367457,
           title: "Dishonored: Death of the Outsider",
-          status: "Currently playing",
+          status: "Currently Playing",
           statusId: "currently_playing",
           platform: "Steam",
           platformId: 'steam',
@@ -111,7 +123,7 @@ export default new Vuex.Store({
         {
           id: 3495367246,
           title: "Battlefield 1",
-          status: "Currently playing",
+          status: "Currently Playing",
           statusId: "currently_playing",
           platform: "Origin",
           platformId: 'origin',
@@ -156,7 +168,7 @@ export default new Vuex.Store({
         {
           id: 2575488549,
           title: "Cyberpunk 2077",
-          status: "Plan to play",
+          status: "Plan to Play",
           statusId: "plan_to_play",
           platform: "Steam",
           platformId: 'steam',
@@ -171,10 +183,10 @@ export default new Vuex.Store({
         {
           id: 7754578953,
           title: "Subverse",
-          status: "Plan to play",
+          status: "Plan to Play",
           statusId: "plan_to_play",
-          platform: "Steam",
-          platformId: 'steam',
+          platform: "Don't own game",
+          platformId: 'pirate',
           hours: 0,
           hoursApproximate: false,
           rating: 0,
@@ -186,8 +198,8 @@ export default new Vuex.Store({
         {
           id: 2564576537,
           title: "Metro Exodus",
-          status: "Currently playing",
-          statusId: "currently_playing",
+          status: "On Hold",
+          statusId: "on_hold",
           platform: "Don't own game",
           platformId: 'pirate',
           hours: 4,
@@ -216,7 +228,7 @@ export default new Vuex.Store({
         {
           id: 3574468557,
           title: "Subnautica",
-          status: "Currently playing",
+          status: "Currently Playing",
           statusId: "currently_playing",
           platform: "Steam",
           platformId: 'steam',
@@ -231,8 +243,8 @@ export default new Vuex.Store({
         {
           id: 5356679205,
           title: "Warframe",
-          status: "Currently playing",
-          statusId: "currently_playing",
+          status: "Continuously Playing",
+          statusId: "continuously_playing",
           platform: "Steam",
           platformId: 'steam',
           hours: 2934,

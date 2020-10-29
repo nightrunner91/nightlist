@@ -24,6 +24,8 @@
 
       div(class='dataset' v-if='!searchState')
         games-data(:id='"currently_playing"')
+        games-data(:id='"continuously_playing"')
+        games-data(:id='"on_hold"')
         games-data(:id='"completed"')
         games-data(:id='"plan_to_play"')
         games-data(:id='"dropped"')
