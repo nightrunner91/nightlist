@@ -12,6 +12,7 @@
         class='title__chevron'
         :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron-down')
       h2(class='title__name') {{tableName(id)}}
+      svg(class='title__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#games_' + id")
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
 
     //- ===== -//
