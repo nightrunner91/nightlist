@@ -164,7 +164,7 @@ export default {
     }
   },
   methods: {
-    closeModal()    { 
+    closeModal() { 
       eventBus.$emit('closeModal') 
     },
 
@@ -232,19 +232,21 @@ export default {
       })
     },
 
-    applySlot(id)  {
+    applySlot(id) {
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
           this.$store.commit('applySlot', { type: "games" , payload: this.current })
+          this.$storage.set('games_' + this.current.id, { key: this.current })
           this.closeModal()
           this.changeConfirm(false)
         }
       })
     },
 
-    deleteSlot(id) { 
-      this.$store.commit('deleteSlot', { type: "games", id: id }) 
+    deleteSlot(id) {
+      this.$store.commit('deleteSlot', { type: "games", id: id })
+      this.$storage.remove('games_' + id)
     },
 
     fieldsCondition() {

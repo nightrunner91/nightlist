@@ -278,8 +278,8 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0]);
-        eventBus.$emit('openModal', 'edit');
+        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0])
+        eventBus.$emit('openModal', 'edit')
       }
     }
   },

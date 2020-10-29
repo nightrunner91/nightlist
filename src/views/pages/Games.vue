@@ -38,14 +38,14 @@
 </template>
 
 <script>
-import { eventBus } from "../../main";
+import { eventBus } from "../../main"
 
 export default {
   name: 'Games',
   data() {
     return {
       
-    };
+    }
   },
   computed: {
     games() {
@@ -66,8 +66,8 @@ export default {
   },
   methods: {
     addSlot() {
-      this.$store.commit('changePayload', this.games.default);
-      eventBus.$emit('openModal', 'add');
+      this.$store.commit('changePayload', this.games.default)
+      eventBus.$emit('openModal', 'add')
     }
   },
   mounted() {

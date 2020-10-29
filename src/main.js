@@ -1,6 +1,6 @@
-// ============== //
-// Core component //
-// ============== //
+// =============== //
+// Core components //
+// =============== //
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -18,6 +18,12 @@ Vue.config.devtools = true
 // Create global event //
 // =================== //
 export const eventBus = new Vue()
+
+
+// =================== //
+// Export project name //
+// =================== //
+export const projectName = 'nightlist_'
 
 
 // ===================================== //

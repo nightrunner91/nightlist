@@ -12,6 +12,7 @@
 
 <script>
 import { eventBus } from "./main"
+import { projectName } from "./main"
 
 export default {
   name: 'App',
@@ -49,9 +50,42 @@ export default {
 
     setDefaultPayload() {
       this.$store.commit('changePayload', this.$store.state[this.currentPage].default)
+    },
+
+    isJson(item) {
+      item = typeof item !== "string"
+        ? JSON.stringify(item)
+        : item
+
+      try {
+        item = JSON.parse(item)
+      } catch (e) {
+        return false
+      }
+
+      if (typeof item === "object" && item !== null) {
+        return true
+      }
+
+      return false
+    },
+
+    importLocalStorage() {
+      Object.values(localStorage).forEach(item => {
+        if (this.isJson(item)) {
+          let parsedItem = JSON.parse(item)
+          let slot = parsedItem.value.key
+
+          if (slot.id && slot.category) {
+            this.$store.commit('applySlot', { type: slot.category , payload: slot })
+          }
+        }
+      })
     }
   },
   mounted() {
+    this.importLocalStorage()
+
     eventBus.$on('openModal',  purpose => this.openModal(purpose))
     eventBus.$on('closeModal', () => { 
       this.closeModal()
@@ -101,7 +135,7 @@ export default {
   @import "styles/elements/modal"
 
   // Plugins
-
+  
 
   // Animations
   @import "styles/animations/animation"
