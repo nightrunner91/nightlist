@@ -27,9 +27,11 @@ export const eventBus = new Vue()
 // main:
 import appSidebar from "./views/components/global/_sidebar"
 import appGradients from "./views/components/global/_gradients"
+import appPlaceholder from "./views/components/global/_placeholder"
 
 Vue.component('app-sidebar', appSidebar)
 Vue.component('app-gradients', appGradients)
+Vue.component('app-placeholder', appPlaceholder)
 
 // modals:
 import gamesModal from "./views/components/modals/_games-modal"

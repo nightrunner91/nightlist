@@ -20,7 +20,7 @@
           svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
 
-      games-search
+      games-search(v-if='totalGames > 0')
 
       div(class='dataset' v-if='!searchState')
         games-data(:id='"currently_playing"')
@@ -29,6 +29,11 @@
         games-data(:id='"completed"')
         games-data(:id='"plan_to_play"')
         games-data(:id='"dropped"')
+
+      app-placeholder(
+        v-if='totalGames == 0'
+        :text='"No data"'
+        :icon='"no-data"')
 
 </template>
 

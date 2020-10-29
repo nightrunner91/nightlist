@@ -29,7 +29,7 @@
     //- ===== -//
     //- TABLE -//
     //- ===== -//
-    div(class='table' v-if='searchQuery.length')
+    div(class='table' v-if='searchQuery.length > 0')
 
       //- ====== -//
       //- HEADER -//
@@ -146,6 +146,11 @@
           //- PLATFORM
           div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
             svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
+
+    app-placeholder(
+      v-if='searchQuery.length && resultsLength == 0'
+      :text='"Nothing found"'
+      :icon='"no-search"')
 
 </template>
 

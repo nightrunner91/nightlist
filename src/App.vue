@@ -75,6 +75,14 @@ export default {
   @import "styles/core/mixins"
   @import "styles/core/scrollbar"
 
+  // Blocks
+  @import "styles/blocks/page"
+  @import "styles/blocks/gradients"
+  @import "styles/blocks/sidebar"
+  @import "styles/blocks/content"
+  @import "styles/blocks/section"
+  @import "styles/blocks/placeholder"
+
   // Elements
   @import "styles/elements/badge"
   @import "styles/elements/data"
@@ -91,13 +99,6 @@ export default {
   @import "styles/elements/progress"
   @import "styles/elements/tooltip"
   @import "styles/elements/modal"
-
-  // Blocks
-  @import "styles/blocks/page"
-  @import "styles/blocks/gradients"
-  @import "styles/blocks/sidebar"
-  @import "styles/blocks/content"
-  @import "styles/blocks/section"
 
   // Plugins
 
