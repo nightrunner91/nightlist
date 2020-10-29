@@ -41,12 +41,23 @@
         
         //- TITLE
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-19'
+          class='table__cell table__cell--functional grid__col grid__col--lg-16'
           :class='{"table__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
           svg(
             v-if='criteria == "title"'
+            class='table__chevron' 
+            :class='chevronPosition'): use(xlink:href='#chevron-down')
+
+        //- STATUS
+        div(
+          class='table__cell table__cell--functional grid__col grid__col--lg-3'
+          :class='{"table__cell--active" : criteria == "statusId"}'
+          @click='sortData("statusId", "switch")')
+          span Status
+          svg(
+            v-if='criteria == "statusId"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
         
@@ -108,7 +119,7 @@
           div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
           
           //- TITLE
-          div(class='table__cell grid__col grid__col--lg-19')
+          div(class='table__cell grid__col grid__col--lg-16')
             span {{item.title}}
             a(
               :ref='"redirect"'
@@ -118,6 +129,13 @@
               class='table__link'
               v-if='item.link.length')
               svg(class='table__redirect'): use(xlink:href='#link')
+
+          //- STATUS
+          div(
+            class='table__cell grid__col grid__col--lg-3')
+            svg(
+              class='table__status'
+              v-tooltip='{ content: item.status, offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.statusId")
           
           //- FAVOURITE
           div(
@@ -208,7 +226,8 @@ export default {
 
       if (
         this.criteria == 'title' || 
-        this.criteria == 'platform') {
+        this.criteria == 'platform' ||
+        this.criteria == 'statusId') {
         // ascending
         if (this.direction) {
           conditionOne = -1
