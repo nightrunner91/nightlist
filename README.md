@@ -18,8 +18,6 @@
 - [kinopoisk.ru](https://kinopoisk.ru/) (фильмы и сериалы)
 - [shikimori.org](https://shikimori.org/) (аниме)
 - [readly.ru](http://readly.ru/) (книги)
-- [pcpartpicker.com](https://pcpartpicker.com/) (комплектующие ПК)
-- [pchound.com](https://pchound.com/) (комплектующие ПК)
 
 # Планируемое к реализации
 
