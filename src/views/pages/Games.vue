@@ -52,8 +52,12 @@ export default {
       return this.$store.state.games
     },
 
+    gamesCollection() {
+      return this.$store.state.collection.filter(i => i.category == 'games')
+    },
+
     totalGames() {
-      return this.games.collection.length
+      return this.gamesCollection.length
     },
 
     modalState() {

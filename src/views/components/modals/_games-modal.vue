@@ -196,30 +196,36 @@ export default {
       }
     },
 
+    setDefaults() {
+      let gamesData = this.$store.state["games"]
+
+      if (this.purpose == 'add') {
+        this.current.id = Math.floor(Math.random() * 10000000000)
+      }
+
+      if (this.current.statusId == 'plan_to_play') {
+        this.current.hours = gamesData.default.hours
+        this.current.hoursApproximate = gamesData.default.hoursApproximate
+        this.current.rating = gamesData.default.rating
+        this.current.favourite = gamesData.default.favourite
+        this.current.priority = gamesData.default.priority
+      }
+
+      if (this.current.platform.length == 0) {
+        let defaultPlatform = gamesData.platforms.filter(i => i.default)[0]
+        this.current.platform = defaultPlatform.name
+        this.current.platformId = defaultPlatform.id
+      }
+
+      if (this.current.status.length == 0) {
+        let defaultStatus = gamesData.statuses.filter(i => i.default)[0]
+        this.current.status = defaultStatus.name
+        this.current.statusId = defaultStatus.id
+      }
+    },
+
     validateModal() {
       return new Promise(resolve => {
-        if (this.purpose == 'add') {
-          this.current.id = Math.floor(Math.random() * 10000000000)
-        }
-
-        if (this.current.status.length == 0) {
-          this.current.status = this.$store.state["games"].statuses.filter(i => i.default)[0].name
-        }
-
-        if (this.current.statusId == 'plan_to_play') {
-          this.current.hours = this.$store.state["games"].default.hours
-          this.current.hoursApproximate = this.$store.state["games"].default.hoursApproximate
-          this.current.rating = this.$store.state["games"].default.rating
-          this.current.favourite = this.$store.state["games"].default.favourite
-          this.current.priority = this.$store.state["games"].default.priority
-        }
-
-        if (this.current.platform.length == 0) {
-          let defaultPlatform = this.$store.state["games"].platforms.filter(i => i.default)[0]
-          this.current.platform = defaultPlatform.name
-          this.current.platformId = defaultPlatform.id
-        }
-
         if (this.current.title.length == 0) {
           this.valid = false
         }
@@ -233,11 +239,12 @@ export default {
     },
 
     applySlot(id) {
+      this.setDefaults()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
-          this.$store.commit('applySlot', { type: "games" , payload: this.current })
-          this.$storage.set('games_' + this.current.id, { key: this.current })
+          this.$store.commit('applySlot', this.current)
+          this.$storage.set('slot_' + this.current.id, { key: this.current })
           this.closeModal()
           this.changeConfirm(false)
         }
@@ -245,8 +252,8 @@ export default {
     },
 
     deleteSlot(id) {
-      this.$store.commit('deleteSlot', { type: "games", id: id })
-      this.$storage.remove('games_' + id)
+      this.$store.commit('deleteSlot', id)
+      this.$storage.remove('slot_' + id)
     },
 
     fieldsCondition() {

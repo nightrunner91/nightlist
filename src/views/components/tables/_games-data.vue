@@ -160,7 +160,7 @@ export default {
   data() {
     return {
       criteria: 'title',
-      storageName: 'games_' + this.id + '_visible',
+      tableVisibilityName: 'games_' + this.id + '_visible',
       direction: true,
       data: [],
       tableVisible: true,
@@ -173,16 +173,16 @@ export default {
     },
 
     tableLength(id) {
-      return this.games.collection.filter(i => i.status == this.tableName(id)).length 
+      return this.data.length
     },
 
     stashData() {
-      this.data = this.games.collection.filter(i => i.status == this.tableName(this.id))
+      this.data = this.gamesCollection.filter(i => i.status == this.tableName(this.id))
     },
 
     switchTable() {
       this.tableVisible = !this.tableVisible
-      this.$storage.set(this.storageName, { key: this.tableVisible })
+      this.$storage.set(this.tableVisibilityName, { key: this.tableVisible })
     },
 
     setDefaultTableState() {
@@ -190,7 +190,7 @@ export default {
     },
 
     setTableState() {
-      let storedState = this.$storage.get(this.storageName, this.setDefaultTableState())
+      let storedState = this.$storage.get(this.tableVisibilityName, this.setDefaultTableState())
       if (storedState != null) {
         this.tableVisible = storedState.key
       }
@@ -267,7 +267,7 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0])
+        this.$store.commit('changePayload', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
     },
@@ -275,6 +275,10 @@ export default {
   computed: {
     games() {
       return this.$store.state.games
+    },
+
+    gamesCollection() {
+      return this.$store.state.collection.filter(i => i.category == 'games')
     },
 
     chevronPosition() {

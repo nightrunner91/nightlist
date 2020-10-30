@@ -77,7 +77,7 @@ export default {
           let slot = parsedItem.value.key
 
           if (slot.id && slot.category) {
-            this.$store.commit('applySlot', { type: slot.category , payload: slot })
+            this.$store.commit('applySlot', slot)
           }
         }
       })

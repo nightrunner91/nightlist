@@ -192,7 +192,7 @@ export default {
   },
   methods: {
     stashData() {
-      this.stashedData = this.games.collection
+      this.stashedData = this.gamesCollection
     },
 
     searchData() {
@@ -278,7 +278,7 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('changePayload', this.games.collection.filter(i => i.id == id)[0])
+        this.$store.commit('changePayload', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
     }
@@ -286,6 +286,10 @@ export default {
   computed: {
     games() {
       return this.$store.state.games
+    },
+
+    gamesCollection() {
+      return this.$store.state.collection.filter(i => i.category == 'games')
     },
 
     chevronPosition() {
