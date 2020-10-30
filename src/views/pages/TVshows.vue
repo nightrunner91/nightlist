@@ -6,7 +6,7 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') My {{$options.name}}
+        h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalTvshows}}
         div(
           class='button button--tvshows title__button'
@@ -24,7 +24,8 @@
 
 <script>
 export default {
-  name: 'TV Shows',
+  name: 'TVShows',
+  pageTitle: 'My TV Shows',
   computed: {
     tvshows() {
       return this.$store.state.tvshows

@@ -7,7 +7,7 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') {{$options.name}}
+        h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalLength}}
       
 </template>
@@ -15,6 +15,7 @@
 <script>
 export default {
   name: 'Dashboard',
+  pageTitle: 'Dashboard',
   computed: {
     games()    { return this.$store.state.games },
     tvshows()  { return this.$store.state.tvshows },

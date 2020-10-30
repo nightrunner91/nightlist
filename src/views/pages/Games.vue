@@ -11,7 +11,7 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') My {{$options.name}}
+        h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
           class='button button--games title__button'
@@ -42,12 +42,17 @@ import { eventBus } from "../../main"
 
 export default {
   name: 'Games',
+  pageTitle: 'My Games',
   data() {
     return {
       
     }
   },
   computed: {
+    pageTitle() {
+      return this.$root
+    },
+
     games() {
       return this.$store.state.games
     },

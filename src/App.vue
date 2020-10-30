@@ -74,11 +74,11 @@ export default {
       Object.values(localStorage).forEach(item => {
         if (this.isJson(item)) {
           let parsedItem = JSON.parse(item)
-          let slot = parsedItem.value.key
 
-          if (slot.id && slot.category) {
-            this.$store.commit('applySlot', slot)
+          if (parsedItem.id != undefined && parsedItem.category != undefined) {
+            this.$store.commit('applySlot', parsedItem.value.key)
           }
+          
         }
       })
     }
