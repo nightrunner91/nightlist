@@ -49,7 +49,7 @@ export default {
     },
 
     setDefaultPayload() {
-      this.$store.commit('changePayload', this.$store.state[this.currentPage].default)
+      this.$store.commit('changePayload', this.$store.state[this.currentPage.toLowerCase()].default)
     },
 
     isJson(item) {
