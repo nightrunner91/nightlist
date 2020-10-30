@@ -95,6 +95,7 @@ export default new Vuex.Store({
         category: 'games',
         title: '',
         status: '',
+        statusId: '',
         platform: '',
         platformId: '',
         hours: 0,
