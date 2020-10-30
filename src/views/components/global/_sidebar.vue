@@ -29,7 +29,10 @@
           svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
         span(class='sidebar__name') {{route.name}}
         span(
-          v-if='route.id != "dashboard"'
+          v-if='route.id == "dashboard"'
+          class='sidebar__badge badge badge--small') {{totalLength()}}
+        span(
+          v-else
           class='sidebar__badge badge badge--small') {{categoryLength(route.id)}}
 
 </template>
@@ -59,6 +62,10 @@ export default {
   methods: {
     categoryLength(id) {
       return this.$store.state.collection.filter(i => i.category == id).length
+    },
+
+    totalLength() {
+      return this.$store.state.collection.length
     }
   },
   mounted() {
