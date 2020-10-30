@@ -9,7 +9,6 @@ import TVshows from './views/pages/TVshows.vue'
 import Films from './views/pages/Films.vue'
 import Anime from './views/pages/Anime.vue'
 import Books from './views/pages/Books.vue'
-import Hardware from './views/pages/Hardware.vue'
 
 Vue.use(VueRouter)
 
@@ -18,42 +17,51 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    id: 'home',
+    mainMenu: false,
     redirect: '/dashboard'
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
+    id: 'dashboard',
+    mainMenu: true,
     component: Dashboard
   },
   {
     path: '/games',
     name: 'Games',
+    id: 'games',
+    mainMenu: true,
     component: Games
   },
   {
     path: '/tvshows',
-    name: 'TVshows',
+    name: 'TV Shows',
+    id: 'tvshows',
+    mainMenu: true,
     component: TVshows
   },
   {
     path: '/films',
     name: 'Films',
+    id: 'films',
+    mainMenu: true,
     component: Films
   },
   {
     path: '/anime',
     name: 'Anime',
+    id: 'anime',
+    mainMenu: true,
     component: Anime
   },
   {
     path: '/books',
     name: 'Books',
+    id: 'books',
+    mainMenu: true,
     component: Books
-  },
-  {
-    path: '/hardware',
-    name: 'Hardware',
-    component: Hardware
   }
 ]
 

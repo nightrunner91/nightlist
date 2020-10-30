@@ -24,7 +24,7 @@ export default {
   computed: {
     currentPage() {
       let rName = this.$route.name
-      if (rName != null) return rName.toLowerCase()
+      if (rName != null) return rName
       else return
     },
 

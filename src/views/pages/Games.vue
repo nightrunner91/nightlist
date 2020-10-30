@@ -11,7 +11,7 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') My Games
+        h1(class='title__name') My {{$options.name}}
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
           class='button button--games title__button'

@@ -7,7 +7,7 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') Dashboard
+        h1(class='title__name') {{$options.name}}
       
 </template>
 
@@ -20,9 +20,10 @@ export default {
     films()    { return this.$store.state.films },
     anime()    { return this.$store.state.anime },
     books()    { return this.$store.state.books },
-    hardware() { return this.$store.state.hardware },
 
-    modalState() {return this.$store.state.modalState}
+    modalState() {
+      return this.$store.state.modalState
+    }
   },
 }
 </script>

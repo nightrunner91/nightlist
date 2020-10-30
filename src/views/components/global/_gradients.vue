@@ -1,9 +1,12 @@
 <template lang='pug'>
+
   div(class='gradients')
     div(
-      v-for='page in pages'
+      v-for='route in routes'
+      v-if='route.mainMenu'
       class='gradients__item'
-      :class='["gradients__item--" + page, {"gradients__item--active" : current == page}]')
+      :class='["gradients__item--" + route.id, {"gradients__item--active" : gradientActive(route.name)}]')
+
 </template>
 
 <script>
@@ -14,11 +17,19 @@ export default {
   },
   data() {
     return {
-      pages: ['dashboard', 'games', 'tvshows', 'films', 'anime', 'books', 'hardware']
+      
+    }
+  },
+  computed: {
+    routes() {
+      return this.$router.options.routes
     }
   },
   methods: {
-
+    gradientActive(name) {
+      if (this.current == name) return true
+      return false
+    }
   },
   mounted() {
     

@@ -6,14 +6,19 @@
       :class='{"section__content--blured" : modalState.visibility}')
 
       div(class='title title--main')
-        h1(class='title__name') My Anime
-        span(class='title__badge badge badge--medium') 150
+        h1(class='title__name') My {{$options.name}}
+        span(class='title__badge badge badge--medium') {{totalAnime}}
         div(
-          class='button button--games title__button'
+          class='button button--anime title__button'
           @click='addSlot()'
           v-ripple)
           svg(class='button__icon'): use(xlink:href='#add')
           span(class='button__text') Add New
+
+      app-placeholder(
+        v-if='totalAnime == 0'
+        :text='"No data"'
+        :icon='"no-data"')
 
 </template>
 
@@ -21,8 +26,21 @@
 export default {
   name: 'Anime',
   computed: {
-    anime() {return this.$store.state.anime},
-    modalState() {return this.$store.state.modalState},
+    anime() {
+      return this.$store.state.anime
+    },
+
+    animeCollection() {
+      return this.$store.state.collection.filter(i => i.category == 'anime')
+    },
+
+    totalAnime() {
+      return this.animeCollection.length
+    },
+
+    modalState() {
+      return this.$store.state.modalState
+    },
   },
 }
 </script>
