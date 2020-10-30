@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'TVshows',
+  name: 'TV Shows',
   computed: {
     tvshows() {
       return this.$store.state.tvshows
