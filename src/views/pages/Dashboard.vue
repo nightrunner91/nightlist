@@ -8,6 +8,7 @@
 
       div(class='title title--main')
         h1(class='title__name') {{$options.name}}
+        span(class='title__badge badge badge--medium') {{totalLength}}
       
 </template>
 
@@ -20,6 +21,10 @@ export default {
     films()    { return this.$store.state.films },
     anime()    { return this.$store.state.anime },
     books()    { return this.$store.state.books },
+
+    totalLength() {
+      return this.$store.state.collection.length
+    },
 
     modalState() {
       return this.$store.state.modalState
