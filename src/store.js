@@ -104,7 +104,6 @@ export default new Vuex.Store({
         hoursApproximate: false,
         rating: 0,
         favourite: false,
-        priority: 0,
         link: '',
         refreshed: false
       }
