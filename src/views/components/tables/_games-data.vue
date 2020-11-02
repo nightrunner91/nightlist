@@ -168,7 +168,7 @@ export default {
     }
   },
   methods: {
-    tableName(id) { 
+    tableName(id) {
       return this.games.statuses.filter(i => i.id == id)[0].name
     },
 
@@ -257,7 +257,7 @@ export default {
 
     subscribeToChanges() {
       this.$store.subscribe((mutation, state) => {
-        if (mutation.type == 'applySlot' || mutation.type == 'deleteSlot') {
+        if (mutation.type == 'APPLY_SLOT' || mutation.type == 'DELETE_SLOT') {
           this.stashData()
           this.sortData(this.criteria)
         }
@@ -267,7 +267,7 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('changePayload', this.gamesCollection.filter(i => i.id == id)[0])
+        this.$store.commit('CHANGE_PAYLOAD', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
     },

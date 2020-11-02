@@ -13,8 +13,7 @@ export default {
   },
   data() {
     return {
-      // text: this.text,
-      // icon: this.icon
+      
     }
   },
   methods: {

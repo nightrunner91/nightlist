@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     openModal(purpose) {
-      this.$store.commit('changeModalState', {
+      this.$store.commit('CHANGE_MODAL_STATE', {
         visibility: true,
         purpose: purpose
       })
@@ -42,14 +42,14 @@ export default {
     },
 
     closeModal() {
-      this.$store.commit('changeModalState', {
+      this.$store.commit('CHANGE_MODAL_STATE', {
         visibility: false
       })
       eventBus.$emit('modalClosed')
     },
 
     setDefaultPayload() {
-      this.$store.commit('changePayload', this.$store.state[this.currentPage.toLowerCase()].default)
+      this.$store.commit('CHANGE_PAYLOAD', this.$store.state[this.currentPage.toLowerCase()].default)
     },
 
     isJson(item) {
@@ -75,8 +75,8 @@ export default {
         if (this.isJson(item)) {
           let parsedItem = JSON.parse(item)
 
-          if (parsedItem.id != undefined && parsedItem.category != undefined) {
-            this.$store.commit('applySlot', parsedItem.value.key)
+          if (parsedItem.value.key.id != undefined && parsedItem.value.key.category != undefined) {
+            this.$store.commit('APPLY_SLOT', parsedItem.value.key)
           }
           
         }

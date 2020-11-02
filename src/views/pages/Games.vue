@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     addSlot() {
-      this.$store.commit('changePayload', this.games.default)
+      this.$store.commit('CHANGE_PAYLOAD', this.games.default)
       eventBus.$emit('openModal', 'add')
     }
   },

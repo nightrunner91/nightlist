@@ -74,7 +74,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  store.commit('changeSearchState', false)
+  store.commit('CHANGE_SEARCH_STATE', false)
   next()
 })
 

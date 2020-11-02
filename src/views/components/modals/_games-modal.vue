@@ -238,12 +238,24 @@ export default {
       })
     },
 
+    slotExist(id) {
+      if (this.gamesCollection.some(e => e.id == id)) {
+        return true
+      }
+      return false
+    },
+
     applySlot(id) {
       this.setDefaults()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
-          this.$store.commit('applySlot', this.current)
+          if (this.slotExist(this.current.id)) {
+            this.$store.dispatch('editSlot', this.current)
+          } else {
+            this.$store.dispatch('addSlot', this.current)
+          }
+          this.$store.commit('APPLY_SLOT', this.current)
           this.$storage.set('slot_' + this.current.id, { key: this.current })
           this.closeModal()
           this.changeConfirm(false)
@@ -252,8 +264,9 @@ export default {
     },
 
     deleteSlot(id) {
-      this.$store.commit('deleteSlot', id)
+      this.$store.commit('DELETE_SLOT', id)
       this.$storage.remove('slot_' + id)
+      this.$store.dispatch('deleteSlot', this.current)
     },
 
     fieldsCondition() {
@@ -287,17 +300,17 @@ export default {
       this.current[prop] = newVal
     },
 
-    setStatus(name, id) { 
+    setStatus(name, id) {
       this.current.status = name
       this.current.statusId = id
     },
 
-    setPlatform(name, id) { 
+    setPlatform(name, id) {
       this.current.platform = name
       this.current.platformId = id
     },
 
-    setRating(data) { 
+    setRating(data) {
       this.current.rating = data 
     },
 
@@ -310,12 +323,16 @@ export default {
     }
   },
   computed: {
-    games() { 
+    games() {
       return this.$store.state.games 
     },
 
-    payload() { 
+    payload() {
       return this.$store.state.payload 
+    },
+
+    gamesCollection() {
+      return this.$store.state.collection.filter(i => i.category == 'games')
     },
 
     excludingCategory() {

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "axios"
 
 Vue.use(Vuex)
 
@@ -111,24 +112,24 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    changeModalState(state, { visibility, purpose }) {
+    CHANGE_MODAL_STATE(state, { visibility, purpose }) {
       state.modalState.visibility = visibility
       if (purpose != undefined) state.modalState.purpose = purpose
     },
 
-    changeConfirmState(state, data) {
+    CHANGE_CONFIRM_STATE(state, data) {
       state.confirmVisible = data
     },
 
-    changePayload(state, data) {
+    CHANGE_PAYLOAD(state, data) {
       state.payload = data
     },
 
-    changeSearchState(state, data) {
+    CHANGE_SEARCH_STATE(state, data) {
       state.searchState = data
     },
 
-    applySlot(state, payload) {
+    APPLY_SLOT(state, payload) {
       let target = state.collection.filter(i => i.id == payload.id)[0]
 
       if (target != undefined) {
@@ -144,7 +145,7 @@ export default new Vuex.Store({
       }, 1500)
     },
 
-    deleteSlot(state, id) {
+    DELETE_SLOT(state, id) {
       let target = state.collection.map(i => i.id).indexOf(id)
       state.collection.splice(target, 1)
     }
@@ -152,7 +153,41 @@ export default new Vuex.Store({
   },
   actions: {
 
-    
+    addSlot({commit, state}, payload) {
+      axios
+        .post('http://localhost:8008/mongo/add_slot', {
+          "table": "slots",
+          "item": payload
+        })
+
+        .then(response => {
+          console.log(response)
+        })
+    },
+
+    editSlot({commit, state}, payload) {
+      axios
+        .post('http://localhost:8008/mongo/edit_slot', {
+          "table": "slots",
+          "item": payload
+        })
+
+        .then(response => {
+          console.log(response)
+        })
+    },
+
+    deleteSlot({commit, state}, payload) {
+      axios
+        .post('http://localhost:8008/mongo/delete_slot', {
+          "table": "slots",
+          "item": payload
+        })
+
+        .then(response => {
+          console.log(response)
+        })
+    }
 
   }
 })
