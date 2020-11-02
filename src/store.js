@@ -177,11 +177,11 @@ export default new Vuex.Store({
         })
     },
 
-    deleteSlot({commit, state}, payload) {
+    deleteSlot({commit, state}, id) {
       axios
         .post('http://localhost:8008/mongo/delete_slot', {
           "table": "slots",
-          "item": payload
+          "item": id
         })
 
         .then(response => {

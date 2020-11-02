@@ -266,7 +266,7 @@ export default {
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
       this.$storage.remove('slot_' + id)
-      this.$store.dispatch('deleteSlot', this.current)
+      this.$store.dispatch('deleteSlot', { id: this.current.id })
     },
 
     fieldsCondition() {
