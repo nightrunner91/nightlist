@@ -121,7 +121,7 @@ export default new Vuex.Store({
       state.confirmVisible = data
     },
 
-    CHANGE_PAYLOAD(state, data) {
+    CHANGE_CONTENT(state, data) {
       state.payload = data
     },
 
@@ -129,19 +129,19 @@ export default new Vuex.Store({
       state.searchState = data
     },
 
-    APPLY_SLOT(state, payload) {
-      let target = state.collection.filter(i => i.id == payload.id)[0]
+    APPLY_SLOT(state, {content, scenario} ) {
+      let target = state.collection.filter(i => i.id == content.id)[0]
 
       if (target != undefined) {
-        Object.keys(payload).forEach(key => {
-          Vue.set(target, key, payload[key])
+        Object.keys(content).forEach(key => {
+          Vue.set(target, key, content[key])
         })
       } else {
-        state.collection.push(payload)
+        state.collection.push(content)
       }
 
       setTimeout(() => {
-        state.collection.filter(i => i.id == payload.id)[0].refreshed = false
+        state.collection.filter(i => i.id == content.id)[0].refreshed = false
       }, 1500)
     },
 

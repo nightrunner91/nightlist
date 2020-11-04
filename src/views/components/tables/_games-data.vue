@@ -180,8 +180,12 @@ export default {
       this.data = this.gamesCollection.filter(i => i.status == this.tableName(this.id))
     },
 
-    switchTable() {
-      this.tableVisible = !this.tableVisible
+    switchTable(state) {
+      if (state) {
+        this.tableVisible = state
+      } else {
+        this.tableVisible = !this.tableVisible
+      }
       this.$storage.set(this.tableVisibilityName, { key: this.tableVisible })
     },
 
@@ -260,6 +264,9 @@ export default {
         if (mutation.type == 'APPLY_SLOT' || mutation.type == 'DELETE_SLOT') {
           this.stashData()
           this.sortData(this.criteria)
+          if (mutation.payload.scenario == 'change') {
+            this.switchTable(true)
+          }
         }
       })
     },
@@ -267,7 +274,7 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('CHANGE_PAYLOAD', this.gamesCollection.filter(i => i.id == id)[0])
+        this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
     },

@@ -15,7 +15,7 @@
 <script>
 export default {
   name: 'Dashboard',
-  pageTitle: 'Dashboard',
+  pageTitle: 'My Dashboard',
   computed: {
     games()    { return this.$store.state.games },
     tvshows()  { return this.$store.state.tvshows },

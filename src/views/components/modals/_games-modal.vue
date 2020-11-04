@@ -255,7 +255,7 @@ export default {
           } else {
             this.$store.dispatch('addSlot', this.current)
           }
-          this.$store.commit('APPLY_SLOT', this.current)
+          this.$store.commit('APPLY_SLOT', { content: this.current, scenario: 'change' })
           this.$storage.set('slot_' + this.current.id, { key: this.current })
           this.closeModal()
           this.changeConfirm(false)

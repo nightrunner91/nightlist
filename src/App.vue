@@ -48,8 +48,8 @@ export default {
       eventBus.$emit('modalClosed')
     },
 
-    setDefaultPayload() {
-      this.$store.commit('CHANGE_PAYLOAD', this.$store.state[this.currentPage.toLowerCase()].default)
+    setDefaultContent() {
+      this.$store.commit('CHANGE_CONTENT', this.$store.state[this.currentPage.toLowerCase()].default)
     },
 
     isJson(item) {
@@ -75,10 +75,15 @@ export default {
         if (this.isJson(item)) {
           let parsedItem = JSON.parse(item)
 
-          if (parsedItem.value.key.id != undefined && parsedItem.value.key.category != undefined) {
-            this.$store.commit('APPLY_SLOT', parsedItem.value.key)
+          if (parsedItem.value) {
+            if (parsedItem.value.key) {
+              if (
+                parsedItem.value.key.id != undefined && 
+                parsedItem.value.key.category != undefined) {
+                this.$store.commit('APPLY_SLOT', { content: parsedItem.value.key, scenario: 'start' })
+              }
+            }
           }
-          
         }
       })
     }
@@ -89,7 +94,7 @@ export default {
     eventBus.$on('openModal',  purpose => this.openModal(purpose))
     eventBus.$on('closeModal', () => { 
       this.closeModal()
-      this.setDefaultPayload()
+      this.setDefaultContent()
     })
   }
 }
