@@ -110,7 +110,7 @@
         div(
           class='table__item' 
           ref='tableItem'
-          :key='item.title'
+          :key='item.id'
           :class='{"table__item--refreshed" : item.refreshed }'
           v-for='(item, index) in searchedData'
           @click='editSlot(item.id, $event)')
