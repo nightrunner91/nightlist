@@ -264,7 +264,9 @@ export default {
         if (mutation.type == 'APPLY_SLOT' || mutation.type == 'DELETE_SLOT') {
           this.stashData()
           this.sortData(this.criteria)
-          if (mutation.payload.scenario == 'change') {
+          if (
+            mutation.payload.scenario == 'change' && 
+            mutation.payload.content.statusId == this.id) {
             this.switchTable(true)
           }
         }
