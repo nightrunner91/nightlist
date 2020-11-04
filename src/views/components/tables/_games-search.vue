@@ -278,7 +278,7 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'table__link') return
       else {
-        this.$store.commit('CHANGE_PAYLOAD', this.gamesCollection.filter(i => i.id == id)[0])
+        this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
     }
