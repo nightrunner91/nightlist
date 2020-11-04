@@ -29,18 +29,25 @@
     border: $border-width solid $clr-grey
     margin-right: $gutter-width/3
 
+    &::before
+      @extend .pseudoelem
+      @extend .base-transition
+      @include svg-icon(strip-unit($checkbox-size), strip-unit($checkbox-size), 'checkbox')
+
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      margin: auto
+      transform: scale(0.8)
+      opacity: $transparent-opacity
+
     &--active
       @extend .bg-grey
-
+      
       &::before
-        @extend .pseudoelem
-        @include svg-icon(strip-unit($checkbox-size), strip-unit($checkbox-size), 'checkbox')
-
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
-        margin: auto
+        transform: scale(1)
+        opacity: $active-opacity
 
   &__label
     @extend .no-select
