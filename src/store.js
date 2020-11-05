@@ -132,6 +132,8 @@ export default new Vuex.Store({
     APPLY_SLOT(state, {content, scenario} ) {
       let target = state.collection.filter(i => i.id == content.id)[0]
 
+      if (scenario == 'start') { content.refreshed = false }
+
       if (target != undefined) {
         Object.keys(content).forEach(key => {
           Vue.set(target, key, content[key])
