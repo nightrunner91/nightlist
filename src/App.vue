@@ -50,46 +50,10 @@ export default {
 
     setDefaultContent() {
       this.$store.commit('CHANGE_CONTENT', this.$store.state[this.currentPage.toLowerCase()].default)
-    },
-
-    isJson(item) {
-      item = typeof item !== "string"
-        ? JSON.stringify(item)
-        : item
-
-      try {
-        item = JSON.parse(item)
-      } catch (e) {
-        return false
-      }
-
-      if (typeof item === "object" && item !== null) {
-        return true
-      }
-
-      return false
-    },
-
-    importLocalStorage() {
-      Object.values(localStorage).forEach(item => {
-        if (this.isJson(item)) {
-          let parsedItem = JSON.parse(item)
-
-          if (parsedItem.value) {
-            if (parsedItem.value.key) {
-              if (
-                parsedItem.value.key.id != undefined && 
-                parsedItem.value.key.category != undefined) {
-                this.$store.commit('APPLY_SLOT', { content: parsedItem.value.key, scenario: 'start' })
-              }
-            }
-          }
-        }
-      })
     }
   },
   mounted() {
-    this.importLocalStorage()
+    this.$store.dispatch('importLocalStorage')
 
     eventBus.$on('openModal',  purpose => this.openModal(purpose))
     eventBus.$on('closeModal', () => { 

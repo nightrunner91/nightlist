@@ -4,6 +4,24 @@ import axios from "axios"
 
 Vue.use(Vuex)
 
+function isJson(item) {
+  item = typeof item !== "string"
+    ? JSON.stringify(item)
+    : item
+
+  try {
+    item = JSON.parse(item)
+  } catch (e) {
+    return false
+  }
+
+  if (typeof item === "object" && item !== null) {
+    return true
+  }
+
+  return false
+}
+
 export default new Vuex.Store({
   state: {
     modalState: {
@@ -154,6 +172,23 @@ export default new Vuex.Store({
 
   },
   actions: {
+
+    importLocalStorage({commit, state}) {
+      Object.values(localStorage).forEach(item => {
+        if (isJson(item)) {
+          let parsed = JSON.parse(item)
+
+          if (parsed.value) {
+            if (parsed.value.key) {
+              if (parsed.value.key.id != undefined && 
+                parsed.value.key.category != undefined) {
+                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
+              }
+            }
+          }
+        }
+      })
+    },
 
     addSlot({commit, state}, payload) {
       axios
