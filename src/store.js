@@ -112,7 +112,6 @@ export default new Vuex.Store({
         },
       ],
       default: {
-        id: 0,
         category: 'games',
         title: '',
         status: '',
@@ -124,6 +123,7 @@ export default new Vuex.Store({
         rating: 0,
         favourite: false,
         link: '',
+        lastUpdated: '',
         refreshed: false
       }
     }
@@ -148,7 +148,7 @@ export default new Vuex.Store({
     },
 
     APPLY_SLOT(state, {content, scenario} ) {
-      let target = state.collection.filter(i => i.id == content.id)[0]
+      let target = state.collection.filter(i => i._id == content._id)[0]
 
       if (scenario == 'start') { content.refreshed = false }
 
@@ -161,34 +161,17 @@ export default new Vuex.Store({
       }
 
       setTimeout(() => {
-        state.collection.filter(i => i.id == content.id)[0].refreshed = false
+        state.collection.filter(i => i._id == content._id)[0].refreshed = false
       }, 1500)
     },
 
     DELETE_SLOT(state, id) {
-      let target = state.collection.map(i => i.id).indexOf(id)
+      let target = state.collection.map(i => i._id).indexOf(id)
       state.collection.splice(target, 1)
     }
 
   },
   actions: {
-
-    importLocalStorage({commit, state}) {
-      Object.values(localStorage).forEach(item => {
-        if (isJson(item)) {
-          let parsed = JSON.parse(item)
-
-          if (parsed.value) {
-            if (parsed.value.key) {
-              if (parsed.value.key.id != undefined && 
-                parsed.value.key.category != undefined) {
-                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
-              }
-            }
-          }
-        }
-      })
-    },
 
     addSlot({commit, state}, payload) {
       axios
@@ -223,6 +206,21 @@ export default new Vuex.Store({
 
         .then(response => {
           console.log(response)
+        })
+    },
+
+    getSlots({commit, state, dispatch}, payload) {
+      axios
+        .post('http://localhost:8008/mongo/get_slots', {
+          "table": "slots",
+          "query": {}
+        })
+
+        .then(response => {
+          for (let index = 0; index < response.data.items.length; index++) {
+            let item = response.data.items[index]
+            commit('APPLY_SLOT', { content: item, scenario: 'change' })
+          }
         })
     }
 

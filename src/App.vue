@@ -53,10 +53,10 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('importLocalStorage')
+    this.$store.dispatch('getSlots')
 
     eventBus.$on('openModal',  purpose => this.openModal(purpose))
-    eventBus.$on('closeModal', () => { 
+    eventBus.$on('closeModal', () => {
       this.closeModal()
       this.setDefaultContent()
     })
