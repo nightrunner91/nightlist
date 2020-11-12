@@ -1,11 +1,14 @@
 <template lang='pug'>
   div(class='indicator')
     svg(
-      v-if='state.status == undefined || state.status == "loading"'
+      v-if='serverState.status == undefined || serverState.status == "loading"'
       class='indicator__loader'): use(xlink:href='#loader')
-    div(
-      class='indicator__tooltip'
-      :class='[{"indicator__tooltip--active" : visibility}, "indicator__tooltip--" + state.status]') {{state.message}}
+    transition-group(name='tooltip')
+      div(
+        class='indicator__tooltip'
+        v-for='tooltip in tooltips'
+        :key='tooltip.id'
+        :class='[{"indicator__tooltip--active" : tooltip.order == tooltips.length}, "indicator__tooltip--" + tooltip.status]') {{tooltip.message}}
     
 </template>
 
@@ -13,27 +16,50 @@
 export default {
   name: 'Indicator',
   props: {
-    state: Object
+    
   },
   data() {
     return {
-      duration: 2000,
-      visibility: false
+      duration: 2500,
+      tooltips: []
     }
   },
-  watch: {
-    state(newVal, oldVal) {
-      if (newVal.status == 'success' || newVal.status == 'error') {
-        this.visibility = true
-        setTimeout(() => { this.visibility = false }, this.duration);
-      }
+  computed: {
+    serverState() {
+      return this.$store.state.serverState
     }
   },
   methods: {
-    
+    addTooltip(payload) {
+      let id = Math.floor(Math.random() * 10000000000)
+      payload.id = id
+      payload.order = this.tooltips.length + 1
+      this.tooltips.push(payload)
+      setTimeout(() => { this.removeTooltip(id) }, this.duration);
+    },
+
+    removeTooltip(id) {
+      let target = this.tooltips.map(i => id).indexOf(id)
+      this.tooltips.splice(target, 1)
+    },
+
+    clearTooltips() {
+      this.tooltips = []
+    },
+
+    watchForNotifications() {
+      this.$store.subscribe((mutation, state) => {
+        if (mutation.type == 'CHANGE_SERVER_STATE') {
+          if (mutation.payload.status == 'success' || mutation.payload.status == 'error') {
+            //this.clearTooltips()
+            this.addTooltip(mutation.payload)
+          }
+        }
+      })
+    }
   },
   mounted() {
-    
+    this.watchForNotifications()
   }
 }
 </script>

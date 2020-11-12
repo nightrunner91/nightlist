@@ -79,7 +79,6 @@ Vue.use(Vuebar)
 Vue.directive('ripple', Ripple)
 Vue.use(Vue2Storage, {prefix: 'nightlist_'})
 
-
 // ========== //
 // SVG Sprite //
 // ========== //

@@ -28,15 +28,20 @@
     padding: $gutter-width/6 $gutter-width/4
     line-height: 1
     white-space: nowrap
-    opacity: $transparent-opacity
-    transform: translateY(10px)
+    visibility: hidden
+
+    &.tooltip-enter
+      opacity: $transparent-opacity
+      transform: translateY(10px)
+
+    &.tooltip-leave-to
+      opacity: $transparent-opacity
+
+    &--active
+      visibility: visible
 
     &--success
       @extend .bg-success
 
     &--error
       @extend .bg-error
-
-    &--active
-      opacity: $active-opacity
-      transform: translateY(0)

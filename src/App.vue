@@ -3,7 +3,7 @@
   div(id='app' class='page')
     app-gradients(:current='currentPage')
     app-sidebar
-    app-indicator(:state='serverState')
+    app-indicator
     main(class='content' v-scrollbar)
       div(class='content__inner')
         transition(name='page' mode='out-in')
@@ -27,14 +27,6 @@ export default {
       let rName = this.$route.name
       if (rName != null) return rName
       else return
-    },
-
-    modalState() { 
-      return this.$store.state.modalState
-    },
-
-    serverState() {
-      return this.$store.state.serverState
     }
   },
   methods: {
