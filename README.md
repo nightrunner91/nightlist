@@ -76,6 +76,7 @@
   rating: Number,             // 1-5, персональный рейтинг
   favourite: Boolean,         // Является ли игра избранной?
   link: String,               // Ссылка на игру на любом желаемом ресурсе
+  lastUpdated: String         // timestamp момента последнего изменения слота (Date.now())
   refreshed: Boolean          // Параметр для внутренних нужд (для дизайна)
 }
 ```
