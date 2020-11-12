@@ -1,3 +1,5 @@
+$loading-size: 24px
+  
 .indicator
   @extend .pos-fixed
 
@@ -7,10 +9,16 @@
 
   &__loader
     @extend .pos-absolute
-    @include icon-size(24, 24)
+    @include icon-size(strip-unit($loading-size), strip-unit($loading-size))
     @extend .half-opacity
 
     bottom: 0
+    right: 0
+
+  &__tooltips
+    @extend .pos-absolute
+
+    bottom: $loading-size + $gutter-width/2
     right: 0
 
   &__tooltip
@@ -23,22 +31,17 @@
     @extend .txt-lowercase
     @extend .shadow-1
 
-    bottom: 0
     right: 0
     padding: $gutter-width/6 $gutter-width/4
     line-height: 1
     white-space: nowrap
-    visibility: hidden
 
     &.tooltip-enter
       opacity: $transparent-opacity
-      transform: translateY(10px)
+      transform: translateX(10px)
 
     &.tooltip-leave-to
       opacity: $transparent-opacity
-
-    &--active
-      visibility: visible
 
     &--success
       @extend .bg-success
