@@ -91,13 +91,13 @@ export default {
         }
 
         case 'loading': {
-          data.title = 'Loading your collection'
+          data.title = 'Loading your collection...'
           data.icon = 'loading'
           break
         }
 
         case 'error': {
-          data.title = 'Oops! Server Error'
+          data.title = 'Oops! Something went wrong'
           data.icon = 'error'
           break
         }
