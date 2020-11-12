@@ -169,7 +169,7 @@ export default {
     },
 
     assignPayload() { 
-      this.current = Object.assign({}, this.payload)
+      this.current = Object.assign({}, this.content)
     },
 
     changeConfirm(state) {
@@ -224,6 +224,10 @@ export default {
       }
     },
 
+    setDate() {
+      this.current.lastUpdated = Date.now()
+    },
+
     validateModal() {
       return new Promise(resolve => {
         if (this.current.title.length == 0) {
@@ -247,6 +251,7 @@ export default {
 
     applySlot(id) {
       this.setDefaults()
+      this.setDate()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
@@ -256,7 +261,6 @@ export default {
             this.$store.dispatch('addSlot', this.current)
           }
           this.$store.commit('APPLY_SLOT', { content: this.current, scenario: 'change' })
-          this.$storage.set('slot_' + this.current.id, { key: this.current })
           this.closeModal()
           this.changeConfirm(false)
         }
@@ -265,7 +269,6 @@ export default {
 
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
-      this.$storage.remove('slot_' + id)
       this.$store.dispatch('deleteSlot', { id: this.current.id })
     },
 
@@ -327,8 +330,8 @@ export default {
       return this.$store.state.games 
     },
 
-    payload() {
-      return this.$store.state.payload 
+    content() {
+      return this.$store.state.content 
     },
 
     gamesCollection() {

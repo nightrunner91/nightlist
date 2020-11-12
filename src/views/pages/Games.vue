@@ -14,6 +14,7 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
+          v-if='serverState.status == "success"'
           class='button button--games title__button'
           @click='addSlot()'
           v-ripple)
@@ -32,8 +33,7 @@
 
       app-placeholder(
         v-if='totalGames == 0'
-        :text='"No data"'
-        :icon='"no-data"')
+        :status='placeholderStatus')
 
 </template>
 
@@ -71,6 +71,44 @@ export default {
 
     searchState() {
       return this.$store.state.searchState
+    },
+
+    serverState() {
+      return this.$store.state.serverState
+    },
+
+    placeholderStatus() {
+      let data = {
+        title: undefined,
+        icon: undefined
+      }
+
+      switch (this.serverState.status) {
+        case undefined: {
+          data.title = 'Collection is empty'
+          data.icon = 'no-data'
+          break
+        }
+
+        case 'loading': {
+          data.title = 'Loading your collection'
+          data.icon = 'loading'
+          break
+        }
+
+        case 'error': {
+          data.title = 'Oops! Server Error'
+          data.icon = 'error'
+          break
+        }
+
+        default: {
+          data.title = 'Collection is empty'
+          data.icon = 'no-data'
+        }
+      }
+
+      return data
     }
   },
   methods: {

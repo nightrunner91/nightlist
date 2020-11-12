@@ -22,18 +22,25 @@ function isJson(item) {
   return false
 }
 
+let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
+
 export default new Vuex.Store({
   state: {
+    collection: [],
+
+    content: {},
+
     modalState: {
       visibility: false,
       purpose: undefined
     },
 
-    payload: {},
+    serverState: {
+      status: undefined,
+      message: undefined
+    },
 
     searchState: false,
-
-    collection: [],
 
     games: {
       statuses: [
@@ -135,20 +142,24 @@ export default new Vuex.Store({
       if (purpose != undefined) state.modalState.purpose = purpose
     },
 
-    CHANGE_CONFIRM_STATE(state, data) {
-      state.confirmVisible = data
-    },
-
-    CHANGE_CONTENT(state, data) {
-      state.payload = data
+    CHANGE_SERVER_STATE(state, data) {
+      state.serverState = data
     },
 
     CHANGE_SEARCH_STATE(state, data) {
       state.searchState = data
     },
 
+    CHANGE_CONFIRM_STATE(state, data) {
+      state.confirmVisible = data
+    },
+
+    CHANGE_CONTENT(state, data) {
+      state.content = data
+    },
+
     APPLY_SLOT(state, {content, scenario} ) {
-      let target = state.collection.filter(i => i._id == content._id)[0]
+      let target = state.collection.filter(i => i.id == content.id)[0]
 
       if (scenario == 'start') { content.refreshed = false }
 
@@ -166,38 +177,85 @@ export default new Vuex.Store({
     },
 
     DELETE_SLOT(state, id) {
-      let target = state.collection.map(i => i._id).indexOf(id)
+      let target = state.collection.map(i => i.id).indexOf(id)
       state.collection.splice(target, 1)
     }
 
   },
   actions: {
 
-    addSlot({commit, state}, payload) {
+    addSlot({ commit }, content) {
+      commit('CHANGE_SERVER_STATE', {
+        status: 'loading',
+        message: 'waiting for response'
+      })
+
       axios
         .post('http://localhost:8008/mongo/add_slot', {
           "table": "slots",
-          "item": payload
+          "item": content
         })
 
         .then(response => {
-          console.log(response)
+          commit('CHANGE_SERVER_STATE', {
+            status: response.data.status,
+            message: response.data.message
+          })
+
+          if (response.data.status == 'error') {
+            console.log("%c" + response.data.message, errStyle)
+          }
+        })
+
+        .catch(error => {
+          console.log("%c" + error, errStyle)
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'error',
+            message: 'server error'
+          })
         })
     },
 
-    editSlot({commit, state}, payload) {
+    editSlot({ commit }, content) {
+      commit('CHANGE_SERVER_STATE', {
+        status: 'loading',
+        message: 'waiting for response'
+      })
+
       axios
         .post('http://localhost:8008/mongo/edit_slot', {
           "table": "slots",
-          "item": payload
+          "item": content
         })
 
         .then(response => {
-          console.log(response)
+          commit('CHANGE_SERVER_STATE', {
+            status: response.data.status,
+            message: response.data.message
+          })
+
+          if (response.data.status == 'error') {
+            console.log("%c" + response.data.message, errStyle)
+          }
+        })
+
+        .catch(error => {
+          console.log("%c" + error, errStyle)
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'error',
+            message: 'server error'
+          })
         })
     },
 
     deleteSlot({commit, state}, id) {
+      commit('CHANGE_SERVER_STATE', {
+        status: 'loading',
+        message: 'waiting for response'
+      })
+
       axios
         .post('http://localhost:8008/mongo/delete_slot', {
           "table": "slots",
@@ -205,22 +263,71 @@ export default new Vuex.Store({
         })
 
         .then(response => {
-          console.log(response)
+          commit('CHANGE_SERVER_STATE', {
+            status: response.data.status,
+            message: response.data.message
+          })
+
+          if (response.data.status == 'error') {
+            console.log("%c" + response.data.message, errStyle)
+          }
+        })
+
+        .catch(error => {
+          console.log("%c" + error, errStyle)
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'error',
+            message: 'server error'
+          })
         })
     },
 
-    getSlots({commit, state, dispatch}, payload) {
+    getSlots({ commit }) {
+      commit('CHANGE_SERVER_STATE', {
+        status: 'loading',
+        message: 'loading data'
+      })
+      
       axios
         .post('http://localhost:8008/mongo/get_slots', {
           "table": "slots",
-          "query": {}
+          "query": { 
+            // offset: 10,
+            // limit: 10
+          }
         })
 
         .then(response => {
-          for (let index = 0; index < response.data.items.length; index++) {
-            let item = response.data.items[index]
-            commit('APPLY_SLOT', { content: item, scenario: 'change' })
+          commit('CHANGE_SERVER_STATE', {
+            status: response.data.status,
+            message: response.data.message
+          })
+
+          if (response.data.status == 'error') {
+            console.log("%c" + response.data.message, errStyle)
           }
+
+          let items = response.data.items
+
+          if (items.length && Array.isArray(items)) {
+            for (let index = 0; index < items.length; index++) {
+              delete items[index]._id
+              commit('APPLY_SLOT', { 
+                content: items[index], 
+                scenario: 'start' 
+              })
+            }
+          }
+        })
+
+        .catch(error => {
+          console.log("%c" + error, errStyle)
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'error',
+            message: 'server error'
+          })
         })
     }
 

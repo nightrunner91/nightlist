@@ -1,0 +1,42 @@
+.indicator
+  @extend .pos-fixed
+
+  bottom: $gutter-width
+  right: $gutter-width
+  z-index: 99
+
+  &__loader
+    @extend .pos-absolute
+    @include icon-size(24, 24)
+    @extend .half-opacity
+
+    bottom: 0
+    right: 0
+
+  &__tooltip
+    @extend .pos-absolute
+    @extend .flex-center
+    @extend .small
+    @extend .base-transition
+    @extend .base-radius
+    @extend .no-select
+    @extend .txt-lowercase
+    @extend .shadow-1
+
+    bottom: 0
+    right: 0
+    padding: $gutter-width/6 $gutter-width/4
+    line-height: 1
+    white-space: nowrap
+    opacity: $transparent-opacity
+    transform: translateY(10px)
+
+    &--success
+      @extend .bg-success
+
+    &--error
+      @extend .bg-error
+
+    &--active
+      opacity: $active-opacity
+      transform: translateY(0)

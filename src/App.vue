@@ -3,6 +3,7 @@
   div(id='app' class='page')
     app-gradients(:current='currentPage')
     app-sidebar
+    app-indicator(:state='serverState')
     main(class='content' v-scrollbar)
       div(class='content__inner')
         transition(name='page' mode='out-in')
@@ -30,6 +31,10 @@ export default {
 
     modalState() { 
       return this.$store.state.modalState
+    },
+
+    serverState() {
+      return this.$store.state.serverState
     }
   },
   methods: {
@@ -85,6 +90,7 @@ export default {
   @import "styles/blocks/content"
   @import "styles/blocks/section"
   @import "styles/blocks/placeholder"
+  @import "styles/blocks/indicator"
 
   // Elements
   @import "styles/elements/badge"
