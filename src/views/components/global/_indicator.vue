@@ -25,7 +25,7 @@ export default {
     return {
       tooltips: [],
       duration: 2000,
-      maxTooltips: 3,
+      maxTooltips: 5,
       margin: 30
     }
   },

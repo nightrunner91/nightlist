@@ -172,7 +172,7 @@ export default new Vuex.Store({
       }
 
       setTimeout(() => {
-        state.collection.filter(i => i._id == content._id)[0].refreshed = false
+        state.collection.filter(i => i.id == content.id)[0].refreshed = false
       }, 1500)
     },
 
