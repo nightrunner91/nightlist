@@ -114,6 +114,7 @@ export default new Vuex.Store({
         rating: 0,
         favourite: false,
         link: '',
+        lastUpdated: '',
         refreshed: false
       }
     }
