@@ -1,26 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from "axios"
+import axios from 'axios'
 
 Vue.use(Vuex)
 
-function isJson(item) {
-  item = typeof item !== "string"
-    ? JSON.stringify(item)
-    : item
-
-  try {
-    item = JSON.parse(item)
-  } catch (e) {
-    return false
-  }
-
-  if (typeof item === "object" && item !== null) {
-    return true
-  }
-
-  return false
-}
+axios.defaults.baseURL = 'http://192.168.88.224:8008'
 
 let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
 
@@ -130,7 +114,6 @@ export default new Vuex.Store({
         rating: 0,
         favourite: false,
         link: '',
-        lastUpdated: '',
         refreshed: false
       }
     }
@@ -191,7 +174,7 @@ export default new Vuex.Store({
       })
 
       axios
-        .post('http://localhost:8008/mongo/add_slot', {
+        .post('/mongo/add_slot', {
           "table": "slots",
           "item": content
         })
@@ -224,7 +207,7 @@ export default new Vuex.Store({
       })
 
       axios
-        .post('http://localhost:8008/mongo/edit_slot', {
+        .post('/mongo/edit_slot', {
           "table": "slots",
           "item": content
         })
@@ -257,7 +240,7 @@ export default new Vuex.Store({
       })
 
       axios
-        .post('http://localhost:8008/mongo/delete_slot', {
+        .post('/mongo/delete_slot', {
           "table": "slots",
           "item": id
         })
@@ -290,7 +273,7 @@ export default new Vuex.Store({
       })
       
       axios
-        .post('http://localhost:8008/mongo/get_slots', {
+        .post('/mongo/get_slots', {
           "table": "slots",
           "query": { 
             // offset: 10,
