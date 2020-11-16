@@ -51,6 +51,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getSlots')
+    this.$router.push('/dashboard')
 
     eventBus.$on('openModal',  purpose => this.openModal(purpose))
     eventBus.$on('closeModal', () => {
