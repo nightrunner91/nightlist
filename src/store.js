@@ -4,7 +4,10 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-axios.defaults.baseURL = 'http://192.168.88.224:8008'
+axios.defaults.baseURL = 'https://api.jsonbin.io/'
+
+let binId = '5fb2575ddedba573f22206e8'
+let secretKey = '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO'
 
 let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
 
@@ -168,93 +171,27 @@ export default new Vuex.Store({
   },
   actions: {
 
-    addSlot({ commit }, content) {
+    sendSlot({state, commit}) {
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
         message: 'waiting for response'
       })
 
       axios
-        .post('/mongo/add_slot', {
-          "table": "slots",
-          "item": content
-        })
-
-        .then(response => {
-          commit('CHANGE_SERVER_STATE', {
-            status: response.data.status,
-            message: response.data.message
-          })
-
-          if (response.data.status == 'error') {
-            console.log("%c" + response.data.message, errStyle)
+        
+        .put('/b/' + binId, state.collection, {
+          headers: {
+            "Content-Type": "application/json",
+            "secret-key": secretKey,
+            "versioning": false
           }
         })
 
-        .catch(error => {
-          console.log("%c" + error, errStyle)
-
+        .then(() => {
           commit('CHANGE_SERVER_STATE', {
-            status: 'error',
-            message: 'server error'
+            status: 'success',
+            message: 'saved'
           })
-        })
-    },
-
-    editSlot({ commit }, content) {
-      commit('CHANGE_SERVER_STATE', {
-        status: 'loading',
-        message: 'waiting for response'
-      })
-
-      axios
-        .post('/mongo/edit_slot', {
-          "table": "slots",
-          "item": content
-        })
-
-        .then(response => {
-          commit('CHANGE_SERVER_STATE', {
-            status: response.data.status,
-            message: response.data.message
-          })
-
-          if (response.data.status == 'error') {
-            console.log("%c" + response.data.message, errStyle)
-          }
-        })
-
-        .catch(error => {
-          console.log("%c" + error, errStyle)
-
-          commit('CHANGE_SERVER_STATE', {
-            status: 'error',
-            message: 'server error'
-          })
-        })
-    },
-
-    deleteSlot({commit, state}, id) {
-      commit('CHANGE_SERVER_STATE', {
-        status: 'loading',
-        message: 'waiting for response'
-      })
-
-      axios
-        .post('/mongo/delete_slot', {
-          "table": "slots",
-          "item": id
-        })
-
-        .then(response => {
-          commit('CHANGE_SERVER_STATE', {
-            status: response.data.status,
-            message: response.data.message
-          })
-
-          if (response.data.status == 'error') {
-            console.log("%c" + response.data.message, errStyle)
-          }
         })
 
         .catch(error => {
@@ -274,29 +211,22 @@ export default new Vuex.Store({
       })
       
       axios
-        .post('/mongo/get_slots', {
-          "table": "slots",
-          "query": { 
-            // offset: 10,
-            // limit: 10
+        .get('/b/' + binId + '/latest', {
+          headers: {
+            "secret-key": secretKey
           }
         })
 
         .then(response => {
           commit('CHANGE_SERVER_STATE', {
-            status: response.data.status,
-            message: response.data.message
+            status: 'success',
+            message: 'collection loaded'
           })
 
-          if (response.data.status == 'error') {
-            console.log("%c" + response.data.message, errStyle)
-          }
-
-          let items = response.data.items
+          let items = response.data
 
           if (items.length && Array.isArray(items)) {
             for (let index = 0; index < items.length; index++) {
-              delete items[index]._id
               commit('APPLY_SLOT', { 
                 content: items[index], 
                 scenario: 'start' 
@@ -306,14 +236,14 @@ export default new Vuex.Store({
         })
 
         .catch(error => {
-          console.log("%c" + error, errStyle)
+          console.log("%c" + error.message, errStyle)
 
           commit('CHANGE_SERVER_STATE', {
             status: 'error',
-            message: 'server error'
+            message: 'loading failed'
           })
         })
-    }
+    }    
 
   }
 })

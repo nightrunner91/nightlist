@@ -255,12 +255,8 @@ export default {
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
-          if (this.slotExist(this.current.id)) {
-            this.$store.dispatch('editSlot', this.current)
-          } else {
-            this.$store.dispatch('addSlot', this.current)
-          }
           this.$store.commit('APPLY_SLOT', { content: this.current, scenario: 'change' })
+          this.$store.dispatch('sendSlot')
           this.closeModal()
           this.changeConfirm(false)
         }
@@ -269,7 +265,7 @@ export default {
 
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
-      this.$store.dispatch('deleteSlot', { id: this.current.id })
+      this.$store.dispatch('sendSlot')
     },
 
     fieldsCondition() {
