@@ -1,12 +1,14 @@
 .placeholder
   @extend .flex-center
   @extend .flex-column
-  @extend .half-opacity
   @extend .no-select
+  @extend .passive-opacity
 
   height: 50vh
 
   &__title
+    @extend .txt-shadow
+    
     margin-bottom: $gutter-width
 
   &__icon
