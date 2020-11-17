@@ -49,10 +49,6 @@ export default {
     }
   },
   computed: {
-    pageTitle() {
-      return this.$root
-    },
-
     games() {
       return this.$store.state.games
     },
