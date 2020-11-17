@@ -16,3 +16,7 @@ npm run serve
 ```
 npm run build
 ```
+5) Deploy to Github Pages
+```
+sh deploy.sh
+```
