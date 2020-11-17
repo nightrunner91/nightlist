@@ -4,7 +4,7 @@
 ```
 git clone git@github.com:nightrunner91/nightlist-frontend.git
 ```
-2) install dependencies
+2) Install dependencies
 ```
 npm i
 ```
