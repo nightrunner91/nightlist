@@ -108,3 +108,17 @@
 
   &__badge
     margin-left: auto
+
+  &__settings
+    @include icon-size(24, 24)
+    @extend .pos-absolute
+    @extend .fill-white
+    @extend .cursor-pointer
+    @extend .base-transition
+
+    bottom: $gutter-width
+    left: $gutter-width
+    opacity: $passive-opacity
+
+    &:hover
+      opacity: $active-opacity

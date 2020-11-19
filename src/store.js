@@ -6,29 +6,40 @@ Vue.use(Vuex)
 
 axios.defaults.baseURL = 'https://api.jsonbin.io/'
 
-let binId = '5fb2575ddedba573f22206e8'
-let secretKey = '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO'
-
 let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
+
+function isJson(item) {
+  item = typeof item !== "string"
+    ? JSON.stringify(item)
+    : item
+
+  try {
+    item = JSON.parse(item)
+  } catch (e) {
+    return false
+  }
+
+  if (typeof item === "object" && item !== null) {
+    return true
+  }
+
+  return false
+}
 
 export default new Vuex.Store({
   state: {
+    secretKey: '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO',
     collection: [],
-
     content: {},
-
     modalState: {
       visibility: false,
       purpose: undefined
     },
-
     serverState: {
       status: undefined,
       message: undefined
     },
-
     searchState: false,
-
     games: {
       statuses: [
         {
@@ -145,6 +156,10 @@ export default new Vuex.Store({
       state.content = data
     },
 
+    SAVE_BIN_ID(state, data) {
+      state.binId = data
+    },
+
     APPLY_SLOT(state, {content, scenario} ) {
       let target = state.collection.filter(i => i.id == content.id)[0]
 
@@ -179,18 +194,18 @@ export default new Vuex.Store({
 
       axios
         
-        .put('/b/' + binId, state.collection, {
+        .put('/b/' + state.binId, state.collection, {
           headers: {
             "Content-Type": "application/json",
-            "secret-key": secretKey,
-            "versioning": false
+            "secret-key": state.secretKey,
+            "versioning": true
           }
         })
 
         .then(() => {
           commit('CHANGE_SERVER_STATE', {
             status: 'success',
-            message: 'saved'
+            message: 'collection saved'
           })
         })
 
@@ -204,16 +219,33 @@ export default new Vuex.Store({
         })
     },
 
-    getSlots({ commit }) {
+    importLocalStorage({ commit }) {
+      Object.values(localStorage).forEach(item => {
+        if (isJson(item)) {
+          let parsed = JSON.parse(item)
+
+          if (parsed.value) {
+            if (parsed.value.key) {
+              if (parsed.value.key.id != undefined && 
+                parsed.value.key.category != undefined) {
+                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
+              }
+            }
+          }
+        }
+      })
+    },
+
+    getSlots({ state, commit }) {
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
-        message: 'loading data'
+        message: 'loading collection...'
       })
       
       axios
-        .get('/b/' + binId + '/latest', {
+        .get('/b/' + state.binId + '/latest', {
           headers: {
-            "secret-key": secretKey
+            "secret-key": state.secretKey
           }
         })
 
@@ -243,7 +275,7 @@ export default new Vuex.Store({
             message: 'loading failed'
           })
         })
-    }    
+    }
 
   }
 })

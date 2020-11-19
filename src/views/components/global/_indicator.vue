@@ -2,7 +2,7 @@
   div(class='indicator')
     transition(name='loader')
       svg(
-        v-if='serverState.status == undefined || serverState.status == "loading"'
+        v-if='serverState.status == "loading"'
         class='indicator__loader'): use(xlink:href='#loader')
     div(class='indicator__tooltips')
       transition-group(name='tooltip')

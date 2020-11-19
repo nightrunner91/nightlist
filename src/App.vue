@@ -50,7 +50,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('getSlots')
+    this.$store.dispatch('importLocalStorage')
     this.$router.push('/dashboard')
 
     eventBus.$on('openModal',  purpose => this.openModal(purpose))
@@ -80,6 +80,7 @@ export default {
   @import "styles/blocks/page"
   @import "styles/blocks/gradients"
   @import "styles/blocks/sidebar"
+  @import "styles/blocks/settings"
   @import "styles/blocks/content"
   @import "styles/blocks/section"
   @import "styles/blocks/placeholder"

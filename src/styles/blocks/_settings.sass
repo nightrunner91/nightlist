@@ -1,0 +1,74 @@
+@mixin themed-colors($category-color)
+  .settings
+    &__footer
+      .button
+        &--main
+          background: $category-color
+          color: $clr-white
+          
+          &:hover
+            background: lighten($category-color, $hover-intensity)
+
+        &--secondary
+          background: $clr-white
+          box-shadow: inset 0px 0px 0px 2px rgba($category-color, $half-opacity)
+          color: rgba($category-color, $half-opacity)
+          margin-right: $gutter-width/4
+
+          &:hover
+            box-shadow: inset 0px 0px 0px 2px $category-color
+            color: $category-color
+  
+.settings
+  @extend .pos-absolute
+  @extend .bg-white
+  @extend .clr-black
+  @extend .base-radius
+  @extend .shadow-3
+
+  bottom: $gutter-width
+  left: $gutter-width
+  width: calc(100% - #{$gutter-width * 2})
+  z-index: 5
+  transform-origin: bottom left
+
+  &-reveal-enter,
+  &-reveal-leave-active
+    opacity: $transparent-opacity
+    transform: scale(0.95)
+
+  &-reveal-enter-active,
+  &-reveal-leave-active
+    @extend .base-transition
+
+  &--dashboard
+    @include themed-colors($clr-dashboard)
+
+  &--games
+    @include themed-colors($clr-games)
+
+  &--tvshows
+    @include themed-colors($clr-tvshows)
+
+  &--films
+    @include themed-colors($clr-films)
+
+  &--anime
+    @include themed-colors($clr-anime)
+
+  &--books
+    @include themed-colors($clr-books)
+
+  &__content
+    padding: $gutter-width/2 $gutter-width/1.5
+
+  &__footer
+    @extend .flex
+    @extend .justify-between
+    @extend .align-center
+    @extend .bg-grey
+
+    padding: $gutter-width/2 $gutter-width/1.5
+    border-top: 1px solid rgba($clr-black, $tiny-opacity)
+    border-bottom-left-radius: $base-radius !important
+    border-bottom-right-radius: $base-radius !important

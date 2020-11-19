@@ -14,7 +14,6 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
-          v-if='serverState.status != "error"'
           class='button button--games title__button'
           @click='addSlot()'
           v-ripple)
