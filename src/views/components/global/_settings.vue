@@ -19,7 +19,7 @@
           required)
 
       div(class='input')
-        label(class='input__label') Avatar
+        label(class='input__label') Avatar (link to image)
         input(
           type='text'
           class='input__field' 
@@ -48,9 +48,9 @@
 
       div(
         class='button button--main'
+        @click='saveSettings(), closeSettings()'
         v-ripple)
-        span(class='button__text'
-        @click='saveSettings(), saveSlot(), closeSettings()') Save
+        span(class='button__text') Save
 
 </template>
 

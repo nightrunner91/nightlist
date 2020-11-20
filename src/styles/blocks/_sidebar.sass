@@ -116,9 +116,27 @@
     @extend .cursor-pointer
     @extend .base-transition
 
-    bottom: $gutter-width
     left: $gutter-width
+    bottom: $gutter-width
     opacity: $passive-opacity
 
     &:hover
       opacity: $active-opacity
+
+  &__backup
+    @extend .pos-absolute
+
+    right: $gutter-width
+    bottom: $gutter-width
+
+    svg
+      @include icon-size(24, 24)
+      @extend .fill-white
+      @extend .cursor-pointer
+      @extend .base-transition
+
+      margin-left: $gutter-width/2
+      opacity: $passive-opacity
+
+      &:hover
+        opacity: $active-opacity

@@ -19,7 +19,7 @@ export default {
   name: 'App',
   data() {
     return {
-      
+      syncInterval: 30000
     }
   },
   computed: {
@@ -50,10 +50,19 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('importLocalStorage')
+    this.$store.dispatch('restoreCollection')
+    this.$store.dispatch('restoreBinId', this.$storage.get('binId'))
+
+    setInterval(() => {
+      //this.$store.dispatch('sendBackup')
+    }, this.syncInterval);
+
     this.$router.push('/dashboard')
 
-    eventBus.$on('openModal',  purpose => this.openModal(purpose))
+    eventBus.$on('openModal', purpose => {
+      this.openModal(purpose)
+    })
+    
     eventBus.$on('closeModal', () => {
       this.closeModal()
       this.setDefaultContent()

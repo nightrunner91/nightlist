@@ -43,6 +43,12 @@
     transition(name='settings-reveal' mode='out-in')
       app-settings(v-if='settingsOpened')
 
+    div(
+      class='sidebar__backup'
+      v-if='storedBinId.length')
+      svg(@click='getBackup()'): use(xlink:href='#backup-get')
+      svg(@click='sendBackup()'): use(xlink:href='#backup-send')
+
 </template>
 
 <script>
@@ -76,17 +82,24 @@ export default {
       else return
     },
 
+    storedBinId() {
+      return this.$store.state.binId
+    },
+
     storedUsername() {
       let storedUsername = this.$storage.get('username')
 
-      if (storedUsername != null && this.tempUsername.length == 0) return storedUsername.key
+      if (
+        storedUsername != null && 
+        storedUsername.key.length > 0 &&
+        this.tempUsername.length == 0) return storedUsername.key
       else return this.tempUsername
     },
 
     storedAvatar() {
       let storedAvatar = this.$storage.get('avatar')
 
-      if (storedAvatar != null && this.tempAvatar.length == 0) return storedAvatar.key
+      if (storedAvatar != null && storedAvatar.key.length > 0) return storedAvatar.key
       else return this.tempAvatar
     },
   },
@@ -113,6 +126,14 @@ export default {
 
     changeAvatar(data) {
       if (data.length) this.tempAvatar = data
+    },
+
+    getBackup() {
+      this.$store.dispatch('getBackup')
+    },
+
+    sendBackup() {
+      this.$store.dispatch('sendBackup')
     }
   },
   mounted() {

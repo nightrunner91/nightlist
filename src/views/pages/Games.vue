@@ -73,37 +73,10 @@ export default {
     },
 
     placeholderStatus() {
-      let data = {
-        title: undefined,
-        icon: undefined
+      return {
+        title: 'Collection is empty',
+        icon: 'no-data'
       }
-
-      switch (this.serverState.status) {
-        case undefined: {
-          data.title = 'Collection is empty'
-          data.icon = 'no-data'
-          break
-        }
-
-        case 'loading': {
-          data.title = 'Loading your collection...'
-          data.icon = 'loading'
-          break
-        }
-
-        case 'error': {
-          data.title = 'Oops! Something went wrong'
-          data.icon = 'error'
-          break
-        }
-
-        default: {
-          data.title = 'Collection is empty'
-          data.icon = 'no-data'
-        }
-      }
-
-      return data
     }
   },
   methods: {

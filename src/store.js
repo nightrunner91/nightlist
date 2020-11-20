@@ -28,6 +28,7 @@ function isJson(item) {
 
 export default new Vuex.Store({
   state: {
+    binId: '',
     secretKey: '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO',
     collection: [],
     content: {},
@@ -186,7 +187,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    sendSlot({state, commit}) {
+    sendBackup({state, commit}) {
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
         message: 'waiting for response'
@@ -198,7 +199,7 @@ export default new Vuex.Store({
           headers: {
             "Content-Type": "application/json",
             "secret-key": state.secretKey,
-            "versioning": true
+            "versioning": false
           }
         })
 
@@ -214,12 +215,12 @@ export default new Vuex.Store({
 
           commit('CHANGE_SERVER_STATE', {
             status: 'error',
-            message: 'server error'
+            message: 'synchronization failed'
           })
         })
     },
 
-    importLocalStorage({ commit }) {
+    restoreCollection({ commit }) {
       Object.values(localStorage).forEach(item => {
         if (isJson(item)) {
           let parsed = JSON.parse(item)
@@ -236,7 +237,13 @@ export default new Vuex.Store({
       })
     },
 
-    getSlots({ state, commit }) {
+    restoreBinId({ commit }, payload) {
+      if (payload != null) {
+        commit('SAVE_BIN_ID', payload.key)
+      }
+    },
+
+    getBackup({ state, commit }) {
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
         message: 'loading collection...'
@@ -256,6 +263,8 @@ export default new Vuex.Store({
           })
 
           let items = response.data
+
+          console.log(items)
 
           if (items.length && Array.isArray(items)) {
             for (let index = 0; index < items.length; index++) {
