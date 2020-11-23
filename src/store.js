@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import {projectName} from "./main"
 
 Vue.use(Vuex)
 
@@ -24,6 +25,18 @@ function isJson(item) {
   }
 
   return false
+}
+
+function removeArrEl(arr, value) {
+  let i = 0
+  while (i < arr.length) {
+    if (arr[i] == value) {
+      arr.splice(i, 1)
+    } else {
+      ++i
+    }
+  }
+  return arr
 }
 
 export default new Vuex.Store({
@@ -161,7 +174,7 @@ export default new Vuex.Store({
       state.binId = data
     },
 
-    APPLY_SLOT(state, {content, scenario} ) {
+    APPLY_SLOT(state, { content, scenario }) {
       let target = state.collection.filter(i => i.id == content.id)[0]
 
       if (scenario == 'start') { content.refreshed = false }
@@ -186,6 +199,28 @@ export default new Vuex.Store({
 
   },
   actions: {
+
+    restoreLocalCollection({ commit }) {
+      Object.values(localStorage).forEach(item => {
+        if (isJson(item)) {
+          let parsed = JSON.parse(item)
+          if (parsed.value) {
+            if (parsed.value.key) {
+              if (parsed.value.key.id != undefined && 
+                parsed.value.key.category != undefined) {
+                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
+              }
+            }
+          }
+        }
+      })
+    },
+
+    restoreBinId({ commit }, payload) {
+      if (payload != null) {
+        commit('SAVE_BIN_ID', payload.key)
+      }
+    },
 
     sendBackup({state, commit}) {
       commit('CHANGE_SERVER_STATE', {
@@ -215,32 +250,9 @@ export default new Vuex.Store({
 
           commit('CHANGE_SERVER_STATE', {
             status: 'error',
-            message: 'synchronization failed'
+            message: 'failed to save collection!'
           })
         })
-    },
-
-    restoreCollection({ commit }) {
-      Object.values(localStorage).forEach(item => {
-        if (isJson(item)) {
-          let parsed = JSON.parse(item)
-
-          if (parsed.value) {
-            if (parsed.value.key) {
-              if (parsed.value.key.id != undefined && 
-                parsed.value.key.category != undefined) {
-                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
-              }
-            }
-          }
-        }
-      })
-    },
-
-    restoreBinId({ commit }, payload) {
-      if (payload != null) {
-        commit('SAVE_BIN_ID', payload.key)
-      }
     },
 
     getBackup({ state, commit }) {
@@ -262,16 +274,29 @@ export default new Vuex.Store({
             message: 'collection loaded'
           })
 
+          let storage = this._vm.$storage
           let items = response.data
+          let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
 
-          console.log(items)
+          for (let index = 0; index < storedItems.length; index++) {
+            storedItems[index] = storedItems[index].replace(projectName, '')
+          }
 
           if (items.length && Array.isArray(items)) {
+            state.collection = []
             for (let index = 0; index < items.length; index++) {
-              commit('APPLY_SLOT', { 
+              removeArrEl(storedItems, 'slot_' + items[index].id)
+              storage.set('slot_' + items[index].id, { key: items[index] })
+              commit('APPLY_SLOT', {
                 content: items[index], 
-                scenario: 'start' 
+                scenario: 'start'
               })
+            }
+          }
+
+          if (storedItems.length && Array.isArray(storedItems)) {
+            for (let index = 0; index < storedItems.length; index++) {
+              storage.remove(storedItems[index])
             }
           }
         })
@@ -281,7 +306,7 @@ export default new Vuex.Store({
 
           commit('CHANGE_SERVER_STATE', {
             status: 'error',
-            message: 'loading failed'
+            message: 'failed to load collection!'
           })
         })
     }

@@ -257,7 +257,6 @@ export default {
           this.current.refreshed = true
           this.$store.commit('APPLY_SLOT', { content: this.current, scenario: 'change' })
           this.$storage.set('slot_' + this.current.id, { key: this.current })
-          //this.$store.dispatch('sendSlot')
           this.closeModal()
           this.changeConfirm(false)
         }
@@ -266,7 +265,6 @@ export default {
 
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
-      //this.$store.dispatch('sendSlot')
     },
 
     fieldsCondition() {

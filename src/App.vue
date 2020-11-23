@@ -50,7 +50,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('restoreCollection')
+    this.$store.dispatch('restoreLocalCollection')
     this.$store.dispatch('restoreBinId', this.$storage.get('binId'))
 
     setInterval(() => {
