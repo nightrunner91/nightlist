@@ -7,7 +7,7 @@
   height: 100%
   min-width: 320px
   max-width: $sidebar-width
-  padding: $gutter-width*2 $gutter-width
+  padding: $gutter-width * 2 $gutter-width
   background: -moz-linear-gradient(top,  rgba($clr-black, $light-opacity) 0%, rgba($clr-black, $tiny-opacity) 100%)
   background: -webkit-linear-gradient(top,  rgba($clr-black, $light-opacity) 0%,rgba($clr-black, $tiny-opacity) 100%)
   background: linear-gradient(to bottom,  rgba($clr-black, $light-opacity) 0%,rgba($clr-black, $tiny-opacity) 100%)
@@ -17,49 +17,14 @@
   &--blured
     @include blur
 
-  &__profile
-    @extend .flex-column
-    @extend .align-center
-
-    margin-bottom: $gutter-width * 2
-
-  &__avatar
-    @include icon-size(100, 100)
-    @extend .round-radius
-    @extend .no-select
-
-    margin-bottom: $gutter-width/2
-
-  &__username
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
-    @extend .fz3
-
-    line-height: 1
-
-  &__share
-    @include icon-size(18, 18)
-    @extend .pos-absolute
-    @extend .cursor-pointer
-    @extend .base-transition
-
-    top: 0
-    bottom: 0
-    margin: auto
-    right: - 18px - $gutter-width/2
-    opacity: $half-opacity
-
-    &:hover
-      opacity: $active-opacity
-
   &__link
     @extend .pos-relative
     @extend .flex
     @extend .align-center
     @extend .weight-light
+    @extend .fz5
 
-    height: 36px
+    height: 42px
     color: rgba($clr-white, $passive-opacity)
     z-index: 2
 
@@ -117,7 +82,7 @@
     @extend .base-transition
 
     left: $gutter-width
-    bottom: $gutter-width
+    bottom: $gutter-width * 2
     opacity: $passive-opacity
 
     &:hover
@@ -127,7 +92,7 @@
     @extend .pos-absolute
 
     right: $gutter-width
-    bottom: $gutter-width
+    bottom: $gutter-width * 2
 
     svg
       @include icon-size(24, 24)

@@ -4,13 +4,6 @@
     class='sidebar'
     :class='{"sidebar--blured" : modalState.visibility}')
 
-    div(class='sidebar__profile')
-      img(
-        :src='storedAvatar' 
-        class='sidebar__avatar' 
-        alt='')
-      div(class='sidebar__username') {{storedUsername}}
-
     div(class='sidebar__menu')
       router-link(
         v-for='route in routes'

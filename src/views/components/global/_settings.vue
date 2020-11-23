@@ -7,27 +7,6 @@
     div(class='settings__content')
 
       div(class='input')
-        label(class='input__label') Username
-        input(
-          pattern='_[a-zA-Z0-9]+'
-          minlength='3'
-          maxlength='50'
-          type='text'
-          class='input__field' 
-          autocomplete='off' 
-          v-model='username'
-          required)
-
-      div(class='input')
-        label(class='input__label') Avatar (link to image)
-        input(
-          type='text'
-          class='input__field' 
-          autocomplete='off' 
-          v-model='avatar'
-          required)
-
-      div(class='input')
         label(class='input__label') Cloud ID
         input(
           pattern='_[a-zA-Z0-9]+'
@@ -64,8 +43,6 @@ export default {
   },
   data() {
     return {
-      username: '',
-      avatar: '',
       binId: ''
     }
   },
@@ -80,8 +57,6 @@ export default {
     },
 
     saveSettings() {
-      this.$storage.set('username', { key: this.username })
-      this.$storage.set('avatar', { key: this.avatar })
       this.$storage.set('binId', { key: this.binId })
       this.$store.commit('SAVE_BIN_ID', this.binId)
 
@@ -95,12 +70,8 @@ export default {
 
     restoreSettings() {
       let storedId = this.$storage.get('binId')
-      let storedUsername = this.$storage.get('username')
-      let storedAvatar = this.$storage.get('avatar')
 
       if (storedId != null) this.binId = storedId.key
-      if (storedUsername != null) this.username = storedUsername.key
-      if (storedAvatar != null) this.avatar = storedAvatar.key
     }
   },
   mounted() {
