@@ -12,11 +12,12 @@
     @extend .base-radius
     @extend .no-select
 
-    margin-bottom: $gutter-width/2
+    margin-bottom: $gutter-width/1.5
     padding: 0 $gutter-width
 
     &:hover
       .title
+        &__icon,
         &__chevron
           opacity: $active-opacity
 
@@ -36,11 +37,14 @@
     line-height: 1
 
   &__icon
-    @include icon-size(24,24)
+    @extend .pos-relative
     @extend .fill-white
-    @extend .passive-opacity
+    @extend .base-transition
+    @include icon-size(24,24) 
 
-    margin-left: $gutter-width/3
+    opacity: $half-opacity
+    left: -$gutter-width/4
+    margin-right: $gutter-width/3
 
   &__badge
     margin: 0 $gutter-width/2
@@ -48,11 +52,11 @@
   &__chevron
     @extend .pos-relative
     @extend .base-transition
-    @include icon-size(24, 24)
+    @extend .round-radius
+    @include icon-size(32, 32)
 
-    left: -$gutter-width/4
-    margin-right: $gutter-width/4
-    opacity: $passive-opacity
+    margin-left: auto
+    opacity: $half-opacity
 
     &--closed
       transform: rotate(-90deg)
