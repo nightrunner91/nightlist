@@ -1,9 +1,33 @@
 $star-size: 40px
+
+@mixin themed-colors($category-name)
+  .rating
+    &__star
+      &--active
+        @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-active-' + $category-name)
   
 .rating
   @extend .pos-relative
 
   margin-bottom: $gutter-width/2
+
+  &--dashboard
+    @include themed-colors('dashboard')
+
+  &--games
+    @include themed-colors('games')
+
+  &--tvshows
+    @include themed-colors('tvshows')
+
+  &--films
+    @include themed-colors('films')
+
+  &--anime
+    @include themed-colors('anime')
+
+  &--books
+    @include themed-colors('books')
 
   &__label
     @extend .small
@@ -21,18 +45,16 @@ $star-size: 40px
     @extend .pos-absolute
     @extend .cursor-pointer
     @extend .base-transition
-
-    @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-b')
+    @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')
 
     &--excluded
-      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-b')
+      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')
 
     &--included
-      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-hovered-b')
+      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-hovered-neutral')
 
     &--active
       @extend .passive-opacity
-      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-active-b')
 
     &--1
       left: 0

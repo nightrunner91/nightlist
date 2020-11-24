@@ -1,6 +1,8 @@
 <template lang='pug'>
 
-  div(class='rating')
+  div(
+    class='rating'
+    :class='"rating--" + currentClass')
     div(class='rating__label') Rating
     div(class='rating__body')
       div(
@@ -28,7 +30,9 @@ export default {
     }
   },
   computed: {
-
+    currentClass() {
+      return this.$router.options.routes.filter(i => i.name == this.$route.name)[0].id
+    },
   },
   methods: {
     setRating(rating) {
