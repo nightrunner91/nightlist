@@ -3,6 +3,13 @@
 
   margin-bottom: $gutter-width/2
 
+  &__buttons
+    @extend .flex
+    @extend .justify-between
+
+    .button
+      width: calc(50% - #{$gutter-width/4})
+
   &__icon
     @include icon-size(24,24)
     @extend .pos-absolute

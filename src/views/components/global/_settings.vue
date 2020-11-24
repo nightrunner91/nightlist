@@ -2,6 +2,7 @@
   
   div(
     class='settings'
+    ref='settings'
     :class='"settings--" + currentClass')
 
     div(class='settings__content')
@@ -17,6 +18,26 @@
           autocomplete='off' 
           v-model='binId'
           required)
+
+      app-selector
+
+      div(class='input')
+        label(class='input__label') Manual synchronization
+        div(class='input__buttons')
+          div(
+            class='button' 
+            :class='"button--" + currentClass'
+            @click='getBackup()'
+            v-ripple)
+            svg(class='button__icon'): use(xlink:href='#backup-get')
+            span(class='button__text') Restore
+          div(
+            class='button' 
+            :class='"button--" + currentClass'
+            @click='sendBackup()'
+            v-ripple)
+            svg(class='button__icon'): use(xlink:href='#backup-send')
+            span(class='button__text') Upload
 
     div(class='settings__footer')
 
@@ -49,9 +70,19 @@ export default {
   computed: {
     currentClass() {
       return this.$router.options.routes.filter(i => i.name == this.$route.name)[0].id
+    },
+
+    storedBin() {
+      return this.$store.state.binId
     }
   },
   methods: {
+    bindOutsideClick() {	
+      document.addEventListener('keyup', e => {	
+        if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeSettings()
+      })
+    },
+
     closeSettings() {
       eventBus.$emit('closeSettings')
     },
@@ -69,13 +100,20 @@ export default {
     },
 
     restoreSettings() {
-      let storedId = this.$storage.get('binId')
+      if (this.storedBin.length > 0) this.binId = this.storedBin
+    },
 
-      if (storedId != null) this.binId = storedId.key
+    getBackup() {
+      eventBus.$emit('getBackup')
+    },
+
+    sendBackup() {
+      eventBus.$emit('sendBackup')
     }
   },
   mounted() {
     this.restoreSettings()
+    this.bindOutsideClick()
   }
 }
 </script>

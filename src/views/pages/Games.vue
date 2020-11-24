@@ -83,6 +83,7 @@ export default {
     addSlot() {
       this.$store.commit('CHANGE_CONTENT', this.games.default)
       eventBus.$emit('openModal', 'add')
+      eventBus.$emit('closeSettings')
     }
   },
   mounted() {

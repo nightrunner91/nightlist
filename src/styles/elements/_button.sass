@@ -1,5 +1,6 @@
 .button
   @extend .inline-flex
+  @extend .justify-center
   @extend .align-center
   @extend .txt-uppercase
   @extend .weight-bold
@@ -10,10 +11,12 @@
   @extend .bg-white
 
   height: 40px
+  background: $clr-grey
   padding: 0 $gutter-width/2
 
   &:hover
-    box-shadow: $shadow-3
+    background: $clr-white
+    box-shadow: $shadow-2
 
   &--iconed
     @extend .justify-center

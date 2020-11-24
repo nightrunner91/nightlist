@@ -10,6 +10,7 @@
         v-if='route.mainMenu'
         :to='route.path'
         class='sidebar__link'
+        @click.native='closeSettings()'
         :key='route.id')
         div(
           class='sidebar__icon'
@@ -30,23 +31,17 @@
           class='sidebar__badge badge badge--small') {{categoryLength(route.id)}}
 
     svg(
+      v-if='!settingsOpened'
       class='sidebar__settings'
       @click='openSettings()'): use(xlink:href='#settings')
 
     transition(name='settings-reveal' mode='out-in')
       app-settings(v-if='settingsOpened')
 
-    div(
-      class='sidebar__backup'
-      v-if='storedBinId.length')
-      svg(@click='getBackup()'): use(xlink:href='#backup-get')
-      svg(@click='sendBackup()'): use(xlink:href='#backup-send')
-
 </template>
 
 <script>
 import { eventBus } from "../../../main"
-import "../../../assets/default-avatar.svg"
 
 export default {
   name: 'Sidebar',
@@ -113,14 +108,6 @@ export default {
       this.settingsOpened = false
     },
 
-    changeUsername(data) {
-      if (data.length) this.tempUsername = data
-    },
-
-    changeAvatar(data) {
-      if (data.length) this.tempAvatar = data
-    },
-
     getBackup() {
       this.$store.dispatch('getBackup')
     },
@@ -134,12 +121,12 @@ export default {
       this.closeSettings()
     })
 
-    eventBus.$on('changeUsername', data => {
-      this.changeUsername(data)
+    eventBus.$on('getBackup', () => {
+      this.getBackup()
     })
 
-    eventBus.$on('changeAvatar', data => {
-      this.changeAvatar(data)
+    eventBus.$on('sendBackup', () => {
+      this.sendBackup()
     })
   }
 }

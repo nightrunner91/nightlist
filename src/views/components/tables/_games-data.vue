@@ -281,6 +281,7 @@ export default {
       else {
         this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
+        eventBus.$emit('closeSettings')
       }
     },
   },

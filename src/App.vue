@@ -19,7 +19,7 @@ export default {
   name: 'App',
   data() {
     return {
-      syncInterval: 30000
+      interval: null
     }
   },
   computed: {
@@ -27,6 +27,14 @@ export default {
       let rName = this.$route.name
       if (rName != null) return rName
       else return
+    },
+
+    syncInterval() {
+      return this.$store.state.syncInterval
+    },
+
+    binId() {
+      return this.$store.state.binId
     }
   },
   methods: {
@@ -47,15 +55,34 @@ export default {
 
     setDefaultContent() {
       this.$store.commit('CHANGE_CONTENT', this.$store.state[this.currentPage.toLowerCase()].default)
+    },
+
+    resetAutoSync() {
+      clearInterval(this.interval)
+    },
+
+    setAutoSync() {
+      if (
+        this.binId.length > 0 && 
+        typeof this.binId == 'string' && 
+        Object.keys(this.syncInterval).length > 0 && 
+        typeof this.syncInterval == 'object') {
+        this.interval = setInterval(() => {
+          this.$store.dispatch('sendBackup')
+        }, this.syncInterval.ms)
+      }
     }
   },
   mounted() {
-    this.$store.dispatch('restoreLocalCollection')
-    this.$store.dispatch('restoreBinId', this.$storage.get('binId'))
+    this.$store.dispatch('restoreCollection')
+    this.$store.dispatch('restoreSettings')
 
-    setInterval(() => {
-      //this.$store.dispatch('sendBackup')
-    }, this.syncInterval);
+    this.setAutoSync()
+
+    eventBus.$on('forceAutoSync', () => {
+      this.resetAutoSync()
+      this.setAutoSync()
+    })
 
     this.$router.push('/dashboard')
 
@@ -67,6 +94,8 @@ export default {
       this.closeModal()
       this.setDefaultContent()
     })
+
+    
   }
 }
 </script>
@@ -107,6 +136,7 @@ export default {
   @import "styles/elements/dropdown"
   @import "styles/elements/rating"
   @import "styles/elements/favourite"
+  @import "styles/elements/selector"
   @import "styles/elements/button"
   @import "styles/elements/progress"
   @import "styles/elements/tooltip"

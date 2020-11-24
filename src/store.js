@@ -42,6 +42,7 @@ function removeArrEl(arr, value) {
 export default new Vuex.Store({
   state: {
     binId: '',
+    syncInterval: {},
     secretKey: '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO',
     collection: [],
     content: {},
@@ -174,6 +175,10 @@ export default new Vuex.Store({
       state.binId = data
     },
 
+    SAVE_SYNC_INTERVAL(state, data) {
+      state.syncInterval = data
+    },
+
     APPLY_SLOT(state, { content, scenario }) {
       let target = state.collection.filter(i => i.id == content.id)[0]
 
@@ -200,7 +205,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    restoreLocalCollection({ commit }) {
+    restoreCollection({ commit }) {
       Object.values(localStorage).forEach(item => {
         if (isJson(item)) {
           let parsed = JSON.parse(item)
@@ -216,10 +221,14 @@ export default new Vuex.Store({
       })
     },
 
-    restoreBinId({ commit }, payload) {
-      if (payload != null) {
-        commit('SAVE_BIN_ID', payload.key)
-      }
+    restoreSettings({ commit }) {
+      let storage = this._vm.$storage
+
+      let binId = storage.get('binId')
+      let syncInterval = storage.get('syncInterval')
+
+      if (binId != null) commit('SAVE_BIN_ID', binId.key)
+      if (syncInterval != null) commit('SAVE_SYNC_INTERVAL', syncInterval.key)
     },
 
     sendBackup({state, commit}) {
@@ -269,12 +278,13 @@ export default new Vuex.Store({
         })
 
         .then(response => {
+          let storage = this._vm.$storage
+
           commit('CHANGE_SERVER_STATE', {
             status: 'success',
             message: 'collection loaded'
           })
 
-          let storage = this._vm.$storage
           let items = response.data
           let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
 

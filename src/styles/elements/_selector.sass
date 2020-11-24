@@ -1,0 +1,59 @@
+@mixin themed-colors($category-color)
+  .selector
+    &__item
+      &:hover
+        background: lighten($category-color, 55%)
+
+      &--active
+        background: $category-color !important
+        color: $clr-white
+  
+.selector
+  margin-bottom: $gutter-width/2
+
+  &--dashboard
+    @include themed-colors($clr-dashboard)
+
+  &--games
+    @include themed-colors($clr-games)
+
+  &--tvshows
+    @include themed-colors($clr-tvshows)
+
+  &--films
+    @include themed-colors($clr-films)
+
+  &--anime
+    @include themed-colors($clr-anime)
+
+  &--books
+    @include themed-colors($clr-books)
+
+  &__label
+    @extend .small
+
+    display: block
+    margin-bottom: $gutter-width/5
+
+  &__body
+    @extend .flex
+
+  &__item
+    @extend .flex-center
+    @extend .base-transition
+    @extend .cursor-pointer
+    @extend .no-select
+
+    height: 40px
+    background: $clr-grey
+
+    &:not(:last-child)
+      border-right: 1px solid $clr-white
+
+    &:first-child
+      border-top-left-radius: $base-radius
+      border-bottom-left-radius: $base-radius
+
+    &:last-child
+      border-top-right-radius: $base-radius
+      border-bottom-right-radius: $base-radius
