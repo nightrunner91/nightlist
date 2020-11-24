@@ -77,9 +77,15 @@ export default {
         others[index].selected = false
       }
 
-      this.$store.commit('SAVE_SYNC_INTERVAL', target)
-      this.$storage.set('syncInterval', { key: target })
-      eventBus.$emit('forceAutoSync')
+      if (target.selected) {
+        this.$store.commit('SAVE_SYNC_INTERVAL', target)
+        this.$storage.set('syncInterval', { key: target })
+        eventBus.$emit('forceAutoSync')
+      } else {
+        this.$store.commit('SAVE_SYNC_INTERVAL', {})
+        this.$storage.remove('syncInterval')
+        eventBus.$emit('resetAutoSync')
+      }
     },
 
     restoreSettings() {

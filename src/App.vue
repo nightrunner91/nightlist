@@ -62,11 +62,7 @@ export default {
     },
 
     setAutoSync() {
-      if (
-        this.binId.length > 0 && 
-        typeof this.binId == 'string' && 
-        Object.keys(this.syncInterval).length > 0 && 
-        typeof this.syncInterval == 'object') {
+      if (this.binId.length > 0 && Object.keys(this.syncInterval).length > 0) {
         this.interval = setInterval(() => {
           this.$store.dispatch('sendBackup')
         }, this.syncInterval.ms)
@@ -82,6 +78,10 @@ export default {
     eventBus.$on('forceAutoSync', () => {
       this.resetAutoSync()
       this.setAutoSync()
+    })
+
+    eventBus.$on('resetAutoSync', () => {
+      this.resetAutoSync()
     })
 
     this.$router.push('/dashboard')
