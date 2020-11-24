@@ -1,9 +1,6 @@
 @mixin themed-colors($category-color)
   .selector
     &__item
-      &:hover
-        background: lighten($category-color, 55%)
-
       &--active
         background: $category-color !important
         color: $clr-white
@@ -57,3 +54,6 @@
     &:last-child
       border-top-right-radius: $base-radius
       border-bottom-right-radius: $base-radius
+
+    &:hover
+      background: darken($clr-grey, 5%)
