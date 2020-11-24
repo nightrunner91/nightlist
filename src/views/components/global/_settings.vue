@@ -7,7 +7,7 @@
 
     div(
       class='settings__close'
-      @click='closeSettings(), changeConfirm(false)'
+      @click='closeSettings()'
       v-ripple)
       svg(class='settings__cross'): use(xlink:href='#close')
 

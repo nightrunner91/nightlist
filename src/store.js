@@ -42,8 +42,13 @@ function removeArrEl(arr, value) {
 export default new Vuex.Store({
   state: {
     binId: '',
+    requestHeaders: {
+      headers: {
+        'Content-Type': 'application/json',
+        'secret-key': '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO'
+      }
+    },
     syncInterval: {},
-    secretKey: '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO',
     collection: [],
     content: {},
     modalState: {
@@ -239,18 +244,12 @@ export default new Vuex.Store({
 
       axios
         
-        .put('/b/' + state.binId, state.collection, {
-          headers: {
-            "Content-Type": "application/json",
-            "secret-key": state.secretKey,
-            "versioning": false
-          }
-        })
+        .put('/b/' + state.binId, state.collection, state.requestHeaders)
 
         .then(() => {
           commit('CHANGE_SERVER_STATE', {
             status: 'success',
-            message: 'collection saved'
+            message: 'collection uploaded'
           })
         })
 
@@ -259,7 +258,7 @@ export default new Vuex.Store({
 
           commit('CHANGE_SERVER_STATE', {
             status: 'error',
-            message: 'failed to save collection!'
+            message: 'failed to upload collection!'
           })
         })
     },
@@ -271,18 +270,15 @@ export default new Vuex.Store({
       })
       
       axios
-        .get('/b/' + state.binId + '/latest', {
-          headers: {
-            "secret-key": state.secretKey
-          }
-        })
+
+        .get('/b/' + state.binId + '/latest', state.requestHeaders)
 
         .then(response => {
           let storage = this._vm.$storage
 
           commit('CHANGE_SERVER_STATE', {
             status: 'success',
-            message: 'collection loaded'
+            message: 'collection restored'
           })
 
           let items = response.data
@@ -316,7 +312,7 @@ export default new Vuex.Store({
 
           commit('CHANGE_SERVER_STATE', {
             status: 'error',
-            message: 'failed to load collection!'
+            message: 'failed to restore collection!'
           })
         })
     }
