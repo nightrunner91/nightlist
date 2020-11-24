@@ -5,6 +5,12 @@
     ref='settings'
     :class='"settings--" + currentClass')
 
+    div(
+      class='settings__close'
+      @click='closeSettings(), changeConfirm(false)'
+      v-ripple)
+      svg(class='settings__cross'): use(xlink:href='#close')
+
     div(class='settings__content')
 
       div(class='input')
@@ -17,11 +23,14 @@
           class='input__field' 
           autocomplete='off' 
           v-model='binId'
+          @input='saveSettings()'
           required)
 
-      app-selector
+      app-selector(v-if='binId.length > 0')
 
-      div(class='input')
+      div(
+        class='input'
+        v-if='binId.length > 0')
         label(class='input__label') Manual synchronization
         div(class='input__buttons')
           div(
@@ -38,19 +47,6 @@
             v-ripple)
             svg(class='button__icon'): use(xlink:href='#backup-send')
             span(class='button__text') Upload
-
-    div(class='settings__footer')
-
-      div(
-        class='button button--secondary'
-        @click='closeSettings()')
-        span(class='button__text') Cancel
-
-      div(
-        class='button button--main'
-        @click='saveSettings(), closeSettings()'
-        v-ripple)
-        span(class='button__text') Save
 
 </template>
 

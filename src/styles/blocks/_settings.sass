@@ -1,23 +1,12 @@
+$close-button-size: 36px
+  
 @mixin themed-colors($category-color)
   .settings
-    &__footer
-      .button
-        &--main
-          background: $category-color
-          color: $clr-white
-          
-          &:hover
-            background: lighten($category-color, $hover-intensity)
+    &__close
+      background: $category-color
 
-        &--secondary
-          background: $clr-white
-          box-shadow: inset 0px 0px 0px 2px rgba($category-color, $half-opacity)
-          color: rgba($category-color, $half-opacity)
-          margin-right: $gutter-width/4
-
-          &:hover
-            box-shadow: inset 0px 0px 0px 2px $category-color
-            color: $category-color
+      &:hover
+        background: lighten($category-color, $hover-intensity)
   
 .settings
   @extend .pos-absolute
@@ -58,6 +47,28 @@
 
   &--books
     @include themed-colors($clr-books)
+
+  &__close
+    @extend .cursor-pointer
+    @extend .base-transition
+    @extend .round-radius
+    @extend .flex-center
+
+    position: absolute !important
+    width: $close-button-size
+    height: $close-button-size
+    top: -$close-button-size/2
+    right: -$close-button-size/2
+    z-index: 100
+
+    &:hover
+      box-shadow: $shadow-3
+
+  &__cross
+    @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
+    @extend .base-transition
+
+    fill: $clr-white
 
   &__content
     padding: $gutter-width/2 $gutter-width/1.5
