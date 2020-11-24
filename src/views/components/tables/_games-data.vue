@@ -91,61 +91,64 @@
 
       //- BODY
       div(class='table__body')
-        div(
-          class='table__item' 
-          ref='tableItem'
-          :key='item.id'
-          :class='{"table__item--refreshed" : item.refreshed }'
-          v-for='(item, index) in data'
-          @click='editSlot(item.id, $event)')
-          
-          //- ORDER
-          div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
-          
-          //- TITLE
+
+        transition-group
+
           div(
-            class='table__cell grid__col'
-            :class='titleWidth')
-            span {{item.title}}
-            a(
-              :ref='"redirect"'
-              rel='nofollow'
-              :href='item.link'
-              target='_blank"'
-              class='table__link'
-              v-if='item.link.length')
-              svg(class='table__redirect'): use(xlink:href='#link')
-          
-          //- FAVOURITE
-          div(
-            v-if='id != "plan_to_play"'
-            class='table__cell grid__col grid__col--lg-3')
-            svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
-          
-          //- RATING
-          div(
-            v-if='id != "plan_to_play"'
-            class='table__cell grid__col grid__col--lg-6')
-            div(class='table__rating')
-              svg(
-                class='table__star table__star--active' 
-                :class='"table__star--" + (index + 1)'
-                v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
-              svg(
-                class='table__star table__star--passive' 
-                :class='"table__star--" + (index + 1)'
-                v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-          
-          //- HOURS
-          div(
-            v-if='id != "plan_to_play"'
-            class='table__cell grid__col grid__col--lg-4')
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span(v-if='item.hours != undefined') {{item.hours}}
-          
-          //- PLATFORM
-          div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
-            svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
+            class='table__item' 
+            ref='tableItem'
+            :key='item.id'
+            :class='{"table__item--refreshed" : item.refreshed }'
+            v-for='(item, index) in data'
+            @click='editSlot(item.id, $event)')
+            
+            //- ORDER
+            div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
+            
+            //- TITLE
+            div(
+              class='table__cell grid__col'
+              :class='titleWidth')
+              span {{item.title}}
+              a(
+                :ref='"redirect"'
+                rel='nofollow'
+                :href='item.link'
+                target='_blank"'
+                class='table__link'
+                v-if='item.link.length')
+                svg(class='table__redirect'): use(xlink:href='#link')
+            
+            //- FAVOURITE
+            div(
+              v-if='id != "plan_to_play"'
+              class='table__cell grid__col grid__col--lg-3')
+              svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
+            
+            //- RATING
+            div(
+              v-if='id != "plan_to_play"'
+              class='table__cell grid__col grid__col--lg-6')
+              div(class='table__rating')
+                svg(
+                  class='table__star table__star--active' 
+                  :class='"table__star--" + (index + 1)'
+                  v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
+                svg(
+                  class='table__star table__star--passive' 
+                  :class='"table__star--" + (index + 1)'
+                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+            
+            //- HOURS
+            div(
+              v-if='id != "plan_to_play"'
+              class='table__cell grid__col grid__col--lg-4')
+              svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
+              span(v-if='item.hours != undefined') {{item.hours}}
+            
+            //- PLATFORM
+            div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
 
 </template>
 

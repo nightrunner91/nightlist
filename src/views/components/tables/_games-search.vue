@@ -107,63 +107,73 @@
 
       //- BODY
       div(class='table__body')
-        div(
-          class='table__item' 
-          ref='tableItem'
-          :key='item.id'
-          :class='{"table__item--refreshed" : item.refreshed }'
-          v-for='(item, index) in searchedData'
-          @click='editSlot(item.id, $event)')
-          
-          //- ORDER
-          div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
-          
-          //- TITLE
-          div(class='table__cell grid__col grid__col--lg-16')
-            span {{item.title}}
-            a(
-              :ref='"redirect"'
-              rel='nofollow'
-              :href='item.link'
-              target='_blank"'
-              class='table__link'
-              v-if='item.link.length')
-              svg(class='table__redirect'): use(xlink:href='#link')
 
-          //- STATUS
+        transition-group(
+          name='staggered-fade'
+          tag='ul'
+          :css='false'
+          @before-enter='prepareItems'
+          @enter='revealItems'
+          @leave='hideItems')
+
           div(
-            class='table__cell grid__col grid__col--lg-3')
-            svg(
-              class='table__status'
-              v-tooltip='{ content: item.status, offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.statusId")
-          
-          //- FAVOURITE
-          div(
-            class='table__cell grid__col grid__col--lg-3')
-            svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
-          
-          //- RATING
-          div(
-            class='table__cell grid__col grid__col--lg-6')
-            div(class='table__rating')
+            class='table__item' 
+            ref='tableItem'
+            :key='item.id'
+            :data-index='index'
+            :class='{"table__item--refreshed" : item.refreshed }'
+            v-for='(item, index) in searchedData'
+            @click='editSlot(item.id, $event)')
+            
+            //- ORDER
+            div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
+            
+            //- TITLE
+            div(class='table__cell grid__col grid__col--lg-16')
+              span {{item.title}}
+              a(
+                :ref='"redirect"'
+                rel='nofollow'
+                :href='item.link'
+                target='_blank"'
+                class='table__link'
+                v-if='item.link.length')
+                svg(class='table__redirect'): use(xlink:href='#link')
+
+            //- STATUS
+            div(
+              class='table__cell grid__col grid__col--lg-3')
               svg(
-                class='table__star table__star--active' 
-                :class='"table__star--" + (index + 1)'
-                v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
-              svg(
-                class='table__star table__star--passive' 
-                :class='"table__star--" + (index + 1)'
-                v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-          
-          //- HOURS
-          div(
-            class='table__cell grid__col grid__col--lg-4')
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span(v-if='item.hours != undefined') {{item.hours}}
-          
-          //- PLATFORM
-          div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
-            svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
+                class='table__status'
+                v-tooltip='{ content: item.status, offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.statusId")
+            
+            //- FAVOURITE
+            div(
+              class='table__cell grid__col grid__col--lg-3')
+              svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
+            
+            //- RATING
+            div(
+              class='table__cell grid__col grid__col--lg-6')
+              div(class='table__rating')
+                svg(
+                  class='table__star table__star--active' 
+                  :class='"table__star--" + (index + 1)'
+                  v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
+                svg(
+                  class='table__star table__star--passive' 
+                  :class='"table__star--" + (index + 1)'
+                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+            
+            //- HOURS
+            div(
+              class='table__cell grid__col grid__col--lg-4')
+              svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
+              span(v-if='item.hours != undefined') {{item.hours}}
+            
+            //- PLATFORM
+            div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
 
     app-placeholder(
       v-if='searchQuery.length && resultsLength == 0'
@@ -281,6 +291,33 @@ export default {
         this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
+    },
+
+    prepareItems(el) {
+      el.style.opacity = 0
+      el.style.height = 0
+    },
+
+    revealItems(el, done) {
+      var delay = el.dataset.index * 200
+      setTimeout(function () {
+        Velocity(
+          el,
+          { opacity: 1, height: '40px' },
+          { complete: done }
+        )
+      }, delay)
+    },
+
+    hideItems(el, done) {
+      var delay = el.dataset.index * 200
+      setTimeout(function () {
+        Velocity(
+          el,
+          { opacity: 0, height: 0 },
+          { complete: done }
+        )
+      }, delay)
     }
   },
   computed: {
