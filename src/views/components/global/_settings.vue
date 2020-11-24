@@ -75,7 +75,9 @@ export default {
   methods: {
     bindOutsideClick() {	
       document.addEventListener('keyup', e => {	
-        if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeSettings()
+        if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) {
+          this.closeSettings()
+        }
       })
     },
 
@@ -86,13 +88,6 @@ export default {
     saveSettings() {
       this.$storage.set('binId', { key: this.binId })
       this.$store.commit('SAVE_BIN_ID', this.binId)
-
-      eventBus.$emit('changeUsername', this.username)
-      eventBus.$emit('changeAvatar', this.avatar)
-    },
-
-    saveSlot() {
-      this.$store.dispatch('sendSlot')
     },
 
     restoreSettings() {
