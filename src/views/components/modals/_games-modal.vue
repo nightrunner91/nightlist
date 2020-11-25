@@ -85,7 +85,7 @@
                     min='0'
                     class='input__field' 
                     autocomplete='off' 
-                    v-model='current.hours'
+                    v-model.number='current.hours'
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                     @wheel='changeNumberVal($event, "hours")')
               //- HOURS APPROXIMATE -//
