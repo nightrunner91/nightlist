@@ -4,6 +4,12 @@
     class='sidebar'
     :class='{"sidebar--blured" : modalState.visibility}')
 
+    div(class='sidebar__profile')
+      div(
+        class='sidebar__avatar'
+        :style='avatarStyles')
+      div(class='sidebar__username') {{username}}
+
     div(class='sidebar__menu')
       router-link(
         v-for='route in routes'
@@ -58,6 +64,18 @@ export default {
   computed: {
     modalState() {
       return this.$store.state.modalState
+    },
+
+    username() {
+      return this.$store.state.username
+    },
+
+    avatarStyles() {
+      if (this.$store.state.avatar.length > 0) {
+        return 'background-image: url(' + this.$store.state.avatar + ')'
+      } else {
+        return 'background-image: url()'
+      }
     },
 
     routes() {

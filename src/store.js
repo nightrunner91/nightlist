@@ -41,14 +41,16 @@ function removeArrEl(arr, value) {
 
 export default new Vuex.Store({
   state: {
-    binId: '',
     requestHeaders: {
       headers: {
         'Content-Type': 'application/json',
         'secret-key': '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO'
       }
     },
+    binId: '',
     syncInterval: {},
+    username: '',
+    avatar: '',
     collection: [],
     content: {},
     modalState: {
@@ -177,6 +179,14 @@ export default new Vuex.Store({
       state.binId = data
     },
 
+    SAVE_USERNAME(state, data) {
+      state.username = data
+    },
+
+    SAVE_AVATAR(state, data) {
+      state.avatar = data
+    },
+
     SAVE_SYNC_INTERVAL(state, data) {
       state.syncInterval = data
     },
@@ -232,9 +242,13 @@ export default new Vuex.Store({
 
       let binId = storage.get('binId')
       let syncInterval = storage.get('syncInterval')
+      let username = storage.get('username')
+      let avatar = storage.get('avatar')
 
       if (binId != null) commit('SAVE_BIN_ID', binId.key)
       if (syncInterval != null) commit('SAVE_SYNC_INTERVAL', syncInterval.key)
+      if (username != null) commit('SAVE_USERNAME', username.key)
+      if (avatar != null) commit('SAVE_AVATAR', avatar.key)
     },
 
     async prepareBackup({state, commit}) {

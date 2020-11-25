@@ -23,7 +23,7 @@
           class='input__field' 
           autocomplete='off' 
           v-model='binId'
-          @input='saveSettings()'
+          @input='saveBinId()'
           required)
 
       app-selector(v-if='binId.length > 0')
@@ -48,6 +48,34 @@
             svg(class='button__icon'): use(xlink:href='#backup-send')
             span(class='button__text') Upload
 
+      div(
+        class='input'
+        v-if='binId.length > 0')
+        label(class='input__label') Username
+        input(
+          pattern='_[a-zA-Z0-9]+'
+          minlength='3'
+          maxlength='20'
+          type='text'
+          class='input__field' 
+          autocomplete='off' 
+          v-model='username'
+          @input='saveUsername()')
+
+      div(
+        class='input'
+        v-if='binId.length > 0')
+        label(class='input__label') 
+          span Avatar
+          sup (link)
+        input(
+          pattern='_[a-zA-Z0-9]+'
+          type='text'
+          class='input__field' 
+          autocomplete='off' 
+          v-model='avatar'
+          @input='saveAvatar()')
+
 </template>
 
 <script>
@@ -60,7 +88,9 @@ export default {
   },
   data() {
     return {
-      binId: ''
+      binId: '',
+      username: '',
+      avatar: ''
     }
   },
   computed: {
@@ -70,7 +100,15 @@ export default {
 
     storedBin() {
       return this.$store.state.binId
-    }
+    },
+
+    storedUsername() {
+      return this.$store.state.username
+    },
+
+    storedAvatar() {
+      return this.$store.state.avatar
+    },
   },
   methods: {
     bindOutsideClick() {	
@@ -85,13 +123,25 @@ export default {
       eventBus.$emit('closeSettings')
     },
 
-    saveSettings() {
+    saveBinId() {
       this.$storage.set('binId', { key: this.binId })
       this.$store.commit('SAVE_BIN_ID', this.binId)
     },
 
+    saveUsername() {
+      this.$storage.set('username', { key: this.username })
+      this.$store.commit('SAVE_USERNAME', this.username)
+    },
+
+    saveAvatar() {
+      this.$storage.set('avatar', { key: this.avatar })
+      this.$store.commit('SAVE_AVATAR', this.avatar)
+    },
+
     restoreSettings() {
       if (this.storedBin.length > 0) this.binId = this.storedBin
+      if (this.storedUsername.length > 0) this.username = this.storedUsername
+      if (this.storedAvatar.length > 0) this.avatar = this.storedAvatar
     },
 
     getBackup() {

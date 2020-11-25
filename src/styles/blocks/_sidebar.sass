@@ -17,6 +17,42 @@
   &--blured
     @include blur
 
+  &__profile
+    @extend .flex-column
+    @extend .align-center
+    
+    margin-bottom: $gutter-width * 2
+
+  &__avatar
+    @extend .pos-relative
+    @extend .round-radius
+    @extend .shadow-1
+
+    width: 120px
+    height: 120px
+    margin-bottom: $gutter-width/2
+    background-color: rgba($clr-white, $light-opacity)
+    background-repeat: no-repeat
+    background-position: center center
+    background-size: cover
+
+    &:before
+      @extend .pseudoelem
+      @extend .passive-opacity
+      @include svg-icon(24, 24, 'avatar')
+
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      margin: auto
+      z-index: -1
+
+  &__username
+    @extend .fz4
+
+    min-height: 26px
+
   &__link
     @extend .pos-relative
     @extend .flex
