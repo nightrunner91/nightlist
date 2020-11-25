@@ -94,8 +94,6 @@ export default {
       this.closeModal()
       this.setDefaultContent()
     })
-
-    
   }
 }
 </script>

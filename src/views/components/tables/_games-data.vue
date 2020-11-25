@@ -148,7 +148,7 @@
             
             //- PLATFORM
             div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
-              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
+              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platform")
 
 </template>
 
@@ -180,7 +180,7 @@ export default {
     },
 
     stashData() {
-      this.data = this.gamesCollection.filter(i => i.status == this.tableName(this.id))
+      this.data = this.gamesCollection.filter(i => i.status == this.id)
     },
 
     switchTable(state) {
@@ -269,7 +269,7 @@ export default {
           this.sortData(this.criteria)
           if (
             mutation.payload.scenario == 'change' && 
-            mutation.payload.content.statusId == this.id) {
+            mutation.payload.content.status == this.id) {
             this.switchTable(true)
           }
         }

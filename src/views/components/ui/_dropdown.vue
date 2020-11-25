@@ -6,9 +6,8 @@
       class='dropdown__toggle'
       @click="switchDropdown()"
       :class="{'dropdown__toggle--active': dropdownOpened}")
-        svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentId")
-        span(v-if='currentValue != undefined && currentValue.length > 0') {{currentValue}}
-        span(v-else) {{defaultValue}}
+        svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentIcon")
+        span {{currentName}}
         svg(class='dropdown__chevron'): use(xlink:href='#chevron-down-black')
     div(
       class='dropdown__body'
@@ -29,11 +28,10 @@
 export default {
   name: "Dropdown",
   props: {
+    category: String,
+    type: String,
     label: String,
-    currentValue: String,
-    currentId: String,
-    defaultValue: String,
-    itemsCount: Number
+    current: String
   },
   data() {
     return {
@@ -47,7 +45,29 @@ export default {
     }
   },
   computed: {
+    currentName() {
+      let path = this.$store.state[this.category][this.type]
 
+      if (this.current != undefined && this.current.length > 0) {
+        return path.filter(i => i.id == this.current)[0].name
+      } else {
+        return path.filter(i => i.default)[0].name
+      }
+    },
+
+    currentIcon() {
+      let path = this.$store.state[this.category][this.type]
+
+      if (this.current != undefined && this.current.length > 0) {
+        return path.filter(i => i.id == this.current)[0].id
+      } else {
+        return path.filter(i => i.default)[0].id
+      }
+    },
+
+    itemsCount() {
+      return this.$store.state[this.category][this.type].length
+    }
   },
   methods: {
     documentClick(event) {

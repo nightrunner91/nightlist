@@ -34,10 +34,9 @@
             //- STATUS -//
             app-dropdown(
               :label='"Status"'
-              :currentValue='current.status'
-              :currentId='getStatusId(current.status)'
-              :defaultValue='games.statuses.filter(i => i.default)[0].name'
-              :itemsCount='games.statuses.length')
+              :category='"games"'
+              :type='"statuses"'
+              :current='current.status')
               input(
                 slot='dropdown-input' 
                 v-model='current.status' 
@@ -46,7 +45,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='status in games.statuses'
-                @click='setStatus(status.name, status.id)') 
+                @click='setStatus(status.id)') 
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + status.id")
                 span {{status.name}}
 
@@ -61,10 +60,9 @@
             //- PLATFORM -//
             app-dropdown(
               :label='"Platform"'
-              :currentValue='current.platform'
-              :currentId='getPlatformId(current.platform)'
-              :defaultValue='games.platforms.filter(i => i.default)[0].name'
-              :itemsCount='games.platforms.length')
+              :category='"games"'
+              :type='"platforms"'
+              :current='current.platform')
               input(
                 slot='dropdown-input'
                 v-model='current.platform'
@@ -73,7 +71,7 @@
                 slot='dropdown-menu'
                 class='dropdown__item'
                 v-for='platform in games.platforms'
-                @click='setPlatform(platform.name, platform.id)')
+                @click='setPlatform(platform.id)')
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
                 span {{platform.name}}
 
@@ -180,22 +178,6 @@ export default {
       this.valid = undefined
     },
 
-    getPlatformId(name) {
-      if (this.current.platform) {
-        return this.games.platforms.filter(i => i.name == this.current.platform)[0].id
-      } else { 
-        return this.games.platforms.filter(i => i.default)[0].id
-      }
-    },
-
-    getStatusId(name) {
-      if (this.current.status) {
-        return this.games.statuses.filter(i => i.name == this.current.status)[0].id
-      } else { 
-        return this.games.statuses.filter(i => i.default)[0].id
-      }
-    },
-
     setDefaults() {
       let gamesData = this.$store.state["games"]
 
@@ -203,7 +185,7 @@ export default {
         this.current.id = Math.floor(Math.random() * 10000000000)
       }
 
-      if (this.current.statusId == 'plan_to_play') {
+      if (this.current.status == 'plan_to_play') {
         this.current.hours = gamesData.default.hours
         this.current.hoursApproximate = gamesData.default.hoursApproximate
         this.current.rating = gamesData.default.rating
@@ -213,19 +195,14 @@ export default {
 
       if (this.current.platform.length == 0) {
         let defaultPlatform = gamesData.platforms.filter(i => i.default)[0]
-        this.current.platform = defaultPlatform.name
-        this.current.platformId = defaultPlatform.id
+        this.current.platform = defaultPlatform.id
       }
 
       if (this.current.status.length == 0) {
         let defaultStatus = gamesData.statuses.filter(i => i.default)[0]
         this.current.status = defaultStatus.name
-        this.current.statusId = defaultStatus.id
+        this.current.status = defaultStatus.id
       }
-    },
-
-    setDate() {
-      this.current.lastUpdated = Date.now()
     },
 
     validateModal() {
@@ -251,7 +228,6 @@ export default {
 
     applySlot(id) {
       this.setDefaults()
-      this.setDate()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
@@ -298,14 +274,12 @@ export default {
       this.current[prop] = newVal
     },
 
-    setStatus(name, id) {
-      this.current.status = name
-      this.current.statusId = id
+    setStatus(id) {
+      this.current.status = id
     },
 
-    setPlatform(name, id) {
-      this.current.platform = name
-      this.current.platformId = id
+    setPlatform(id) {
+      this.current.platform = id
     },
 
     setRating(data) {

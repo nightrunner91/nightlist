@@ -140,15 +140,12 @@ export default new Vuex.Store({
         category: 'games',
         title: '',
         status: '',
-        statusId: '',
         platform: '',
-        platformId: '',
         hours: 0,
         hoursApproximate: false,
         rating: 0,
         favourite: false,
         link: '',
-        lastUpdated: '',
         refreshed: false
       }
     }
@@ -184,6 +181,10 @@ export default new Vuex.Store({
       state.syncInterval = data
     },
 
+    PREPARE_BACKUP(state, data) {
+      state.prepareBackup = data
+    },
+
     APPLY_SLOT(state, { content, scenario }) {
       let target = state.collection.filter(i => i.id == content.id)[0]
 
@@ -199,7 +200,7 @@ export default new Vuex.Store({
 
       setTimeout(() => {
         state.collection.filter(i => i.id == content.id)[0].refreshed = false
-      }, 1500)
+      }, 1000)
     },
 
     DELETE_SLOT(state, id) {
@@ -236,7 +237,16 @@ export default new Vuex.Store({
       if (syncInterval != null) commit('SAVE_SYNC_INTERVAL', syncInterval.key)
     },
 
-    sendBackup({state, commit}) {
+    async prepareBackup({state, commit}) {
+      for (let index = 0; index < state.collection.length; index++) {
+        Vue.delete(state.collection[index], 'refreshed')
+      }
+      commit('PREPARE_BACKUP', state.collection)
+    },
+
+    async sendBackup({dispatch, state, commit}) {
+      await dispatch('prepareBackup')
+
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
         message: 'waiting for response'

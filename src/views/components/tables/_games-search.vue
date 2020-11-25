@@ -53,11 +53,11 @@
         //- STATUS
         div(
           class='table__cell table__cell--functional grid__col grid__col--lg-3'
-          :class='{"table__cell--active" : criteria == "statusId"}'
-          @click='sortData("statusId", "switch")')
+          :class='{"table__cell--active" : criteria == "status"}'
+          @click='sortData("status", "switch")')
           span Status
           svg(
-            v-if='criteria == "statusId"'
+            v-if='criteria == "status"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
         
@@ -145,7 +145,7 @@
               class='table__cell grid__col grid__col--lg-3')
               svg(
                 class='table__status'
-                v-tooltip='{ content: item.status, offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.statusId")
+                v-tooltip='{ content: item.status, offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.status")
             
             //- FAVOURITE
             div(
@@ -237,7 +237,7 @@ export default {
       if (
         this.criteria == 'title' || 
         this.criteria == 'platform' ||
-        this.criteria == 'statusId') {
+        this.criteria == 'status') {
         // ascending
         if (this.direction) {
           conditionOne = -1
