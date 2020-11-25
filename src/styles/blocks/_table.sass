@@ -4,6 +4,8 @@ $star-size: 24px
   @extend .base-transition
   @extend .no-overflow
 
+  margin-bottom: $gutter-width * 2
+
   &--hidden
     max-height: 0px !important
     opacity: $transparent-opacity
@@ -76,7 +78,7 @@ $star-size: 24px
       z-index: -1
       width: 100%
       height: 100%
-      opacity: 0
+      opacity: $transparent-opacity
 
     &--refreshed
       &::after
@@ -204,3 +206,14 @@ $star-size: 24px
 
     &:hover
       opacity: $active-opacity
+
+
+@keyframes shine
+  0%
+    opacity: $transparent-opacity
+
+  50%
+    opacity: $tiny-opacity
+
+  100%
+    opacity: $transparent-opacity

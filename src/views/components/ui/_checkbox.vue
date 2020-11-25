@@ -1,13 +1,14 @@
 <template lang='pug'>
 
   div(class='checkbox')
+    div(class='checkbox__label') Checkbox
     div(
       class='checkbox__body'
       @click='changeCheckbox()')
       div(
         class='checkbox__input'
         :class='{"checkbox__input--active" : currentCheckbox }')
-      div(class='checkbox__label') {{label}}
+      div(class='checkbox__text') {{text}}
 
 </template>
 
@@ -17,7 +18,7 @@ import { eventBus } from "../../../main";
 export default {
   name: "Checkbox",
   props: {
-    label: String,
+    text: String,
     currentCheckbox: Boolean,
     event: String
   },

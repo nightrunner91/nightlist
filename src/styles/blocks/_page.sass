@@ -4,3 +4,11 @@
   @extend .bg-black
 
   height: 100vh
+
+  &-enter-active,
+  &-leave-active
+    @extend .slow-transition
+
+  &-enter,
+  &-leave-active
+    @extend .transparent-opacity

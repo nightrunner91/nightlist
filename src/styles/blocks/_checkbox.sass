@@ -1,7 +1,5 @@
 .checkbox
-  @extend .flex
-
-  padding-top: 24px
+  width: 100%
   margin-bottom: $gutter-width/2
 
   &__body
@@ -50,6 +48,15 @@
         opacity: $active-opacity
 
   &__label
+    @extend .flex
+    @extend .small
+    @extend .transparent-opacity
+    @extend .no-overflow
+
+    text-indent: -9999px
+    margin-bottom: $gutter-width/5
+
+  &__text
     @extend .no-select
 
     line-height: 1

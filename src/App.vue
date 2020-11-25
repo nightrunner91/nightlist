@@ -110,7 +110,6 @@ export default {
   @import "styles/core/grid"
   @import "styles/core/typography"
   @import "styles/core/mixins"
-  @import "styles/core/scrollbar"
 
   // Blocks
   @import "styles/blocks/page"
@@ -121,28 +120,21 @@ export default {
   @import "styles/blocks/section"
   @import "styles/blocks/placeholder"
   @import "styles/blocks/indicator"
-
-  // Elements
-  @import "styles/elements/badge"
-  @import "styles/elements/data"
-  @import "styles/elements/title"
-  @import "styles/elements/table"
-  @import "styles/elements/item"
-  @import "styles/elements/search"
-  @import "styles/elements/input"
-  @import "styles/elements/checkbox"
-  @import "styles/elements/dropdown"
-  @import "styles/elements/rating"
-  @import "styles/elements/favourite"
-  @import "styles/elements/selector"
-  @import "styles/elements/button"
-  @import "styles/elements/progress"
-  @import "styles/elements/tooltip"
-  @import "styles/elements/modal"
+  @import "styles/blocks/badge"
+  @import "styles/blocks/title"
+  @import "styles/blocks/table"
+  @import "styles/blocks/search"
+  @import "styles/blocks/input"
+  @import "styles/blocks/checkbox"
+  @import "styles/blocks/dropdown"
+  @import "styles/blocks/rating"
+  @import "styles/blocks/favourite"
+  @import "styles/blocks/selector"
+  @import "styles/blocks/button"
+  @import "styles/blocks/progress"
+  @import "styles/blocks/tooltip"
+  @import "styles/blocks/modal"
 
   // Plugins
-  
-
-  // Animations
-  @import "styles/animations/animation"
+  @import "styles/plugins/scrollbar"
 </style>

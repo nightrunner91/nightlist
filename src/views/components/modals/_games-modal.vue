@@ -91,7 +91,7 @@
               //- HOURS APPROXIMATE -//
               div(class='grid__col grid__col--lg-20 grid__col--right')
                 app-checkbox(
-                  :label='"Approximate value"'
+                  :text='"Approximate value"'
                   :currentCheckbox='current.hoursApproximate'
                   :event='"hoursApproximate"')
 
