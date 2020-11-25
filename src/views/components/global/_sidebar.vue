@@ -56,9 +56,7 @@ export default {
   },
   data() {
     return {
-      settingsOpened: false,
-      tempUsername: '',
-      tempAvatar: 'img/default-avatar.svg'
+      settingsOpened: false
     }
   },
   computed: {
@@ -67,12 +65,12 @@ export default {
     },
 
     username() {
-      return this.$store.state.username
+      return this.$store.state.settings.username
     },
 
     avatarStyles() {
-      if (this.$store.state.avatar.length > 0) {
-        return 'background-image: url(' + this.$store.state.avatar + ')'
+      if (this.$store.state.settings.avatar.length > 0) {
+        return 'background-image: url(' + this.$store.state.settings.avatar + ')'
       } else {
         return 'background-image: url()'
       }
@@ -86,28 +84,7 @@ export default {
       let rName = this.$route.name
       if (rName != null) return rName
       else return
-    },
-
-    storedBinId() {
-      return this.$store.state.binId
-    },
-
-    storedUsername() {
-      let storedUsername = this.$storage.get('username')
-
-      if (
-        storedUsername != null && 
-        storedUsername.key.length > 0 &&
-        this.tempUsername.length == 0) return storedUsername.key
-      else return this.tempUsername
-    },
-
-    storedAvatar() {
-      let storedAvatar = this.$storage.get('avatar')
-
-      if (storedAvatar != null && storedAvatar.key.length > 0) return storedAvatar.key
-      else return this.tempAvatar
-    },
+    }
   },
   methods: {
     categoryLength(id) {

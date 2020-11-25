@@ -99,26 +99,23 @@ export default {
     },
 
     storedBin() {
-      return this.$store.state.binId
+      return this.$store.state.settings.binId
     },
 
     storedUsername() {
-      return this.$store.state.username
+      return this.$store.state.settings.username
     },
 
     storedAvatar() {
-      return this.$store.state.avatar
+      return this.$store.state.settings.avatar
     },
   },
+  watch: {
+    storedBin() { this.restoreSettings() },
+    storedUsername() { this.restoreSettings() },
+    storedAvatar() { this.restoreSettings() }
+  },
   methods: {
-    bindOutsideClick() {	
-      document.addEventListener('keyup', e => {	
-        if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) {
-          this.closeSettings()
-        }
-      })
-    },
-
     closeSettings() {
       eventBus.$emit('closeSettings')
     },
@@ -154,7 +151,6 @@ export default {
   },
   mounted() {
     this.restoreSettings()
-    this.bindOutsideClick()
   }
 }
 </script>

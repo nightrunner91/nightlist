@@ -47,11 +47,14 @@ export default new Vuex.Store({
         'secret-key': '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO'
       }
     },
-    binId: '',
-    syncInterval: {},
-    username: '',
-    avatar: '',
+    preparedBackup: {},
     collection: [],
+    settings: {
+      binId: '',
+      syncInterval: {},
+      username: '',
+      avatar: '',
+    },
     content: {},
     modalState: {
       visibility: false,
@@ -176,23 +179,31 @@ export default new Vuex.Store({
     },
 
     SAVE_BIN_ID(state, data) {
-      state.binId = data
+      state.settings.binId = data
     },
 
     SAVE_USERNAME(state, data) {
-      state.username = data
+      state.settings.username = data
     },
 
     SAVE_AVATAR(state, data) {
-      state.avatar = data
+      state.settings.avatar = data
     },
 
     SAVE_SYNC_INTERVAL(state, data) {
-      state.syncInterval = data
+      state.settings.syncInterval = data
     },
 
-    PREPARE_BACKUP(state, data) {
-      state.prepareBackup = data
+    PREPARE_BACKUP(state) {
+      for (let index = 0; index < state.collection.length; index++) {
+        Vue.delete(state.collection[index], 'refreshed')
+      }
+      let preparedSettings = {}
+      Object.assign(preparedSettings, state.settings)
+      delete preparedSettings.syncInterval
+      delete preparedSettings.binId
+      state.preparedBackup.settings = preparedSettings
+      state.preparedBackup.collection = state.collection
     },
 
     APPLY_SLOT(state, { content, scenario }) {
@@ -251,14 +262,11 @@ export default new Vuex.Store({
       if (avatar != null) commit('SAVE_AVATAR', avatar.key)
     },
 
-    async prepareBackup({state, commit}) {
-      for (let index = 0; index < state.collection.length; index++) {
-        Vue.delete(state.collection[index], 'refreshed')
-      }
-      commit('PREPARE_BACKUP', state.collection)
+    async prepareBackup({ commit }) {
+      commit('PREPARE_BACKUP')
     },
 
-    async sendBackup({dispatch, state, commit}) {
+    async sendBackup({ dispatch, state, commit }) {
       await dispatch('prepareBackup')
 
       commit('CHANGE_SERVER_STATE', {
@@ -268,7 +276,7 @@ export default new Vuex.Store({
 
       axios
         
-        .put('/b/' + state.binId, state.collection, state.requestHeaders)
+        .put('/b/' + state.settings.binId, state.preparedBackup, state.requestHeaders)
 
         .then(() => {
           commit('CHANGE_SERVER_STATE', {
@@ -295,7 +303,7 @@ export default new Vuex.Store({
       
       axios
 
-        .get('/b/' + state.binId + '/latest', state.requestHeaders)
+        .get('/b/' + state.settings.binId + '/latest', state.requestHeaders)
 
         .then(response => {
           let storage = this._vm.$storage
@@ -305,7 +313,8 @@ export default new Vuex.Store({
             message: 'collection restored'
           })
 
-          let items = response.data
+          let settings = response.data.settings
+          let items = response.data.collection
           let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
 
           for (let index = 0; index < storedItems.length; index++) {
@@ -315,13 +324,21 @@ export default new Vuex.Store({
           if (items.length && Array.isArray(items)) {
             state.collection = []
             for (let index = 0; index < items.length; index++) {
-              removeArrEl(storedItems, 'slot_' + items[index].id)
-              storage.set('slot_' + items[index].id, { key: items[index] })
-              commit('APPLY_SLOT', {
-                content: items[index], 
-                scenario: 'start'
-              })
+              if (items[index].id != undefined) {
+                removeArrEl(storedItems, 'slot_' + items[index].id)
+                storage.set('slot_' + items[index].id, { key: items[index] })
+                commit('APPLY_SLOT', {
+                  content: items[index], 
+                  scenario: 'start'
+                })
+              }
             }
+          }
+
+          if (Object.keys(settings).length > 0 && typeof settings == 'object') {
+            Object.keys(settings).forEach(key => {
+              Vue.set(state.settings, key, settings[key])
+            })
           }
 
           if (storedItems.length && Array.isArray(storedItems)) {

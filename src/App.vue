@@ -30,11 +30,11 @@ export default {
     },
 
     syncInterval() {
-      return this.$store.state.syncInterval
+      return this.$store.state.settings.syncInterval
     },
 
     binId() {
-      return this.$store.state.binId
+      return this.$store.state.settings.binId
     }
   },
   methods: {

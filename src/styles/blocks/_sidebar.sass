@@ -38,8 +38,8 @@
 
     &:before
       @extend .pseudoelem
-      @extend .passive-opacity
-      @include svg-icon(24, 24, 'avatar')
+      @extend .half-opacity
+      @include svg-icon(120, 120, 'avatar')
 
       left: 0
       right: 0
@@ -116,7 +116,7 @@
     @extend .base-transition
 
     left: $gutter-width
-    bottom: $gutter-width * 2
+    top: $gutter-width * 2
     opacity: $passive-opacity
 
     &:hover

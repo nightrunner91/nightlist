@@ -40,13 +40,13 @@ export default {
         },
         {
           name: '5 min',
-          id: '2min',
+          id: '5min',
           selected: false,
           ms: 300000
         },
         {
           name: '10 min',
-          id: '5min',
+          id: '10min',
           selected: false,
           ms: 600000
         }
@@ -63,7 +63,7 @@ export default {
     },
 
     syncInterval() {
-      return this.$store.state.syncInterval
+      return this.$store.state.settings.syncInterval
     }
   },
   methods: {
