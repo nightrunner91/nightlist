@@ -35,7 +35,7 @@ export default {
         {
           name: '1 min',
           id: '1min',
-          selected: true,
+          selected: false,
           ms: 60000
         },
         {
@@ -103,8 +103,12 @@ export default {
     this.restoreSettings()
 
     eventBus.$on('setOption', id => {
-      if (id != this.options.filter(i => i.selected)[0].id) {
+      if (this.options.filter(i => i.selected).length == 0) {
         this.setOption(id)
+      } else {
+        if (id != this.options.filter(i => i.selected)[0].id) {
+          this.setOption(id)
+        }
       }
     })
   }
