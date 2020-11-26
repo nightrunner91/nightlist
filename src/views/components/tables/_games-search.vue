@@ -137,7 +137,7 @@
             class='table__cell grid__col grid__col--lg-3')
             svg(
               class='table__status'
-              v-tooltip='{ content: item.status, offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.status")
+              v-tooltip='{ content: statusName(item.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.status")
           
           //- FAVOURITE
           div(
@@ -282,6 +282,10 @@ export default {
         this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
+    },
+
+    statusName(id) {
+      return this.$store.state['games'].statuses.filter(i => i.id == id)[0].name
     }
   },
   computed: {
