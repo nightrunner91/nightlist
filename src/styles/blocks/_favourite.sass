@@ -1,4 +1,10 @@
-$star-size: 40px
+$favourite-size: 40px
+
+@mixin themed-colors($category-name)
+  .favourite
+    &__icon
+      &--active
+        @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'favourite-active-' + $category-name)
   
 .favourite
   @extend .flex-column
@@ -6,6 +12,21 @@ $star-size: 40px
   @extend .txt-right
 
   margin-bottom: $gutter-width/2
+
+  &--games
+    @include themed-colors('games')
+
+  &--tvshows
+    @include themed-colors('tvshows')
+
+  &--films
+    @include themed-colors('films')
+
+  &--anime
+    @include themed-colors('anime')
+
+  &--books
+    @include themed-colors('books')
 
   &__label
     @extend .flex
@@ -18,11 +39,10 @@ $star-size: 40px
     @extend .base-transition
     
     &--passive
-      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'favourite-passive')
+      @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-passive-neutral')
 
       &:hover
-        @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'favourite-hovered')
+        @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-hovered-neutral')
 
     &--active
       @extend .passive-opacity
-      @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'favourite-active')

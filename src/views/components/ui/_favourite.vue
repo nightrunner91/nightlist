@@ -1,6 +1,8 @@
 <template lang='pug'>
 
-  div(class='favourite')
+  div(
+    class='favourite'
+    :class='"favourite--" + currentClass')
     div(class='favourite__label') Favourite
     div(
       class='favourite__icon'
@@ -23,7 +25,9 @@ export default {
     }
   },
   computed: {
-
+    currentClass() {
+      return this.$router.options.routes.filter(i => i.name == this.$route.name)[0].id
+    }
   },
   methods: {
     changeFavourite() {

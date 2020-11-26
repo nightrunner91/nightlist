@@ -8,7 +8,7 @@
       :class="{'dropdown__toggle--active': dropdownOpened}")
         svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentIcon")
         span {{currentName}}
-        svg(class='dropdown__chevron'): use(xlink:href='#chevron-down-black')
+        svg(class='dropdown__chevron'): use(xlink:href='#chevron-down')
     div(
       class='dropdown__body'
       :class='{"dropdown__body--active" : dropdownOpened}')

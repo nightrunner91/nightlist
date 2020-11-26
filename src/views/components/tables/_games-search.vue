@@ -169,8 +169,7 @@
 
     app-placeholder(
       v-if='searchQuery.length && resultsLength == 0'
-      :text='"Nothing found"'
-      :icon='"no-search"')
+      :status='placeholderStatus')
 
 </template>
 
@@ -301,6 +300,13 @@ export default {
 
     resultsLength() {
       return this.searchedData.length
+    },
+
+    placeholderStatus() {
+      return {
+        title: 'Nothing found',
+        icon: 'no-search'
+      }
     }
   },
   mounted() {
