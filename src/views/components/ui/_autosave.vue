@@ -35,7 +35,7 @@ export default {
         {
           name: '1 min',
           id: '1min',
-          selected: false,
+          selected: true,
           ms: 60000
         },
         {
