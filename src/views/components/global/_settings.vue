@@ -26,7 +26,7 @@
           @input='saveBinId()'
           required)
 
-      app-selector(v-if='binId.length > 0')
+      app-autosave(v-if='binId.length > 0')
 
       div(
         class='input'

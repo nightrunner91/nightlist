@@ -3,7 +3,7 @@
   div(
     class='selector'
     :class='"selector--" + currentClass')
-    div(class='selector__label') Auto synchronization
+    div(class='selector__label') Autosave interval
     div(class='selector__body')
       div(
         class='selector__item'
@@ -19,7 +19,7 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: "Selector",
+  name: "Autosave",
   props: {
     
   },
@@ -101,6 +101,10 @@ export default {
   },
   mounted() {
     this.restoreSettings()
+
+    eventBus.$on('setOption', data => {
+      this.setOption(data)
+    })
   }
 }
 </script>

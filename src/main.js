@@ -60,13 +60,13 @@ import appDropdown from "./views/components/ui/_dropdown"
 import appCheckbox from "./views/components/ui/_checkbox"
 import appRating from "./views/components/ui/_rating"
 import appFavourite from "./views/components/ui/_favourite"
-import appSelector from "./views/components/ui/_selector"
+import appAutosave from "./views/components/ui/_autosave"
 
 Vue.component('app-dropdown', appDropdown)
 Vue.component('app-checkbox', appCheckbox)
 Vue.component('app-rating', appRating)
 Vue.component('app-favourite', appFavourite)
-Vue.component('app-selector', appSelector)
+Vue.component('app-autosave', appAutosave)
 
 
 // ======================================= //

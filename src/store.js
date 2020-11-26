@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import {projectName} from "./main"
+import {eventBus, projectName} from "./main"
 
 Vue.use(Vuex)
 
@@ -198,11 +198,7 @@ export default new Vuex.Store({
       for (let index = 0; index < state.collection.length; index++) {
         Vue.delete(state.collection[index], 'refreshed')
       }
-      let preparedSettings = {}
-      Object.assign(preparedSettings, state.settings)
-      delete preparedSettings.syncInterval
-      delete preparedSettings.binId
-      state.preparedBackup.settings = preparedSettings
+      state.preparedBackup.settings = state.settings
       state.preparedBackup.collection = state.collection
     },
 
@@ -341,6 +337,9 @@ export default new Vuex.Store({
               storage.set('username', {key: settings.username})
               storage.set('avatar', {key: settings.avatar})
             })
+            if (settings.syncInterval != undefined) {
+              eventBus.$emit('setOption', settings.syncInterval.id)
+            }
           }
 
           if (storedItems.length && Array.isArray(storedItems)) {
