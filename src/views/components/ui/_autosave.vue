@@ -102,8 +102,10 @@ export default {
   mounted() {
     this.restoreSettings()
 
-    eventBus.$on('setOption', data => {
-      this.setOption(data)
+    eventBus.$on('setOption', id => {
+      if (id != this.options.filter(i => i.selected)[0].id) {
+        this.setOption(id)
+      }
     })
   }
 }
