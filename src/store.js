@@ -338,6 +338,8 @@ export default new Vuex.Store({
           if (Object.keys(settings).length > 0 && typeof settings == 'object') {
             Object.keys(settings).forEach(key => {
               Vue.set(state.settings, key, settings[key])
+              storage.set('username', {key: settings.username})
+              storage.set('avatar', {key: settings.avatar})
             })
           }
 
