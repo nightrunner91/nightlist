@@ -165,7 +165,7 @@
           
           //- PLATFORM
           div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
-            svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platformId")
+            svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platform")
 
     app-placeholder(
       v-if='searchQuery.length && resultsLength == 0'
