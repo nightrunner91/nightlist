@@ -3,7 +3,7 @@
   div(
     class='settings'
     ref='settings'
-    :class='"settings--" + currentClass')
+    :class='["settings--" + settingsPosition, "settings--" + currentClass]')
 
     div(
       class='settings__close'
@@ -84,7 +84,7 @@ import { eventBus } from "../../../main"
 export default {
   name: 'Settings',
   props: {
-    
+    sidebarCollapsed: Boolean
   },
   data() {
     return {
@@ -109,6 +109,14 @@ export default {
     storedAvatar() {
       return this.$store.state.settings.avatar
     },
+
+    settingsPosition() {
+      if (this.sidebarCollapsed) {
+        return 'outside'
+      } else {
+        return 'inside'
+      }
+    }
   },
   watch: {
     storedBin() { this.restoreSettings() },

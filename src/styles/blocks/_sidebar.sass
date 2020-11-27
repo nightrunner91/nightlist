@@ -1,23 +1,117 @@
+$icons-size: 24px
+  
+@mixin themed-colors($category-color)
+  background: -moz-linear-gradient(top,  rgba($category-color, $half-opacity) 0%, rgba($category-color, $light-opacity) 100%)
+  background: -webkit-linear-gradient(top,  rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
+  background: linear-gradient(to bottom,  rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#007db9e8',GradientType=0 )
+  
 .sidebar
-  @extend .pos-relative
   @extend .flex-column
   @extend .base-transition
+  @extend .shadow-5
 
+  position: relative
   width: 25%
   height: 100%
   min-width: 320px
   max-width: $sidebar-width
   padding: $gutter-width * 2 $gutter-width
-  background: -moz-linear-gradient(top,  rgba($clr-black, $light-opacity) 0%, rgba($clr-black, $tiny-opacity) 100%)
-  background: -webkit-linear-gradient(top,  rgba($clr-black, $light-opacity) 0%,rgba($clr-black, $tiny-opacity) 100%)
-  background: linear-gradient(to bottom,  rgba($clr-black, $light-opacity) 0%,rgba($clr-black, $tiny-opacity) 100%)
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#007db9e8',GradientType=0 )
   z-index: 3
+
+  @media #{$lg-up}
+    background: rgba($clr-black, $half-opacity)
+
+  @media #{$lg-dw}
+    position: fixed
+    top: 0
+    left: 0
+    background: rgba($clr-black, $barely-opacity)
+
+  &--collapsed
+    width: $sidebar-collapsed-width
+    min-width: $sidebar-collapsed-width
+    padding: $gutter-width * 2 0
+
+    .sidebar
+      &__profile
+        @extend .pos-absolute
+
+        bottom: $gutter-width * 2
+        left: 0
+        right: 0
+        margin: auto
+      
+      &__avatar
+        width: $gutter-width * 1.5
+        height: $gutter-width * 1.5
+
+        &:before
+          @include svg-icon(strip-unit($gutter-width * 1.5), strip-unit($gutter-width * 1.5), 'avatar')
+
+      &__settings
+        top: initial
+        bottom: $gutter-width
+
+      &__username,
+      &__name,
+      &__badge
+        display: none
+
+      &__menu
+        margin-top: $gutter-width * 3
+
+      &__link
+        @extend .flex-center
+
+      &__icon
+        margin: 0
+
+  &__gradient
+    @extend .pos-absolute
+    @extend .slow-transition
+
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    z-index: -1
+    opacity: $transparent-opacity
+
+    &--active
+      opacity: $active-opacity
+
+    &--dashboard
+      @include themed-colors($clr-dashboard)
+
+    &--games
+      @include themed-colors($clr-games)
+
+    &--tvshows
+      @include themed-colors($clr-tvshows)
+
+    &--films
+      @include themed-colors($clr-films)
+
+    &--anime
+      @include themed-colors($clr-anime)
+
+    &--books
+      @include themed-colors($clr-books)
 
   &--blured
     @include blur
+    @extend .light-opacity
+
+  &__hamburger
+    @extend .pos-absolute
+
+    left: $gutter-width
+    top: $gutter-width * 2
+    z-index: 10
 
   &__profile
+    @extend .pos-relative
     @extend .flex-column
     @extend .align-center
     
@@ -81,7 +175,7 @@
 
   &__icon
     @extend .pos-relative
-    @include icon-size(24, 24)
+    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
 
     margin-right: $gutter-width/3
 
@@ -89,7 +183,7 @@
     @extend .pos-absolute
     @extend .base-transition
     @extend .fill-white
-    @include icon-size(24, 24)
+    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
 
     top: 0
     left: 0
@@ -102,6 +196,7 @@
 
   &__name
     @extend .txt-shadow
+    @extend .no-wrap
     
     line-height: 1
 
@@ -109,15 +204,16 @@
     margin-left: auto
 
   &__settings
-    @include icon-size(24, 24)
+    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     @extend .pos-absolute
     @extend .fill-white
     @extend .cursor-pointer
-    @extend .base-transition
 
-    left: $gutter-width
+    transition: opacity 0.3s ease
+    right: $gutter-width
     top: $gutter-width * 2
     opacity: $passive-opacity
+    z-index: 10
 
     &:hover
       opacity: $active-opacity
@@ -129,7 +225,7 @@
     bottom: $gutter-width * 2
 
     svg
-      @include icon-size(24, 24)
+      @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
       @extend .fill-white
       @extend .cursor-pointer
       @extend .base-transition

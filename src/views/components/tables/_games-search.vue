@@ -41,7 +41,7 @@
         
         //- TITLE
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-16'
+          class='table__cell table__cell--functional grid__col grid__col--lg-15'
           :class='{"table__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
@@ -74,7 +74,7 @@
         
         //- RATING
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-6'
+          class='table__cell table__cell--functional grid__col grid__col--lg-7'
           :class='{"table__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
@@ -121,7 +121,7 @@
           div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
           
           //- TITLE
-          div(class='table__cell grid__col grid__col--lg-16')
+          div(class='table__cell grid__col grid__col--lg-15')
             span {{item.title}}
             a(
               :ref='"redirect"'
@@ -146,7 +146,7 @@
           
           //- RATING
           div(
-            class='table__cell grid__col grid__col--lg-6')
+            class='table__cell grid__col grid__col--lg-7')
             div(class='table__rating')
               svg(
                 class='table__star table__star--active' 

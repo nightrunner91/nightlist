@@ -2,7 +2,7 @@
 
   div(id='app' class='page')
     app-gradients(:current='currentPage')
-    app-sidebar
+    app-sidebar(:current='currentPage')
     app-indicator
     main(class='content' v-scrollbar)
       div(class='content__inner')
@@ -137,4 +137,5 @@ export default {
 
   // Plugins
   @import "styles/plugins/scrollbar"
+  @import "styles/plugins/hamburgers/hamburgers"
 </style>

@@ -29,7 +29,7 @@
       div(class='table__header')
 
         //- ORDER
-        div(class='table__cell grid__col grid__col--lg-1')
+        div(class='table__cell grid__col grid__col--lg-1 grid__col--md-1')
         
         //- TITLE
         div(
@@ -45,7 +45,7 @@
         //- FAVOURITE
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-3'
+          class='table__cell table__cell--functional grid__col grid__col--lg-4'
           :class='{"table__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
           span Favourite
@@ -57,7 +57,7 @@
         //- RATING
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-6'
+          class='table__cell table__cell--functional grid__col grid__col--lg-7'
           :class='{"table__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
@@ -69,10 +69,10 @@
         //- HOURS
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-4'
+          class='table__cell table__cell--functional grid__col grid__col--lg-3'
           :class='{"table__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
-          span Hours played
+          span Hours
           svg(
             v-if='criteria == "hours"'
             class='table__chevron' 
@@ -103,7 +103,7 @@
             @click='editSlot(item.id, $event)')
             
             //- ORDER
-            div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
+            div(class='table__cell grid__col grid__col--lg-1 grid__col--md-1') {{index + 1}}
             
             //- TITLE
             div(
@@ -122,13 +122,13 @@
             //- FAVOURITE
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-3')
+              class='table__cell grid__col grid__col--lg-4')
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
             
             //- RATING
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-6')
+              class='table__cell grid__col grid__col--lg-7')
               div(class='table__rating')
                 svg(
                   class='table__star table__star--active' 
@@ -142,7 +142,7 @@
             //- HOURS
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-4')
+              class='table__cell grid__col grid__col--lg-3')
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
             
@@ -305,7 +305,7 @@ export default {
 
     titleWidth() {
       if (this.id != 'plan_to_play') {
-        return 'grid__col--lg-19'
+        return 'grid__col--lg-18 grid__col--md-18'
       } else {
         return 'grid__col--lg-32'
       }

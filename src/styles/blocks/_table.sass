@@ -33,6 +33,7 @@ $star-size: 24px
         @extend .txt-uppercase
         @extend .small
         @extend .font-sans
+        @extend .no-wrap
 
         color: rgba($clr-white, $half-opacity)
 
@@ -114,7 +115,8 @@ $star-size: 24px
       line-height: 1
 
     &:first-child
-      color: rgba($clr-white, $half-opacity)
+      @extend .small
+      @extend .half-opacity
 
   &__rating
     @extend .pos-relative
@@ -160,11 +162,11 @@ $star-size: 24px
 
   &__tilda
     @extend .pos-absolute
-    @include icon-size(16, 16)
+    @include icon-size(12, 12)
 
     top: -2px
     bottom: 0
-    left: -16px
+    left: -14px
     margin: auto
     opacity: $half-opacity
 

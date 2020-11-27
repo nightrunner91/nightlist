@@ -9,17 +9,12 @@ $close-button-size: 36px
         background: lighten($category-color, $hover-intensity)
   
 .settings
-  @extend .pos-absolute
   @extend .bg-white
   @extend .clr-black
   @extend .base-radius
   @extend .shadow-3
 
-  top: $gutter-width * 2
-  left: $gutter-width
-  width: calc(100% - #{$gutter-width * 2})
-  z-index: 5
-  transform-origin: top left
+  z-index: 15
 
   &-reveal-enter,
   &-reveal-leave-active
@@ -29,6 +24,22 @@ $close-button-size: 36px
   &-reveal-enter-active,
   &-reveal-leave-active
     @extend .base-transition
+
+  &--inside
+    @extend .pos-absolute
+
+    top: $gutter-width * 2
+    right: $gutter-width
+    width: calc(100% - #{$gutter-width * 2})
+    transform-origin: top right
+
+  &--outside
+    @extend .pos-fixed
+
+    bottom: $gutter-width
+    left: $sidebar-collapsed-width + $gutter-width / 2
+    width: 320px
+    transform-origin: bottom left
 
   &--dashboard
     @include themed-colors($clr-dashboard)

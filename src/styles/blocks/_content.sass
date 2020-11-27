@@ -6,4 +6,8 @@
   z-index: 2
 
   &__inner
-    padding: $gutter-width*2 0
+    @media #{$lg-dw}
+      padding: $gutter-width*2
+
+    @media #{$lg-up}
+      padding: $gutter-width*2 0

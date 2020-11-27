@@ -2,9 +2,33 @@
   
   aside(
     class='sidebar'
-    :class='{"sidebar--blured" : modalState.visibility}')
+    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}]')
 
-    div(class='sidebar__profile')
+    div(
+      v-for='route in routes'
+      v-if='route.mainMenu'
+      class='sidebar__gradient'
+      :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
+
+    button(
+      v-if='window.width <= 1366'
+      class='sidebar__hamburger hamburger hamburger--arrowalt'
+      :class='{ "is-active" : !sidebarCollapsed }'
+      type='button'
+      @click='toggleSidebar()')
+      span(class='hamburger-box')
+        span(class='hamburger-inner')
+
+    svg(
+      class='sidebar__settings'
+      @click='openSettings()'): use(xlink:href='#settings')
+
+    transition(name='settings-reveal' mode='out-in')
+      app-settings(v-if='settingsOpened' :sidebarCollapsed='sidebarCollapsed')
+
+    div(
+      class='sidebar__profile'
+      :class='{"sidebar__profile--collapsed" : sidebarCollapsed}')
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
@@ -36,14 +60,6 @@
           v-else
           class='sidebar__badge badge badge--small') {{categoryLength(route.id)}}
 
-    svg(
-      v-if='!settingsOpened'
-      class='sidebar__settings'
-      @click='openSettings()'): use(xlink:href='#settings')
-
-    transition(name='settings-reveal' mode='out-in')
-      app-settings(v-if='settingsOpened')
-
 </template>
 
 <script>
@@ -52,12 +68,24 @@ import { eventBus } from "../../../main"
 export default {
   name: 'Sidebar',
   props: {
-    
+    current: String
   },
   data() {
     return {
-      settingsOpened: false
+      settingsOpened: false,
+      sidebarCollapsed: false,
+      window: {
+        width: 0,
+        height: 0
+      }
     }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   computed: {
     modalState() {
@@ -87,6 +115,15 @@ export default {
     }
   },
   methods: {
+    handleResize() {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+
+      if (window.innerWidth > 1366 && this.sidebarCollapsed) {
+        this.openSidebar()
+      }
+    },
+
     categoryLength(id) {
       return this.$store.state.collection.filter(i => i.category == id).length
     },
@@ -109,6 +146,23 @@ export default {
 
     sendBackup() {
       this.$store.dispatch('sendBackup')
+    },
+
+    gradientActive(name) {
+      if (this.current == name) return true
+      return false
+    },
+
+    toggleSidebar() {
+      this.sidebarCollapsed = !this.sidebarCollapsed
+    },
+
+    openSidebar() {
+      this.sidebarCollapsed = false
+    },
+
+    collapseSidebar() {
+      this.sidebarCollapsed = true
     }
   },
   mounted() {

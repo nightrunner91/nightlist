@@ -1,11 +1,12 @@
 .section
   width: 100%
-  max-width: 1400px
   margin: 0 auto
-  padding: 0 $gutter-width*2
+  max-width: 1200px
+  padding: 0 $gutter-width
 
   &__content
     @extend .base-transition
     
     &--blured
       @include blur
+      @extend .passive-opacity
