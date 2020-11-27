@@ -1,9 +1,9 @@
 $icons-size: 24px
   
 @mixin themed-colors($category-color)
-  background: -moz-linear-gradient(top,  rgba($category-color, $half-opacity) 0%, rgba($category-color, $light-opacity) 100%)
-  background: -webkit-linear-gradient(top,  rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
-  background: linear-gradient(to bottom,  rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
+  background: -moz-linear-gradient(bottom,  rgba($category-color, $half-opacity) 0%, rgba($category-color, $light-opacity) 100%)
+  background: -webkit-linear-gradient(bottom,  rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
+  background: linear-gradient(to top,  rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#007db9e8',GradientType=0 )
   
 .sidebar
@@ -20,7 +20,7 @@ $icons-size: 24px
   z-index: 3
 
   @media #{$lg-up}
-    background: rgba($clr-black, $half-opacity)
+    background: rgba($clr-black, $passive-opacity)
 
   @media #{$lg-dw}
     position: fixed
