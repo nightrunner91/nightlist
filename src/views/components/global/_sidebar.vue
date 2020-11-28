@@ -40,7 +40,7 @@
         v-if='route.mainMenu'
         :to='route.path'
         class='sidebar__link'
-        @click.native='closeSettings()'
+        @click.native='closeSettings(), collapseSidebar()'
         :key='route.id')
         div(
           class='sidebar__icon'
@@ -162,8 +162,10 @@ export default {
     },
 
     collapseSidebar() {
-      this.sidebarCollapsed = true
-    }
+      if (this.window.width <= 1366) {
+        this.sidebarCollapsed = true
+      }
+    },
   },
   mounted() {
     eventBus.$on('closeSettings', () => {
