@@ -50,8 +50,8 @@
         div(
           class='sidebar__icon'
           v-else)
-          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(xlink:href='#bookmark-passive')
-          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(xlink:href='#bookmark-active')
+          svg(class='sidebar__bookmark sidebar__bookmark--passive'): use(:xlink:href="'#bookmark-passive-' + route.id")
+          svg(class='sidebar__bookmark sidebar__bookmark--active'): use(:xlink:href="'#bookmark-active-' + route.id")
         span(class='sidebar__name') {{route.name}}
         span(
           v-if='route.id == "dashboard"'
