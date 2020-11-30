@@ -37,7 +37,21 @@ export default {
       return this.$store.state.settings.binId
     }
   },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
+  },
   methods: {
+    handleResize() {
+      this.$store.commit('SAVE_WINDOW_PARAMS', {
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    },
+
     openModal(purpose) {
       this.$store.commit('CHANGE_MODAL_STATE', {
         visibility: true,

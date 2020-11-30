@@ -56,6 +56,17 @@ export default new Vuex.Store({
       avatar: '',
     },
     content: {},
+    windowParams: {
+      width: undefined,
+      height: undefined
+    },
+    breakpoints: {
+      mb: 320,
+      xs: 480,
+      sm: 648,
+      md: 960,
+      lg: 1366
+    },
     modalState: {
       visibility: false,
       purpose: undefined
@@ -157,6 +168,11 @@ export default new Vuex.Store({
   },
   mutations: {
 
+    SAVE_WINDOW_PARAMS(state, { width, height }) {
+      state.windowParams.width = width
+      state.windowParams.height = height
+    },
+
     CHANGE_MODAL_STATE(state, { visibility, purpose }) {
       state.modalState.visibility = visibility
       if (purpose != undefined) state.modalState.purpose = purpose
@@ -198,6 +214,7 @@ export default new Vuex.Store({
       for (let index = 0; index < state.collection.length; index++) {
         Vue.delete(state.collection[index], 'refreshed')
       }
+      state.preparedBackup.date = Date.now()
       state.preparedBackup.settings = state.settings
       state.preparedBackup.collection = state.collection
     },

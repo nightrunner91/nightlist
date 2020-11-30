@@ -11,7 +11,7 @@
       :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
 
     button(
-      v-if='window.width <= 1366'
+      v-if='windowParams.width <= breakpoints.lg'
       class='sidebar__hamburger hamburger hamburger--arrowalt'
       :class='{ "is-active" : !sidebarCollapsed }'
       type='button'
@@ -74,21 +74,18 @@ export default {
     return {
       settingsOpened: false,
       sidebarCollapsed: false,
-      noTransition: false,
-      window: {
-        width: 0,
-        height: 0
-      }
+      noTransition: false
     }
   },
-  created() {
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
-  },
-  destroyed() {
-    window.removeEventListener('resize', this.handleResize)
-  },
   computed: {
+    windowParams() {
+      return this.$store.state.windowParams
+    },
+
+    breakpoints() {
+      return this.$store.state.breakpoints
+    },
+
     modalState() {
       return this.$store.state.modalState
     },
@@ -98,8 +95,10 @@ export default {
     },
 
     avatarStyles() {
-      if (this.$store.state.settings.avatar.length > 0) {
-        return 'background-image: url(' + this.$store.state.settings.avatar + ')'
+      let storedAvatar = this.$store.state.settings.avatar
+
+      if (storedAvatar.length > 0) {
+        return 'background-image: url(' + storedAvatar + ')'
       } else {
         return 'background-image: url()'
       }
@@ -113,15 +112,21 @@ export default {
       let rName = this.$route.name
       if (rName != null) return rName
       else return
-    }
+    },
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     handleResize() {
-      this.window.width = window.innerWidth
-      this.window.height = window.innerHeight
-
-      if (window.innerWidth > 1366 && this.sidebarCollapsed) {
+      if (this.windowParams.width > this.breakpoints.lg && this.sidebarCollapsed) {
         this.openSidebar()
+      } else {
+        this.collapseSidebar()
       }
     },
 
@@ -163,10 +168,10 @@ export default {
     },
 
     collapseSidebar(scenario) {
-      if (this.window.width <= 1366) {
+      if (this.windowParams.width <= this.breakpoints.lg) {
         if (scenario == 'start') {
           this.noTransition = true
-          setTimeout(() => this.noTransition = false, 1000)
+          setTimeout(() => this.noTransition = false, 300)
         }
         this.sidebarCollapsed = true
       }
@@ -185,6 +190,7 @@ export default {
       this.sendBackup()
     })
 
+    this.handleResize()
     this.collapseSidebar('start')
   }
 }
