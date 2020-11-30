@@ -24,10 +24,12 @@
                 minlength='3'
                 maxlength='50'
                 type='text'
+                ref='title'
                 class='input__field' 
                 :class='{"input__field--invalid" : valid == false }'
                 autocomplete='off' 
                 @input='removeValidation'
+                v-if='titleVisible'
                 v-model='current.title'
                 required)
 
@@ -158,7 +160,8 @@ export default {
     return {
       valid: undefined,
       current: {},
-      confirmActive: false
+      confirmActive: false,
+      titleVisible: false
     }
   },
   methods: {
@@ -293,6 +296,11 @@ export default {
 
     sethoursApproximate(data) {
       this.current.hoursApproximate = data
+    },
+
+    focusTitle() {
+      this.titleVisible = true
+      this.$nextTick(() => this.$refs.title.focus())
     }
   },
   computed: {
@@ -317,7 +325,14 @@ export default {
       if (e.key == "Escape" || e.key == "Esc" || e.keyCode == 27) this.closeModal()
     })
 
-    eventBus.$on('modalOpened', () => this.assignPayload())
+    eventBus.$on('openModal', () => {
+      this.focusTitle()
+    })
+
+    eventBus.$on('modalOpened', () => {
+      this.assignPayload()
+    })
+
     eventBus.$on('modalClosed', () => {
       this.assignPayload()
       this.removeValidation()
