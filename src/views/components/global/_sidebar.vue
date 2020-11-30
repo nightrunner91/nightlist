@@ -2,7 +2,7 @@
   
   aside(
     class='sidebar'
-    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}]')
+    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--notransition" : noTransition}]')
 
     div(
       v-for='route in routes'
@@ -74,6 +74,7 @@ export default {
     return {
       settingsOpened: false,
       sidebarCollapsed: false,
+      noTransition: false,
       window: {
         width: 0,
         height: 0
@@ -163,9 +164,11 @@ export default {
 
     collapseSidebar() {
       if (this.window.width <= 1366) {
+        this.noTransition = true
+        setTimeout(() => this.noTransition = false, 1000)
         this.sidebarCollapsed = true
       }
-    },
+    }
   },
   mounted() {
     eventBus.$on('closeSettings', () => {
@@ -179,6 +182,8 @@ export default {
     eventBus.$on('sendBackup', () => {
       this.sendBackup()
     })
+
+    this.collapseSidebar()
   }
 }
 </script>
