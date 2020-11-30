@@ -45,7 +45,7 @@
         //- FAVOURITE
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-4'
+          class='table__cell table__cell--functional grid__col grid__col--lg-4 grid__col--md-3'
           :class='{"table__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
           span Favourite
@@ -57,7 +57,7 @@
         //- RATING
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-7'
+          class='table__cell table__cell--functional grid__col grid__col--lg-7 grid__col--md-6'
           :class='{"table__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
@@ -69,7 +69,7 @@
         //- HOURS
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-3'
+          class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--md-3'
           :class='{"table__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
           span Hours
@@ -80,7 +80,7 @@
         
         //- PLATFORM
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--right'
+          class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--right'
           :class='{"table__cell--active" : criteria == "platform"}'
           @click='sortData("platform", "switch")')
           span Platform
@@ -122,13 +122,13 @@
             //- FAVOURITE
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-4')
+              class='table__cell grid__col grid__col--lg-4 grid__col--md-3')
               svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
             
             //- RATING
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-7')
+              class='table__cell grid__col grid__col--lg-7 grid__col--md-6')
               div(class='table__rating')
                 svg(
                   class='table__star table__star--active' 
@@ -142,12 +142,12 @@
             //- HOURS
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-3')
+              class='table__cell grid__col grid__col--lg-3 grid__col--md-3')
               svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='item.hours != undefined') {{item.hours}}
             
             //- PLATFORM
-            div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
+            div(class='table__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--right')
               svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platform")
 
 </template>
@@ -305,9 +305,9 @@ export default {
 
     titleWidth() {
       if (this.id != 'plan_to_play') {
-        return 'grid__col--lg-18 grid__col--md-18'
+        return 'grid__col--lg-18 grid__col--md-20'
       } else {
-        return 'grid__col--lg-32'
+        return 'grid__col--lg-32 grid__col--md-32'
       }
     },
   },
