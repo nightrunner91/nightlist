@@ -61,10 +61,10 @@ export default new Vuex.Store({
       height: undefined
     },
     breakpoints: {
-      mb: 320,
-      xs: 480,
-      sm: 648,
-      md: 960,
+      mb: 480,
+      xs: 768,
+      sm: 960,
+      md: 1280,
       lg: 1366
     },
     modalState: {

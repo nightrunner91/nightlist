@@ -112,7 +112,12 @@ $star-size: 24px
     padding: 0
 
     span
+      @extend .no-overflow
+      @extend .no-wrap
+      
       line-height: 1
+      max-width: 320px
+      text-overflow: ellipsis
 
     &:first-child
       @extend .small
