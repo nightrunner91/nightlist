@@ -162,10 +162,12 @@ export default {
       this.sidebarCollapsed = false
     },
 
-    collapseSidebar() {
+    collapseSidebar(scenario) {
       if (this.window.width <= 1366) {
-        this.noTransition = true
-        setTimeout(() => this.noTransition = false, 1000)
+        if (scenario == 'start') {
+          this.noTransition = true
+          setTimeout(() => this.noTransition = false, 1000)
+        }
         this.sidebarCollapsed = true
       }
     }
@@ -183,7 +185,7 @@ export default {
       this.sendBackup()
     })
 
-    this.collapseSidebar()
+    this.collapseSidebar('start')
   }
 }
 </script>
