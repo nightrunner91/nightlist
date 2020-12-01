@@ -64,3 +64,11 @@
 @mixin blur()
   filter: blur(3px)
   pointer-events: none
+
+
+@mixin truncate($val)
+  @extend .no-overflow
+  @extend .no-wrap
+
+  max-width: $val + px
+  text-overflow: ellipsis

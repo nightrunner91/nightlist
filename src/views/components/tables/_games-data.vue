@@ -26,15 +26,19 @@
       //- ====== -//
       //- HEADER -//
       //- ====== -//
-      div(class='table__header')
+      
+      //- DESKTOP -//
+      div(
+        class='table__header'
+        v-if='currentStructure == "desktop"')
 
         //- ORDER
-        div(class='table__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1')
+        div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1')
         
         //- TITLE
         div(
-          class='table__cell table__cell--functional grid__col'
-          :class='[{"table__cell--active" : criteria == "title"}, titleWidth]'
+          class='slot__cell slot__cell--functional grid__col'
+          :class='[{"slot__cell--active" : criteria == "title"}, titleWidth]'
           @click='sortData("title", "switch")')
           span Title
           svg(
@@ -45,8 +49,8 @@
         //- FAVOURITE
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
-          :class='{"table__cell--active" : criteria == "favourite"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
+          :class='{"slot__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
           span Favourite
           svg(
@@ -57,8 +61,8 @@
         //- RATING
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-7 grid__col--md-7 grid__col--sm-8'
-          :class='{"table__cell--active" : criteria == "rating"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-7 grid__col--md-7 grid__col--sm-8'
+          :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
           svg(
@@ -69,8 +73,8 @@
         //- HOURS
         div(
           v-if='id != "plan_to_play"'
-          class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
-          :class='{"table__cell--active" : criteria == "hours"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
+          :class='{"slot__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
           span Hours
           svg(
@@ -80,8 +84,8 @@
         
         //- PLATFORM
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
-          :class='{"table__cell--active" : criteria == "platform"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
+          :class='{"slot__cell--active" : criteria == "platform"}'
           @click='sortData("platform", "switch")')
           span Platform
           svg(
@@ -89,66 +93,126 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
 
-      //- BODY
-      div(class='table__body')
+      //- ==== -//
+      //- BODY -//
+      //- ==== -//
+
+      //- DESKTOP -//
+      div(
+        class='table__body'
+        v-if='currentStructure == "desktop"')
 
         transition-group
 
           div(
-            class='table__item' 
-            ref='tableItem'
-            :key='item.id'
-            :class='{"table__item--refreshed" : item.refreshed }'
-            v-for='(item, index) in data'
-            @click='editSlot(item.id, $event)')
+            class='slot' 
+            ref='slot'
+            :key='slot.id'
+            :class='{"slot--refreshed" : slot.refreshed }'
+            v-for='(slot, index) in data'
+            @click='editSlot(slot.id, $event)'
+            v-ripple)
             
             //- ORDER
-            div(class='table__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
+            div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
             div(
-              class='table__cell grid__col'
+              class='slot__cell grid__col'
               :class='titleWidth')
-              span {{item.title}}
+              span {{slot.title}}
               a(
                 :ref='"redirect"'
                 rel='nofollow'
-                :href='item.link'
+                :href='slot.link'
                 target='_blank"'
-                class='table__link'
-                v-if='item.link.length')
-                svg(class='table__redirect'): use(xlink:href='#link')
+                class='slot__link'
+                v-if='slot.link.length')
+                svg(class='slot__redirect'): use(xlink:href='#link')
             
             //- FAVOURITE
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
-              svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
+              class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
+              svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-7 grid__col--md-6 grid__col--sm-8')
-              div(class='table__rating')
+              class='slot__cell grid__col grid__col--lg-7 grid__col--md-6 grid__col--sm-8')
+              div(class='slot__rating')
                 svg(
-                  class='table__star table__star--active' 
-                  :class='"table__star--" + (index + 1)'
-                  v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
+                  class='slot__star slot__star--active' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(star, index) in slot.rating'): use(xlink:href='#star-active-w')
                 svg(
-                  class='table__star table__star--passive' 
-                  :class='"table__star--" + (index + 1)'
+                  class='slot__star slot__star--passive' 
+                  :class='"slot__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             
             //- HOURS
             div(
               v-if='id != "plan_to_play"'
-              class='table__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
-              svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-              span(v-if='item.hours != undefined') {{item.hours}}
+              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
+              svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
+              span(v-if='slot.hours != undefined') {{slot.hours}}
             
             //- PLATFORM
-            div(class='table__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
-              svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platform")
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
+              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
+
+      //- TABLETS -//
+      div(
+        class='table__body'
+        v-if='currentStructure == "tablets"')
+
+        transition-group
+
+          div(
+            class='slot' 
+            ref='slot'
+            :key='slot.id'
+            :class='{"slot--refreshed" : slot.refreshed }'
+            v-for='(slot, index) in data'
+            @click='editSlot(slot.id, $event)'
+            v-ripple)
+
+            //- header
+            div(class='slot__header')
+
+              div(class='slot__index') {{ index + 1 }}
+              div(class='slot__title')
+                span {{slot.title}}
+                a(
+                  :ref='"redirect"'
+                  rel='nofollow'
+                  :href='slot.link'
+                  target='_blank"'
+                  class='slot__link'
+                  v-if='slot.link.length')
+                  svg(class='slot__redirect'): use(xlink:href='#link')
+              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
+
+            div(
+              class='slot__bottom'
+              v-if='id != "plan_to_play"')
+
+              div(class='slot__rating')
+                svg(
+                  class='slot__star slot__star--active' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(star, index) in slot.rating'): use(xlink:href='#star-active-w')
+                svg(
+                  class='slot__star slot__star--passive' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+
+              svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
+
+              div(class='slot__hours')
+                svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
+                span(v-if='slot.hours != undefined') {{slot.hours}}
+                svg(class='slot__clock'): use(xlink:href='#clock')
 
 </template>
 
@@ -167,8 +231,16 @@ export default {
       direction: true,
       data: [],
       tableVisible: true,
-      noTransition: true
+      noTransition: true,
+      currentStructure: undefined
     }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     tableName(id) {
@@ -277,13 +349,23 @@ export default {
     },
 
     editSlot(id, event) {
-      if (event.target.className == 'table__link') return
+      if (event.target.className == 'slot__link') return
       else {
         this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
         eventBus.$emit('closeSettings')
       }
     },
+
+    handleResize() {
+      if (this.windowParams.width <= this.breakpoints.sm) {
+        this.currentStructure = 'tablets'
+      }
+
+      if (this.windowParams.width > this.breakpoints.sm) {
+        this.currentStructure = 'desktop'
+      }
+    }
   },
   computed: {
     games() {
@@ -300,7 +382,17 @@ export default {
     },
 
     tableHeight() {
-      return 'max-height: ' + (40 * this.data.length + 40) + 'px'
+      if (this.windowParams.width <= this.breakpoints.sm && this.id != 'plan_to_play') {
+        return 'max-height: ' + (95 * this.data.length + 40) + 'px'
+      }
+
+      if (this.windowParams.width <= this.breakpoints.sm && this.id == 'plan_to_play') {
+        return 'max-height: ' + (55 * this.data.length + 40) + 'px'
+      }
+      
+      if (this.windowParams.width > this.breakpoints.sm) {
+        return 'max-height: ' + (40 * this.data.length + 40) + 'px'
+      }
     },
 
     titleWidth() {
@@ -310,6 +402,14 @@ export default {
         return 'grid__col--lg-32 grid__col--md-32 grid__col--sm-32'
       }
     },
+
+    windowParams() {
+      return this.$store.state.windowParams
+    },
+
+    breakpoints() {
+      return this.$store.state.breakpoints
+    }
   },
   mounted() {
     this.stashData()

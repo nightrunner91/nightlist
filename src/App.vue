@@ -137,6 +137,7 @@ export default {
   @import "styles/blocks/badge"
   @import "styles/blocks/title"
   @import "styles/blocks/table"
+  @import "styles/blocks/slot"
   @import "styles/blocks/search"
   @import "styles/blocks/input"
   @import "styles/blocks/checkbox"
