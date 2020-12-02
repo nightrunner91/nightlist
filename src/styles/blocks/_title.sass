@@ -15,6 +15,9 @@
     margin-bottom: $gutter-width/1.5
     padding: 0 $gutter-width
 
+    @media #{$mb-dw}
+      padding: 0 $gutter-width/2
+
     &:hover
       .title
         &__icon,
@@ -49,6 +52,9 @@
   &__badge
     margin: 0 $gutter-width/2
 
+    @media #{$mb-dw}
+      margin: 0 $gutter-width/4
+
   &__chevron
     @extend .pos-relative
     @extend .base-transition
@@ -64,6 +70,9 @@
 
     &--notransition
       @extend .no-transition
+
+    @media #{$mb-dw}
+      @include icon-size(24, 24)
 
   &__button
     margin-left: auto

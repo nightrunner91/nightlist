@@ -28,6 +28,18 @@ $icons-size: 24px
     left: 0
     background: rgba($clr-black, $barely-opacity)
 
+  @media #{$mb-dw}
+    position: fixed
+    width: 100% !important
+    height: 50px !important
+    max-height: 50px !important
+    top: initial
+    left: 0
+    bottom: 0
+    padding: 0 !important
+    min-width: initial
+    max-width: initial
+
   &--notransition
     @extend .no-transition
 
@@ -63,6 +75,9 @@ $icons-size: 24px
 
       &__menu
         margin-top: $gutter-width * 3
+
+        @media #{$mb-dw}
+          margin-top: 0
 
       &__link
         @extend .flex-center
@@ -150,6 +165,13 @@ $icons-size: 24px
 
     min-height: 26px
 
+  &__menu
+    @media #{$mb-dw}
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 100%
+
   &__link
     @extend .pos-relative
     @extend .flex
@@ -164,6 +186,11 @@ $icons-size: 24px
 
     &:first-child
       margin-bottom: $gutter-width/2
+
+    @media #{$mb-dw}
+      margin-bottom: 0 !important
+      margin-right: $gutter-width/3
+      margin-left: $gutter-width/3
 
     &--active
       color: $clr-white

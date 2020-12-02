@@ -6,6 +6,9 @@ $star-size: 24px
 
   margin-bottom: $gutter-width * 2
 
+  @media #{$mb-dw}
+    margin-bottom: $gutter-width/1.5
+
   &--hidden
     max-height: 0px !important
     opacity: $transparent-opacity

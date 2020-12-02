@@ -11,7 +11,7 @@
       :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
 
     button(
-      v-if='windowParams.width <= breakpoints.lg'
+      v-if='windowParams.width <= breakpoints.lg && windowParams.width > breakpoints.mb'
       class='sidebar__hamburger hamburger hamburger--arrowalt'
       :class='{ "is-active" : !sidebarCollapsed }'
       type='button'
@@ -20,6 +20,7 @@
         span(class='hamburger-inner')
 
     svg(
+      v-if='windowParams.width > breakpoints.mb'
       class='sidebar__settings'
       @click='openSettings()'): use(xlink:href='#settings')
 
@@ -27,6 +28,7 @@
       app-settings(v-if='settingsOpened' :sidebarCollapsed='sidebarCollapsed')
 
     div(
+      v-if='windowParams.width > breakpoints.mb'
       class='sidebar__profile'
       :class='{"sidebar__profile--collapsed" : sidebarCollapsed}')
       div(

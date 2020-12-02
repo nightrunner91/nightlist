@@ -8,7 +8,9 @@
     div(
       class='title title--secondary'
       @click='switchTable()')
-      svg(class='title__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + id")
+      svg(
+        class='title__icon'
+        v-if='windowParams.width > breakpoints.mb'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + id")
       h2(class='title__name') {{tableName(id)}}
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
       svg(
@@ -383,11 +385,11 @@ export default {
 
     tableHeight() {
       if (this.windowParams.width <= this.breakpoints.sm && this.id != 'plan_to_play') {
-        return 'max-height: ' + (95 * this.data.length + 40) + 'px'
+        return 'max-height: ' + ((95 + 7.5) * this.data.length + 40) + 'px'
       }
 
       if (this.windowParams.width <= this.breakpoints.sm && this.id == 'plan_to_play') {
-        return 'max-height: ' + (55 * this.data.length + 40) + 'px'
+        return 'max-height: ' + ((55 + 7.5) * this.data.length + 40) + 'px'
       }
       
       if (this.windowParams.width > this.breakpoints.sm) {

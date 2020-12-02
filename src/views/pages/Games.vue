@@ -15,10 +15,13 @@
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
           class='button button--games title__button'
+          :class='{"button--iconed" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
           v-ripple)
           svg(class='button__icon'): use(xlink:href='#add')
-          span(class='button__text') Add New
+          span(
+            class='button__text'
+            v-if='windowParams.width > breakpoints.mb') Add New
 
       games-search(v-if='totalGames > 0')
 
@@ -77,7 +80,15 @@ export default {
         title: 'Collection is empty',
         icon: 'no-data'
       }
-    }
+    },
+
+    windowParams() {
+      return this.$store.state.windowParams
+    },
+
+    breakpoints() {
+      return this.$store.state.breakpoints
+    },
   },
   methods: {
     addSlot() {
