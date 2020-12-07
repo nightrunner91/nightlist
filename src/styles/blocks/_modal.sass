@@ -59,7 +59,7 @@ $close-button-size: 36px
   min-width: 320px
   will-change: opacity
 
-  @media #{$xs-dw}
+  @media #{$mb-dw}
     width: 100%
     max-width: 100%
     min-width: 100%
@@ -104,7 +104,7 @@ $close-button-size: 36px
     &:hover
       box-shadow: $shadow-3
 
-    @media #{$xs-dw}
+    @media #{$mb-dw}
       width: $close-button-size/1.2
       height: $close-button-size/1.2
       top: $close-button-size/6
@@ -116,12 +116,16 @@ $close-button-size: 36px
     @extend .base-transition
     @extend .fill-white
 
-    @media #{$xs-dw}
+    @media #{$mb-dw}
       @include icon-size(strip-unit($close-button-size)/1.8, strip-unit($close-button-size)/1.8)
 
   &__content
-    @media #{$xs-dw}
+    height: 485px
+    max-height: 485px
+
+    @media #{$mb-dw}
       height: calc(100% - 70px)
+      max-height: initial
 
   &__fields
     padding: $gutter-width/2 $gutter-width/1.5 !important
@@ -138,7 +142,7 @@ $close-button-size: 36px
     border-bottom-left-radius: $base-radius !important
     border-bottom-right-radius: $base-radius !important
 
-    @media #{$xs-dw}
+    @media #{$mb-dw}
       position: absolute
       width: 100%
       bottom: 0

@@ -9,6 +9,9 @@
   &__title
     margin-bottom: $gutter-width
 
+    @media #{$sm-dw}
+      margin-bottom: $gutter-width/2
+
   &__icon
     @include icon-size(48, 48)
     @extend .fill-white

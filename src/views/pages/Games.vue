@@ -15,7 +15,7 @@
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
           class='button button--games title__button'
-          :class='{"button--iconed" : windowParams.width <= breakpoints.mb}'
+          :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
           v-ripple)
           svg(class='button__icon'): use(xlink:href='#add')
