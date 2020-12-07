@@ -14,6 +14,9 @@
   background: $clr-grey
   padding: 0 $gutter-width/2
 
+  @media #{$xs-dw}
+    padding: 0 $gutter-width/2.5
+
   &:hover
     box-shadow: $shadow-2
 
@@ -35,6 +38,9 @@
 
     margin-right: $gutter-width/8
     top: -1px
+
+  &__text
+    @extend .no-wrap
 
   &--games
     .button

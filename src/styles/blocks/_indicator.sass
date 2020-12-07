@@ -7,6 +7,10 @@ $loading-size: 24px
   right: $gutter-width
   z-index: 99
 
+  @media #{$xs-dw}
+    bottom: $sidebar-mobile-height + $loading-size/2
+    right: $gutter-width/2
+
   &__loader
     @extend .pos-absolute
     @extend .base-transition

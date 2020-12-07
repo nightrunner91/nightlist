@@ -1,10 +1,11 @@
 .title
   @extend .flex
   @extend .align-center
+  @extend .no-wrap
 
   &--main
     margin-bottom: $gutter-width
-    padding: 0 $gutter-width/2
+    padding: 0 $gutter-width/2.5
 
   &--secondary
     @extend .cursor-pointer
@@ -50,10 +51,10 @@
     margin-right: $gutter-width/3
 
   &__badge
-    margin: 0 $gutter-width/2
+    margin-left: $gutter-width/2
 
     @media #{$mb-dw}
-      margin: 0 $gutter-width/4
+      margin-left: $gutter-width/4
 
   &__chevron
     @extend .pos-relative

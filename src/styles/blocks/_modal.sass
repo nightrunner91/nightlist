@@ -45,7 +45,7 @@ $close-button-size: 36px
   left: 0
   right: 0
   background: rgba($clr-black, $passive-opacity)
-  z-index: 9
+  z-index: 9999
 
 .modal
   @extend .pos-relative
@@ -58,6 +58,12 @@ $close-button-size: 36px
   max-width: 400px
   min-width: 320px
   will-change: opacity
+
+  @media #{$xs-dw}
+    width: 100%
+    max-width: 100%
+    min-width: 100%
+    height: 100%
 
   &-fade-enter,
   &-fade-leave-active
@@ -98,11 +104,24 @@ $close-button-size: 36px
     &:hover
       box-shadow: $shadow-3
 
+    @media #{$xs-dw}
+      width: $close-button-size/1.2
+      height: $close-button-size/1.2
+      top: $close-button-size/6
+      right: $close-button-size/6
+      box-shadow: $shadow-2
+
   &__cross
     @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
     @extend .base-transition
+    @extend .fill-white
 
-    fill: $clr-white
+    @media #{$xs-dw}
+      @include icon-size(strip-unit($close-button-size)/1.8, strip-unit($close-button-size)/1.8)
+
+  &__content
+    @media #{$xs-dw}
+      height: calc(100% - 70px)
 
   &__fields
     padding: $gutter-width/2 $gutter-width/1.5 !important
@@ -113,10 +132,17 @@ $close-button-size: 36px
     @extend .align-center
     @extend .bg-grey
 
-    padding: $gutter-width/2 $gutter-width/1.5
+    height: 70px
+    padding: 0 $gutter-width/1.5
     border-top: 1px solid rgba($clr-black, $tiny-opacity)
     border-bottom-left-radius: $base-radius !important
     border-bottom-right-radius: $base-radius !important
+
+    @media #{$xs-dw}
+      position: absolute
+      width: 100%
+      bottom: 0
+      left: 0
 
   &__confirmation
     @extend .flex

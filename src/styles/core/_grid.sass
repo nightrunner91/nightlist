@@ -1,8 +1,9 @@
 // Grid settings
-$num-cols:        36
-$gutter-width:    30px
-$sidebar-width:   360px
+$num-cols:                36
+$gutter-width:            30px
+$sidebar-width:           360px
 $sidebar-collapsed-width: 80px
+$sidebar-mobile-height:   50px
 
 // Breakpoints
 $mb-screen: 480px !default // mobile
@@ -53,23 +54,22 @@ $lg-dw: "screen and (max-width : #{$lg-screen})" !default
       @extend .justify-end
 
     // MB settings
-    @media #{$mb-up}
-      $i: 1
-      @while $i <= $num-cols 
-        $perc: unquote((100 / ($num-cols / $i)) + "%")
-        &--mb-#{$i}
-          flex-basis: $perc
-          max-width: $perc
-          -ms-flex-preferred-size: $perc
-        
-        $i: $i + 1
+    $i: 1
+    @while $i <= $num-cols 
+      $perc: unquote((100 / ($num-cols / $i)) + "%")
+      &--mb-#{$i}
+        flex-basis: $perc
+        max-width: $perc
+        -ms-flex-preferred-size: $perc
+      
+      $i: $i + 1
 
-      $i: 1
-      @while $i <= $num-cols 
-        $perc: unquote((100 / ($num-cols / $i)) + "%")
-        &--offset-mb-#{$i} 
-          margin-left: $perc
-        $i: $i + 1
+    $i: 1
+    @while $i <= $num-cols 
+      $perc: unquote((100 / ($num-cols / $i)) + "%")
+      &--offset-mb-#{$i} 
+        margin-left: $perc
+      $i: $i + 1
 
     // XS settings
     @media #{$xs-up}
