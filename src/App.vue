@@ -13,13 +13,12 @@
 
 <script>
 import { eventBus } from "./main"
-import { projectName } from "./main"
 
 export default {
   name: 'App',
   data() {
     return {
-      interval: null
+      
     }
   },
   computed: {
@@ -27,10 +26,6 @@ export default {
       let rName = this.$route.name
       if (rName != null) return rName
       else return
-    },
-
-    syncInterval() {
-      return this.$store.state.settings.syncInterval
     },
 
     binId() {
@@ -69,34 +64,10 @@ export default {
 
     setDefaultContent() {
       this.$store.commit('CHANGE_CONTENT', this.$store.state[this.currentPage.toLowerCase()].default)
-    },
-
-    resetAutoSync() {
-      clearInterval(this.interval)
-    },
-
-    setAutoSync() {
-      if (this.binId.length > 0 && Object.keys(this.syncInterval).length > 0) {
-        this.interval = setInterval(() => {
-          this.$store.dispatch('sendBackup')
-        }, this.syncInterval.ms)
-      }
     }
   },
   mounted() {
-    this.$store.dispatch('restoreCollection')
-    this.$store.dispatch('restoreSettings')
-
-    this.setAutoSync()
-
-    eventBus.$on('forceAutoSync', () => {
-      this.resetAutoSync()
-      this.setAutoSync()
-    })
-
-    eventBus.$on('resetAutoSync', () => {
-      this.resetAutoSync()
-    })
+    this.$store.dispatch('getBackup')
 
     this.$router.push('/dashboard')
 

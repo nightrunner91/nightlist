@@ -236,6 +236,7 @@ export default {
           this.current.refreshed = true
           this.$store.commit('APPLY_SLOT', { content: this.current, scenario: 'change' })
           this.$storage.set('slot_' + this.current.id, { key: this.current })
+          this.$store.dispatch('sendBackup')
           this.closeModal()
           this.changeConfirm(false)
         }

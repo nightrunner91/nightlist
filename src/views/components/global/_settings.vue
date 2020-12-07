@@ -26,28 +26,6 @@
           @input='saveBinId()'
           required)
 
-      app-autosave(v-if='binId.length > 0')
-
-      div(
-        class='input'
-        v-if='binId.length > 0')
-        label(class='input__label') Manual synchronization
-        div(class='input__buttons')
-          div(
-            class='button' 
-            :class='"button--" + currentClass'
-            @click='getBackup()'
-            v-ripple)
-            svg(class='button__icon'): use(xlink:href='#backup-get')
-            span(class='button__text') Restore
-          div(
-            class='button' 
-            :class='"button--" + currentClass'
-            @click='sendBackup()'
-            v-ripple)
-            svg(class='button__icon'): use(xlink:href='#backup-send')
-            span(class='button__text') Upload
-
       div(
         class='input'
         v-if='binId.length > 0')
@@ -147,14 +125,6 @@ export default {
       if (this.storedBin.length > 0) this.binId = this.storedBin
       if (this.storedUsername.length > 0) this.username = this.storedUsername
       if (this.storedAvatar.length > 0) this.avatar = this.storedAvatar
-    },
-
-    getBackup() {
-      eventBus.$emit('getBackup')
-    },
-
-    sendBackup() {
-      eventBus.$emit('sendBackup')
     }
   },
   mounted() {

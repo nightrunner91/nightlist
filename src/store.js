@@ -51,7 +51,6 @@ export default new Vuex.Store({
     collection: [],
     settings: {
       binId: '',
-      syncInterval: {},
       username: '',
       avatar: '',
     },
@@ -245,7 +244,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    restoreCollection({ commit }) {
+    async restoreCollection({ commit }) {
       Object.values(localStorage).forEach(item => {
         if (isJson(item)) {
           let parsed = JSON.parse(item)
@@ -261,16 +260,14 @@ export default new Vuex.Store({
       })
     },
 
-    restoreSettings({ commit }) {
+    async restoreSettings({ commit }) {
       let storage = this._vm.$storage
 
       let binId = storage.get('binId')
-      let syncInterval = storage.get('syncInterval')
       let username = storage.get('username')
       let avatar = storage.get('avatar')
 
       if (binId != null) commit('SAVE_BIN_ID', binId.key)
-      if (syncInterval != null) commit('SAVE_SYNC_INTERVAL', syncInterval.key)
       if (username != null) commit('SAVE_USERNAME', username.key)
       if (avatar != null) commit('SAVE_AVATAR', avatar.key)
     },
@@ -294,7 +291,7 @@ export default new Vuex.Store({
         .then(() => {
           commit('CHANGE_SERVER_STATE', {
             status: 'success',
-            message: 'collection uploaded'
+            message: 'saved'
           })
         })
 
@@ -308,7 +305,10 @@ export default new Vuex.Store({
         })
     },
 
-    getBackup({ state, commit }) {
+    async getBackup({ dispatch, state, commit }) {
+      await dispatch('restoreCollection')
+      await dispatch('restoreSettings')
+
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
         message: 'loading collection...'
@@ -323,7 +323,7 @@ export default new Vuex.Store({
 
           commit('CHANGE_SERVER_STATE', {
             status: 'success',
-            message: 'collection restored'
+            message: 'updated'
           })
 
           let settings = response.data.settings
@@ -354,9 +354,6 @@ export default new Vuex.Store({
               storage.set('username', {key: settings.username})
               storage.set('avatar', {key: settings.avatar})
             })
-            if (settings.syncInterval != undefined) {
-              eventBus.$emit('setOption', settings.syncInterval.id)
-            }
           }
 
           if (storedItems.length && Array.isArray(storedItems)) {
