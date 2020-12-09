@@ -8,7 +8,7 @@
 
     div(
       class='section__content'
-      :class='{"section__content--blured" : modalState.visibility}')
+      :class='{"section__content--blured" : modalState.visibility && windowParams.width > breakpoints.mb}')
 
       div(class='title title--main')
         h1(class='title__name') {{$options.pageTitle}}
@@ -53,6 +53,14 @@ export default {
   computed: {
     games() {
       return this.$store.state.games
+    },
+
+    windowParams() {
+      return this.$store.state.windowParams
+    },
+
+    breakpoints() {
+      return this.$store.state.breakpoints
     },
 
     gamesCollection() {

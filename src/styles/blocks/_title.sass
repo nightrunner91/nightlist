@@ -77,3 +77,11 @@
 
   &__button
     margin-left: auto
+
+    @media #{$mb-dw}
+      position: fixed !important
+      bottom: $sidebar-mobile-height + $gutter-width/2
+      right: $gutter-width/2
+      z-index: 9
+      box-shadow: $shadow-3
+      margin: 0

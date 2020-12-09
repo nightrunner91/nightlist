@@ -112,8 +112,7 @@
             :key='slot.id'
             :class='{"slot--refreshed" : slot.refreshed }'
             v-for='(slot, index) in data'
-            @click='editSlot(slot.id, $event)'
-            v-ripple)
+            @click='editSlot(slot.id, $event)')
             
             //- ORDER
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
@@ -163,7 +162,7 @@
             div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
               svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
 
-      //- TABLETS -//
+      //- TABLETS & MOBILE -//
       div(
         class='table__body'
         v-if='currentStructure == "tablets"')
@@ -176,8 +175,7 @@
             :key='slot.id'
             :class='{"slot--refreshed" : slot.refreshed }'
             v-for='(slot, index) in data'
-            @click='editSlot(slot.id, $event)'
-            v-ripple)
+            @click='editSlot(slot.id, $event)')
 
             //- header
             div(class='slot__header')

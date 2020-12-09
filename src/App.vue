@@ -2,12 +2,13 @@
 
   div(id='app' class='page')
     app-gradients(:current='currentPage')
-    app-sidebar(:current='currentPage')
-    app-indicator
+    app-header
     main(class='content' v-scrollbar)
       div(class='content__inner')
         transition(name='page' mode='out-in')
           router-view
+    app-sidebar(:current='currentPage')
+    app-indicator
 
 </template>
 
@@ -99,6 +100,7 @@ export default {
   // Blocks
   @import "styles/blocks/page"
   @import "styles/blocks/gradients"
+  @import "styles/blocks/header"
   @import "styles/blocks/sidebar"
   @import "styles/blocks/settings"
   @import "styles/blocks/content"

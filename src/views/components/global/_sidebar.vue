@@ -6,7 +6,7 @@
 
     div(
       v-for='route in routes'
-      v-if='route.mainMenu'
+      v-if='route.mainMenu && windowParams.width > breakpoints.xs'
       class='sidebar__gradient'
       :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
 
@@ -145,15 +145,11 @@ export default {
     },
 
     closeSettings() {
-      this.settingsOpened = false
-    },
-
-    getBackup() {
-      this.$store.dispatch('getBackup')
-    },
-
-    sendBackup() {
-      this.$store.dispatch('sendBackup')
+      if (this.windowParams.width > this.breakpoints.mb) {
+        this.settingsOpened = false
+      } else {
+        eventBus.$emit('closeSettings')
+      }
     },
 
     gradientActive(name) {
@@ -182,14 +178,6 @@ export default {
   mounted() {
     eventBus.$on('closeSettings', () => {
       this.closeSettings()
-    })
-
-    eventBus.$on('getBackup', () => {
-      this.getBackup()
-    })
-
-    eventBus.$on('sendBackup', () => {
-      this.sendBackup()
     })
 
     this.handleResize()

@@ -23,7 +23,7 @@
           class='input__field' 
           autocomplete='off' 
           v-model='binId'
-          @input='saveBinId()'
+          @input='saveBinId(), getBackup()'
           required)
 
       div(
@@ -125,6 +125,10 @@ export default {
       if (this.storedBin.length > 0) this.binId = this.storedBin
       if (this.storedUsername.length > 0) this.username = this.storedUsername
       if (this.storedAvatar.length > 0) this.avatar = this.storedAvatar
+    },
+
+    getBackup() {
+      this.$store.dispatch('getBackup')
     }
   },
   mounted() {

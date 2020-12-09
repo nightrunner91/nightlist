@@ -1,0 +1,51 @@
+.header
+  @extend .flex
+  @extend .justify-between
+  @extend .align-center
+
+  width: 100%
+  height: $sidebar-mobile-height
+  padding: 0 $gutter-width/2
+  z-index: 2
+  background: rgba($clr-black, $half-opacity)
+
+  &--active
+    z-index: 3
+
+  &__avatar
+    @extend .pos-relative
+    @extend .round-radius
+    @extend .shadow-1
+
+    width: 24px
+    height: 24px
+    background-color: rgba($clr-white, $light-opacity)
+    background-repeat: no-repeat
+    background-position: center center
+    background-size: cover
+
+    &:before
+      @extend .pseudoelem
+      @extend .half-opacity
+      @include svg-icon(24, 24, 'avatar')
+
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      margin: auto
+      z-index: -1
+
+  &__settings
+    @include icon-size(24, 24)
+    @extend .fill-white
+    @extend .cursor-pointer
+
+    transition: opacity 0.3s ease
+    right: $gutter-width
+    top: $gutter-width * 2
+    opacity: $passive-opacity
+    z-index: 10
+
+    &:hover
+      opacity: $active-opacity
