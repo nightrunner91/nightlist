@@ -6,6 +6,9 @@
   z-index: 2
   order: 2
 
+  @media #{$mb-dw}
+    height: calc(100vh - $sidebar-mobile-height*2)
+
   &__inner
     @media #{$lg-dw}
       padding: $gutter-width*2 0 $gutter-width*2 $sidebar-collapsed-width !important
@@ -15,5 +18,3 @@
 
     @media #{$mb-dw}
       padding: $gutter-width/2 0 !important
-
-    

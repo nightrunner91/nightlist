@@ -20,36 +20,17 @@ $icons-size: 24px
   z-index: 3
   order: 1
 
-  @media #{$lg-up}
-    background: rgba($clr-black, $half-opacity)
-
-  @media #{$lg-dw}
-    position: fixed
-    top: 0
-    left: 0
-    background: rgba($clr-black, $half-opacity)
-
-  @media #{$mb-dw}
-    position: relative
-    width: 100% !important
-    height: $sidebar-mobile-height !important
-    max-height: $sidebar-mobile-height !important
-    top: initial
-    left: 0
-    bottom: 0
-    padding: 0 !important
-    min-width: initial
-    max-width: initial
-    background: rgba($clr-black, $half-opacity)
-    order: 3
-
   &--notransition
     @extend .no-transition
+
+  &--opened
+    background: rgba($clr-black, $barely-opacity) !important
 
   &--collapsed
     width: $sidebar-collapsed-width
     min-width: $sidebar-collapsed-width
     padding: $gutter-width * 2 0
+    background: rgba($clr-black, $light-opacity)
 
     .sidebar
       &__profile
@@ -87,6 +68,31 @@ $icons-size: 24px
 
       &__icon
         margin: 0
+
+  @media #{$lg-up}
+    background: rgba($clr-black, $small-opacity)
+
+  @media #{$lg-dw}
+    position: fixed
+    top: 0
+    left: 0
+
+  @media #{$sm-dw}
+    background: rgba($clr-black, $half-opacity)
+
+  @media #{$mb-dw}
+    position: sticky
+    width: 100% !important
+    height: $sidebar-mobile-height !important
+    max-height: $sidebar-mobile-height !important
+    top: initial
+    left: 0
+    bottom: 0
+    padding: 0 !important
+    min-width: initial
+    max-width: initial
+    order: 3
+    background: $clr-black
 
   &__gradient
     @extend .pos-absolute

@@ -2,11 +2,11 @@
   
   aside(
     class='sidebar'
-    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--notransition" : noTransition}]')
+    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--opened" : !sidebarCollapsed && windowParams.width < breakpoints.lg}, {"sidebar--notransition" : noTransition}]')
 
     div(
       v-for='route in routes'
-      v-if='route.mainMenu && windowParams.width > breakpoints.xs'
+      v-if='route.mainMenu && windowParams.width > breakpoints.mb'
       class='sidebar__gradient'
       :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
 
