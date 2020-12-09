@@ -29,20 +29,26 @@
     //- ===== -//
     //- TABLE -//
     //- ===== -//
-    div(class='table' v-if='searchQuery.length > 0')
+    div(
+      class='table' 
+      v-if='searchQuery.length > 0')
 
       //- ====== -//
       //- HEADER -//
       //- ====== -//
-      div(class='table__header' v-if='searchQuery.length && resultsLength > 0')
+      
+      //- DESKTOP -//
+      div(
+        class='table__header'
+        v-if='currentStructure == "desktop" && searchQuery.length > 0 && resultsLength > 0')
 
         //- ORDER
-        div(class='table__cell grid__col grid__col--lg-1')
+        div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1')
         
         //- TITLE
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-15'
-          :class='{"table__cell--active" : criteria == "title"}'
+          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-16 grid__col--md-16 grid__col--sm-15'
+          :class='[{"slot__cell--active" : criteria == "title"}]'
           @click='sortData("title", "switch")')
           span Title
           svg(
@@ -52,8 +58,8 @@
 
         //- STATUS
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-3'
-          :class='{"table__cell--active" : criteria == "status"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
+          :class='{"slot__cell--active" : criteria == "status"}'
           @click='sortData("status", "switch")')
           span Status
           svg(
@@ -63,8 +69,8 @@
         
         //- FAVOURITE
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-3'
-          :class='{"table__cell--active" : criteria == "favourite"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
+          :class='{"slot__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
           span Favourite
           svg(
@@ -74,8 +80,8 @@
         
         //- RATING
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-7'
-          :class='{"table__cell--active" : criteria == "rating"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-7'
+          :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
           svg(
@@ -85,10 +91,10 @@
         
         //- HOURS
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-4'
-          :class='{"table__cell--active" : criteria == "hours"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
+          :class='{"slot__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
-          span Hours played
+          span Hours
           svg(
             v-if='criteria == "hours"'
             class='table__chevron' 
@@ -96,8 +102,8 @@
         
         //- PLATFORM
         div(
-          class='table__cell table__cell--functional grid__col grid__col--lg-3 grid__col--right'
-          :class='{"table__cell--active" : criteria == "platform"}'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
+          :class='{"slot__cell--active" : criteria == "platform"}'
           @click='sortData("platform", "switch")')
           span Platform
           svg(
@@ -105,67 +111,125 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
 
-      //- BODY
-      div(class='table__body')
+      //- ==== -//
+      //- BODY -//
+      //- ==== -//
 
-        div(
-          class='table__item' 
-          ref='tableItem'
-          :key='item.id'
-          :data-index='index'
-          :class='{"table__item--refreshed" : item.refreshed }'
-          v-for='(item, index) in searchedData'
-          @click='editSlot(item.id, $event)')
-          
-          //- ORDER
-          div(class='table__cell grid__col grid__col--lg-1') {{index + 1}}
-          
-          //- TITLE
-          div(class='table__cell grid__col grid__col--lg-15')
-            span {{item.title}}
-            a(
-              :ref='"redirect"'
-              rel='nofollow'
-              :href='item.link'
-              target='_blank"'
-              class='table__link'
-              v-if='item.link.length')
-              svg(class='table__redirect'): use(xlink:href='#link')
+      //- DESKTOP -//
+      div(
+        class='table__body'
+        v-if='currentStructure == "desktop"')
 
-          //- STATUS
+        transition-group
+
           div(
-            class='table__cell grid__col grid__col--lg-3')
-            svg(
-              class='table__status'
-              v-tooltip='{ content: statusName(item.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.status")
-          
-          //- FAVOURITE
-          div(
-            class='table__cell grid__col grid__col--lg-3')
-            svg(class='table__favourite' v-if='item.favourite'): use(xlink:href='#favourite')
-          
-          //- RATING
-          div(
-            class='table__cell grid__col grid__col--lg-7')
-            div(class='table__rating')
+            class='slot' 
+            ref='slot'
+            :key='slot.id'
+            :class='{"slot--refreshed" : slot.refreshed }'
+            v-for='(slot, index) in searchedData'
+            @click='editSlot(slot.id, $event)')
+            
+            //- ORDER
+            div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
+            
+            //- TITLE
+            div(
+              class='slot__cell grid__col grid__col grid__col--lg-16 grid__col--md-16 grid__col--sm-15')
+              span {{slot.title}}
+              a(
+                :ref='"redirect"'
+                rel='nofollow'
+                :href='slot.link'
+                target='_blank"'
+                class='slot__link'
+                v-if='slot.link.length')
+                svg(class='slot__redirect'): use(xlink:href='#link')
+
+            //- STATUS
+            div(
+              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
               svg(
-                class='table__star table__star--active' 
-                :class='"table__star--" + (index + 1)'
-                v-for='(star, index) in item.rating'): use(xlink:href='#star-active-w')
-              svg(
-                class='table__star table__star--passive' 
-                :class='"table__star--" + (index + 1)'
-                v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-          
-          //- HOURS
+                class='slot__status'
+                v-tooltip='{ content: statusName(slot.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.status")
+            
+            //- FAVOURITE
+            div(
+              class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
+              svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
+            
+            //- RATING
+            div(
+              class='slot__cell grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-7')
+              div(class='slot__rating')
+                svg(
+                  class='slot__star slot__star--active' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(star, index) in slot.rating'): use(xlink:href='#star-active-w')
+                svg(
+                  class='slot__star slot__star--passive' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+            
+            //- HOURS
+            div(
+              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
+              svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
+              span(v-if='slot.hours != undefined') {{slot.hours}}
+            
+            //- PLATFORM
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
+              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
+
+      //- TABLETS & MOBILE -//
+      div(
+        class='table__body'
+        v-if='currentStructure == "tablets"')
+
+        transition-group
+
           div(
-            class='table__cell grid__col grid__col--lg-4')
-            svg(class='table__tilda' v-if='item.hoursApproximate'): use(xlink:href='#tilda')
-            span(v-if='item.hours != undefined') {{item.hours}}
-          
-          //- PLATFORM
-          div(class='table__cell grid__col grid__col--lg-3 grid__col--right')
-            svg(class='table__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + item.platform")
+            class='slot' 
+            ref='slot'
+            :key='slot.id'
+            :class='{"slot--refreshed" : slot.refreshed }'
+            v-for='(slot, index) in searchedData'
+            @click='editSlot(slot.id, $event)')
+
+            //- header
+            div(class='slot__header')
+
+              div(class='slot__index') {{ index + 1 }}
+              div(class='slot__title')
+                span {{slot.title}}
+                a(
+                  :ref='"redirect"'
+                  rel='nofollow'
+                  :href='slot.link'
+                  target='_blank"'
+                  class='slot__link'
+                  v-if='slot.link.length')
+                  svg(class='slot__redirect'): use(xlink:href='#link')
+              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
+
+            div(class='slot__bottom')
+
+              div(class='slot__rating')
+                svg(
+                  class='slot__star slot__star--active' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(star, index) in slot.rating'): use(xlink:href='#star-active-w')
+                svg(
+                  class='slot__star slot__star--passive' 
+                  :class='"slot__star--" + (index + 1)'
+                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+
+              svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
+
+              div(class='slot__hours')
+                svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
+                span(v-if='slot.hours != undefined') {{slot.hours}}
+                svg(class='slot__clock'): use(xlink:href='#clock')
 
     app-placeholder(
       v-if='searchQuery.length && resultsLength == 0'
@@ -188,8 +252,16 @@ export default {
       criteria: 'title',
       direction: true,
       stashedData: [],
-      searchedData: []
+      searchedData: [],
+      currentStructure: undefined
     }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     stashData() {
@@ -277,7 +349,7 @@ export default {
     },
 
     editSlot(id, event) {
-      if (event.target.className == 'table__link') return
+      if (event.target.className == 'slot__link') return
       else {
         this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
@@ -286,11 +358,29 @@ export default {
 
     statusName(id) {
       return this.$store.state['games'].statuses.filter(i => i.id == id)[0].name
+    },
+
+    handleResize() {
+      if (this.windowParams.width <= this.breakpoints.sm) {
+        this.currentStructure = 'tablets'
+      }
+
+      if (this.windowParams.width > this.breakpoints.sm) {
+        this.currentStructure = 'desktop'
+      }
     }
   },
   computed: {
     games() {
       return this.$store.state.games
+    },
+
+    windowParams() {
+      return this.$store.state.windowParams
+    },
+
+    breakpoints() {
+      return this.$store.state.breakpoints
     },
 
     gamesCollection() {

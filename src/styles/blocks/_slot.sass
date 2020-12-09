@@ -62,7 +62,10 @@
     span
       @include truncate(320)
 
-      @media #{$xs-dw}
+      @media #{$sm-dw}
+        @include truncate(240)
+
+      @media #{$mb-dw}
         @include truncate(180)
 
   &__hours
