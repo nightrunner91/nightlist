@@ -85,6 +85,53 @@ export default {
 </script>
 
 <style lang="sass">
+
+  // ================================== //
+  // === Code guides for SASS files === //
+  // ================================== //
+
+  // === Main order === //
+
+  //  1. varaibles
+  //  2. mixins
+  //  3. .blocks
+  //  4.   &__elements
+  //  5.   &--modificators
+  //  6.   .another-blocks
+  //  7. @keyframes
+
+
+  // === Order inside classnames === //
+
+  //  .classname ↴
+  //  1.  @extends
+  //  2.  @includes
+  //  3.  styles
+  //  4.  &:first-child, &:last-child, &:nth-child
+  //  5.  &:before, &:after
+  //  6.  &:hover, &:focus
+  //  7.  @media
+  //  8.  @keyframes
+
+
+  // === Order of CSS properties and @extends === //
+
+  //  1. Positions (relative, absolute, fixed...)
+  //  2. Display (block, inline, flex...)
+  //  3. Coordinates (top, right, bottom, left)
+  //  4. Z-index
+  //  5. Dimensions (width, height)
+  //  6. Margins
+  //  7. Paddings
+  //  8. Styles of element (background, border, outline, shadow, radius, opacity...)
+  //  9. Styles of text (font-size, color, line-height...)
+  // 10. Transitions and @keyframes
+
+  
+  // ====================== //
+  // === Project styles === //
+  // ====================== //
+
   // Fonts
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&Open+Sans:400,700&display=swap')
     
