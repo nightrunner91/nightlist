@@ -58,10 +58,6 @@ $loading-size: 24px
     right: 0
     padding: $gutter-width/6 $gutter-width/4
 
-    @media #{$mb-dw}
-      left: 0
-      right: auto
-
     &.tooltip-enter
       opacity: $transparent-opacity
       transform: translateX(10px)
@@ -77,3 +73,7 @@ $loading-size: 24px
 
     &--error
       @extend .bg-error
+
+    @media #{$mb-dw}
+      left: 0
+      right: auto
