@@ -86,54 +86,30 @@ export default {
 
 <style lang="sass">
 
-  // ================================== //
-  // === Code guides for SASS files === //
-  // ================================== //
-
-  // === Main order === //
-
-  //  1. varaibles
-  //  2. mixins
-  //  3. .blocks
-  //  4.   &__elements
-  //  5.   &--modificators
-  //  6.   .another-blocks
-  //  7. @keyframes
-
-
-  // === Order inside classnames === //
-
-  //  .classname ↴
-  //  1.  @extends
-  //  2.  @includes
-  //  3.  styles
-  //  4.  &__elements
-  //  5.  &--modificators
-  //  6.  &:first-child, &:last-child, &:nth-child
-  //  7.  &:before, &:after
-  //  8.  &:hover, &:focus
-  //  9.  @media
-  // 10.  @keyframes
-
-
-  // === Order of CSS properties and @extends === //
-
-  //  1. Positions (relative, absolute, fixed...)
-  //  2. Display (block, inline, flex...)
-  //  3. Coordinates (top, right, bottom, left)
-  //  4. Z-index
-  //  5. Dimensions (width, height)
-  //  6. Margins
-  //  7. Paddings
-  //  8. Styles of element (background, border, outline, shadow, radius, opacity...)
-  //  9. Styles of text (font-size, color, line-height...)
-  // 10. Transitions and @keyframes
+  //  1.  $varaibles
+  //  2.  @mixins
+  //  3.  @extends
+  //  4.  @includes
+  //  5.  { styles } ↴
+  //      1. Positions (relative, absolute, fixed...)
+  //      2. Display (block, inline, flex...)
+  //      3. Coordinates (top, right, bottom, left)
+  //      4. z-index
+  //      5. Dimensions (width, height)
+  //      6. Margins
+  //      7. Paddings
+  //      8. Styles of element (background, border, outline, shadow, radius, opacity...)
+  //      9. Styles of text (font-size, color, line-height...)
+  //      10. Transitions and @keyframes
+  //  6.  &__elements {}
+  //  7.  &--modificators {}
+  //  8.  &:first-child, &:last-child, &:nth-child
+  //  9.  &:before, &:after
+  //  10. &:hover, &:focus
+  //  11. @media
+  //  12. @keyframes
 
   
-  // ====================== //
-  // === Project styles === //
-  // ====================== //
-
   // Fonts
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&Open+Sans:400,700&display=swap')
     

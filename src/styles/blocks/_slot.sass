@@ -3,15 +3,14 @@ $star-size: 24px
 
 .slot
   @extend .pos-relative
-  @extend .cursor-pointer
-  @extend .base-transition
-  @extend .no-overflow
   @extend .flex
   @extend .flex-wrap
   @extend .align-center
+  @extend .cursor-pointer
+  @extend .no-overflow
   @extend .base-radius
   @extend .no-select
-
+  @extend .base-transition
   padding: 0 $gutter-width/2
 
   @media #{$sm-dw}
@@ -23,7 +22,6 @@ $star-size: 24px
     @extend .pseudoelem
     @extend .tiny-opacity
     @extend .bg-white
-
     top: 0
     left: 0
     z-index: -1
@@ -42,20 +40,21 @@ $star-size: 24px
       &__link
         opacity: $half-opacity
 
+
   &__header,
   &__bottom
     @extend .pos-relative
     @extend .flex
     @extend .align-center
-
     width: 100%
     height: 35px
+
 
   &__index
     @extend .small
     @extend .half-opacity
-
     min-width: $gutter-width/1.5
+
 
   &__title
     @extend .flex
@@ -71,22 +70,22 @@ $star-size: 24px
       @media #{$mb-dw}
         @include truncate(180)
 
+
   &__hours
     @extend .pos-relative
     @extend .flex
     @extend .align-center
-
     margin-left: auto
     
     span
       @extend .base-lineheight
+
 
   &__clock
     @extend .pos-relative
     @extend .fill-white
     @extend .passive-opacity
     @include icon-size(16,16)
-
     top: -1px
     margin-left: 4px
 
@@ -94,24 +93,18 @@ $star-size: 24px
     @extend .pos-relative
     @extend .flex
     @extend .align-center
-
     @extend .ui-height
     padding: 0
-
-    span
-      @include truncate(320)
-
-      @extend .base-lineheight
 
     &:first-child
       @extend .small
       @extend .half-opacity
 
+
   &__link
     @extend .pos-relative
     @extend .flex-center
     @include icon-size(18, 18)
-
     margin-left: $gutter-width/3
     opacity: $transparent-opacity
 
@@ -130,15 +123,16 @@ $star-size: 24px
     @media #{$sm-dw}
       opacity: $half-opacity
 
+
   &__rating
     @extend .pos-relative
-
     width: $star-size * 5
     height: $star-size
 
     @media #{$sm-dw}
       left: -3px
       margin-right: $gutter-width/1.5
+
 
   &__star
     @extend .pos-absolute
@@ -162,46 +156,48 @@ $star-size: 24px
     &--passive
       @extend .light-opacity
 
+
   &__platform
     @include icon-size(24,24)
     @extend .fill-white
-
     margin-left: auto
+
 
   &__icon
     @include icon-size(24, 24)
     @extend .base-transition
     @extend .cursor-pointer
-
     opacity: $light-opacity
 
     &:hover
       opacity: $active-opacity
 
+
   &__tilda
     @extend .pos-absolute
+    @extend .half-opacity
     @include icon-size(12, 12)
-
     top: -2px
     bottom: 0
     left: -14px
     margin: auto
-    opacity: $half-opacity
+
 
   &__favourite,
   &__status
     @include icon-size(18, 18)
     @extend .fill-white
 
+
   &__redirect
     @include icon-size(18, 18)
     @extend .base-transition
+
 
   &__control
     @include icon-size(18,18)
     @extend .cursor-pointer
     @extend .base-transition
-
     margin-left: auto
     opacity: $half-opacity
 

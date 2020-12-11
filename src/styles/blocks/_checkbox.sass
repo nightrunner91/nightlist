@@ -1,3 +1,7 @@
+$border-width: 3px
+$checkbox-size: 18px
+  
+
 .checkbox
   margin-bottom: $gutter-width/2
 
@@ -15,13 +19,9 @@
 
 
   &__input
-    $border-width: 3px
-    $checkbox-size: 18px
-
     @extend .pos-relative
     @extend .base-radius
     @extend .base-transition
-
     width: $checkbox-size + $border-width*2
     height: $checkbox-size + $border-width*2
     border: $border-width solid $clr-grey
@@ -37,9 +37,7 @@
     &::before
       @extend .pseudoelem
       @extend .base-transition
-
       @include svg-icon(strip-unit($checkbox-size), strip-unit($checkbox-size), 'checkbox')
-
       top: 0
       left: 0
       right: 0
@@ -54,7 +52,6 @@
     @extend .transparent-opacity
     @extend .no-overflow
     @extend .small
-
     text-indent: -9999px
     margin-bottom: $gutter-width/5
 
