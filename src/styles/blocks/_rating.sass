@@ -9,7 +9,7 @@ $star-size: 40px
   
 
 .rating
-  @extend .pos-relative
+  position: relative
   margin-bottom: $gutter-width/2
 
   &--games
@@ -29,19 +29,19 @@ $star-size: 40px
 
 
   &__label
-    @extend .flex
-    @extend .small
+    display: flex
+    font-size: 11px
     margin-bottom: $gutter-width/5
 
   &__body
-    @extend .pos-relative
+    position: relative
     width: $star-size * 5
     height: $star-size
 
   &__star
-    @extend .pos-absolute
-    @extend .cursor-pointer
-    @extend .base-transition
+    position: absolute
+    cursor: pointer
+    transition: $base-transition
     @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')
 
     &--excluded
@@ -51,7 +51,7 @@ $star-size: 40px
       @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-hovered-neutral')
 
     &--active
-      @extend .passive-opacity
+      opacity: $passive-opacity
 
     &--1
       left: 0

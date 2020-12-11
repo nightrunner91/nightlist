@@ -12,8 +12,8 @@
 
 
   &__content
-    @extend .base-transition
+    transition: $base-transition
     
     &--blured
-      @extend .passive-opacity
+      opacity: $passive-opacity
       @include blur

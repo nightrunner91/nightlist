@@ -1,17 +1,17 @@
 .title
-  @extend .flex
-  @extend .align-center
-  @extend .no-wrap
+  display: flex
+  align-items: center
+  white-space: nowrap
 
   &--main
     margin-bottom: $gutter-width
     padding: 0 $gutter-width/2.5
 
   &--secondary
-    @extend .cursor-pointer
-    @extend .base-radius
-    @extend .no-select
-    @extend .base-transition
+    cursor: pointer
+    border-radius: $base-radius
+    user-select: none
+    transition: $base-transition
     margin-bottom: $gutter-width/1.5
     padding: 0 $gutter-width
 
@@ -25,7 +25,7 @@
           opacity: $active-opacity
 
   &--inactive
-    @extend .cursor-default
+    cursor: default
 
     &::before
       @include icon-size(24, 24)
@@ -34,15 +34,15 @@
 
 
   &__name
-    @extend .no-mg
-    @extend .txt-shadow
-    @extend .base-lineheight
+    margin-bottom: 0
+    text-shadow: 1px 1px 2px $clr-black
+    line-height: 1
 
 
   &__icon
-    @extend .pos-relative
-    @extend .fill-white
-    @extend .base-transition
+    position: relative
+    fill: $clr-white
+    transition: $base-transition
     @include icon-size(24,24) 
     opacity: $half-opacity
     left: -$gutter-width/2
@@ -56,10 +56,10 @@
 
 
   &__chevron
-    @extend .pos-relative
-    @extend .base-transition
-    @extend .round-radius
-    @extend .fill-white
+    position: relative
+    transition: $base-transition
+    border-radius: $round-radius
+    fill: $clr-white
     @include icon-size(32, 32)
     margin-left: auto
     opacity: $half-opacity
@@ -71,7 +71,7 @@
       transform: rotate(-90deg)
 
     &--notransition
-      @extend .no-transition
+      transition: $no-transition
 
     @media #{$mb-dw}
       @include icon-size(24, 24)

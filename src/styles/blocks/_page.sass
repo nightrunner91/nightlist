@@ -1,16 +1,16 @@
 .page
-  @extend .flex
-  @extend .clr-white
-  @extend .bg-black
+  display: flex
+  color: $clr-white
+  background: $clr-black
   height: 100vh
 
   &-enter-active,
   &-leave-active
-    @extend .slow-transition
+    transition: $slow-transition
 
   &-enter,
   &-leave-active
-    @extend .transparent-opacity
+    opacity: $transparent-opacity
 
   @media #{$mb-dw}
     flex-direction: column

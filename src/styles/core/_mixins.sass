@@ -35,9 +35,15 @@
 
 @mixin clearfix() 
   &::after 
-    display: block;
-    content: "";
-    clear: both;
+    display: block
+    content: ""
+    clear: both
+
+
+@mixin pseudoelem()
+  content: ' '
+  display: block
+  position: absolute
 
 
 @mixin gradient($color)

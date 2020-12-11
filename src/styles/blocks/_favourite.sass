@@ -9,9 +9,9 @@ $favourite-size: 40px
 
 
 .favourite
-  @extend .flex-column
-  @extend .align-end
-  @extend .txt-right
+  display: flex-column
+  align-items: flex-end
+  text-align: right
   margin-bottom: $gutter-width/2
 
   &--games
@@ -31,14 +31,14 @@ $favourite-size: 40px
 
 
   &__label
-    @extend .flex
-    @extend .small
+    display: flex
+    font-size: 11px
     margin-bottom: $gutter-width/5
 
   
   &__icon
-    @extend .cursor-pointer
-    @extend .base-transition
+    cursor: pointer
+    transition: $base-transition
     
     &--passive
       @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-passive-neutral')
@@ -47,4 +47,4 @@ $favourite-size: 40px
         @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-hovered-neutral')
 
     &--active
-      @extend .passive-opacity
+      opacity: $passive-opacity

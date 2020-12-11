@@ -7,10 +7,10 @@ $checkbox-size: 18px
 
 
   &__body
-    @extend .flex
-    @extend .align-center
-    @extend .cursor-pointer
-    @extend .ui-height
+    display: flex
+    align-items: center
+    cursor: pointer
+    height: $ui-height
 
     &:hover
       .checkbox
@@ -19,24 +19,24 @@ $checkbox-size: 18px
 
 
   &__input
-    @extend .pos-relative
-    @extend .base-radius
-    @extend .base-transition
+    position: relative
+    border-radius: $base-radius
+    transition: $base-transition
     width: $checkbox-size + $border-width*2
     height: $checkbox-size + $border-width*2
     border: $border-width solid $clr-grey
     margin-right: $gutter-width/3
 
     &--active
-      @extend .bg-grey
+      background: $clr-grey
       
       &::before
         transform: scale(1) !important
         opacity: $active-opacity !important
 
     &::before
-      @extend .pseudoelem
-      @extend .base-transition
+      @include pseudoelem
+      transition: $base-transition
       @include svg-icon(strip-unit($checkbox-size), strip-unit($checkbox-size), 'checkbox')
       top: 0
       left: 0
@@ -48,14 +48,14 @@ $checkbox-size: 18px
 
 
   &__label
-    @extend .flex
-    @extend .transparent-opacity
-    @extend .no-overflow
-    @extend .small
+    display: flex
+    opacity: $transparent-opacity
+    overflow: hidden
+    font-size: 11px
     text-indent: -9999px
     margin-bottom: $gutter-width/5
 
   
   &__text
-    @extend .no-select
-    @extend .base-lineheight
+    user-select: none
+    line-height: 1

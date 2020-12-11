@@ -10,7 +10,7 @@ $icons-size: 24px
 @mixin collapsed-sidebar()
   .sidebar
     &__profile
-      @extend .pos-absolute
+      position: absolute
       right: 0
       bottom: $gutter-width * 2
       left: 0
@@ -44,7 +44,7 @@ $icons-size: 24px
 
 
     &__link
-      @extend .flex-center
+      display: flex-center
 
 
     &__icon
@@ -52,9 +52,9 @@ $icons-size: 24px
   
 
 .sidebar
-  @extend .flex-column
-  @extend .shadow-5
-  @extend .base-transition
+  display: flex-column
+  box-shadow: $shadow-5
+  transition: $base-transition
   position: relative
   z-index: 3
   order: 1
@@ -65,7 +65,7 @@ $icons-size: 24px
   padding: $gutter-width * 2 $gutter-width
   
   &--notransition
-    @extend .no-transition
+    transition: $no-transition
 
   &--opened
     background: rgba($clr-black, $barely-opacity) !important
@@ -78,7 +78,7 @@ $icons-size: 24px
     background: rgba($clr-black, $light-opacity)
 
   &--blured
-    @extend .small-opacity
+    font-size: 11px-opacity
     @include blur
 
     @media #{$xs-dw}
@@ -111,8 +111,8 @@ $icons-size: 24px
 
 
   &__gradient
-    @extend .pos-absolute
-    @extend .slow-transition
+    position: absolute
+    transition: $slow-transition
     width: 100%
     height: 100%
     top: 0
@@ -143,23 +143,23 @@ $icons-size: 24px
 
 
   &__hamburger
-    @extend .pos-absolute
+    position: absolute
     top: $gutter-width * 2
     left: $gutter-width
     z-index: 10
 
 
   &__profile
-    @extend .pos-relative
-    @extend .flex-column
-    @extend .align-center
+    position: relative
+    display: flex-column
+    align-items: center
     margin-bottom: $gutter-width * 2
 
   
   &__avatar
-    @extend .pos-relative
-    @extend .round-radius
-    @extend .shadow-1
+    position: relative
+    border-radius: $round-radius
+    box-shadow: $shadow-1
     width: 120px
     height: 120px
     margin-bottom: $gutter-width/2
@@ -169,8 +169,8 @@ $icons-size: 24px
     background-size: cover
 
     &:before
-      @extend .pseudoelem
-      @extend .half-opacity
+      @include pseudoelem
+      opacity: $half-opacity
       @include svg-icon(120, 120, 'avatar')
       top: 0
       right: 0
@@ -195,9 +195,9 @@ $icons-size: 24px
 
 
   &__link
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
+    position: relative
+    display: flex
+    align-items: center
     height: 36px
     z-index: 2
     color: rgba($clr-white, $half-opacity)
@@ -226,15 +226,15 @@ $icons-size: 24px
 
 
   &__icon
-    @extend .pos-relative
+    position: relative
     @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     margin-right: $gutter-width/3
 
 
   &__bookmark
-    @extend .pos-absolute
-    @extend .base-transition
-    @extend .fill-white
+    position: absolute
+    transition: $base-transition
+    fill: $clr-white
     @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     top: 0
     left: 0
@@ -247,10 +247,10 @@ $icons-size: 24px
 
 
   &__name
-    @extend .weight-bold
-    @extend .txt-shadow
-    @extend .no-wrap
-    @extend .base-lineheight
+    font-weight: 700
+    text-shadow: 1px 1px 2px $clr-black
+    white-space: nowrap
+    line-height: 1
 
   
   &__badge
@@ -258,9 +258,9 @@ $icons-size: 24px
 
 
   &__settings
-    @extend .pos-absolute
-    @extend .fill-white
-    @extend .cursor-pointer
+    position: absolute
+    fill: $clr-white
+    cursor: pointer
     @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     top: $gutter-width * 2
     right: $gutter-width

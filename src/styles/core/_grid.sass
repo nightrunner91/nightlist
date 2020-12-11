@@ -34,24 +34,24 @@ $lg-dw: "screen and (max-width : #{$lg-screen})" !default
 
 .grid
   &__row
-    @extend .pos-relative
-    @extend .flex
-    @extend .flex-wrap
+    position: relative
+    display: flex
+    display: flex-wrap
 
     width: calc(100% + #{$gutter-width})
     margin-left: -$gutter-width/2
     margin-right: -$gutter-width/2
 
   &__col
-    @extend .flex
+    display: flex
 
     padding: 0 $gutter-width/2
 
     &--left
-      @extend .justify-start
+      justify-content: flex-start
 
     &--right
-      @extend .justify-end
+      justify-content: flex-end
 
     // MB settings
     $i: 1

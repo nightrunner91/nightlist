@@ -2,25 +2,25 @@ $visible-items: 4
 
 
 .dropdown
-  @extend .pos-relative
+  position: relative
   margin-bottom: $gutter-width/2
 
 
   &__label
-    @extend .flex
-    @extend .small
+    display: flex
+    font-size: 11px
     margin-bottom: $gutter-width/3
 
 
   &__toggle
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
-    @extend .ui-height
-    @extend .cursor-pointer
-    @extend .base-radius
-    @extend .bg-grey
-    @extend .no-select
+    position: relative
+    display: flex
+    align-items: center
+    height: $ui-height
+    cursor: pointer
+    border-radius: $base-radius
+    background: $clr-grey
+    user-select: none
     width: 100%
     padding: 0 $gutter-width/2
     z-index: 2
@@ -28,7 +28,7 @@ $visible-items: 4
     outline: 0
 
     &::before 
-      @extend .pseudoelem
+      @include pseudoelem
       width: 100%
       height: 100%
       top: 0
@@ -42,22 +42,22 @@ $visible-items: 4
         &__chevron
           transform: rotate(180deg)
 
-  
+
   &__chevron
-    @extend .base-transition
-    @extend .fill-black
+    transition: $base-transition
+    fill: $clr-black
     @include icon-size(18,18)
     margin-left: auto
 
   
   &__body
-    @extend .pos-relative
-    @extend .no-select
+    position: relative
+    user-select: none
     overflow: hidden
     z-index: -99
 
     .vb-dragger
-      @extend .half-opacity
+      opacity: $half-opacity
       max-height: 0
       transform: translateY(-100%)
       transition: none
@@ -73,7 +73,7 @@ $visible-items: 4
 
 
   &__sliding
-    @extend .no-overflow
+    overflow: hidden
     position: absolute !important
     width: 100%
     top: 0
@@ -99,12 +99,12 @@ $visible-items: 4
 
 
   &__item
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
-    @extend .ui-height
-    @extend .cursor-pointer
-    @extend .base-transition
+    position: relative
+    display: flex
+    align-items: center
+    height: $ui-height
+    cursor: pointer
+    transition: $base-transition
     padding: 0 $gutter-width/2
     border-top: 1px solid $clr-grey
 
@@ -121,5 +121,5 @@ $visible-items: 4
 
   &__icon
     @include icon-size(24,24)
-    @extend .half-opacity
+    opacity: $half-opacity
     margin-right: $gutter-width/4

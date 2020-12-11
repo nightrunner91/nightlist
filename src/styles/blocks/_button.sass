@@ -8,21 +8,21 @@
 
 
 .button
-  @extend .inline-flex
-  @extend .justify-center
-  @extend .align-center
-  @extend .cursor-pointer
-  @extend .base-radius
-  @extend .bg-grey
-  @extend .no-select
-  @extend .txt-uppercase
-  @extend .weight-bold
-  @extend .slow-transition
-  @extend .ui-height
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  border-radius: $base-radius
+  background: $clr-grey
+  user-select: none
+  text-transform: uppercase
+  font-weight: 700
+  transition: $slow-transition
+  height: $ui-height
   padding: 0 $gutter-width/2
 
   &--iconed
-    @extend .justify-center
+    justify-content: center
 
     width: 40px
     padding: 0
@@ -33,7 +33,7 @@
         margin-right: 0
 
   &--rounded
-    @extend .round-radius
+    border-radius: $round-radius
 
   &--games
     @include themed-colors($clr-games)
@@ -58,8 +58,8 @@
 
 
   &__icon
-    @extend .pos-relative
-    @extend .slow-transition
+    position: relative
+    transition: $slow-transition
     @include icon-size(24, 24)
 
     top: -1px
@@ -67,4 +67,4 @@
 
 
   &__text
-    @extend .no-wrap
+    white-space: nowrap

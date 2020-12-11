@@ -1,8 +1,8 @@
 .placeholder
-  @extend .flex-center
-  @extend .flex-column
-  @extend .no-select
-  @extend .half-opacity
+  display: flex-center
+  display: flex-column
+  user-select: none
+  opacity: $half-opacity
   height: 50vh
 
   &__title
@@ -12,7 +12,7 @@
       margin-bottom: $gutter-width/2
 
   &__icon
-    @extend .fill-white
+    fill: $clr-white
     @include icon-size(48, 48)
 
     @media #{$sm-dw}

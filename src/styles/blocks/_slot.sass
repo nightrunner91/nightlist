@@ -2,15 +2,15 @@ $star-size: 24px
   
 
 .slot
-  @extend .pos-relative
-  @extend .flex
-  @extend .flex-wrap
-  @extend .align-center
-  @extend .cursor-pointer
-  @extend .no-overflow
-  @extend .base-radius
-  @extend .no-select
-  @extend .base-transition
+  position: relative
+  display: flex
+  display: flex-wrap
+  align-items: center
+  cursor: pointer
+  overflow: hidden
+  border-radius: $base-radius
+  user-select: none
+  transition: $base-transition
   padding: 0 $gutter-width/2
 
   @media #{$sm-dw}
@@ -19,9 +19,9 @@ $star-size: 24px
     background: rgba($clr-white, $tiny-opacity)
 
   &::after
-    @extend .pseudoelem
-    @extend .tiny-opacity
-    @extend .bg-white
+    @include pseudoelem
+    opacity: $tiny-opacity
+    background: $clr-white
     top: 0
     left: 0
     z-index: -1
@@ -43,23 +43,23 @@ $star-size: 24px
 
   &__header,
   &__bottom
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
+    position: relative
+    display: flex
+    align-items: center
     width: 100%
     height: 35px
 
 
   &__index
-    @extend .small
-    @extend .half-opacity
+    font-size: 11px
+    opacity: $half-opacity
     min-width: $gutter-width/1.5
 
 
   &__title
-    @extend .flex
-    @extend .align-center
-    @extend .weight-bold
+    display: flex
+    align-items: center
+    font-weight: 700
 
     span
       @include truncate(320)
@@ -72,44 +72,44 @@ $star-size: 24px
 
 
   &__hours
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
+    position: relative
+    display: flex
+    align-items: center
     margin-left: auto
     
     span
-      @extend .base-lineheight
+      line-height: 1
 
 
   &__clock
-    @extend .pos-relative
-    @extend .fill-white
-    @extend .passive-opacity
+    position: relative
+    fill: $clr-white
+    opacity: $passive-opacity
     @include icon-size(16,16)
     top: -1px
     margin-left: 4px
 
   &__cell
-    @extend .pos-relative
-    @extend .flex
-    @extend .align-center
-    @extend .ui-height
+    position: relative
+    display: flex
+    align-items: center
+    height: $ui-height
     padding: 0
 
     &:first-child
-      @extend .small
-      @extend .half-opacity
+      font-size: 11px
+      opacity: $half-opacity
 
 
   &__link
-    @extend .pos-relative
-    @extend .flex-center
+    position: relative
+    display: flex-center
     @include icon-size(18, 18)
     margin-left: $gutter-width/3
     opacity: $transparent-opacity
 
     &::before
-      @extend .pseudoelem
+      @include pseudoelem
 
       width: 100%
       height: 100%
@@ -125,7 +125,7 @@ $star-size: 24px
 
 
   &__rating
-    @extend .pos-relative
+    position: relative
     width: $star-size * 5
     height: $star-size
 
@@ -135,7 +135,7 @@ $star-size: 24px
 
 
   &__star
-    @extend .pos-absolute
+    position: absolute
     @include icon-size(strip-unit($star-size), strip-unit($star-size))
 
     &--1
@@ -154,19 +154,19 @@ $star-size: 24px
       left: $star-size * 4
 
     &--passive
-      @extend .light-opacity
+      opacity: $light-opacity
 
 
   &__platform
     @include icon-size(24,24)
-    @extend .fill-white
+    fill: $clr-white
     margin-left: auto
 
 
   &__icon
     @include icon-size(24, 24)
-    @extend .base-transition
-    @extend .cursor-pointer
+    transition: $base-transition
+    cursor: pointer
     opacity: $light-opacity
 
     &:hover
@@ -174,8 +174,8 @@ $star-size: 24px
 
 
   &__tilda
-    @extend .pos-absolute
-    @extend .half-opacity
+    position: absolute
+    opacity: $half-opacity
     @include icon-size(12, 12)
     top: -2px
     bottom: 0
@@ -186,18 +186,18 @@ $star-size: 24px
   &__favourite,
   &__status
     @include icon-size(18, 18)
-    @extend .fill-white
+    fill: $clr-white
 
 
   &__redirect
     @include icon-size(18, 18)
-    @extend .base-transition
+    transition: $base-transition
 
 
   &__control
     @include icon-size(18,18)
-    @extend .cursor-pointer
-    @extend .base-transition
+    cursor: pointer
+    transition: $base-transition
     margin-left: auto
     opacity: $half-opacity
 

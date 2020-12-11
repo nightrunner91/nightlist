@@ -11,10 +11,10 @@ $close-button-size: 36px
   
 
 .settings
-  @extend .base-radius
-  @extend .shadow-3
-  @extend .bg-white
-  @extend .clr-black
+  border-radius: $base-radius
+  box-shadow: $shadow-3
+  background: $clr-white
+  color: $clr-black
   z-index: 15
   height: fit-content
 
@@ -25,10 +25,10 @@ $close-button-size: 36px
 
   &-reveal-enter-active,
   &-reveal-leave-active
-    @extend .base-transition
+    transition: $base-transition
 
   &--inside
-    @extend .pos-absolute
+    position: absolute
     top: $gutter-width * 2
     right: $gutter-width
     width: calc(100% - #{$gutter-width * 2})
@@ -42,7 +42,7 @@ $close-button-size: 36px
       margin: auto
 
   &--outside
-    @extend .pos-fixed
+    position: fixed
     bottom: $gutter-width
     left: $sidebar-collapsed-width + $gutter-width / 2
     width: 320px
@@ -68,11 +68,11 @@ $close-button-size: 36px
 
 
   &__close
-    @extend .flex-center
-    @extend .round-radius
-    @extend .cursor-pointer
-    @extend .shadow-1
-    @extend .base-transition
+    display: flex-center
+    border-radius: $round-radius
+    cursor: pointer
+    box-shadow: $shadow-1
+    transition: $base-transition
     position: absolute !important
     width: $close-button-size
     height: $close-button-size
@@ -85,8 +85,8 @@ $close-button-size: 36px
 
 
   &__cross
-    @extend .base-transition
-    @extend .fill-white
+    transition: $base-transition
+    fill: $clr-white
     @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
 
 
@@ -95,10 +95,10 @@ $close-button-size: 36px
 
 
   &__footer
-    @extend .flex
-    @extend .justify-between
-    @extend .align-center
-    @extend .bg-grey
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background: $clr-grey
     padding: $gutter-width/2 $gutter-width/1.5
     border-top: 1px solid rgba($clr-black, $tiny-opacity)
     border-bottom-left-radius: $base-radius !important

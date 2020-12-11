@@ -2,7 +2,7 @@ $loading-size: 24px
   
 
 .indicator
-  @extend .pos-fixed
+  position: fixed
   z-index: 99
   bottom: $gutter-width
   right: $gutter-width
@@ -17,8 +17,8 @@ $loading-size: 24px
 
 
   &__loader
-    @extend .pos-absolute
-    @extend .base-transition
+    position: absolute
+    transition: $base-transition
     @include icon-size(strip-unit($loading-size), strip-unit($loading-size))
     bottom: 0
     right: 0
@@ -35,7 +35,7 @@ $loading-size: 24px
 
 
   &__tooltips
-    @extend .pos-absolute
+    position: absolute
     bottom: $loading-size + $gutter-width/2
     right: 0
 
@@ -45,16 +45,16 @@ $loading-size: 24px
 
 
   &__tooltip
-    @extend .pos-absolute
-    @extend .flex-center
-    @extend .base-radius
-    @extend .shadow-1
-    @extend .no-select
-    @extend .txt-lowercase
-    @extend .small
-    @extend .base-lineheight
-    @extend .base-transition
-    @extend .no-wrap
+    position: absolute
+    display: flex-center
+    border-radius: $base-radius
+    box-shadow: $shadow-1
+    user-select: none
+    text-transform: lowercase
+    font-size: 11px
+    line-height: 1
+    transition: $base-transition
+    white-space: nowrap
     right: 0
     padding: $gutter-width/6 $gutter-width/4
 
@@ -69,10 +69,10 @@ $loading-size: 24px
       opacity: $transparent-opacity
 
     &--success
-      @extend .bg-success
+      background: $clr-success
 
     &--error
-      @extend .bg-error
+      background: $clr-error
 
     @media #{$mb-dw}
       left: 0

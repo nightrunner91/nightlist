@@ -1,20 +1,20 @@
 .input
-  @extend .pos-relative
+  position: relative
   margin-bottom: $gutter-width/2
 
 
   &__buttons
-    @extend .flex
-    @extend .justify-between
+    display: flex
+    justify-content: space-between
 
     .button
       width: calc(50% - #{$gutter-width/4})
 
 
   &__icon
-    @extend .pos-absolute
-    @extend .base-transition
-    @extend .half-opacity
+    position: absolute
+    transition: $base-transition
+    opacity: $half-opacity
     @include icon-size(24,24)
     top: 0
     left: $gutter-width/3
@@ -23,10 +23,10 @@
 
 
   &__field
-    @extend .ui-height
-    @extend .base-radius
-    @extend .bg-grey
-    @extend .base-transition
+    height: $ui-height
+    border-radius: $base-radius
+    background: $clr-grey
+    transition: $base-transition
     width: 100%
     padding: 0 $gutter-width/2
     border: 0
@@ -86,8 +86,8 @@
 
 
   &__label
-    @extend .flex
-    @extend .small
+    display: flex
+    font-size: 11px
     margin-bottom: $gutter-width/5
 
     sup

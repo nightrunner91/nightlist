@@ -117,7 +117,6 @@ export default {
   @import "styles/core/normalize"
   @import "styles/core/colors"
   @import "styles/core/varaibles"
-  @import "styles/core/extends"
   @import "styles/core/grid"
   @import "styles/core/typography"
   @import "styles/core/mixins"

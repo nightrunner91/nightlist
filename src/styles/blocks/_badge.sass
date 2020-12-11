@@ -1,21 +1,21 @@
 .badge
-  @extend .pos-relative
-  @extend .inline-flex
-  @extend .align-center
-  @extend .shadow-1
-  @extend .clr-white
-  @extend .weight-bold
-  @extend .base-lineheight
+  position: relative
+  display: inline-flex
+  align-items: center
+  box-shadow: $shadow-1
+  color: $clr-white
+  font-weight: 700
+  line-height: 1
   background: rgba($clr-white, $light-opacity)
 
   &--small
-    @extend .big-radius
-    @extend .small
+    border-radius: $big-radius
+    font-size: 11px
     height: $big-radius * 2
     padding: 0 $gutter-width/3
 
   &--medium
-    @extend .huge-radius
+    border-radius: $huge-radius
     top: 0.1em
     height: $huge-radius * 2
     padding: 0 $gutter-width/2.5

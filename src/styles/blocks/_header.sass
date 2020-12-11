@@ -1,7 +1,7 @@
 .header
-  @extend .flex
-  @extend .justify-between
-  @extend .align-center
+  display: flex
+  justify-content: space-between
+  align-items: center
   width: 100%
   height: $sidebar-mobile-height
   padding: 0 $gutter-width/2
@@ -13,9 +13,9 @@
 
   
   &__avatar
-    @extend .pos-relative
-    @extend .round-radius
-    @extend .shadow-1
+    position: relative
+    border-radius: $round-radius
+    box-shadow: $shadow-1
     width: 24px
     height: 24px
     background-color: rgba($clr-white, $light-opacity)
@@ -24,8 +24,8 @@
     background-size: cover
 
     &:before
-      @extend .pseudoelem
-      @extend .half-opacity
+      @include pseudoelem
+      opacity: $half-opacity
       @include svg-icon(24, 24, 'avatar')
       left: 0
       right: 0
@@ -36,8 +36,8 @@
 
 
   &__settings
-    @extend .fill-white
-    @extend .cursor-pointer
+    fill: $clr-white
+    cursor: pointer
     @include icon-size(24, 24)
     right: $gutter-width
     top: $gutter-width * 2
