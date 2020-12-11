@@ -210,9 +210,6 @@ export default new Vuex.Store({
     },
 
     PREPARE_BACKUP(state) {
-      for (let index = 0; index < state.collection.length; index++) {
-        Vue.delete(state.collection[index], 'refreshed')
-      }
       state.preparedBackup.date = Date.now()
       state.preparedBackup.settings = state.settings
       state.preparedBackup.collection = state.collection
