@@ -1,25 +1,69 @@
 $icons-size: 24px
   
+
 @mixin themed-colors($category-color)
   background: -moz-linear-gradient(top, rgba($category-color, $half-opacity) 0%, rgba($category-color, $light-opacity) 100%)
   background: -webkit-linear-gradient(top, rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
   background: linear-gradient(to bottom, rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#007db9e8',GradientType=0 )
+
+@mixin collapsed-sidebar()
+  .sidebar
+    &__profile
+      @extend .pos-absolute
+      right: 0
+      bottom: $gutter-width * 2
+      left: 0
+      margin: auto
+    
+
+    &__avatar
+      width: $gutter-width * 1.5
+      height: $gutter-width * 1.5
+
+      &:before
+        @include svg-icon(strip-unit($gutter-width * 1.5), strip-unit($gutter-width * 1.5), 'avatar')
+
+
+    &__settings
+      top: initial
+      bottom: $gutter-width
+
+
+    &__username,
+    &__name,
+    &__badge
+      display: none
+
+
+    &__menu
+      margin-top: $gutter-width * 3
+
+      @media #{$mb-dw}
+        margin-top: 0
+
+
+    &__link
+      @extend .flex-center
+
+
+    &__icon
+      margin: 0
   
+
 .sidebar
   @extend .flex-column
-  @extend .base-transition
   @extend .shadow-5
-
+  @extend .base-transition
   position: relative
+  z-index: 3
+  order: 1
   width: 25%
   height: 100%
   min-width: 320px
   max-width: $sidebar-width
   padding: $gutter-width * 2 $gutter-width
-  z-index: 3
-  order: 1
-
+  
   &--notransition
     @extend .no-transition
 
@@ -27,47 +71,18 @@ $icons-size: 24px
     background: rgba($clr-black, $barely-opacity) !important
 
   &--collapsed
+    @include collapsed-sidebar()
     width: $sidebar-collapsed-width
     min-width: $sidebar-collapsed-width
     padding: $gutter-width * 2 0
     background: rgba($clr-black, $light-opacity)
 
-    .sidebar
-      &__profile
-        @extend .pos-absolute
+  &--blured
+    @extend .light-opacity
+    @include blur
 
-        bottom: $gutter-width * 2
-        left: 0
-        right: 0
-        margin: auto
-      
-      &__avatar
-        width: $gutter-width * 1.5
-        height: $gutter-width * 1.5
-
-        &:before
-          @include svg-icon(strip-unit($gutter-width * 1.5), strip-unit($gutter-width * 1.5), 'avatar')
-
-      &__settings
-        top: initial
-        bottom: $gutter-width
-
-      &__username,
-      &__name,
-      &__badge
-        display: none
-
-      &__menu
-        margin-top: $gutter-width * 3
-
-        @media #{$mb-dw}
-          margin-top: 0
-
-      &__link
-        @extend .flex-center
-
-      &__icon
-        margin: 0
+    @media #{$xs-dw}
+      display: none
 
   @media #{$lg-up}
     background: rgba($clr-black, $small-opacity)
@@ -88,16 +103,16 @@ $icons-size: 24px
     top: initial
     left: 0
     bottom: 0
-    padding: 0 !important
     min-width: initial
     max-width: initial
     order: 3
+    padding: 0 !important
     background: $clr-black
+
 
   &__gradient
     @extend .pos-absolute
     @extend .slow-transition
-
     width: 100%
     height: 100%
     top: 0
@@ -126,32 +141,23 @@ $icons-size: 24px
     &--books
       @include themed-colors($clr-books)
 
-  &--blured
-    @include blur
-    @extend .light-opacity
-
-    @media #{$xs-dw}
-      display: none
 
   &__hamburger
     @extend .pos-absolute
-
-    left: $gutter-width
     top: $gutter-width * 2
+    left: $gutter-width
     z-index: 10
 
   &__profile
     @extend .pos-relative
     @extend .flex-column
     @extend .align-center
-    
     margin-bottom: $gutter-width * 2
 
   &__avatar
     @extend .pos-relative
     @extend .round-radius
     @extend .shadow-1
-
     width: 120px
     height: 120px
     margin-bottom: $gutter-width/2
@@ -164,18 +170,18 @@ $icons-size: 24px
       @extend .pseudoelem
       @extend .half-opacity
       @include svg-icon(120, 120, 'avatar')
-
-      left: 0
-      right: 0
       top: 0
+      right: 0
       bottom: 0
-      margin: auto
+      left: 0
       z-index: -1
+      margin: auto
+
 
   &__username
     @extend .fz4
-
     min-height: 26px
+
 
   &__menu
     @media #{$mb-dw}
@@ -185,14 +191,14 @@ $icons-size: 24px
       height: 100%
       padding: 0 $gutter-width
 
+
   &__link
     @extend .pos-relative
     @extend .flex
     @extend .align-center
-
     height: 36px
-    color: rgba($clr-white, $passive-opacity)
     z-index: 2
+    color: rgba($clr-white, $passive-opacity)
 
     &:hover
       color: $clr-white
@@ -216,18 +222,18 @@ $icons-size: 24px
           &--active
             opacity: $active-opacity
 
+
   &__icon
     @extend .pos-relative
     @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
-
     margin-right: $gutter-width/3
+
 
   &__bookmark
     @extend .pos-absolute
     @extend .base-transition
     @extend .fill-white
     @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
-
     top: 0
     left: 0
 
@@ -237,44 +243,27 @@ $icons-size: 24px
     &--active
       opacity: $transparent-opacity
 
+
   &__name
     @extend .txt-shadow
     @extend .no-wrap
-    
-    line-height: 1
+    @extend .base-lineheight
 
+  
   &__badge
     margin-left: auto
 
+
   &__settings
-    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     @extend .pos-absolute
     @extend .fill-white
     @extend .cursor-pointer
-
-    transition: opacity 0.3s ease
-    right: $gutter-width
+    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     top: $gutter-width * 2
-    opacity: $passive-opacity
+    right: $gutter-width
     z-index: 10
+    opacity: $passive-opacity
+    transition: opacity 0.3s ease
 
     &:hover
       opacity: $active-opacity
-
-  &__backup
-    @extend .pos-absolute
-
-    right: $gutter-width
-    bottom: $gutter-width * 2
-
-    svg
-      @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
-      @extend .fill-white
-      @extend .cursor-pointer
-      @extend .base-transition
-
-      margin-left: $gutter-width/2
-      opacity: $passive-opacity
-
-      &:hover
-        opacity: $active-opacity

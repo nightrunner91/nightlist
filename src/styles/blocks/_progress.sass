@@ -1,6 +1,5 @@
 .progress
 	@extend .pos-relative
-
 	width: calc(100% - #{$gutter-width * 2})
 	height: 12px
 
@@ -12,28 +11,28 @@
 						border-top-right-radius: $base-radius
 						border-bottom-right-radius: $base-radius
 
+
 	&__bar
 		@extend .pos-absolute
 		@extend .flex
 		@extend .align-center
-
 		width: 100%
 		height: 100%
 		top: 0
 		left: 0
 		cursor: help
 
+
 	&__item
 		@extend .flex-center
 		@extend .bg-white
 		@extend .clr-black
-	
 		border-right: 1px solid rgba($clr-black, $half-opacity)
 		height: 100%
 		font-size: 10px
 
 		&--total
-			opacity: $half-opacity
+			@extend .half-opacity
 
 			&:first-child
 				border-top-left-radius: $base-radius
@@ -44,8 +43,6 @@
 				border-bottom-right-radius: $base-radius
 
 		&--watched
-			opacity: 1
-
 			&:first-child
 				border-top-left-radius: $base-radius
 				border-bottom-left-radius: $base-radius

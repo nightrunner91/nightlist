@@ -1,5 +1,6 @@
 $close-button-size: 36px
 
+
 @mixin themed-colors($category-color)
   .modal
     &__close
@@ -18,10 +19,10 @@ $close-button-size: 36px
             background: lighten($category-color, $hover-intensity)
 
         &--secondary
+          margin-right: $gutter-width/4
           background: $clr-white
           box-shadow: inset 0px 0px 0px 2px rgba($category-color, $half-opacity)
           color: rgba($category-color, $half-opacity)
-          margin-right: $gutter-width/4
 
           .button
             &__icon
@@ -36,34 +37,28 @@ $close-button-size: 36px
               &__icon
                 opacity: $active-opacity
 
+
 .modal-backdrop
   @extend .pos-fixed
   @extend .flex-center
-  
   top: 0
-  bottom: 0
   left: 0
+  bottom: 0
   right: 0
-  background: rgba($clr-black, $passive-opacity)
   z-index: 9999
+  background: rgba($clr-black, $passive-opacity)
+
 
 .modal
   @extend .pos-relative
   @extend .bg-white
-  @extend .clr-black
   @extend .base-radius
   @extend .shadow-3
-
+  @extend .clr-black
   width: 50vw
   max-width: 400px
   min-width: 320px
   will-change: opacity
-
-  @media #{$mb-dw}
-    width: 100%
-    max-width: 100%
-    min-width: 100%
-    height: 100%
 
   &-fade-enter,
   &-fade-leave-active
@@ -88,12 +83,18 @@ $close-button-size: 36px
   &--books
     @include themed-colors($clr-books)
 
+  @media #{$mb-dw}
+    width: 100%
+    max-width: 100%
+    min-width: 100%
+    height: 100%
+
+
   &__close
+    @extend .flex-center
+    @extend .round-radius
     @extend .cursor-pointer
     @extend .base-transition
-    @extend .round-radius
-    @extend .flex-center
-
     position: absolute !important
     width: $close-button-size
     height: $close-button-size
@@ -109,15 +110,16 @@ $close-button-size: 36px
       height: $close-button-size/1.2
       top: $close-button-size/6
       right: $close-button-size/6
-      box-shadow: $shadow-2
+
 
   &__cross
-    @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
-    @extend .base-transition
     @extend .fill-white
+    @extend .base-transition
+    @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
 
     @media #{$mb-dw}
       @include icon-size(strip-unit($close-button-size)/1.8, strip-unit($close-button-size)/1.8)
+
 
   &__content
     height: 485px
@@ -127,15 +129,16 @@ $close-button-size: 36px
       height: calc(100% - 70px)
       max-height: initial
 
+
   &__fields
     padding: $gutter-width/2 $gutter-width/1.5 !important
+
 
   &__footer
     @extend .flex
     @extend .justify-between
     @extend .align-center
     @extend .bg-grey
-
     height: 70px
     padding: 0 $gutter-width/1.5
     border-top: 1px solid rgba($clr-black, $tiny-opacity)
@@ -148,16 +151,17 @@ $close-button-size: 36px
       bottom: 0
       left: 0
 
+
   &__confirmation
-    @extend .flex
     @extend .pos-relative
+    @extend .flex
+
 
   &__tip
     @extend .pos-absolute
     @extend .flex-center
     @extend .txt-center
     @extend .small
-
     width: 100%
     height: 20px
     top: -20px

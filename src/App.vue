@@ -107,11 +107,13 @@ export default {
   //  1.  @extends
   //  2.  @includes
   //  3.  styles
-  //  4.  &:first-child, &:last-child, &:nth-child
-  //  5.  &:before, &:after
-  //  6.  &:hover, &:focus
-  //  7.  @media
-  //  8.  @keyframes
+  //  4.  &__elements
+  //  5.  &--modificators
+  //  6.  &:first-child, &:last-child, &:nth-child
+  //  7.  &:before, &:after
+  //  8.  &:hover, &:focus
+  //  9.  @media
+  // 10.  @keyframes
 
 
   // === Order of CSS properties and @extends === //
@@ -145,32 +147,31 @@ export default {
   @import "styles/core/mixins"
 
   // Blocks
-  @import "styles/blocks/page"
+  @import "styles/blocks/badge"
+  @import "styles/blocks/button"
+  @import "styles/blocks/checkbox"
+  @import "styles/blocks/content"
+  @import "styles/blocks/dropdown"
+  @import "styles/blocks/favourite"
   @import "styles/blocks/gradients"
   @import "styles/blocks/header"
-  @import "styles/blocks/sidebar"
-  @import "styles/blocks/settings"
-  @import "styles/blocks/content"
-  @import "styles/blocks/section"
-  @import "styles/blocks/placeholder"
   @import "styles/blocks/indicator"
-  @import "styles/blocks/badge"
-  @import "styles/blocks/title"
-  @import "styles/blocks/table"
-  @import "styles/blocks/slot"
-  @import "styles/blocks/search"
   @import "styles/blocks/input"
-  @import "styles/blocks/checkbox"
-  @import "styles/blocks/dropdown"
-  @import "styles/blocks/rating"
-  @import "styles/blocks/favourite"
-  @import "styles/blocks/selector"
-  @import "styles/blocks/button"
-  @import "styles/blocks/progress"
-  @import "styles/blocks/tooltip"
   @import "styles/blocks/modal"
-
+  @import "styles/blocks/page"
+  @import "styles/blocks/placeholder"
+  @import "styles/blocks/progress"
+  @import "styles/blocks/rating"
+  @import "styles/blocks/search"
+  @import "styles/blocks/section"
+  @import "styles/blocks/settings"
+  @import "styles/blocks/sidebar"
+  @import "styles/blocks/slot"
+  @import "styles/blocks/table"
+  @import "styles/blocks/title"
+  
   // Plugins
+  @import "styles/plugins/tooltip"
   @import "styles/plugins/scrollbar"
   @import "styles/plugins/hamburgers/hamburgers"
 </style>

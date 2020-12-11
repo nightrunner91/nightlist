@@ -1,7 +1,7 @@
 .input
   @extend .pos-relative
-
   margin-bottom: $gutter-width/2
+
 
   &__buttons
     @extend .flex
@@ -10,27 +10,27 @@
     .button
       width: calc(50% - #{$gutter-width/4})
 
+
   &__icon
-    @include icon-size(24,24)
     @extend .pos-absolute
     @extend .base-transition
-
-    left: $gutter-width/3
+    @extend .half-opacity
+    @include icon-size(24,24)
     top: 0
+    left: $gutter-width/3
     bottom: 0
     margin: auto
-    opacity: $half-opacity
+
 
   &__field
+    @extend .ui-height
     @extend .base-radius
+    @extend .bg-grey
     @extend .base-transition
-
     width: 100%
+    padding: 0 $gutter-width/2
     border: 0
     outline: 0
-    height: 40px
-    padding: 0 $gutter-width/2
-    background: $clr-grey
 
     &--invalid
       box-shadow: inset 0px 0px 0px 1px $clr-error
@@ -43,27 +43,27 @@
       -webkit-appearance: none
       margin: 0
 
-    &::placeholder 
+    &::placeholder
       opacity: $active-opacity !important
       color: rgba($clr-white, $half-opacity) !important
       transition: all 0.15s ease !important
 
-    &::-webkit-input-placeholder 
+    &::-webkit-input-placeholder
       opacity: $active-opacity !important
       color: rgba($clr-white, $half-opacity) !important
       transition: all 0.15s ease !important
 
-    &::-moz-placeholder 
+    &::-moz-placeholder
       opacity: $active-opacity !important
       color: rgba($clr-white, $half-opacity) !important
       transition: all 0.15s ease !important
 
-    &:-ms-input-placeholder 
+    &:-ms-input-placeholder
       opacity: $active-opacity !important
       color: rgba($clr-white, $half-opacity) !important
       transition: all 0.15s ease !important
 
-    &:-moz-placeholder 
+    &:-moz-placeholder
       opacity: $active-opacity !important
       color: rgba($clr-white, $half-opacity) !important
       transition: all 0.15s ease !important
@@ -84,10 +84,10 @@
       &:-moz-placeholder 
         opacity: $transparent-opacity !important
 
+
   &__label
     @extend .flex
     @extend .small
-
     margin-bottom: $gutter-width/5
 
     sup

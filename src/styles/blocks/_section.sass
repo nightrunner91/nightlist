@@ -10,9 +10,10 @@
   @media #{$mb-dw}
     padding: 0
 
+
   &__content
     @extend .base-transition
     
     &--blured
-      @include blur
       @extend .passive-opacity
+      @include blur

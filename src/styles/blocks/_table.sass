@@ -1,13 +1,10 @@
 $star-size: 24px
-  
+
+
 .table
-  @extend .base-transition
   @extend .no-overflow
-
+  @extend .base-transition
   margin-bottom: $gutter-width * 2
-
-  @media #{$xs-dw}
-    margin-bottom: $gutter-width/1.5
 
   &--hidden
     max-height: 0px !important
@@ -15,6 +12,10 @@ $star-size: 24px
 
   &--notransition
     @extend .no-transition
+
+  @media #{$xs-dw}
+    margin-bottom: $gutter-width/1.5
+
 
   &__header
     @extend .flex
@@ -30,7 +31,6 @@ $star-size: 24px
         @extend .small
         @extend .font-sans
         @extend .no-wrap
-
         color: rgba($clr-white, $half-opacity)
 
         &:hover
@@ -56,12 +56,14 @@ $star-size: 24px
             &__chevron
               opacity: $half-opacity
 
+
   &__body
     padding: 0 $gutter-width/2
 
+
   &__chevron
-    @extend .base-transition
     @extend .fill-white
+    @extend .base-transition
     @include icon-size(18, 18)
 
     &--ascending

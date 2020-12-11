@@ -1,16 +1,17 @@
 $favourite-size: 40px
 
+
 @mixin themed-colors($category-name)
   .favourite
     &__icon
       &--active
-        @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'favourite-active-' + $category-name)
-  
+        @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-active-' + $category-name)
+
+
 .favourite
   @extend .flex-column
   @extend .align-end
   @extend .txt-right
-
   margin-bottom: $gutter-width/2
 
   &--games
@@ -28,12 +29,13 @@ $favourite-size: 40px
   &--books
     @include themed-colors('books')
 
+
   &__label
     @extend .flex
     @extend .small
-
     margin-bottom: $gutter-width/5
 
+  
   &__icon
     @extend .cursor-pointer
     @extend .base-transition

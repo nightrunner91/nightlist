@@ -1,3 +1,6 @@
+$star-size: 24px
+  
+
 .slot
   @extend .pos-relative
   @extend .cursor-pointer
@@ -76,7 +79,7 @@
     margin-left: auto
     
     span
-      line-height: 1
+      @extend .base-lineheight
 
   &__clock
     @extend .pos-relative
@@ -92,13 +95,13 @@
     @extend .flex
     @extend .align-center
 
-    height: 40px
+    @extend .ui-height
     padding: 0
 
     span
       @include truncate(320)
 
-      line-height: 1
+      @extend .base-lineheight
 
     &:first-child
       @extend .small

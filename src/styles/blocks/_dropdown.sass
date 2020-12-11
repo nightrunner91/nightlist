@@ -1,46 +1,34 @@
-$dropdown-height: 40px
 $visible-items: 4
-  
+
+
 .dropdown
   @extend .pos-relative
-
   margin-bottom: $gutter-width/2
+
 
   &__label
     @extend .flex
     @extend .small
-
     margin-bottom: $gutter-width/3
 
-  input
-    display: none !important
-
-  &__shadow
-    @extend .pos-absolute
-    @extend .base-radius
-    @extend .shadow-1
-
-    width: 100%
 
   &__toggle
     @extend .pos-relative
-    @extend .base-radius
     @extend .flex
     @extend .align-center
+    @extend .ui-height
     @extend .cursor-pointer
+    @extend .base-radius
+    @extend .bg-grey
     @extend .no-select
-
     width: 100%
+    padding: 0 $gutter-width/2
+    z-index: 2
     border: 0
     outline: 0
-    height: $dropdown-height
-    padding: 0 $gutter-width/2
-    background: $clr-grey
-    z-index: 2
 
     &::before 
       @extend .pseudoelem
-
       width: 100%
       height: 100%
       top: 0
@@ -58,22 +46,20 @@ $visible-items: 4
     @extend .base-transition
     @extend .fill-black
     @include icon-size(18,18)
-
     margin-left: auto
 
+  
   &__body
     @extend .pos-relative
     @extend .no-select
-
     overflow: hidden
     z-index: -99
 
     .vb-dragger
       @extend .half-opacity
-
+      max-height: 0
       transform: translateY(-100%)
       transition: none
-      max-height: 0
 
     &--active
       overflow: initial
@@ -84,39 +70,40 @@ $visible-items: 4
         transition: transform .45s ease
         max-height: initial
 
+
   &__sliding
     @extend .no-overflow
-
     position: absolute !important
     width: 100%
     top: 0
+
 
   &__menu
     width: 100%
     top: 100%
     left: 0
+    z-index: 1
+    padding-right: 0 !important
     background: $clr-white
     border: 1px solid $clr-grey
     border-top: none
     border-bottom-left-radius: $base-radius !important
     border-bottom-right-radius: $base-radius !important
-    z-index: 1
     transform: translateY(-100%)
     transition: none
-    padding-right: 0 !important
 
     &--opened
       transform: translateY(0)
       transition: transform .45s ease
 
+
   &__item
     @extend .pos-relative
     @extend .flex
     @extend .align-center
+    @extend .ui-height
     @extend .cursor-pointer
     @extend .base-transition
-
-    height: $dropdown-height
     padding: 0 $gutter-width/2
     border-top: 1px solid $clr-grey
 
@@ -130,8 +117,8 @@ $visible-items: 4
     &:hover
       background: rgba($clr-grey, $passive-opacity)
 
+
   &__icon
     @include icon-size(24,24)
     @extend .half-opacity
-
     margin-right: $gutter-width/4

@@ -1,10 +1,9 @@
 .tooltip
   @extend .pos-relative
-
   display: flex !important
   z-index: 10000
 
-  .tooltip-inner 
+  .tooltip-inner
     @extend .flex-center
     @extend .small
     @extend .txt-center
@@ -24,7 +23,7 @@
     border-color: rgba($clr-black, $half-opacity)
     z-index: 1
 
-  &[x-placement^="top"] 
+  &[x-placement^="top"]
     margin-bottom: 5px
 
     .tooltip-arrow 

@@ -9,10 +9,9 @@
 
   &--secondary
     @extend .cursor-pointer
-    @extend .base-transition
     @extend .base-radius
     @extend .no-select
-
+    @extend .base-transition
     margin-bottom: $gutter-width/1.5
     padding: 0 $gutter-width
 
@@ -30,24 +29,24 @@
 
     &::before
       @include icon-size(24, 24)
-
       content: ''
       left: -$gutter-width/2
+
 
   &__name
     @extend .no-mg
     @extend .txt-shadow
+    @extend .base-lineheight
 
-    line-height: 1
 
   &__icon
     @extend .pos-relative
     @extend .fill-white
     @extend .base-transition
     @include icon-size(24,24) 
-
     opacity: $half-opacity
     left: -$gutter-width/2
+
 
   &__badge
     margin-left: $gutter-width/2
@@ -55,13 +54,13 @@
     @media #{$mb-dw}
       margin-left: $gutter-width/4
 
+
   &__chevron
     @extend .pos-relative
     @extend .base-transition
     @extend .round-radius
     @extend .fill-white
     @include icon-size(32, 32)
-
     margin-left: auto
     opacity: $half-opacity
 
@@ -77,6 +76,7 @@
     @media #{$mb-dw}
       @include icon-size(24, 24)
 
+
   &__button
     margin-left: auto
 
@@ -85,5 +85,5 @@
       bottom: $sidebar-mobile-height + $gutter-width/2
       right: $gutter-width/2
       z-index: 9
-      box-shadow: $shadow-3
       margin: 0
+      box-shadow: $shadow-3

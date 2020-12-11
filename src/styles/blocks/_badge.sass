@@ -2,23 +2,25 @@
   @extend .pos-relative
   @extend .inline-flex
   @extend .align-center
+  @extend .shadow-1
   @extend .clr-white
   @extend .weight-bold
-  @extend .shadow-1
+  @extend .base-lineheight
 
-  line-height: 1
   background: rgba($clr-white, $light-opacity)
 
   &--small
+    @extend .big-radius
     @extend .small
-    
-    border-radius: $big-radius
+
     height: $big-radius * 2
     padding: 0 $gutter-width/3
 
+
   &--medium
+    @extend .huge-radius
+
     top: 0.1em
-    font-size: 70%
-    border-radius: $huge-radius
     height: $huge-radius * 2
     padding: 0 $gutter-width/2.5
+    font-size: 70%

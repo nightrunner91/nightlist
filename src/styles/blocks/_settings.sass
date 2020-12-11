@@ -1,5 +1,6 @@
 $close-button-size: 36px
-  
+
+
 @mixin themed-colors($category-color)
   .settings
     &__close
@@ -8,14 +9,14 @@ $close-button-size: 36px
       &:hover
         background: lighten($category-color, $hover-intensity)
   
+
 .settings
-  @extend .bg-white
-  @extend .clr-black
   @extend .base-radius
   @extend .shadow-3
-
-  height: fit-content
+  @extend .bg-white
+  @extend .clr-black
   z-index: 15
+  height: fit-content
 
   &-reveal-enter,
   &-reveal-leave-active
@@ -28,7 +29,6 @@ $close-button-size: 36px
 
   &--inside
     @extend .pos-absolute
-
     top: $gutter-width * 2
     right: $gutter-width
     width: calc(100% - #{$gutter-width * 2})
@@ -36,14 +36,13 @@ $close-button-size: 36px
 
     @media #{$mb-dw}
       top: 0
+      right: 0
       bottom: 0
       left: 0
-      right: 0
       margin: auto
 
   &--outside
     @extend .pos-fixed
-
     bottom: $gutter-width
     left: $sidebar-collapsed-width + $gutter-width / 2
     width: 320px
@@ -67,13 +66,13 @@ $close-button-size: 36px
   &--books
     @include themed-colors($clr-books)
 
-  &__close
-    @extend .cursor-pointer
-    @extend .base-transition
-    @extend .round-radius
-    @extend .flex-center
-    @extend .shadow-1
 
+  &__close
+    @extend .flex-center
+    @extend .round-radius
+    @extend .cursor-pointer
+    @extend .shadow-1
+    @extend .base-transition
     position: absolute !important
     width: $close-button-size
     height: $close-button-size
@@ -84,21 +83,22 @@ $close-button-size: 36px
     &:hover
       box-shadow: $shadow-3
 
-  &__cross
-    @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
-    @extend .base-transition
 
-    fill: $clr-white
+  &__cross
+    @extend .base-transition
+    @extend .fill-white
+    @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
+
 
   &__content
     padding: $gutter-width/2 $gutter-width/1.5
+
 
   &__footer
     @extend .flex
     @extend .justify-between
     @extend .align-center
     @extend .bg-grey
-
     padding: $gutter-width/2 $gutter-width/1.5
     border-top: 1px solid rgba($clr-black, $tiny-opacity)
     border-bottom-left-radius: $base-radius !important

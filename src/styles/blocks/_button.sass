@@ -1,24 +1,26 @@
+@mixin themed-colors($category-color)
+  .button
+    &__text
+      color: $category-color
+
+    &__icon
+      fill: $category-color
+
+
 .button
   @extend .inline-flex
   @extend .justify-center
   @extend .align-center
+  @extend .cursor-pointer
+  @extend .base-radius
+  @extend .bg-grey
+  @extend .no-select
   @extend .txt-uppercase
   @extend .weight-bold
   @extend .slow-transition
-  @extend .cursor-pointer
-  @extend .base-radius
-  @extend .no-select
-  @extend .bg-white
-
-  height: 40px
-  background: $clr-grey
+  @extend .ui-height
+  
   padding: 0 $gutter-width/2
-
-  @media #{$xs-dw}
-    padding: 0 $gutter-width/2.5
-
-  &:hover
-    box-shadow: $shadow-2
 
   &--iconed
     @extend .justify-center
@@ -28,59 +30,43 @@
 
     .button
       &__icon
-        margin-right: 0
         top: 0
+        margin-right: 0
 
   &--rounded
     @extend .round-radius
 
+  &--games
+    @include themed-colors($clr-games)
+
+  &--tvshows
+    @include themed-colors($clr-tvshows)
+
+  &--films
+    @include themed-colors($clr-films)
+
+  &--anime
+    @include themed-colors($clr-anime)
+
+  &--books
+    @include themed-colors($clr-books)
+
+  &:hover
+    box-shadow: $shadow-2
+
+  @media #{$xs-dw}
+    padding: 0 $gutter-width/2.5
+
+
   &__icon
     @extend .pos-relative
     @extend .slow-transition
+
     @include icon-size(24, 24)
 
-    margin-right: $gutter-width/8
     top: -1px
+    margin-right: $gutter-width/8
+
 
   &__text
     @extend .no-wrap
-
-  &--games
-    .button
-      &__text
-        @extend .clr-games
-
-      &__icon
-        @extend .fill-games
-
-  &--tvshows
-    .button
-      &__text
-        @extend .clr-tvshows
-
-      &__icon
-        @extend .fill-tvshows
-
-  &--films
-    .button
-      &__text
-        @extend .clr-films
-
-      &__icon
-        @extend .fill-films
-
-  &--anime
-    .button
-      &__text
-        @extend .clr-anime
-
-      &__icon
-        @extend .fill-anime
-
-  &--books
-    .button
-      &__text
-        @extend .clr-books
-
-      &__icon
-        @extend .fill-books
