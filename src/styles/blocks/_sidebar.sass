@@ -198,10 +198,10 @@ $icons-size: 24px
     @extend .align-center
     height: 36px
     z-index: 2
-    color: rgba($clr-white, $passive-opacity)
+    color: rgba($clr-white, $half-opacity)
 
     &:hover
-      color: $clr-white
+      color: rgba($clr-white, $passive-opacity)
 
     &:first-child
       margin-bottom: $gutter-width/2
@@ -212,7 +212,7 @@ $icons-size: 24px
       margin-left: $gutter-width/3
 
     &--active
-      color: $clr-white
+      color: $clr-white !important
 
       .sidebar
         &__bookmark
@@ -245,6 +245,7 @@ $icons-size: 24px
 
 
   &__name
+    @extend .weight-bold
     @extend .txt-shadow
     @extend .no-wrap
     @extend .base-lineheight
