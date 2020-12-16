@@ -34,7 +34,7 @@
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
-      div(class='sidebar__username') {{username}}
+      h4(class='sidebar__username') {{username}}
 
     div(class='sidebar__menu')
       router-link(
@@ -145,11 +145,7 @@ export default {
     },
 
     closeSettings() {
-      if (this.windowParams.width > this.breakpoints.mb) {
-        this.settingsOpened = false
-      } else {
-        eventBus.$emit('closeSettings')
-      }
+      this.settingsOpened = false
     },
 
     gradientActive(name) {
@@ -176,6 +172,10 @@ export default {
     }
   },
   mounted() {
+    eventBus.$on('openSettings', () => {
+      this.openSettings()
+    })
+
     eventBus.$on('closeSettings', () => {
       this.closeSettings()
     })

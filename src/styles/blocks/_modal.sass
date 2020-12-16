@@ -103,6 +103,7 @@ $close-button-size: 36px
     width: $close-button-size
     height: $close-button-size
     border-radius: $round-radius
+    box-shadow: $shadow-2
     cursor: pointer
     transition: $base-transition
 
@@ -110,8 +111,6 @@ $close-button-size: 36px
       box-shadow: $shadow-3
 
     @media #{$mb-dw}
-      width: $close-button-size/1.2
-      height: $close-button-size/1.2
       top: $close-button-size/6
       right: $close-button-size/6
 
@@ -121,10 +120,6 @@ $close-button-size: 36px
 
     fill: $clr-white
     transition: $base-transition
-
-    @media #{$mb-dw}
-      @include icon-size(strip-unit($close-button-size)/1.8, strip-unit($close-button-size)/1.8)
-
 
   &__content
     @media #{$mb-dw}

@@ -303,7 +303,11 @@ export default {
 
     focusTitle() {
       this.titleVisible = true
-      this.$nextTick(() => this.$refs.title.focus())
+      this.$nextTick(() => {
+        if (this.$refs.title != undefined) {
+          this.$refs.title.focus()
+        }
+      })
     }
   },
   computed: {

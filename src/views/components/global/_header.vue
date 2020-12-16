@@ -13,9 +13,6 @@
       class='header__settings'
       @click='openSettings()'): use(xlink:href='#settings')
 
-    transition(name='settings-reveal' mode='out-in')
-      app-settings(v-if='settingsOpened' :sidebarCollapsed='sidebarCollapsed')
-
 </template>
 
 <script>
@@ -75,18 +72,14 @@ export default {
     },
 
     openSettings() {
-      this.settingsOpened = true
+      eventBus.$emit('openSettings')
     },
 
     closeSettings() {
-      this.settingsOpened = false
+      eventBus.$emit('closeSettings')
     },
   },
   mounted() {
-    eventBus.$on('closeSettings', () => {
-      this.closeSettings()
-    })
-
     this.handleResize()
   }
 }
