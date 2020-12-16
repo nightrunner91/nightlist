@@ -8,15 +8,12 @@
     padding: 0 $gutter-width/2.5
 
   &--secondary
-    cursor: pointer
-    border-radius: $base-radius
-    user-select: none
-    transition: $base-transition
     margin-bottom: $gutter-width/1.5
     padding: 0 $gutter-width
-
-    @media #{$mb-dw}
-      padding: 0 $gutter-width/2
+    border-radius: $base-radius
+    cursor: pointer
+    user-select: none
+    transition: $base-transition
 
     &:hover
       .title
@@ -24,11 +21,15 @@
         &__chevron
           opacity: $active-opacity
 
+    @media #{$mb-dw}
+      padding: 0 $gutter-width/2
+
   &--inactive
     cursor: default
 
     &::before
       @include icon-size(24, 24)
+
       content: ''
       left: -$gutter-width/2
 
@@ -40,12 +41,13 @@
 
 
   &__icon
+    @include icon-size(24,24)
+
     position: relative
-    fill: $clr-white
-    transition: $base-transition
-    @include icon-size(24,24) 
-    opacity: $half-opacity
     left: -$gutter-width/2
+    fill: $clr-white
+    opacity: $half-opacity
+    transition: $base-transition
 
 
   &__badge
@@ -56,22 +58,23 @@
 
 
   &__chevron
+    @include icon-size(32,32)
+
     position: relative
-    transition: $base-transition
+    margin-left: auto
     border-radius: $round-radius
     fill: $clr-white
-    @include icon-size(32, 32)
-    margin-left: auto
     opacity: $half-opacity
-
-    @media #{$mb-up}
-      right: -$gutter-width/2
+    transition: $base-transition
 
     &--closed
       transform: rotate(-90deg)
 
     &--notransition
       transition: $no-transition
+
+    @media #{$mb-up}
+      right: -$gutter-width/2
 
     @media #{$mb-dw}
       @include icon-size(24, 24)

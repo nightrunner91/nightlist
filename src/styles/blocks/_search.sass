@@ -1,6 +1,12 @@
 .search
-  padding: 0 $gutter-width/2
   margin-bottom: $gutter-width * 2
+  padding: 0 $gutter-width/2
+
+  &:hover
+    .input
+      &__icon
+        fill: $clr-white
+        opacity: $active-opacity
 
   @media #{$mb-dw}
     margin-bottom: $gutter-width * 1.5
@@ -8,18 +14,11 @@
   &--active
     .input
       &__field
+        background: $clr-white !important
         box-shadow: $shadow-3
-        background: $clr-white
-        
 
       &__icon
         fill: $clr-black !important
-        opacity: $active-opacity
-
-  &:hover
-    .input
-      &__icon
-        fill: $clr-white
         opacity: $active-opacity
 
 
@@ -30,8 +29,8 @@
       color: $clr-black
 
       &:focus
-        box-shadow: $shadow-3
         background: rgba($clr-white, $active-opacity)
+        box-shadow: $shadow-3
 
 
     &__icon

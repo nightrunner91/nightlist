@@ -86,37 +86,32 @@ export default {
 
 <style lang="sass">
 
-  //  1.  $varaibles
-  //  2.  @mixins
-  //  3.  @extends
-  //  4.  @includes
-  //  5.  { styles } ↴
-  //      1. Positions (relative, absolute, fixed...)
-  //      2. Display (block, inline, flex...)
-  //      3. Coordinates (top, right, bottom, left)
-  //      4. z-index
-  //      5. Dimensions (width, height)
-  //      6. Margins
-  //      7. Paddings
-  //      8. Styles of element (background, border, outline, shadow, radius, opacity...)
-  //      9. Styles of text (font-size, color, line-height...)
-  //      10. Transitions and @keyframes
-  //  6.  &__elements {}
-  //  7.  &--modificators {}
-  //  8.  &:first-child, &:last-child, &:nth-child
-  //  9.  &:before, &:after
-  //  10. &:hover, &:focus
-  //  11. @media
-  //  12. @keyframes
+  // @extend
+  // @include
+  // { CSS свойства }
+  // &--модификаторы
+  // &::псевдоэлементы
+  // &:псевдоклассы
+  // @медиазапросы
+  // &__элементы
+  // .блоки
+
+  // Положение объекта (position, top, left, right, bottom, float, z-index)
+  // Тип объекта (display)
+  // Размеры и отступы объекта (width, height, margin, padding)
+  // Стили границ объекта (border, outline, border-radius, overflow)
+  // Внешний вид объекта (background, opacity, box-shadow)
+  // Стили текста внутри объекта (font, color, line-height, font-size, text-shadow)
+  // Дополнительные стили (cursor, transition, transform, animation)
 
   
   // Fonts
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&Open+Sans:400,700&display=swap')
     
   // Core
-  @import "styles/core/normalize"
   @import "styles/core/colors"
   @import "styles/core/varaibles"
+  @import "styles/core/normalize"
   @import "styles/core/grid"
   @import "styles/core/typography"
   @import "styles/core/mixins"
@@ -149,4 +144,5 @@ export default {
   @import "styles/plugins/tooltip"
   @import "styles/plugins/scrollbar"
   @import "styles/plugins/hamburgers/hamburgers"
+
 </style>

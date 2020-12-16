@@ -2,9 +2,9 @@ $star-size: 24px
 
 
 .table
+  margin-bottom: $gutter-width * 2
   overflow: hidden
   transition: $base-transition
-  margin-bottom: $gutter-width * 2
 
   &--hidden
     max-height: 0px !important
@@ -20,9 +20,9 @@ $star-size: 24px
   &__header
     display: flex
     align-items: center
+    padding: 0 $gutter-width
     user-select: none
 
-    padding: 0 $gutter-width
     
     .slot
       &__cell
@@ -62,9 +62,10 @@ $star-size: 24px
 
 
   &__chevron
+    @include icon-size(18, 18)
+
     fill: $clr-white
     transition: $base-transition
-    @include icon-size(18, 18)
 
     &--ascending
       transform: rotate(0deg)

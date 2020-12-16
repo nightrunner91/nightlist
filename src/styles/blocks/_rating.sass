@@ -30,19 +30,22 @@ $star-size: 40px
 
   &__label
     display: flex
-    font-size: 11px
     margin-bottom: $gutter-width/5
+    font-size: 11px
+
 
   &__body
     position: relative
     width: $star-size * 5
     height: $star-size
 
+
   &__star
+    @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')
+
     position: absolute
     cursor: pointer
     transition: $base-transition
-    @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')
 
     &--excluded
       @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')

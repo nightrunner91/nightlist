@@ -12,22 +12,23 @@ $loading-size: 24px
     bottom: $sidebar-mobile-height + $loading-size/2
 
   @media #{$mb-dw}
-    left: $gutter-width/2
     right: auto
+    left: $gutter-width/2
 
 
   &__loader
-    position: absolute
-    transition: $base-transition
     @include icon-size(strip-unit($loading-size), strip-unit($loading-size))
-    bottom: 0
+
+    position: absolute
     right: 0
+    bottom: 0
     opacity: $half-opacity
+    transition: $base-transition
 
     @media #{$mb-dw}
-      opacity: $active-opacity
-      left: 0
       right: auto
+      left: 0
+      opacity: $active-opacity
     
     &.loader-enter, 
     &.loader-leave-to
@@ -36,12 +37,12 @@ $loading-size: 24px
 
   &__tooltips
     position: absolute
-    bottom: $loading-size + $gutter-width/2
     right: 0
+    bottom: $loading-size + $gutter-width/2
 
     @media #{$mb-dw}
-      left: 0
       right: auto
+      left: 0
 
 
   &__tooltip
@@ -49,16 +50,22 @@ $loading-size: 24px
     display: flex
     justify-content: center
     align-items: center
+    right: 0
+    padding: $gutter-width/6 $gutter-width/4
     border-radius: $base-radius
     box-shadow: $shadow-1
     user-select: none
     text-transform: lowercase
     font-size: 11px
     line-height: 1
-    transition: $base-transition
     white-space: nowrap
-    right: 0
-    padding: $gutter-width/6 $gutter-width/4
+    transition: $base-transition
+
+    &--success
+      background: $clr-success
+
+    &--error
+      background: $clr-error
 
     &.tooltip-enter
       opacity: $transparent-opacity
@@ -70,12 +77,6 @@ $loading-size: 24px
     &.tooltip-leave-to
       opacity: $transparent-opacity
 
-    &--success
-      background: $clr-success
-
-    &--error
-      background: $clr-error
-
     @media #{$mb-dw}
-      left: 0
       right: auto
+      left: 0

@@ -12,25 +12,26 @@
 
 
   &__icon
-    position: absolute
-    transition: $base-transition
-    opacity: $half-opacity
     @include icon-size(24,24)
+
+    position: absolute
     top: 0
-    left: $gutter-width/3
     bottom: 0
+    left: $gutter-width/3
     margin: auto
+    opacity: $half-opacity
+    transition: $base-transition
 
 
   &__field
-    height: $ui-height
-    border-radius: $base-radius
-    background: $clr-grey
-    transition: $base-transition
     width: 100%
+    height: $ui-height
     padding: 0 $gutter-width/2
     border: 0
     outline: 0
+    border-radius: $base-radius
+    background: $clr-grey
+    transition: $base-transition
 
     &--invalid
       box-shadow: inset 0px 0px 0px 1px $clr-error
@@ -87,8 +88,8 @@
 
   &__label
     display: flex
-    font-size: 11px
     margin-bottom: $gutter-width/5
+    font-size: 11px
 
     sup
       top: 0.4em

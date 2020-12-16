@@ -1,9 +1,12 @@
 .content
   position: relative
-  overflow: hidden
   flex: 1
   z-index: 2
   order: 2
+  overflow: hidden
+
+  @media #{$mb-dw}
+    height: calc(100vh - #{$sidebar-mobile-height}*2)
 
 
   &__inner
@@ -16,5 +19,4 @@
     @media #{$mb-dw}
       padding: $gutter-width/2 0 !important
 
-  @media #{$mb-dw}
-    height: calc(100vh - #{$sidebar-mobile-height}*2)
+  

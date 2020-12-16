@@ -11,21 +11,12 @@ $close-button-size: 36px
   
 
 .settings
-  border-radius: $base-radius
-  box-shadow: $shadow-3
-  background: $clr-white
-  color: $clr-black
   z-index: 15
   height: fit-content
-
-  &-reveal-enter,
-  &-reveal-leave-active
-    opacity: $transparent-opacity
-    transform: scale(0.95)
-
-  &-reveal-enter-active,
-  &-reveal-leave-active
-    transition: $base-transition
+  border-radius: $base-radius
+  background: $clr-white
+  box-shadow: $shadow-3
+  color: $clr-black
 
   &--inside
     position: absolute
@@ -66,30 +57,40 @@ $close-button-size: 36px
   &--books
     @include themed-colors($clr-books)
 
+  &-reveal-enter,
+  &-reveal-leave-active
+    opacity: $transparent-opacity
+    transform: scale(0.95)
+
+  &-reveal-enter-active,
+  &-reveal-leave-active
+    transition: $base-transition
+
 
   &__close
+    position: absolute !important
+    top: -$close-button-size/2
+    right: -$close-button-size/2
+    z-index: 100
     display: flex
     justify-content: center
     align-items: center
+    width: $close-button-size
+    height: $close-button-size
     border-radius: $round-radius
     cursor: pointer
     box-shadow: $shadow-1
     transition: $base-transition
-    position: absolute !important
-    width: $close-button-size
-    height: $close-button-size
-    top: -$close-button-size/2
-    right: -$close-button-size/2
-    z-index: 100
 
     &:hover
       box-shadow: $shadow-3
 
 
   &__cross
-    transition: $base-transition
-    fill: $clr-white
     @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
+    
+    fill: $clr-white
+    transition: $base-transition
 
 
   &__content
@@ -100,8 +101,8 @@ $close-button-size: 36px
     display: flex
     justify-content: space-between
     align-items: center
-    background: $clr-grey
     padding: $gutter-width/2 $gutter-width/1.5
     border-top: 1px solid rgba($clr-black, $tiny-opacity)
     border-bottom-left-radius: $base-radius !important
     border-bottom-right-radius: $base-radius !important
+    background: $clr-grey

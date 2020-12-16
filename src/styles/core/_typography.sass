@@ -22,12 +22,10 @@ body
 
 h1, h2, h3, h4, h5, h6
   margin-top: 0
-  margin-bottom: 20px
+  margin-bottom: $gutter-width/2
   font-weight: 700
   line-height: $base-lh
 
-.fz1, .fz2, .fz3, .fz4, .fz5, .fz6
-  font-weight: 700
 
 h1, .fz1
   font-size: 52px
@@ -38,6 +36,7 @@ h1, .fz1
   @media #{$xs-dw}
     font-size: 28px
 
+
 h2, .fz2
   font-size: 34px
 
@@ -46,6 +45,7 @@ h2, .fz2
 
   @media #{$xs-dw}
     font-size: 22px
+
 
 h3, .fz3
   font-size: 28px
@@ -56,6 +56,7 @@ h3, .fz3
   @media #{$xs-dw}
     font-size: 18px
 
+
 h4, .fz4
   font-size: 22px
 
@@ -64,6 +65,7 @@ h4, .fz4
 
   @media #{$xs-dw}
     font-size: 14px
+
 
 h5, .fz5
   font-size: 18px
@@ -74,6 +76,7 @@ h5, .fz5
   @media #{$xs-dw}
     font-size: 12px
 
+
 h6, .fz6
   font-size: 14px
 
@@ -82,6 +85,7 @@ h6, .fz6
 
   @media #{$xs-dw}
     font-size: 11px
+
 
 p,
 ul,
@@ -101,69 +105,3 @@ ol
   list-style-type: none
   margin: 0
   padding: 0
-
-
-small,
-.small 
-  font-size: 11px
-
-
-hr 
-  height: 0
-  box-sizing: border-box
-  border: none
-  border-bottom: 1px solid $clr-black
-  margin-top: 40px
-  margin-bottom: 0
-
-
-a 
-  text-decoration: none
-  transition: all 0.3s ease
-  cursor: pointer
-
-
-strong,
-.strong 
-  font-weight: 700
-
-
-sub, sup
-  font-size: 80%
-
-
-em,
-.italic 
-  font-style: italic
-
-
-mark,
-.mark 
-  background-color: $clr-black
-  color: lighten($clr-black, 75%)
-
-
-::selection 
-  background-color: $clr-black
-  color: $clr-white
-
-
-* 
-  -webkit-tap-highlight-color: transparent
-
-
-input[type="number"] 
-  -moz-appearance: textfield
-
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button 
-  -webkit-appearance: none
-  -moz-appearance: none
-  appearance: none
-  margin: 0
-
-
-.svg-sprite 
-  display: none !important
-  visibility: hidden !important

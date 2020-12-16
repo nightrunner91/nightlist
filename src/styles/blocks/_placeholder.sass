@@ -1,11 +1,12 @@
 .placeholder
-  justify-content: center
-  align-items: center
   display: flex
   flex-direction: column
+  justify-content: center
+  align-items: center
+  height: 50vh
   user-select: none
   opacity: $half-opacity
-  height: 50vh
+
 
   &__title
     margin-bottom: $gutter-width
@@ -13,9 +14,11 @@
     @media #{$sm-dw}
       margin-bottom: $gutter-width/2
 
+
   &__icon
-    fill: $clr-white
     @include icon-size(48, 48)
+
+    fill: $clr-white
 
     @media #{$sm-dw}
       @include icon-size(32, 32)

@@ -33,13 +33,6 @@
   animation-direction: $mode 
 
 
-@mixin clearfix() 
-  &::after 
-    display: block
-    content: ""
-    clear: both
-
-
 @mixin pseudoelem()
   content: ' '
   display: block
@@ -69,7 +62,6 @@
 @function strip-unit($number) 
   @if type-of($number) == 'number' and not unitless($number)
     @return $number / ($number * 0 + 1);
-
   @return $number
 
 
@@ -79,7 +71,7 @@
 
 
 @mixin truncate($val)
+  max-width: $val + px
   overflow: hidden
   white-space: nowrap
-  max-width: $val + px
   text-overflow: ellipsis

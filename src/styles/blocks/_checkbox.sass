@@ -9,8 +9,8 @@ $checkbox-size: 18px
   &__body
     display: flex
     align-items: center
-    cursor: pointer
     height: $ui-height
+    cursor: pointer
 
     &:hover
       .checkbox
@@ -20,41 +20,42 @@ $checkbox-size: 18px
 
   &__input
     position: relative
-    border-radius: $base-radius
-    transition: $base-transition
     width: $checkbox-size + $border-width*2
     height: $checkbox-size + $border-width*2
-    border: $border-width solid $clr-grey
     margin-right: $gutter-width/3
+    border: $border-width solid $clr-grey
+    border-radius: $base-radius
+    transition: $base-transition
 
     &--active
       background: $clr-grey
       
       &::before
-        transform: scale(1) !important
         opacity: $active-opacity !important
+        transform: scale(1) !important
 
     &::before
       @include pseudoelem
-      transition: $base-transition
       @include svg-icon(strip-unit($checkbox-size), strip-unit($checkbox-size), 'checkbox')
+      
       top: 0
       left: 0
       right: 0
       bottom: 0
       margin: auto
-      transform: scale(0.8)
       opacity: $transparent-opacity
+      transition: $base-transition
+      transform: scale(0.8)
 
 
   &__label
     display: flex
+    margin-bottom: $gutter-width/5
     opacity: $transparent-opacity
     overflow: hidden
     font-size: 11px
     text-indent: -9999px
-    margin-bottom: $gutter-width/5
-
+    
   
   &__text
     user-select: none

@@ -11,19 +11,18 @@
   display: inline-flex
   justify-content: center
   align-items: center
-  cursor: pointer
+  height: $ui-height
+  padding: 0 $gutter-width/2
   border-radius: $base-radius
   background: $clr-grey
   user-select: none
   text-transform: uppercase
   font-weight: 700
+  cursor: pointer
   transition: $slow-transition
-  height: $ui-height
-  padding: 0 $gutter-width/2
 
   &--iconed
     justify-content: center
-
     width: 40px
     padding: 0
 
@@ -56,14 +55,14 @@
   @media #{$xs-dw}
     padding: 0 $gutter-width/2.5
 
-
+  
   &__icon
-    position: relative
-    transition: $slow-transition
     @include icon-size(24, 24)
 
+    position: relative
     top: -1px
     margin-right: $gutter-width/8
+    transition: $slow-transition
 
 
   &__text

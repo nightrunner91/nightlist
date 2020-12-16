@@ -2,21 +2,21 @@
   position: relative
   display: inline-flex
   align-items: center
+  background: rgba($clr-white, $light-opacity)
   box-shadow: $shadow-1
   color: $clr-white
   font-weight: 700
   line-height: 1
-  background: rgba($clr-white, $light-opacity)
 
   &--small
-    border-radius: $big-radius
-    font-size: 11px
     height: $big-radius * 2
     padding: 0 $gutter-width/3
+    border-radius: $big-radius
+    font-size: 11px
 
   &--medium
-    border-radius: $huge-radius
     top: 0.1em
     height: $huge-radius * 2
     padding: 0 $gutter-width/2.5
+    border-radius: $huge-radius
     font-size: 70%

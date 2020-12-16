@@ -2,10 +2,10 @@
   display: flex
   justify-content: space-between
   align-items: center
+  z-index: 2
   width: 100%
   height: $sidebar-mobile-height
   padding: 0 $gutter-width/2
-  z-index: 2
   background: $clr-black
 
   &--active
@@ -14,34 +14,36 @@
   
   &__avatar
     position: relative
-    border-radius: $round-radius
-    box-shadow: $shadow-1
     width: 24px
     height: 24px
+    border-radius: $round-radius
     background-color: rgba($clr-white, $light-opacity)
     background-repeat: no-repeat
     background-position: center center
     background-size: cover
+    box-shadow: $shadow-1
 
     &:before
       @include pseudoelem
-      opacity: $half-opacity
       @include svg-icon(24, 24, 'avatar')
-      left: 0
-      right: 0
+
       top: 0
+      right: 0
+      left: 0
       bottom: 0
       z-index: -1
       margin: auto
+      opacity: $half-opacity
 
 
   &__settings
+    @include icon-size(24, 24)
+
+    top: $gutter-width * 2
+    right: $gutter-width
+    z-index: 10
     fill: $clr-white
     cursor: pointer
-    @include icon-size(24, 24)
-    right: $gutter-width
-    top: $gutter-width * 2
-    z-index: 10
     opacity: $passive-opacity
     transition: opacity 0.3s ease
 
