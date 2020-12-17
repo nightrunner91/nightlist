@@ -6,7 +6,9 @@
       class='dropdown__toggle'
       @click="switchDropdown()"
       :class="{'dropdown__toggle--active': dropdownOpened}")
-        svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentIcon")
+        svg(
+          class='dropdown__icon'
+          v-if='category != undefined && type != undefined'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentIcon")
         span {{currentName}}
         svg(class='dropdown__chevron'): use(xlink:href='#chevron-down')
     div(
@@ -31,7 +33,8 @@ export default {
     category: String,
     type: String,
     label: String,
-    current: String
+    current: String,
+    length: Number
   },
   data() {
     return {
@@ -46,27 +49,39 @@ export default {
   },
   computed: {
     currentName() {
-      let path = this.$store.state[this.category][this.type]
+      if (this.category != undefined && this.type != undefined) {
+        let path = this.$store.state[this.category][this.type]
 
-      if (this.current != undefined && this.current.length > 0) {
-        return path.filter(i => i.id == this.current)[0].name
+        if (this.current != undefined && this.current.length > 0) {
+          return path.filter(i => i.id == this.current)[0].name
+        } else {
+          return path.filter(i => i.default)[0].name
+        }
       } else {
-        return path.filter(i => i.default)[0].name
+        return this.current
       }
     },
 
     currentIcon() {
-      let path = this.$store.state[this.category][this.type]
+      if (this.category != undefined && this.type != undefined) {
+        let path = this.$store.state[this.category][this.type]
 
-      if (this.current != undefined && this.current.length > 0) {
-        return path.filter(i => i.id == this.current)[0].id
+        if (this.current != undefined && this.current.length > 0) {
+          return path.filter(i => i.id == this.current)[0].id
+        } else {
+          return path.filter(i => i.default)[0].id
+        }
       } else {
-        return path.filter(i => i.default)[0].id
+        return this.current
       }
     },
 
     itemsCount() {
-      return this.$store.state[this.category][this.type].length
+      if (this.category != undefined && this.type != undefined) {
+        return this.$store.state[this.category][this.type].length
+      } else {
+        return this.length
+      }
     }
   },
   methods: {

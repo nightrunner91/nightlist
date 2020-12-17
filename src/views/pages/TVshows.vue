@@ -1,20 +1,36 @@
 <template lang='pug'>
+  
   section(class='section')
+
+    tvshows-modal(
+      :purpose='modalState.purpose'
+      v-show='modalState.visibility')
 
     div(
       class='section__content'
-      :class='{"section__content--blured" : modalState.visibility}')
+      :class='{"section__content--blured" : modalState.visibility && windowParams.width > breakpoints.mb}')
 
       div(class='title title--main')
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalTvshows}}
         div(
-          v-if='serverState.status == "success"'
           class='button button--tvshows title__button'
+          :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
           v-ripple)
           svg(class='button__icon'): use(xlink:href='#add')
-          span(class='button__text') Add New
+          span(
+            class='button__text'
+            v-if='windowParams.width > breakpoints.mb') Add New
+
+      games-search(v-if='totalTvshows > 0')
+
+      div(class='dataset' v-if='!searchState')
+        tvshows-data(:id='"currently_watching"')
+        tvshows-data(:id='"on_hold"')
+        tvshows-data(:id='"plan_to_watch"')
+        tvshows-data(:id='"completed"')
+        tvshows-data(:id='"dropped"')
 
       app-placeholder(
         v-if='totalTvshows == 0'
@@ -23,6 +39,8 @@
 </template>
 
 <script>
+import { eventBus } from "../../main"
+
 export default {
   name: 'TVShows',
   pageTitle: 'My TV Shows',
@@ -43,43 +61,38 @@ export default {
       return this.$store.state.modalState
     },
 
+    searchState() {
+      return this.$store.state.searchState
+    },
+
     serverState() {
       return this.$store.state.serverState
     },
 
     placeholderStatus() {
-      let data = {
-        title: undefined,
-        icon: undefined
+      return {
+        title: 'Collection is empty',
+        icon: 'no-data'
       }
+    },
 
-      switch (this.serverState.status) {
-        case undefined: {
-          data.title = 'Collection is empty'
-          data.icon = 'no-data'
-          break
-        }
+    windowParams() {
+      return this.$store.state.windowParams
+    },
 
-        case 'loading': {
-          data.title = 'Loading your collection...'
-          data.icon = 'loading'
-          break
-        }
-
-        case 'error': {
-          data.title = 'Oops! Something went wrong'
-          data.icon = 'error'
-          break
-        }
-
-        default: {
-          data.title = 'Collection is empty'
-          data.icon = 'no-data'
-        }
-      }
-
-      return data
+    breakpoints() {
+      return this.$store.state.breakpoints
+    },
+  },
+  methods: {
+    addSlot() {
+      this.$store.commit('CHANGE_CONTENT', this.tvshows.default)
+      eventBus.$emit('openModal', 'add')
+      eventBus.$emit('closeSettings')
     }
   },
+  mounted() {
+    
+  }
 }
 </script>

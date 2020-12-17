@@ -163,6 +163,55 @@ export default new Vuex.Store({
         link: '',
         refreshed: false
       }
+    },
+    tvshows: {
+      statuses: [
+        {
+          name: "Currently Watching",
+          default: true,
+          id: 'currently_watching',
+          excludeFields: false
+        },
+        {
+          name: "On Hold",
+          default: false,
+          id: 'on_hold',
+          excludeFields: false
+        },
+        {
+          name: "Watched All",
+          default: false,
+          id: 'completed',
+          excludeFields: false
+        },
+        {
+          name: "Plan to Watch",
+          default: false,
+          id: 'plan_to_watch',
+          excludeFields: true
+        },
+        {
+          name: "Dropped",
+          default: false,
+          id: 'dropped',
+          excludeFields: false
+        }
+      ],
+      default: {
+        category: 'tvshows',
+        title: '',
+        status: '',
+        currentSeason: 1,
+        currentEpisode: 1,
+        totalSeasons: 1,
+        episodeDuration: 40,
+        episodesWatched: 1,
+        rewatchedCounter: 1,
+        rating: 0,
+        favourite: false,
+        link: '',
+        refreshed: false
+      }
     }
   },
   mutations: {
