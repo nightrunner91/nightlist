@@ -325,7 +325,7 @@ export default {
     },
 
     excludingCategory() {
-      let exclude = this.$store.state["games"].statuses.filter(i => i.excludeFields)[0]
+      let exclude = this.$store.state["games"].statuses.filter(i => i.excludeFields)
 
       if (exclude) return exclude[0].id
       else return

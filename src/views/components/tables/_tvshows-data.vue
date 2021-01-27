@@ -50,7 +50,14 @@
 
         //- PROGRESS
         div(
-          class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3') Progress
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3'
+          :class='{"slot__cell--active" : criteria == "progress"}'
+          @click='sortData("progress", "switch")')
+          span Progress
+          svg(
+            v-if='criteria == "progress"'
+            class='table__chevron' 
+            :class='chevronPosition'): use(xlink:href='#chevron-down')
         
         //- FAVOURITE
         div(
@@ -65,23 +72,12 @@
         
         //- RATING
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-7 grid__col--md-7 grid__col--sm-8'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-7 grid__col--sm-8'
           :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
           svg(
             v-if='criteria == "rating"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
-        
-        //- HOURS
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
-          :class='{"slot__cell--active" : criteria == "hours"}'
-          @click='sortData("hours", "switch")')
-          span Hours
-          svg(
-            v-if='criteria == "hours"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
 
@@ -128,7 +124,7 @@
               div(
                 class='progress'
                 :class='{"progress--completed" : slot.totalSeasons == slot.currentSeason }'
-                v-tooltip='{ content: "Watched " + slot.currentSeason + " of " + slot.totalSeasons + " seasons", offset: 5}')
+                v-tooltip='{ content: "Watched " + slot.currentSeason + " of " + slot.totalSeasons + " seasons (" + slot.progress + "%)", offset: 5}')
                 div(class='progress__bar')
                   div(
                     class='progress__item progress__item--total' 
@@ -147,7 +143,7 @@
             
             //- RATING
             div(
-              class='slot__cell grid__col grid__col--lg-7 grid__col--md-6 grid__col--sm-8')
+              class='slot__cell grid__col grid__col--lg-5 grid__col--md-6 grid__col--sm-8')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -157,11 +153,6 @@
                   class='slot__star slot__star--passive' 
                   :class='"slot__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-            
-            //- HOURS
-            div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
-              span(v-if='slot.hours != undefined') {{slot.hours}}
 
       //- TABLETS & MOBILE -//
       div(
@@ -294,9 +285,7 @@ export default {
 
       this.criteria = criteria
 
-      if (
-        this.criteria == 'title' || 
-        this.criteria == 'platform') {
+      if (this.criteria == 'title') {
         // ascending
         if (this.direction) {
           conditionOne = -1
@@ -312,7 +301,8 @@ export default {
       if (
         this.criteria == 'favourite' || 
         this.criteria == 'rating' || 
-        this.criteria == 'hours') {
+        this.criteria == 'hours' ||
+        this.criteria == 'progress') {
         // descending
         if (this.direction) {
           conditionOne = 1
@@ -396,11 +386,7 @@ export default {
     },
 
     titleWidth() {
-      if (this.id != 'plan_to_play') {
-        return 'grid__col--lg-14 grid__col--md-20 grid__col--sm-17'
-      } else {
-        return 'grid__col--lg-32 grid__col--md-32 grid__col--sm-32'
-      }
+      return 'grid__col--lg-17 grid__col--md-20 grid__col--sm-17'
     },
 
     windowParams() {

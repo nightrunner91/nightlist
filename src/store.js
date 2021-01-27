@@ -204,6 +204,7 @@ export default new Vuex.Store({
         currentSeason: 1,
         currentEpisode: 1,
         totalSeasons: 1,
+        progress: 0,
         episodeDuration: 40,
         episodesWatched: 1,
         rewatchedCounter: 1,

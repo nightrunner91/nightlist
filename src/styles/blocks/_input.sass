@@ -2,6 +2,9 @@
   position: relative
   margin-bottom: $gutter-width/2
 
+  &--dual
+    
+
 
   &__buttons
     display: flex
@@ -21,6 +24,59 @@
     margin: auto
     opacity: $half-opacity
     transition: $base-transition
+
+
+  &__pairs
+    display: flex
+
+
+  &__pair
+    position: relative
+    display: flex
+
+    .input
+      &__field
+        padding: 0
+        border-top-left-radius: 0
+        border-bottom-left-radius: 0
+
+  &__prefix
+    display: flex
+    justify-content: center
+    align-items: center
+    margin: auto
+    height: $ui-height
+    padding: $gutter-width / 9 $gutter-width / 9 0 $gutter-width / 2
+    border-top-left-radius: $base-radius
+    border-bottom-left-radius: $base-radius
+    background: $clr-grey
+    font-size: 13px
+    font-weight: 700
+    user-select: none
+
+
+  &__separator
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    flex: 1
+    min-width: $gutter-width
+    height: $ui-height
+    font-weight: 700
+    user-select: none
+
+    &::before
+      @include pseudoelem()
+
+      width: 50%
+      height: 2px
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      margin: auto
+      background: darken($clr-grey, 10%)
 
 
   &__field
@@ -91,6 +147,7 @@
     margin-bottom: $gutter-width/5
     font-size: 12px
     white-space: nowrap
+    user-select: none
 
     sup
       top: 0.4em

@@ -53,7 +53,7 @@
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + status.id")
                 span {{status.name}}
 
-            div(class='grid__row' v-if='fieldsCondition()')
+            div(class='grid__row')
               //- RATING -//
               div(class='grid__col grid__col--lg-24 grid__col--md-24 grid__col--sm-24 grid__col--xs-24 grid__col--mb-26')
                 app-rating(:currentRating='current.rating')
@@ -61,31 +61,36 @@
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-10 grid__col--right')
                 app-favourite(:currentFavourite='current.favourite')
 
-            div(class='grid__row' v-if='fieldsCondition()')
+            div(class='grid__row')
               //- CURRENT SEASON -//
-              div(class='grid__col grid__col--lg-12 grid__col--md-12')
-                div(class='input')
-                  label(class='input__label') Watching Season
-                  input(
-                    type='number'
-                    class='input__field' 
-                    autocomplete='off' 
-                    min='1'
-                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    @wheel='changeNumberVal($event, "currentSeason")'
-                    v-model='current.currentSeason')
+              div(class='grid__col grid__col--lg-24 grid__col--md-12')
+                div(class='input input--dual')
+                  label(class='input__label') Last Watched Episode
+                  div(class='input__pairs')
+                    div(class='input__pair')
+                      label(class='input__prefix' for='season') s
+                      input(
+                        id='season'
+                        type='number'
+                        class='input__field' 
+                        autocomplete='off' 
+                        min='1'
+                        onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                        @wheel='changeNumberVal($event, "currentSeason")'
+                        v-model='current.currentSeason')
+                    div(class='input__separator')
+                    div(class='input__pair')
+                      label(class='input__prefix' for='episode') ep
+                      input(
+                        id='episode'
+                        type='number'
+                        class='input__field' 
+                        autocomplete='off' 
+                        min='1'
+                        onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                        @wheel='changeNumberVal($event, "currentEpisode")'
+                        v-model='current.currentEpisode')
 
-              div(class='grid__col grid__col--lg-12 grid__col--md-12')
-                div(class='number')
-                  label(class='input__label') Watching Episode
-                  input(
-                    type='number'
-                    class='input__field' 
-                    autocomplete='off' 
-                    min='1'
-                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    @wheel='changeNumberVal($event, "currentEpisode")'
-                    v-model='current.currentEpisode')
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
@@ -126,14 +131,17 @@
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
                   label(class='input__label') Times Watched
-                  input(
-                    type='number'
-                    class='input__field' 
-                    autocomplete='off' 
-                    min='1'
-                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    @wheel='changeNumberVal($event, "rewatchedCounter")'
-                    v-model='current.rewatchedCounter')
+                  div(class='input__pair')
+                    label(class='input__prefix' for='rewatch') ×
+                    input(
+                      id='rewatch'
+                      type='number'
+                      class='input__field' 
+                      autocomplete='off' 
+                      min='1'
+                      onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                      @wheel='changeNumberVal($event, "rewatchedCounter")'
+                      v-model='current.rewatchedCounter')
 
             //- LINK -//
             div(class='input')
@@ -233,6 +241,14 @@ export default {
       }
     },
 
+    setProgress() {
+      if (this.current.currentSeason < this.current.totalSeasons) {
+        this.current.progress = parseFloat((((this.current.currentSeason * 100) / this.current.totalSeasons)).toFixed(0))
+      } else {
+        this.current.progress = 100
+      }
+    },
+
     validateModal() {
       return new Promise(resolve => {
         if (this.current.title.length == 0) {
@@ -256,6 +272,7 @@ export default {
 
     applySlot(id) {
       this.setDefaults()
+      this.setProgress()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
@@ -348,7 +365,7 @@ export default {
     },
 
     excludingCategory() {
-      let exclude = this.$store.state["tvshows"].statuses.filter(i => i.excludeFields)[0]
+      let exclude = this.$store.state["tvshows"].statuses.filter(i => i.excludeFields)
 
       if (exclude) return exclude[0].id
       else return
