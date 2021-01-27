@@ -47,10 +47,13 @@
             v-if='criteria == "title"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
+
+        //- PROGRESS
+        div(
+          class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3') Progress
         
         //- FAVOURITE
         div(
-          v-if='id != "plan_to_play"'
           class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
           :class='{"slot__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
@@ -62,7 +65,6 @@
         
         //- RATING
         div(
-          v-if='id != "plan_to_play"'
           class='slot__cell slot__cell--functional grid__col grid__col--lg-7 grid__col--md-7 grid__col--sm-8'
           :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
@@ -74,24 +76,12 @@
         
         //- HOURS
         div(
-          v-if='id != "plan_to_play"'
           class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
           :class='{"slot__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
           span Hours
           svg(
             v-if='criteria == "hours"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
-        
-        //- PLATFORM
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
-          :class='{"slot__cell--active" : criteria == "platform"}'
-          @click='sortData("platform", "switch")')
-          span Platform
-          svg(
-            v-if='criteria == "platform"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
 
@@ -130,16 +120,33 @@
                 class='slot__link'
                 v-if='slot.link.length')
                 svg(class='slot__redirect'): use(xlink:href='#link')
+
+            //- PROGRESS
+            div(
+              class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3')
+
+              div(
+                class='progress'
+                :class='{"progress--completed" : slot.totalSeasons == slot.currentSeason }'
+                v-tooltip='{ content: "Watched " + slot.currentSeason + " of " + slot.totalSeasons + " seasons", offset: 5}')
+                div(class='progress__bar')
+                  div(
+                    class='progress__item progress__item--total' 
+                    v-for='season in slot.totalSeasons'
+                    :style="'width: ' + 100 / slot.totalSeasons + '%'")
+                div(class='progress__bar')
+                  div(
+                    class='progress__item progress__item--watched' 
+                    v-for='season in slot.currentSeason'
+                    :style="'width: ' + 100 / slot.totalSeasons + '%'")
             
             //- FAVOURITE
             div(
-              v-if='id != "plan_to_play"'
               class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
             div(
-              v-if='id != "plan_to_play"'
               class='slot__cell grid__col grid__col--lg-7 grid__col--md-6 grid__col--sm-8')
               div(class='slot__rating')
                 svg(
@@ -153,14 +160,8 @@
             
             //- HOURS
             div(
-              v-if='id != "plan_to_play"'
               class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
-              svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='slot.hours != undefined') {{slot.hours}}
-            
-            //- PLATFORM
-            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
-              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
 
       //- TABLETS & MOBILE -//
       div(
@@ -191,7 +192,6 @@
                   class='slot__link'
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
-              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
 
             div(
               class='slot__bottom'
@@ -244,7 +244,7 @@ export default {
   },
   methods: {
     tableName(id) {
-      return this.games.statuses.filter(i => i.id == id)[0].name
+      return this.tvshows.statuses.filter(i => i.id == id)[0].name
     },
 
     tableLength(id) {
@@ -397,7 +397,7 @@ export default {
 
     titleWidth() {
       if (this.id != 'plan_to_play') {
-        return 'grid__col--lg-18 grid__col--md-20 grid__col--sm-17'
+        return 'grid__col--lg-14 grid__col--md-20 grid__col--sm-17'
       } else {
         return 'grid__col--lg-32 grid__col--md-32 grid__col--sm-32'
       }

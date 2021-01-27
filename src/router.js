@@ -37,7 +37,7 @@ const routes = [
   },
   {
     path: '/tvshows',
-    name: 'TV Shows',
+    name: 'TVShows',
     id: 'tvshows',
     mainMenu: true,
     component: TVshows

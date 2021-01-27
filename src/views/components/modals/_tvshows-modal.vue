@@ -67,54 +67,72 @@
                 div(class='input')
                   label(class='input__label') Watching Season
                   input(
-                    type='text'
+                    type='number'
                     class='input__field' 
                     autocomplete='off' 
-                    v-model='current.currentEpisode')
+                    min='1'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeNumberVal($event, "currentSeason")'
+                    v-model='current.currentSeason')
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
-                div(class='input')
+                div(class='number')
                   label(class='input__label') Watching Episode
                   input(
-                    type='text'
+                    type='number'
                     class='input__field' 
                     autocomplete='off' 
+                    min='1'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeNumberVal($event, "currentEpisode")'
                     v-model='current.currentEpisode')
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
                   label(class='input__label') Total Seasons
                   input(
-                    type='text'
+                    type='number'
                     class='input__field' 
                     autocomplete='off' 
+                    min='1'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeNumberVal($event, "totalSeasons")'
                     v-model='current.totalSeasons')
             
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
                   label(class='input__label') Episode Duration
                   input(
-                    type='text'
+                    type='number'
                     class='input__field' 
                     autocomplete='off' 
+                    min='1'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeNumberVal($event, "episodeDuration")'
                     v-model='current.episodeDuration')
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
                   label(class='input__label') Watched Episodes
                   input(
-                    type='text'
+                    type='number'
                     class='input__field' 
                     autocomplete='off' 
+                    min='1'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeNumberVal($event, "episodesWatched")'
                     v-model='current.episodesWatched')
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
                   label(class='input__label') Times Watched
                   input(
-                    type='text'
+                    type='number'
                     class='input__field' 
                     autocomplete='off' 
+                    min='1'
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    @wheel='changeNumberVal($event, "rewatchedCounter")'
                     v-model='current.rewatchedCounter')
 
             //- LINK -//
@@ -208,19 +226,6 @@ export default {
         this.current.id = Math.floor(Math.random() * 10000000000)
       }
 
-      if (this.current.status == 'plan_to_play') {
-        this.current.hours = tvshowsData.default.hours
-        this.current.hoursApproximate = tvshowsData.default.hoursApproximate
-        this.current.rating = tvshowsData.default.rating
-        this.current.favourite = tvshowsData.default.favourite
-        this.current.priority = tvshowsData.default.priority
-      }
-
-      if (this.current.platform.length == 0) {
-        let defaultPlatform = tvshowsData.platforms.filter(i => i.default)[0]
-        this.current.platform = defaultPlatform.id
-      }
-
       if (this.current.status.length == 0) {
         let defaultStatus = tvshowsData.statuses.filter(i => i.default)[0]
         this.current.status = defaultStatus.name
@@ -266,6 +271,7 @@ export default {
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
       this.$storage.remove('slot_' + this.current.id)
+      this.$store.dispatch('sendBackup')
     },
 
     fieldsCondition() {
@@ -286,17 +292,17 @@ export default {
       let prevVal = Number(target.value)
       let newVal
 
-      if (event.deltaY < 0) {
+      if (event.deltaY < 1) {
         newVal = prevVal + interval
-      } else if (event.deltaY > 0) {
-        if (prevVal == 0) { 
-          newVal = 0 
+      } else if (event.deltaY > 1) {
+        if (prevVal == 1) { 
+          newVal = 1 
         } else { 
           newVal = prevVal - interval 
         }
       }
 
-      this.current[prop] = newVal
+      this.current[prop] = Number(newVal)
     },
 
     setStatus(id) {
@@ -342,12 +348,11 @@ export default {
     },
 
     excludingCategory() {
-      return this.$store.state["tvshows"].statuses.filter(i => i.excludeFields)[0].id
-    },
+      let exclude = this.$store.state["tvshows"].statuses.filter(i => i.excludeFields)[0]
 
-    availableSeasons() {
-      return [1,2,3,4,5]
-    }
+      if (exclude) return exclude[0].id
+      else return
+    },
   },
   mounted() {
     document.addEventListener('keyup', e => {

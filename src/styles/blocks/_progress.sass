@@ -1,7 +1,7 @@
 .progress
 	position: relative
 	width: calc(100% - #{$gutter-width * 2})
-	height: 12px
+	height: 10px
 
 	&--completed
 		.progress
@@ -48,3 +48,5 @@
 			&:first-child
 				border-top-left-radius: $base-radius
 				border-bottom-left-radius: $base-radius
+				border-top-right-radius: 0 !important
+				border-bottom-right-radius: 0 !important

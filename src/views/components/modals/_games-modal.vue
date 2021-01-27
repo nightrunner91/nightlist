@@ -248,6 +248,7 @@ export default {
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
       this.$storage.remove('slot_' + this.current.id)
+      this.$store.dispatch('sendBackup')
     },
 
     fieldsCondition() {
@@ -324,7 +325,10 @@ export default {
     },
 
     excludingCategory() {
-      return this.$store.state["games"].statuses.filter(i => i.excludeFields)[0].id
+      let exclude = this.$store.state["games"].statuses.filter(i => i.excludeFields)[0]
+
+      if (exclude) return exclude[0].id
+      else return
     }
   },
   mounted() {
