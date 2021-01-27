@@ -131,8 +131,8 @@
 
               div(
                 class='progress'
-                :class='{"progress--completed" : slot.totalSeasons == slot.currentSeason }'
-                v-tooltip='{ content: "Watched " + slot.currentSeason + " of " + slot.totalSeasons + " seasons (" + slot.progress + "%)", offset: 5}')
+                :class='{"progress--completed" : slot.totalSeasons == slot.viewedSeasons }'
+                v-tooltip='{ content: "Watched " + slot.viewedSeasons + " of " + slot.totalSeasons + " seasons (" + slot.progress + "%)", offset: 5}')
                 div(class='progress__bar')
                   div(
                     class='progress__item progress__item--total' 
@@ -141,7 +141,8 @@
                 div(class='progress__bar')
                   div(
                     class='progress__item progress__item--watched' 
-                    v-for='season in slot.currentSeason'
+                    :class='{"progress__item--first-only" : slot.totalSeasons == slot.viewedSeasons == 1}'
+                    v-for='season in slot.viewedSeasons'
                     :style="'width: ' + 100 / slot.totalSeasons + '%'")
             
             //- FAVOURITE

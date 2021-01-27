@@ -66,17 +66,50 @@
     font-weight: 700
     user-select: none
 
-    &::before
+    &::before,
+    &::after
       @include pseudoelem()
 
-      width: 50%
-      height: 2px
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
-      margin: auto
+      
       background: darken($clr-grey, 10%)
+
+    &--dash
+      &::before
+        width: 50%
+        height: 2px
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        margin: auto
+
+    &--cross
+      &::before,
+      &::after
+        width: 40%
+        height: 2px
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        margin: auto
+
+      &::before
+        transform: rotate(-45deg)
+
+      &::after
+        transform: rotate(45deg)
+
+    &--slash
+      &::before
+        width: 50%
+        height: 2px
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        margin: auto
+        transform: rotate(-45deg)
 
 
   &__field

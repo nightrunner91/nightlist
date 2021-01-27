@@ -62,8 +62,8 @@
                 app-favourite(:currentFavourite='current.favourite')
 
             div(class='grid__row')
-              //- CURRENT SEASON -//
-              div(class='grid__col grid__col--lg-24 grid__col--md-12')
+              //- LAST EPISODE -//
+              div(class='grid__col grid__col--lg-18 grid__col--md-12')
                 div(class='input input--dual')
                   label(class='input__label') Last Watched Episode
                   div(class='input__pairs')
@@ -78,7 +78,7 @@
                         onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                         @wheel='changeNumberVal($event, "currentSeason")'
                         v-model='current.currentSeason')
-                    div(class='input__separator')
+                    div(class='input__separator input__separator--cross')
                     div(class='input__pair')
                       label(class='input__prefix' for='episode') ep
                       input(
@@ -91,18 +91,28 @@
                         @wheel='changeNumberVal($event, "currentEpisode")'
                         v-model='current.currentEpisode')
 
-
-              div(class='grid__col grid__col--lg-12 grid__col--md-12')
-                div(class='input')
-                  label(class='input__label') Total Seasons
-                  input(
-                    type='number'
-                    class='input__field' 
-                    autocomplete='off' 
-                    min='1'
-                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    @wheel='changeNumberVal($event, "totalSeasons")'
-                    v-model='current.totalSeasons')
+              //- SEASONS PROGRESS -//
+              div(class='grid__col grid__col--lg-18 grid__col--md-12')
+                div(class='input input--dual')
+                  label(class='input__label') Seasons Progress
+                  div(class='input__pairs')
+                    input(
+                      type='number'
+                      class='input__field' 
+                      autocomplete='off' 
+                      min='0'
+                      onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                      @wheel='changeNumberVal($event, "viewedSeasons")'
+                      v-model='current.viewedSeasons')
+                    div(class='input__separator input__separator--slash')
+                    input(
+                      type='number'
+                      class='input__field' 
+                      autocomplete='off' 
+                      min='1'
+                      onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                      @wheel='changeNumberVal($event, "totalSeasons")'
+                      v-model='current.totalSeasons')
             
               div(class='grid__col grid__col--lg-12 grid__col--md-12')
                 div(class='input')
@@ -242,8 +252,8 @@ export default {
     },
 
     setProgress() {
-      if (this.current.currentSeason < this.current.totalSeasons) {
-        this.current.progress = parseFloat((((this.current.currentSeason * 100) / this.current.totalSeasons)).toFixed(0))
+      if (this.current.viewedSeasons <= this.current.totalSeasons) {
+        this.current.progress = parseFloat((((this.current.viewedSeasons * 100) / this.current.totalSeasons)).toFixed(0))
       } else {
         this.current.progress = 100
       }
@@ -314,11 +324,11 @@ export default {
       let prevVal = Number(target.value)
       let newVal
 
-      if (event.deltaY < 1) {
+      if (event.deltaY < 0) {
         newVal = prevVal + interval
-      } else if (event.deltaY > 1) {
-        if (prevVal == 1) { 
-          newVal = 1 
+      } else if (event.deltaY > 0) {
+        if (prevVal == 0) { 
+          newVal = 0 
         } else { 
           newVal = prevVal - interval 
         }
