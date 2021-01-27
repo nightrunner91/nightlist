@@ -249,6 +249,10 @@ export default {
       }
     },
 
+    setHours() {
+      this.current.hours = parseFloat(((this.current.episodeDuration * this.current.episodesWatched * this.current.rewatchedCounter) / 60).toFixed(0))
+    },
+
     validateModal() {
       return new Promise(resolve => {
         if (this.current.title.length == 0) {
@@ -273,6 +277,7 @@ export default {
     applySlot(id) {
       this.setDefaults()
       this.setProgress()
+      this.setHours()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true

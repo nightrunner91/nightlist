@@ -209,6 +209,7 @@ export default new Vuex.Store({
         episodesWatched: 1,
         rewatchedCounter: 1,
         rating: 0,
+        hours: 0,
         favourite: false,
         link: '',
         refreshed: false

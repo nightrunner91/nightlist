@@ -39,8 +39,8 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col'
-          :class='[{"slot__cell--active" : criteria == "title"}, titleWidth]'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-16 grid__col--md-20 grid__col--sm-17'
+          :class='{"slot__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
           svg(
@@ -81,6 +81,17 @@
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron-down')
 
+        //- HOURS
+        div(
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
+          :class='{"slot__cell--active" : criteria == "hours"}'
+          @click='sortData("hours", "switch")')
+          span Hours
+          svg(
+            v-if='criteria == "hours"'
+            class='table__chevron' 
+            :class='chevronPosition'): use(xlink:href='#chevron-down')
+
       //- ==== -//
       //- BODY -//
       //- ==== -//
@@ -104,9 +115,7 @@
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
-            div(
-              class='slot__cell grid__col'
-              :class='titleWidth')
+            div(class='slot__cell grid__col grid__col--lg-16 grid__col--md-20 grid__col--sm-17')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -118,8 +127,7 @@
                 svg(class='slot__redirect'): use(xlink:href='#link')
 
             //- PROGRESS
-            div(
-              class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3')
+            div(class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3')
 
               div(
                 class='progress'
@@ -153,6 +161,9 @@
                   class='slot__star slot__star--passive' 
                   :class='"slot__star--" + (index + 1)'
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
+
+            //- HOURS
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right') {{slot.hours}}
 
       //- TABLETS & MOBILE -//
       div(
@@ -372,21 +383,9 @@ export default {
     },
 
     tableHeight() {
-      if (this.windowParams.width <= this.breakpoints.sm && this.id != 'plan_to_play') {
-        return 'max-height: ' + ((95 + 7.5) * this.data.length + 40) + 'px'
-      }
-
-      if (this.windowParams.width <= this.breakpoints.sm && this.id == 'plan_to_play') {
-        return 'max-height: ' + ((55 + 7.5) * this.data.length + 40) + 'px'
-      }
-      
       if (this.windowParams.width > this.breakpoints.sm) {
         return 'max-height: ' + (40 * this.data.length + 40) + 'px'
       }
-    },
-
-    titleWidth() {
-      return 'grid__col--lg-17 grid__col--md-20 grid__col--sm-17'
     },
 
     windowParams() {
