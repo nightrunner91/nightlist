@@ -39,7 +39,7 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-16 grid__col--md-20 grid__col--sm-17'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-15 grid__col--md-20 grid__col--sm-17'
           :class='{"slot__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
@@ -50,7 +50,7 @@
 
         //- PROGRESS
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-3 grid__col--sm-3'
           :class='{"slot__cell--active" : criteria == "progress"}'
           @click='sortData("progress", "switch")')
           span Progress
@@ -115,7 +115,7 @@
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
-            div(class='slot__cell grid__col grid__col--lg-16 grid__col--md-20 grid__col--sm-17')
+            div(class='slot__cell grid__col grid__col--lg-15 grid__col--md-20 grid__col--sm-17')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -127,7 +127,7 @@
                 svg(class='slot__redirect'): use(xlink:href='#link')
 
             //- PROGRESS
-            div(class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3')
+            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-3 grid__col--sm-3')
               app-progress(
                 :viewed='slot.viewedSeasons'
                 :total='slot.totalSeasons'
