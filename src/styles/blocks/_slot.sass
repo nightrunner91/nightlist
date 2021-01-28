@@ -37,12 +37,14 @@ $star-size: 24px
         opacity: $half-opacity
 
   @media #{$sm-dw}
+    flex-direction: column
     margin-bottom: $gutter-width/4
     padding: $gutter-width/3 $gutter-width/2
     background: rgba($clr-white, $tiny-opacity)
 
 
   &__header,
+  &__middle,
   &__bottom
     position: relative
     display: flex
@@ -55,12 +57,14 @@ $star-size: 24px
     min-width: $gutter-width/1.5
     opacity: $half-opacity
     font-size: 12px
+    line-height: 1
 
 
   &__title
     display: flex
     align-items: center
     font-weight: 700
+    line-height: 1
 
     span
       @include truncate(320)

@@ -39,7 +39,7 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-15 grid__col--md-20 grid__col--sm-17'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-15 grid__col--md-15 grid__col--sm-14'
           :class='{"slot__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
@@ -50,7 +50,7 @@
 
         //- PROGRESS
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-3 grid__col--sm-3'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9'
           :class='{"slot__cell--active" : criteria == "progress"}'
           @click='sortData("progress", "switch")')
           span Progress
@@ -61,7 +61,7 @@
         
         //- FAVOURITE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
           :class='{"slot__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
           span Favourite
@@ -72,7 +72,7 @@
         
         //- RATING
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-7 grid__col--sm-8'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5'
           :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
@@ -115,19 +115,19 @@
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
-            div(class='slot__cell grid__col grid__col--lg-15 grid__col--md-20 grid__col--sm-17')
+            div(class='slot__cell grid__col grid__col--lg-15 grid__col--md-15 grid__col--sm-14')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
                 rel='nofollow'
                 :href='slot.link'
-                target='_blank"'
+                target='_blank'
                 class='slot__link'
                 v-if='slot.link.length')
                 svg(class='slot__redirect'): use(xlink:href='#link')
 
             //- PROGRESS
-            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-3 grid__col--sm-3')
+            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9')
               app-progress(
                 :viewed='slot.viewedSeasons'
                 :total='slot.totalSeasons'
@@ -135,11 +135,11 @@
             
             //- FAVOURITE
             div(
-              class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
+              class='slot__cell grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4')
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
-            div(class='slot__cell grid__col grid__col--lg-5 grid__col--md-6 grid__col--sm-8')
+            div(class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -178,10 +178,16 @@
                   :ref='"redirect"'
                   rel='nofollow'
                   :href='slot.link'
-                  target='_blank"'
+                  target='_blank'
                   class='slot__link'
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
+
+            div(class='slot__middle')
+              app-progress(
+                :viewed='slot.viewedSeasons'
+                :total='slot.totalSeasons'
+                :progress='slot.progress')
 
             div(
               class='slot__bottom'

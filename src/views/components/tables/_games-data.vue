@@ -126,7 +126,7 @@
                 :ref='"redirect"'
                 rel='nofollow'
                 :href='slot.link'
-                target='_blank"'
+                target='_blank'
                 class='slot__link'
                 v-if='slot.link.length')
                 svg(class='slot__redirect'): use(xlink:href='#link')
@@ -187,7 +187,7 @@
                   :ref='"redirect"'
                   rel='nofollow'
                   :href='slot.link'
-                  target='_blank"'
+                  target='_blank'
                   class='slot__link'
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
