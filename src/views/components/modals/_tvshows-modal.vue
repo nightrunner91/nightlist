@@ -28,9 +28,10 @@
                 type='text'
                 ref='title'
                 class='input__field' 
-                :class='{"input__field--invalid" : valid == false }'
+                :class='{"input__field--invalid" : valid.title == false}'
+                v-tooltip='{ content: "Title field is required", offset: 5, trigger: "manual", show: valid.title == false}'
                 autocomplete='off' 
-                @input='removeValidation'
+                @input='removeValidation("title")'
                 v-if='titleVisible'
                 v-model='current.title'
                 required)
@@ -63,7 +64,7 @@
 
             div(class='grid__row')
               //- LAST EPISODE -//
-              div(class='grid__col grid__col--lg-18 grid__col--md-12')
+              div(class='grid__col grid__col--lg-18 grid__col--md-18 grid__col--sm-18 grid__col--xs-18 grid__col--mb-36')
                 div(class='input input--dual')
                   label(class='input__label') Last Watched Episode
                   div(class='input__pairs')
@@ -92,17 +93,20 @@
                         v-model='current.currentEpisode')
 
               //- SEASONS PROGRESS -//
-              div(class='grid__col grid__col--lg-18 grid__col--md-12')
+              div(class='grid__col grid__col--lg-18 grid__col--md-18 grid__col--sm-18 grid__col--xs-18 grid__col--mb-36')
                 div(class='input input--dual')
                   label(class='input__label') Seasons Progress
                   div(class='input__pairs')
                     input(
                       type='number'
-                      class='input__field' 
+                      class='input__field'
+                      :class='{"input__field--invalid" : valid.viewedSeasons == false}'
                       autocomplete='off' 
                       min='0'
+                      v-tooltip='{ content: "Viewed Seasons cannot be greater than Total Seasons", offset: 5, trigger: "manual", show: valid.viewedSeasons == false}'
                       onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                      @wheel='changeNumberVal($event, "viewedSeasons")'
+                      @wheel='changeNumberVal($event, "viewedSeasons"), removeValidation("viewedSeasons")'
+                      @input='removeValidation("viewedSeasons")'
                       v-model='current.viewedSeasons')
                     div(class='input__separator input__separator--slash')
                     input(
@@ -114,7 +118,7 @@
                       @wheel='changeNumberVal($event, "totalSeasons")'
                       v-model='current.totalSeasons')
             
-              div(class='grid__col grid__col--lg-12 grid__col--md-12')
+              div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
                 div(class='input')
                   label(class='input__label') Episode Duration
                   input(
@@ -126,7 +130,7 @@
                     @wheel='changeNumberVal($event, "episodeDuration")'
                     v-model='current.episodeDuration')
 
-              div(class='grid__col grid__col--lg-12 grid__col--md-12')
+              div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
                 div(class='input')
                   label(class='input__label') Watched Episodes
                   input(
@@ -138,7 +142,7 @@
                     @wheel='changeNumberVal($event, "episodesWatched")'
                     v-model='current.episodesWatched')
 
-              div(class='grid__col grid__col--lg-12 grid__col--md-12')
+              div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
                 div(class='input')
                   label(class='input__label') Times Watched
                   div(class='input__pair')
@@ -214,7 +218,10 @@ export default {
   },
   data() {
     return {
-      valid: undefined,
+      valid: {
+        title: undefined,
+        viewedSeasons: undefined
+      },
       current: {},
       confirmActive: false,
       titleVisible: false
@@ -233,8 +240,14 @@ export default {
       this.confirmActive = state 
     },
 
-    removeValidation() {
-      this.valid = undefined
+    removeValidation(target) {
+      if (target) {
+        this.valid[target] = undefined
+      } else {
+        Object.keys(this.valid).forEach(key => {
+          this.valid[key] = undefined
+        })
+      }
     },
 
     setDefaults() {
@@ -266,10 +279,20 @@ export default {
     validateModal() {
       return new Promise(resolve => {
         if (this.current.title.length == 0) {
-          this.valid = false
+          this.valid.title = false
         }
 
-        if (this.valid == false) {
+        if (this.current.viewedSeasons > this.current.totalSeasons) {
+          this.valid.viewedSeasons = false
+        }
+
+        let results = []
+
+        Object.values(this.valid).forEach(value => {
+          results.push(value)
+        })
+
+        if (results.some(el => el == false)) {
           resolve(false)
         } else {
           resolve(true)
@@ -306,29 +329,28 @@ export default {
       this.$store.dispatch('sendBackup')
     },
 
-    fieldsCondition() {
-      if (
-        this.current.status != undefined && 
-        this.current.status == this.excludingCategory) {
-          return false
-        } else {
-          return true
-        }
-    },
-
     changeNumberVal(event, prop) {
       event.preventDefault()
+
+      this.removeValidation(prop)
 
       let target = event.target
       let interval = 1
       let prevVal = Number(target.value)
       let newVal
+      let min
 
-      if (event.deltaY < 0) {
+      if (prop == 'totalSeasons' || prop == 'rewatchedCounter') {
+        min = 1
+      } else {
+        min = 0
+      }
+
+      if (event.deltaY < min) {
         newVal = prevVal + interval
-      } else if (event.deltaY > 0) {
-        if (prevVal == 0) { 
-          newVal = 0 
+      } else if (event.deltaY > min) {
+        if (prevVal == min) { 
+          newVal = min 
         } else { 
           newVal = prevVal - interval 
         }
@@ -341,20 +363,12 @@ export default {
       this.current.status = id
     },
 
-    setPlatform(id) {
-      this.current.platform = id
-    },
-
     setRating(data) {
       this.current.rating = data 
     },
 
     setFavourite(data) {
       this.current.favourite = data 
-    },
-
-    sethoursApproximate(data) {
-      this.current.hoursApproximate = data
     },
 
     focusTitle() {
@@ -377,14 +391,7 @@ export default {
 
     tvshowsCollection() {
       return this.$store.state.collection.filter(i => i.category == 'tvshows')
-    },
-
-    excludingCategory() {
-      let exclude = this.$store.state["tvshows"].statuses.filter(i => i.excludeFields)
-
-      if (exclude) return exclude[0].id
-      else return
-    },
+    }
   },
   mounted() {
     document.addEventListener('keyup', e => {
@@ -406,7 +413,6 @@ export default {
 
     eventBus.$on('rated', data => this.setRating(data))
     eventBus.$on('favourite', data => this.setFavourite(data))
-    eventBus.$on('hoursApproximate', data => this.sethoursApproximate(data))
   }
 }
 </script>

@@ -1,9 +1,8 @@
 .input
   position: relative
+  width: 100%
+  max-width: 100%
   margin-bottom: $gutter-width/2
-
-  &--dual
-    
 
 
   &__buttons
@@ -40,7 +39,9 @@
         border-top-left-radius: 0
         border-bottom-left-radius: 0
 
+
   &__prefix
+    position: relative
     display: flex
     justify-content: center
     align-items: center
@@ -54,6 +55,15 @@
     font-weight: 700
     user-select: none
 
+    &::before
+      @include pseudoelem
+
+      width: 3px
+      height: 100%
+      top: 0
+      right: 0
+      background: $clr-grey
+
 
   &__separator
     position: relative
@@ -65,13 +75,6 @@
     height: $ui-height
     font-weight: 700
     user-select: none
-
-    &::before,
-    &::after
-      @include pseudoelem()
-
-      
-      background: darken($clr-grey, 10%)
 
     &--dash
       &::before
@@ -111,9 +114,16 @@
         margin: auto
         transform: rotate(-45deg)
 
+    &::before,
+    &::after
+      @include pseudoelem()
+
+      background: darken($clr-grey, 10%)
+
 
   &__field
     width: 100%
+    max-width: 100%
     height: $ui-height
     padding: 0 $gutter-width/2
     border: 0

@@ -128,22 +128,10 @@
 
             //- PROGRESS
             div(class='slot__cell grid__col grid__col--lg-7 grid__col--md-3 grid__col--sm-3')
-
-              div(
-                class='progress'
-                :class='{"progress--completed" : slot.totalSeasons == slot.viewedSeasons }'
-                v-tooltip='{ content: "Watched " + slot.viewedSeasons + " of " + slot.totalSeasons + " seasons (" + slot.progress + "%)", offset: 5}')
-                div(class='progress__bar')
-                  div(
-                    class='progress__item progress__item--total' 
-                    v-for='season in slot.totalSeasons'
-                    :style="'width: ' + 100 / slot.totalSeasons + '%'")
-                div(class='progress__bar')
-                  div(
-                    class='progress__item progress__item--watched' 
-                    :class='{"progress__item--first-only" : slot.totalSeasons == slot.viewedSeasons == 1}'
-                    v-for='season in slot.viewedSeasons'
-                    :style="'width: ' + 100 / slot.totalSeasons + '%'")
+              app-progress(
+                :viewed='slot.viewedSeasons'
+                :total='slot.totalSeasons'
+                :progress='slot.progress')
             
             //- FAVOURITE
             div(
@@ -151,8 +139,7 @@
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
-            div(
-              class='slot__cell grid__col grid__col--lg-5 grid__col--md-6 grid__col--sm-8')
+            div(class='slot__cell grid__col grid__col--lg-5 grid__col--md-6 grid__col--sm-8')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 

@@ -1,6 +1,6 @@
 .progress
 	position: relative
-	width: calc(100% - #{$gutter-width * 2})
+	width: calc(100% - #{$gutter-width * 3})
 	height: $ui-height / 4
 
 	&--completed
@@ -55,3 +55,17 @@
 			&:last-child
 				border-top-right-radius: $base-radius !important
 				border-bottom-right-radius: $base-radius !important
+
+	
+	&__percentage
+		$position: -$gutter-width - $gutter-width/2
+
+		position: absolute
+		top: 0
+		right: $position
+		bottom: 0
+		width: $gutter-width
+		margin: auto
+		font-size: 10px
+		text-align: center
+		opacity: $passive-opacity
