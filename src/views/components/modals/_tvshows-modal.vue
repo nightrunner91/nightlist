@@ -76,6 +76,7 @@
                         class='input__field' 
                         autocomplete='off' 
                         min='1'
+                        @input='convertToNumber("currentSeason")'
                         onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                         @wheel='changeNumberVal($event, "currentSeason")'
                         v-model='current.currentSeason')
@@ -88,6 +89,7 @@
                         class='input__field' 
                         autocomplete='off' 
                         min='1'
+                        @input='convertToNumber("currentEpisode")'
                         onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                         @wheel='changeNumberVal($event, "currentEpisode")'
                         v-model='current.currentEpisode')
@@ -106,7 +108,7 @@
                       v-tooltip='{ content: "Viewed Seasons cannot be greater than Total Seasons", offset: 5, trigger: "manual", show: valid.viewedSeasons == false}'
                       onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                       @wheel='changeNumberVal($event, "viewedSeasons"), removeValidation("viewedSeasons")'
-                      @input='removeValidation("viewedSeasons")'
+                      @input='removeValidation("viewedSeasons"), convertToNumber("viewedSeasons")'
                       v-model='current.viewedSeasons')
                     div(class='input__separator input__separator--slash')
                     input(
@@ -116,7 +118,7 @@
                       min='1'
                       onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                       @wheel='changeNumberVal($event, "totalSeasons"), removeValidation("viewedSeasons")'
-                      @input='removeValidation("viewedSeasons")'
+                      @input='removeValidation("viewedSeasons"), convertToNumber("totalSeasons")'
                       v-model='current.totalSeasons')
             
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
@@ -127,6 +129,7 @@
                     class='input__field' 
                     autocomplete='off' 
                     min='1'
+                    @input='convertToNumber("episodeDuration")'
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                     @wheel='changeNumberVal($event, "episodeDuration")'
                     v-model='current.episodeDuration')
@@ -139,6 +142,7 @@
                     class='input__field' 
                     autocomplete='off' 
                     min='1'
+                    @input='convertToNumber("episodesWatched")'
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                     @wheel='changeNumberVal($event, "episodesWatched")'
                     v-model='current.episodesWatched')
@@ -154,6 +158,7 @@
                       class='input__field' 
                       autocomplete='off' 
                       min='0'
+                      @input='convertToNumber("rewatchedCounter")'
                       onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                       @wheel='changeNumberVal($event, "rewatchedCounter")'
                       v-model='current.rewatchedCounter')
@@ -308,23 +313,14 @@ export default {
       return false
     },
 
-    convertToNumber() {
-      this.current.currentSeason = parseFloat(this.current.currentSeason)
-      this.current.currentEpisode = parseFloat(this.current.currentEpisode)
-      this.current.viewedSeasons = parseFloat(this.current.viewedSeasons)
-      this.current.totalSeasons = parseFloat(this.current.totalSeasons)
-      this.current.progress = parseFloat(this.current.progress)
-      this.current.episodeDuration = parseFloat(this.current.episodeDuration)
-      this.current.episodesWatched = parseFloat(this.current.episodesWatched)
-      this.current.rewatchedCounter = parseFloat(this.current.rewatchedCounter)
-      this.current.hours = parseFloat(this.current.hours)
+    convertToNumber(key) {
+      this.current[key] = parseFloat(this.current[key])
     },
 
     applySlot(id) {
       this.setDefaults()
       this.setProgress()
       this.setHours()
-      this.convertToNumber()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
