@@ -115,7 +115,8 @@
                       autocomplete='off' 
                       min='1'
                       onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                      @wheel='changeNumberVal($event, "totalSeasons")'
+                      @wheel='changeNumberVal($event, "totalSeasons"), removeValidation("viewedSeasons")'
+                      @input='removeValidation("viewedSeasons")'
                       v-model='current.totalSeasons')
             
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
@@ -152,7 +153,7 @@
                       type='number'
                       class='input__field' 
                       autocomplete='off' 
-                      min='1'
+                      min='0'
                       onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                       @wheel='changeNumberVal($event, "rewatchedCounter")'
                       v-model='current.rewatchedCounter')
@@ -307,10 +308,23 @@ export default {
       return false
     },
 
+    convertToNumber() {
+      this.current.currentSeason = parseFloat(this.current.currentSeason)
+      this.current.currentEpisode = parseFloat(this.current.currentEpisode)
+      this.current.viewedSeasons = parseFloat(this.current.viewedSeasons)
+      this.current.totalSeasons = parseFloat(this.current.totalSeasons)
+      this.current.progress = parseFloat(this.current.progress)
+      this.current.episodeDuration = parseFloat(this.current.episodeDuration)
+      this.current.episodesWatched = parseFloat(this.current.episodesWatched)
+      this.current.rewatchedCounter = parseFloat(this.current.rewatchedCounter)
+      this.current.hours = parseFloat(this.current.hours)
+    },
+
     applySlot(id) {
       this.setDefaults()
       this.setProgress()
       this.setHours()
+      this.convertToNumber()
       this.validateModal().then(result => {
         if (result) {
           this.current.refreshed = true
@@ -336,11 +350,11 @@ export default {
 
       let target = event.target
       let interval = 1
-      let prevVal = Number(target.value)
+      let prevVal = parseFloat(target.value)
       let newVal
       let min
 
-      if (prop == 'totalSeasons' || prop == 'rewatchedCounter') {
+      if (prop == 'totalSeasons') {
         min = 1
       } else {
         min = 0
@@ -356,7 +370,7 @@ export default {
         }
       }
 
-      this.current[prop] = Number(newVal)
+      this.current[prop] = parseFloat(newVal)
     },
 
     setStatus(id) {

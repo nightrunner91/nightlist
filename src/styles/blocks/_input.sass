@@ -66,6 +66,9 @@
 
 
   &__separator
+    $icon-size: 50%
+    $icon-thickness: 2px
+
     position: relative
     display: flex
     justify-content: center
@@ -78,8 +81,8 @@
 
     &--dash
       &::before
-        width: 50%
-        height: 2px
+        width: $icon-size
+        height: $icon-thickness
         top: 0
         right: 0
         bottom: 0
@@ -89,8 +92,8 @@
     &--cross
       &::before,
       &::after
-        width: 40%
-        height: 2px
+        width: $icon-size / 1.2
+        height: $icon-thickness
         top: 0
         right: 0
         bottom: 0
@@ -105,8 +108,8 @@
 
     &--slash
       &::before
-        width: 50%
-        height: 2px
+        width: $icon-size
+        height: $icon-thickness
         top: 0
         right: 0
         bottom: 0
@@ -118,6 +121,7 @@
     &::after
       @include pseudoelem()
 
+      border-radius: $icon-thickness
       background: darken($clr-grey, 10%)
 
 
