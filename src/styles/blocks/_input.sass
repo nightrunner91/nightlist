@@ -35,9 +35,15 @@
 
     .input
       &__field
-        padding: 0
-        border-top-left-radius: 0
-        border-bottom-left-radius: 0
+        &--left
+          padding-right: 0
+          border-top-right-radius: 0
+          border-bottom-right-radius: 0
+
+        &--right
+          padding-left: 0
+          border-top-left-radius: 0
+          border-bottom-left-radius: 0
 
 
   &__prefix
@@ -47,13 +53,24 @@
     align-items: center
     margin: auto
     height: $ui-height
-    padding: $gutter-width / 9 $gutter-width / 9 0 $gutter-width / 2
-    border-top-left-radius: $base-radius
-    border-bottom-left-radius: $base-radius
     background: $clr-grey
-    font-size: 13px
-    font-weight: 700
     user-select: none
+
+    &--left
+      padding: 0 $gutter-width / 9 0 $gutter-width / 2
+      border-top-left-radius: $base-radius
+      border-bottom-left-radius: $base-radius
+
+      &::before
+        right: 0
+
+    &--right
+      padding: 0 $gutter-width / 2 0 $gutter-width / 9
+      border-top-right-radius: $base-radius
+      border-bottom-right-radius: $base-radius
+
+      &::before
+        left: 0
 
     &::before
       @include pseudoelem
@@ -61,7 +78,6 @@
       width: 3px
       height: 100%
       top: 0
-      right: 0
       background: $clr-grey
 
 

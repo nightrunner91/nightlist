@@ -10,7 +10,7 @@
           class='dropdown__icon'
           v-if='category != undefined && type != undefined'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + currentIcon")
         span {{currentName}}
-        svg(class='dropdown__chevron'): use(xlink:href='#chevron-down')
+        svg(class='dropdown__chevron'): use(xlink:href='#chevron')
     div(
       class='dropdown__body'
       :class='{"dropdown__body--active" : dropdownOpened}')

@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     gradientActive(name) {
-      if (this.current == name) return true
+      if (this.current == name.replace(/\s/g, '')) return true
       return false
     }
   },

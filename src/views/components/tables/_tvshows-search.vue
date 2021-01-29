@@ -54,7 +54,7 @@
           svg(
             v-if='criteria == "title"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
 
         //- STATUS
         div(
@@ -65,7 +65,7 @@
           svg(
             v-if='criteria == "status"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- FAVOURITE
         div(
@@ -76,7 +76,7 @@
           svg(
             v-if='criteria == "favourite"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- RATING
         div(
@@ -87,7 +87,7 @@
           svg(
             v-if='criteria == "rating"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- HOURS
         div(
@@ -98,7 +98,7 @@
           svg(
             v-if='criteria == "hours"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- PLATFORM
         div(
@@ -109,7 +109,7 @@
           svg(
             v-if='criteria == "platform"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
 
       //- ==== -//
       //- BODY -//

@@ -3,14 +3,6 @@
 	width: calc(100% - #{$gutter-width * 3})
 	height: $ui-height / 4
 
-	&--completed
-		.progress
-			&__item
-				&--watched
-					&:last-child
-						border-top-right-radius: $base-radius
-						border-bottom-right-radius: $base-radius
-
 
 	&__bar
 		position: absolute
@@ -29,38 +21,41 @@
 		align-items: center
 		height: 100%
 		border-right: 1px solid rgba($clr-black, $half-opacity)
-		background: $clr-white
-		color: $clr-black
-		font-size: 10px
 
 		&--total
+			background: $clr-white
 			opacity: $half-opacity
 
-			&:first-child
-				border-top-left-radius: $base-radius
-				border-bottom-left-radius: $base-radius
-
-			&:last-child
-				border-top-right-radius: $base-radius
-				border-bottom-right-radius: $base-radius
-
 		&--watched
-			&:first-child
-				border-top-left-radius: $base-radius
-				border-bottom-left-radius: $base-radius
-				border-top-right-radius: 0 !important
-				border-bottom-right-radius: 0 !important
+			background: $clr-white
 
-		&--first-only
-			&:last-child
-				border-top-right-radius: $base-radius !important
-				border-bottom-right-radius: $base-radius !important
+		&--not-last
+			border-top-right-radius: 0 !important
+			border-bottom-right-radius: 0 !important
+
+		&--in-progress
+			border-right: 0
+			background: -moz-linear-gradient(left,  rgba($clr-white, 1) 0%, rgba($clr-white, 0) 70%)
+			background: -webkit-linear-gradient(left,  rgba($clr-white, 1) 0%,rgba($clr-white, 0) 70%)
+			background: linear-gradient(to right,  rgba($clr-white, 1) 0%,rgba($clr-white, 0) 70%)
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 )
+			opacity: $passive-opacity
+
+		&:first-child
+			border-top-left-radius: $base-radius
+			border-bottom-left-radius: $base-radius
+
+		&:last-child
+			border-top-right-radius: $base-radius
+			border-bottom-right-radius: $base-radius
 
 	
 	&__percentage
 		$position: -$gutter-width - $gutter-width/2
 
 		position: absolute
+		display: flex
+		align-items: center
 		top: 0
 		right: $position
 		bottom: 0
@@ -69,3 +64,12 @@
 		font-size: 10px
 		text-align: center
 		opacity: $passive-opacity
+
+	
+	&__more
+		@include icon-size(12, 12)
+
+		position: absolute
+		left: -10px
+		fill: $clr-white
+		transform: rotate(-90deg)

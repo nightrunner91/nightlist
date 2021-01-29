@@ -15,7 +15,7 @@
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
       svg(
         class='title__chevron'
-        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron-down')
+        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- TABLE -//
@@ -46,7 +46,7 @@
           svg(
             v-if='criteria == "title"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- FAVOURITE
         div(
@@ -58,7 +58,7 @@
           svg(
             v-if='criteria == "favourite"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- RATING
         div(
@@ -70,7 +70,7 @@
           svg(
             v-if='criteria == "rating"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- HOURS
         div(
@@ -82,7 +82,7 @@
           svg(
             v-if='criteria == "hours"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- PLATFORM
         div(
@@ -93,7 +93,7 @@
           svg(
             v-if='criteria == "platform"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
 
       //- ==== -//
       //- BODY -//

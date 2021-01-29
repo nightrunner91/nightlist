@@ -25,7 +25,7 @@ export default {
   computed: {
     currentPage() {
       let rName = this.$route.name
-      if (rName != null) return rName
+      if (rName != null) return rName.replace(/\s/g, '')
       else return
     },
 

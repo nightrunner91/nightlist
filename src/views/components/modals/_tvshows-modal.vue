@@ -69,11 +69,11 @@
                   label(class='input__label') Last Watched Episode
                   div(class='input__pairs')
                     div(class='input__pair')
-                      label(class='input__prefix' for='season') s
+                      label(class='input__prefix input__prefix--left' for='season') s
                       input(
                         id='season'
                         type='number'
-                        class='input__field' 
+                        class='input__field input__field--right' 
                         autocomplete='off' 
                         min='1'
                         @input='convertToNumber("currentSeason")'
@@ -82,11 +82,11 @@
                         v-model='current.currentSeason')
                     div(class='input__separator input__separator--cross')
                     div(class='input__pair')
-                      label(class='input__prefix' for='episode') ep
+                      label(class='input__prefix input__prefix--left' for='episode') ep
                       input(
                         id='episode'
                         type='number'
-                        class='input__field' 
+                        class='input__field input__field--right' 
                         autocomplete='off' 
                         min='1'
                         @input='convertToNumber("currentEpisode")'
@@ -124,15 +124,18 @@
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
                 div(class='input')
                   label(class='input__label') Episode Duration
-                  input(
-                    type='number'
-                    class='input__field' 
-                    autocomplete='off' 
-                    min='1'
-                    @input='convertToNumber("episodeDuration")'
-                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    @wheel='changeNumberVal($event, "episodeDuration")'
-                    v-model='current.episodeDuration')
+                  div(class='input__pair')
+                    input(
+                      id='duration'
+                      type='number'
+                      class='input__field input__field--left' 
+                      autocomplete='off' 
+                      min='1'
+                      @input='convertToNumber("episodeDuration")'
+                      onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                      @wheel='changeNumberVal($event, "episodeDuration")'
+                      v-model='current.episodeDuration')
+                    label(class='input__prefix input__prefix--right' for='duration') min
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
                 div(class='input')
@@ -151,11 +154,11 @@
                 div(class='input')
                   label(class='input__label') Times Watched
                   div(class='input__pair')
-                    label(class='input__prefix' for='rewatch') ×
+                    label(class='input__prefix input__prefix--left' for='rewatch') ×
                     input(
                       id='rewatch'
                       type='number'
-                      class='input__field' 
+                      class='input__field input__field--right' 
                       autocomplete='off' 
                       min='0'
                       @input='convertToNumber("rewatchedCounter")'

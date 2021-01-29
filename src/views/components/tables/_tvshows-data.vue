@@ -15,7 +15,7 @@
       span(class='title__badge badge badge--medium') {{tableLength(id)}}
       svg(
         class='title__chevron'
-        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron-down')
+        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- TABLE -//
@@ -46,7 +46,7 @@
           svg(
             v-if='criteria == "title"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
 
         //- PROGRESS
         div(
@@ -57,7 +57,7 @@
           svg(
             v-if='criteria == "progress"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- FAVOURITE
         div(
@@ -68,7 +68,7 @@
           svg(
             v-if='criteria == "favourite"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- RATING
         div(
@@ -79,7 +79,7 @@
           svg(
             v-if='criteria == "rating"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
 
         //- HOURS
         div(
@@ -90,7 +90,7 @@
           svg(
             v-if='criteria == "hours"'
             class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron-down')
+            :class='chevronPosition'): use(xlink:href='#chevron')
 
       //- ==== -//
       //- BODY -//
@@ -129,8 +129,10 @@
             //- PROGRESS
             div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9')
               app-progress(
-                :viewed='slot.viewedSeasons'
-                :total='slot.totalSeasons'
+                :viewedSeasons='slot.viewedSeasons'
+                :totalSeasons='slot.totalSeasons'
+                :currentSeason='slot.currentSeason'
+                :currentEpisode='slot.currentEpisode'
                 :progress='slot.progress')
             
             //- FAVOURITE
