@@ -23,7 +23,7 @@
             class='button__text'
             v-if='windowParams.width > breakpoints.mb') Add New
 
-      games-search(v-if='totalTvshows > 0')
+      tvshows-search(v-if='totalTvshows > 0')
 
       div(class='dataset' v-if='!searchState')
         tvshows-data(:id='"currently_watching"')

@@ -47,7 +47,7 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-16 grid__col--md-16 grid__col--sm-15'
+          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11'
           :class='[{"slot__cell--active" : criteria == "title"}]'
           @click='sortData("title", "switch")')
           span Title
@@ -66,10 +66,21 @@
             v-if='criteria == "status"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron')
+
+        //- PROGRESS
+        div(
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9'
+          :class='{"slot__cell--active" : criteria == "progress"}'
+          @click='sortData("progress", "switch")')
+          span Progress
+          svg(
+            v-if='criteria == "progress"'
+            class='table__chevron' 
+            :class='chevronPosition'): use(xlink:href='#chevron')
         
         //- FAVOURITE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
           :class='{"slot__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
           span Favourite
@@ -80,7 +91,7 @@
         
         //- RATING
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-7'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5'
           :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
@@ -91,23 +102,12 @@
         
         //- HOURS
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
           :class='{"slot__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
           span Hours
           svg(
             v-if='criteria == "hours"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-        
-        //- PLATFORM
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
-          :class='{"slot__cell--active" : criteria == "platform"}'
-          @click='sortData("platform", "switch")')
-          span Platform
-          svg(
-            v-if='criteria == "platform"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron')
 
@@ -135,7 +135,7 @@
             
             //- TITLE
             div(
-              class='slot__cell grid__col grid__col grid__col--lg-16 grid__col--md-16 grid__col--sm-15')
+              class='slot__cell grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -152,6 +152,15 @@
               svg(
                 class='slot__status'
                 v-tooltip='{ content: statusName(slot.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.status")
+
+            //- PROGRESS
+            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9')
+              app-progress(
+                :viewedSeasons='slot.viewedSeasons'
+                :totalSeasons='slot.totalSeasons'
+                :currentSeason='slot.currentSeason'
+                :currentEpisode='slot.currentEpisode'
+                :progress='slot.progress')
             
             //- FAVOURITE
             div(
@@ -160,7 +169,7 @@
             
             //- RATING
             div(
-              class='slot__cell grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-7')
+              class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -173,13 +182,9 @@
             
             //- HOURS
             div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
+              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
               svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='slot.hours != undefined') {{slot.hours}}
-            
-            //- PLATFORM
-            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
-              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
 
       //- TABLETS & MOBILE -//
       div(
@@ -211,6 +216,14 @@
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
               svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
+
+            div(class='slot__middle')
+              app-progress(
+                :viewedSeasons='slot.viewedSeasons'
+                :totalSeasons='slot.totalSeasons'
+                :currentSeason='slot.currentSeason'
+                :currentEpisode='slot.currentEpisode'
+                :progress='slot.progress')
 
             div(class='slot__bottom')
 
@@ -265,7 +278,7 @@ export default {
   },
   methods: {
     stashData() {
-      this.stashedData = this.gamesCollection
+      this.stashedData = this.tvshowsCollection
     },
 
     searchData() {
@@ -298,8 +311,7 @@ export default {
       this.criteria = criteria
 
       if (
-        this.criteria == 'title' || 
-        this.criteria == 'platform' ||
+        this.criteria == 'title' ||
         this.criteria == 'status') {
         // ascending
         if (this.direction) {
@@ -316,7 +328,8 @@ export default {
       if (
         this.criteria == 'favourite' || 
         this.criteria == 'rating' || 
-        this.criteria == 'hours') {
+        this.criteria == 'hours' ||
+        this.criteria == 'progress') {
         // descending
         if (this.direction) {
           conditionOne = 1
@@ -351,13 +364,13 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'slot__link') return
       else {
-        this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
+        this.$store.commit('CHANGE_CONTENT', this.tvshowsCollection.filter(i => i.id == id)[0])
         eventBus.$emit('openModal', 'edit')
       }
     },
 
     statusName(id) {
-      return this.$store.state['games'].statuses.filter(i => i.id == id)[0].name
+      return this.$store.state['tvshows'].statuses.filter(i => i.id == id)[0].name
     },
 
     handleResize() {
@@ -371,8 +384,8 @@ export default {
     }
   },
   computed: {
-    games() {
-      return this.$store.state.games
+    tvshows() {
+      return this.$store.state.tvshows
     },
 
     windowParams() {
@@ -383,8 +396,8 @@ export default {
       return this.$store.state.breakpoints
     },
 
-    gamesCollection() {
-      return this.$store.state.collection.filter(i => i.category == 'games')
+    tvshowsCollection() {
+      return this.$store.state.collection.filter(i => i.category == 'tvshows')
     },
 
     chevronPosition() {

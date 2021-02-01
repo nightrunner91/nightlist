@@ -107,6 +107,15 @@ $star-size: 24px
       opacity: $half-opacity
       font-size: 12px
 
+    span
+      @include truncate(320)
+
+      @media #{$sm-dw}
+        @include truncate(240)
+
+      @media #{$mb-dw}
+        @include truncate(180)
+
 
   &__link
     @include icon-size(18,18)

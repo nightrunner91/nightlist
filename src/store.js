@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import {eventBus, projectName} from "./main"
+import { projectName } from "./main"
 
 Vue.use(Vuex)
 
