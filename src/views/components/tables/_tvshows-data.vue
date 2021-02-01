@@ -187,8 +187,10 @@
 
             div(class='slot__middle')
               app-progress(
-                :viewed='slot.viewedSeasons'
-                :total='slot.totalSeasons'
+                :viewedSeasons='slot.viewedSeasons'
+                :totalSeasons='slot.totalSeasons'
+                :currentSeason='slot.currentSeason'
+                :currentEpisode='slot.currentEpisode'
                 :progress='slot.progress')
 
             div(
