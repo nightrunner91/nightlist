@@ -82,7 +82,7 @@
                         v-model='current.currentSeason')
                     div(class='input__separator input__separator--cross')
                     div(class='input__pair')
-                      label(class='input__prefix input__prefix--left' for='episode') ep
+                      label(class='input__prefix input__prefix--left' for='episode') e
                       input(
                         id='episode'
                         type='number'
@@ -122,7 +122,7 @@
                       v-model='current.totalSeasons')
             
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
-                div(class='input')
+                div(class='input input--dual')
                   label(class='input__label') Episode Duration
                   div(class='input__pair')
                     input(
@@ -151,7 +151,7 @@
                     v-model='current.episodesWatched')
 
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-12')
-                div(class='input')
+                div(class='input input--dual')
                   label(class='input__label') Times Watched
                   div(class='input__pair')
                     label(class='input__prefix input__prefix--left' for='rewatch') ×
