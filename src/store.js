@@ -201,8 +201,60 @@ export default new Vuex.Store({
         category: 'tvshows',
         title: '',
         status: '',
-        currentSeason: '',
-        currentEpisode: '',
+        currentSeason: 0,
+        currentEpisode: 0,
+        viewedSeasons: 0,
+        totalSeasons: 1,
+        progress: 0,
+        episodeDuration: 0,
+        episodesWatched: 0,
+        rewatchedCounter: 1,
+        hours: 0,
+        rating: 0,
+        favourite: false,
+        link: '',
+        refreshed: false
+      }
+    },
+    anime: {
+      statuses: [
+        {
+          name: "Currently Watching",
+          default: true,
+          id: 'currently_watching',
+          excludeFields: false
+        },
+        {
+          name: "On Hold",
+          default: false,
+          id: 'on_hold',
+          excludeFields: false
+        },
+        {
+          name: "Watched All",
+          default: false,
+          id: 'completed',
+          excludeFields: false
+        },
+        {
+          name: "Plan to Watch",
+          default: false,
+          id: 'plan_to_watch',
+          excludeFields: false
+        },
+        {
+          name: "Dropped",
+          default: false,
+          id: 'dropped',
+          excludeFields: false
+        }
+      ],
+      default: {
+        category: 'anime',
+        title: '',
+        status: '',
+        currentSeason: 0,
+        currentEpisode: 0,
         viewedSeasons: 0,
         totalSeasons: 1,
         progress: 0,

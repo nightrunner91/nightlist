@@ -48,20 +48,26 @@ Vue.component('app-settings', appSettings)
 // modals:
 import gamesModal from "./views/components/modals/_games-modal"
 import tvshowsModal from "./views/components/modals/_tvshows-modal"
+import animeModal from "./views/components/modals/_anime-modal"
 
 Vue.component('games-modal', gamesModal)
 Vue.component('tvshows-modal', tvshowsModal)
+Vue.component('anime-modal', animeModal)
 
 // tables:
 import gamesData from "./views/components/tables/_games-data"
 import gamesSearch from "./views/components/tables/_games-search"
 import tvshowsData from "./views/components/tables/_tvshows-data"
 import tvshowsSearch from "./views/components/tables/_tvshows-search"
+import animeData from "./views/components/tables/_anime-data"
+import animeSearch from "./views/components/tables/_anime-search"
 
 Vue.component('games-data', gamesData)
 Vue.component('games-search', gamesSearch)
 Vue.component('tvshows-data', tvshowsData)
 Vue.component('tvshows-search', tvshowsSearch)
+Vue.component('anime-data', animeData)
+Vue.component('anime-search', animeSearch)
 
 // UI:
 import appDropdown from "./views/components/ui/_dropdown"
