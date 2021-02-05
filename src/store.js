@@ -216,6 +216,35 @@ export default new Vuex.Store({
         refreshed: false
       }
     },
+    films: {
+      statuses: [
+        {
+          name: "Watched",
+          default: true,
+          id: 'completed',
+          excludeFields: false
+        },
+        {
+          name: "Plan to Watch",
+          default: false,
+          id: 'plan_to_watch',
+          excludeFields: false
+        }
+      ],
+      default: {
+        category: 'films',
+        title: '',
+        status: '',
+        filmDuration: 0,
+        rewatchedCounter: 1,
+        minutes: 0,
+        rating: 0,
+        hours: 0,
+        favourite: false,
+        link: '',
+        refreshed: false
+      }
+    },
     anime: {
       statuses: [
         {

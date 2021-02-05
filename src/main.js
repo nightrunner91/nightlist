@@ -48,10 +48,12 @@ Vue.component('app-settings', appSettings)
 // modals:
 import gamesModal from "./views/components/modals/_games-modal"
 import tvshowsModal from "./views/components/modals/_tvshows-modal"
+import filmsModal from "./views/components/modals/_films-modal"
 import animeModal from "./views/components/modals/_anime-modal"
 
 Vue.component('games-modal', gamesModal)
 Vue.component('tvshows-modal', tvshowsModal)
+Vue.component('films-modal', filmsModal)
 Vue.component('anime-modal', animeModal)
 
 // tables:
@@ -59,6 +61,8 @@ import gamesData from "./views/components/tables/_games-data"
 import gamesSearch from "./views/components/tables/_games-search"
 import tvshowsData from "./views/components/tables/_tvshows-data"
 import tvshowsSearch from "./views/components/tables/_tvshows-search"
+import filmsData from "./views/components/tables/_films-data"
+import filmsSearch from "./views/components/tables/_films-search"
 import animeData from "./views/components/tables/_anime-data"
 import animeSearch from "./views/components/tables/_anime-search"
 
@@ -66,6 +70,8 @@ Vue.component('games-data', gamesData)
 Vue.component('games-search', gamesSearch)
 Vue.component('tvshows-data', tvshowsData)
 Vue.component('tvshows-search', tvshowsSearch)
+Vue.component('films-data', filmsData)
+Vue.component('films-search', filmsSearch)
 Vue.component('anime-data', animeData)
 Vue.component('anime-search', animeSearch)
 
