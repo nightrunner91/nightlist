@@ -39,7 +39,7 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-23 grid__col--md-15 grid__col--sm-14'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-23 grid__col--md-23 grid__col--sm-21'
           :class='{"slot__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
@@ -52,7 +52,8 @@
         div(
           class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
           :class='{"slot__cell--active" : criteria == "favourite"}'
-          @click='sortData("favourite", "switch")')
+          @click='sortData("favourite", "switch")'
+          v-if='id != "plan_to_watch"')
           span Favourite
           svg(
             v-if='criteria == "favourite"'
@@ -61,9 +62,10 @@
         
         //- RATING
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7'
           :class='{"slot__cell--active" : criteria == "rating"}'
-          @click='sortData("rating", "switch")')
+          @click='sortData("rating", "switch")'
+          v-if='id != "plan_to_watch"')
           span Rating
           svg(
             v-if='criteria == "rating"'
@@ -74,7 +76,8 @@
         div(
           class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
           :class='{"slot__cell--active" : criteria == "hours"}'
-          @click='sortData("hours", "switch")')
+          @click='sortData("hours", "switch")'
+          v-if='id != "plan_to_watch"')
           span Hours
           svg(
             v-if='criteria == "hours"'
@@ -104,7 +107,7 @@
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
-            div(class='slot__cell grid__col grid__col--lg-23 grid__col--md-15 grid__col--sm-14')
+            div(class='slot__cell grid__col grid__col--lg-23 grid__col--md-23 grid__col--sm-21')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -117,11 +120,14 @@
             
             //- FAVOURITE
             div(
-              class='slot__cell grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4')
+              class='slot__cell grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
+              v-if='id != "plan_to_watch"')
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
-            div(class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5')
+            div(
+              class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7'
+              v-if='id != "plan_to_watch"')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -133,7 +139,9 @@
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
 
             //- HOURS
-            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right') {{slot.hours}}
+            div(
+              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
+              v-if='id != "plan_to_watch"') {{slot.hours}}
 
       //- TABLETS & MOBILE -//
       div(
@@ -165,17 +173,9 @@
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
 
-            div(class='slot__middle')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
-
             div(
               class='slot__bottom'
-              v-if='id != "plan_to_play"')
+              v-if='id != "plan_to_watch"')
 
               div(class='slot__rating')
                 svg(

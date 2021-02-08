@@ -54,7 +54,7 @@
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + status.id")
                 span {{status.name}}
 
-            div(class='grid__row')
+            div(class='grid__row' v-if='fieldsCondition()')
               //- RATING -//
               div(class='grid__col grid__col--lg-24 grid__col--md-24 grid__col--sm-24 grid__col--xs-24 grid__col--mb-26')
                 app-rating(:currentRating='current.rating')
@@ -201,14 +201,6 @@ export default {
       }
     },
 
-    setProgress() {
-      if (this.current.viewedSeasons <= this.current.totalSeasons) {
-        this.current.progress = parseFloat((((this.current.viewedSeasons * 100) / this.current.totalSeasons)).toFixed(0))
-      } else {
-        this.current.progress = 100
-      }
-    },
-
     setHours() {
       this.current.hours = parseFloat(((this.current.filmDuration * this.current.rewatchedCounter) / 60).toFixed(1))
     },
@@ -250,7 +242,6 @@ export default {
 
     applySlot(id) {
       this.setDefaults()
-      this.setProgress()
       this.setHours()
       this.validateModal().then(result => {
         if (result) {
@@ -319,6 +310,16 @@ export default {
           this.$refs.title.focus()
         }
       })
+    },
+
+    fieldsCondition() {
+      if (
+        this.current.status != undefined && 
+        this.current.status == this.excludingCategory) {
+          return false
+        } else {
+          return true
+        }
     }
   },
   computed: {
@@ -332,6 +333,13 @@ export default {
 
     filmsCollection() {
       return this.$store.state.collection.filter(i => i.category == 'films')
+    },
+
+    excludingCategory() {
+      let exclude = this.$store.state["films"].statuses.filter(i => i.excludeFields)
+
+      if (exclude) return exclude[0].id
+      else return
     }
   },
   mounted() {

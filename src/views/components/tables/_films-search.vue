@@ -47,7 +47,7 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11'
+          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20'
           :class='[{"slot__cell--active" : criteria == "title"}]'
           @click='sortData("title", "switch")')
           span Title
@@ -64,17 +64,6 @@
           span Status
           svg(
             v-if='criteria == "status"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-
-        //- PROGRESS
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9'
-          :class='{"slot__cell--active" : criteria == "progress"}'
-          @click='sortData("progress", "switch")')
-          span Progress
-          svg(
-            v-if='criteria == "progress"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron')
         
@@ -135,7 +124,7 @@
             
             //- TITLE
             div(
-              class='slot__cell grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11')
+              class='slot__cell grid__col grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -152,15 +141,6 @@
               svg(
                 class='slot__status'
                 v-tooltip='{ content: statusName(slot.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.status")
-
-            //- PROGRESS
-            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
             
             //- FAVOURITE
             div(
@@ -216,14 +196,6 @@
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
               svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
-
-            div(class='slot__middle')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
 
             div(class='slot__bottom')
 
