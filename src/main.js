@@ -52,11 +52,13 @@ import gamesModal from "./views/components/modals/_games-modal"
 import tvshowsModal from "./views/components/modals/_tvshows-modal"
 import filmsModal from "./views/components/modals/_films-modal"
 import animeModal from "./views/components/modals/_anime-modal"
+import booksModal from "./views/components/modals/_books-modal"
 
 Vue.component('games-modal', gamesModal)
 Vue.component('tvshows-modal', tvshowsModal)
 Vue.component('films-modal', filmsModal)
 Vue.component('anime-modal', animeModal)
+Vue.component('books-modal', booksModal)
 
 // tables:
 import gamesData from "./views/components/tables/_games-data"
@@ -67,6 +69,8 @@ import filmsData from "./views/components/tables/_films-data"
 import filmsSearch from "./views/components/tables/_films-search"
 import animeData from "./views/components/tables/_anime-data"
 import animeSearch from "./views/components/tables/_anime-search"
+import booksData from "./views/components/tables/_books-data"
+import booksSearch from "./views/components/tables/_books-search"
 
 Vue.component('games-data', gamesData)
 Vue.component('games-search', gamesSearch)
@@ -76,6 +80,8 @@ Vue.component('films-data', filmsData)
 Vue.component('films-search', filmsSearch)
 Vue.component('anime-data', animeData)
 Vue.component('anime-search', animeSearch)
+Vue.component('books-data', booksData)
+Vue.component('books-search', booksSearch)
 
 // UI:
 import appDropdown from "./views/components/ui/_dropdown"

@@ -241,9 +241,9 @@ export default new Vuex.Store({
         category: 'films',
         title: '',
         status: '',
-        filmDuration: 0,
+        durationHours: 0,
+        durationMinutes: 0,
         rewatchedCounter: 1,
-        minutes: 0,
         rating: 0,
         hours: 0,
         favourite: false,
@@ -298,6 +298,48 @@ export default new Vuex.Store({
         rewatchedCounter: 1,
         hours: 0,
         rating: 0,
+        favourite: false,
+        link: '',
+        refreshed: false
+      }
+    },
+    books: {
+      statuses: [
+        {
+          name: "Currently Reading",
+          default: false,
+          id: 'currently_reading',
+          excludeFields: false
+        },
+        {
+          name: "Read All",
+          default: true,
+          id: 'completed',
+          excludeFields: false
+        },
+        {
+          name: "Plan to Read",
+          default: false,
+          id: 'plan_to_watch',
+          excludeFields: true
+        },
+        {
+          name: "Dropped",
+          default: false,
+          id: 'dropped',
+          excludeFields: false
+        }
+      ],
+      default: {
+        category: 'books',
+        title: '',
+        author: '',
+        status: '',
+        durationHours: 0,
+        durationMinutes: 0,
+        rereadCounter: 1,
+        rating: 0,
+        hours: 0,
         favourite: false,
         link: '',
         refreshed: false
