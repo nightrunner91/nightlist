@@ -36,6 +36,7 @@ import appSidebar from "./views/components/global/_sidebar"
 import appGradients from "./views/components/global/_gradients"
 import appPlaceholder from "./views/components/global/_placeholder"
 import appIndicator from "./views/components/global/_indicator"
+import appPreloader from "./views/components/global/_preloader"
 import appSettings from "./views/components/global/_settings"
 
 Vue.component('app-header', appHeader)
@@ -43,6 +44,7 @@ Vue.component('app-sidebar', appSidebar)
 Vue.component('app-gradients', appGradients)
 Vue.component('app-placeholder', appPlaceholder)
 Vue.component('app-indicator', appIndicator)
+Vue.component('app-preloader', appPreloader)
 Vue.component('app-settings', appSettings)
 
 // modals:

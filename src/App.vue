@@ -1,6 +1,7 @@
 <template lang='pug'>
 
   div(id='app' class='page')
+    app-preloader(:current='currentPage')
     app-gradients(:current='currentPage')
     app-header
     main(class='content' v-scrollbar)
@@ -144,5 +145,6 @@ export default {
   @import "styles/plugins/tooltip"
   @import "styles/plugins/scrollbar"
   @import "styles/plugins/hamburgers/hamburgers"
+  @import "styles/plugins/nprogress"
 
 </style>

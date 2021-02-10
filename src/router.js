@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store.js'
 
+import NProgress from 'nprogress'
+
 import Home from './views/pages/Home.vue'
 import Dashboard from './views/pages/Dashboard.vue'
 import Games from './views/pages/Games.vue'
@@ -11,6 +13,14 @@ import Anime from './views/pages/Anime.vue'
 import Books from './views/pages/Books.vue'
 
 Vue.use(VueRouter)
+Vue.use(NProgress)
+
+NProgress.configure({ 
+  parent: '.preloader',
+  showSpinner: false,
+  easing: 'ease',
+  speed: 500
+})
 
 const routes = [
   {
@@ -74,8 +84,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   store.commit('CHANGE_SEARCH_STATE', false)
   next()
+})
+
+router.afterEach(() => {
+  setTimeout(() => NProgress.done(), 300)
 })
 
 export default router
