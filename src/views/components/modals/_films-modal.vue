@@ -62,23 +62,37 @@
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-10 grid__col--right')
                 app-favourite(:currentFavourite='current.favourite')
             
-              div(class='grid__col grid__col--mb-18')
+              div(class='grid__col grid__col--mb-24')
                 div(class='input input--dual')
-                  label(class='input__label') Episode Duration
-                  div(class='input__pair')
-                    input(
-                      id='duration'
-                      type='number'
-                      class='input__field input__field--left' 
-                      autocomplete='off' 
-                      min='1'
-                      @input='convertToNumber("filmDuration")'
-                      onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
-                      @wheel='changeNumberVal($event, "filmDuration")'
-                      v-model='current.filmDuration')
-                    label(class='input__prefix input__prefix--right' for='duration') min
+                  label(class='input__label') Film Duration
+                  div(class='input__pairs')
+                    div(class='input__pair')
+                      input(
+                        id='durationHours'
+                        type='number'
+                        class='input__field input__field--left' 
+                        autocomplete='off' 
+                        min='0'
+                        @input='convertToNumber("durationHours")'
+                        onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                        @wheel='changeNumberVal($event, "durationHours")'
+                        v-model='current.durationHours')
+                      label(class='input__prefix input__prefix--right' for='durationHours') h
+                    div(class='input__separator input__separator--colon')
+                    div(class='input__pair')
+                      input(
+                        id='durationMinutes'
+                        type='number'
+                        class='input__field input__field--left' 
+                        autocomplete='off' 
+                        min='0'
+                        @input='convertToNumber("durationMinutes")'
+                        onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                        @wheel='changeNumberVal($event, "durationMinutes")'
+                        v-model='current.durationMinutes')
+                      label(class='input__prefix input__prefix--right' for='durationMinutes') min
 
-              div(class='grid__col grid__col--mb-18')
+              div(class='grid__col grid__col--mb-12')
                 div(class='input input--dual')
                   label(class='input__label') Times Watched
                   div(class='input__pair')
@@ -202,7 +216,7 @@ export default {
     },
 
     setHours() {
-      this.current.hours = parseFloat(((this.current.filmDuration * this.current.rewatchedCounter) / 60).toFixed(1))
+      this.current.hours = parseFloat(((this.current.durationHours + this.current.durationMinutes / 60) * this.current.rewatchedCounter).toFixed(1))
     },
 
     validateModal() {
@@ -270,13 +284,7 @@ export default {
       let interval = 1
       let prevVal = parseFloat(target.value)
       let newVal
-      let min
-
-      if (prop == 'totalSeasons') {
-        min = 1
-      } else {
-        min = 0
-      }
+      let min = 0
 
       if (event.deltaY < min) {
         newVal = prevVal + interval

@@ -91,6 +91,18 @@
     font-weight: 700
     user-select: none
 
+    &--colon
+      &::before,
+      &::after
+        width: 4px
+        height: 4px
+
+      &::before
+        top: 35%
+
+      &::after
+        bottom: 35%
+
     &--dash
       &::before
         width: $icon-size
