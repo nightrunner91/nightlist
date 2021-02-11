@@ -172,9 +172,7 @@
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             
             //- HOURS
-            div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
-              v-if='id != "plan_to_read"')
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
               svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='slot.hours != undefined') {{slot.hours}}
 
