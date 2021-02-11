@@ -320,7 +320,7 @@ export default new Vuex.Store({
         {
           name: "Plan to Read",
           default: false,
-          id: 'plan_to_watch',
+          id: 'plan_to_read',
           excludeFields: true
         },
         {

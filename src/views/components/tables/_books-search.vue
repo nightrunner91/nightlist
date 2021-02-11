@@ -47,12 +47,23 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-10 grid__col--md-10 grid__col--sm-9'
           :class='[{"slot__cell--active" : criteria == "title"}]'
           @click='sortData("title", "switch")')
           span Title
           svg(
             v-if='criteria == "title"'
+            class='table__chevron' 
+            :class='chevronPosition'): use(xlink:href='#chevron')
+
+        //- AUTHOR
+        div(
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-10 grid__col--md-10 grid__col--sm-9'
+          :class='{"slot__cell--active" : criteria == "author"}'
+          @click='sortData("author", "switch")')
+          span Author
+          svg(
+            v-if='criteria == "author"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron')
 
@@ -80,7 +91,7 @@
         
         //- RATING
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7'
           :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
           span Rating
@@ -123,8 +134,7 @@
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
-            div(
-              class='slot__cell grid__col grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20')
+            div(class='slot__cell grid__col grid__col--lg-10 grid__col--md-10 grid__col--sm-9')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -135,21 +145,22 @@
                 v-if='slot.link.length')
                 svg(class='slot__redirect'): use(xlink:href='#link')
 
+            //- AUTHOR
+            div(class='slot__cell grid__col grid__col--lg-10 grid__col--md-10 grid__col--sm-9')
+              span {{slot.author}}
+
             //- STATUS
-            div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
               svg(
                 class='slot__status'
                 v-tooltip='{ content: statusName(slot.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.status")
             
             //- FAVOURITE
-            div(
-              class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
+            div(class='slot__cell grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4')
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
-            div(
-              class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5')
+            div(class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -162,7 +173,8 @@
             
             //- HOURS
             div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
+              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
+              v-if='id != "plan_to_read"')
               svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='slot.hours != undefined') {{slot.hours}}
 
@@ -284,6 +296,7 @@ export default {
 
       if (
         this.criteria == 'title' ||
+        this.criteria == 'author' ||
         this.criteria == 'status') {
         // ascending
         if (this.direction) {
