@@ -53,7 +53,7 @@
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + status.id")
                 span {{status.name}}
 
-            div(class='grid__row' v-if='fieldsCondition()')
+            div(class='grid__row')
               //- RATING -//
               div(class='grid__col grid__col--lg-24 grid__col--md-24 grid__col--sm-24 grid__col--xs-24 grid__col--mb-26')
                 app-rating(:currentRating='current.rating')
@@ -79,7 +79,7 @@
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + platform.id")
                 span {{platform.name}}
 
-            div(class='grid__row' v-if='fieldsCondition()')
+            div(class='grid__row')
               //- HOURS -//
               div(class='grid__col grid__col--lg-16 grid__col--md-16 grid__col--sm-16 grid__col--xs-16 grid__col--mb-12')
                 div(class='input')
@@ -251,16 +251,6 @@ export default {
       this.$store.dispatch('sendBackup')
     },
 
-    fieldsCondition() {
-      if (
-        this.current.status != undefined && 
-        this.current.status == this.excludingCategory) {
-          return false
-        } else {
-          return true
-        }
-    },
-
     changeNumberVal(event, prop) {
       event.preventDefault()
 
@@ -322,13 +312,6 @@ export default {
 
     gamesCollection() {
       return this.$store.state.collection.filter(i => i.category == 'games')
-    },
-
-    excludingCategory() {
-      let exclude = this.$store.state["games"].statuses.filter(i => i.excludeFields)
-
-      if (exclude) return exclude[0].id
-      else return
     }
   },
   mounted() {

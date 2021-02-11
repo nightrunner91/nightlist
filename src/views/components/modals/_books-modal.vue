@@ -71,7 +71,7 @@
                 svg(class='dropdown__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + status.id")
                 span {{status.name}}
 
-            div(class='grid__row' v-if='fieldsCondition()')
+            div(class='grid__row')
               //- RATING -//
               div(class='grid__col grid__col--lg-24 grid__col--md-24 grid__col--sm-24 grid__col--xs-24 grid__col--mb-26')
                 app-rating(:currentRating='current.rating')
@@ -335,16 +335,6 @@ export default {
           this.$refs.title.focus()
         }
       })
-    },
-
-    fieldsCondition() {
-      if (
-        this.current.status != undefined && 
-        this.current.status == this.excludingCategory) {
-          return false
-        } else {
-          return true
-        }
     }
   },
   computed: {
@@ -358,13 +348,6 @@ export default {
 
     booksCollection() {
       return this.$store.state.collection.filter(i => i.category == 'books')
-    },
-
-    excludingCategory() {
-      let exclude = this.$store.state["books"].statuses.filter(i => i.excludeFields)
-
-      if (exclude) return exclude[0].id
-      else return
     }
   },
   mounted() {

@@ -39,8 +39,8 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col'
-          :class='[{"slot__cell--active" : criteria == "title"}, titleWidth]'
+          class='slot__cell slot__cell--functional grid__col grid__col--lg-18 grid__col--md-20 grid__col--sm-17'
+          :class='{"slot__cell--active" : criteria == "title"}'
           @click='sortData("title", "switch")')
           span Title
           svg(
@@ -50,7 +50,6 @@
         
         //- FAVOURITE
         div(
-          v-if='id != "plan_to_play"'
           class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4'
           :class='{"slot__cell--active" : criteria == "favourite"}'
           @click='sortData("favourite", "switch")')
@@ -62,7 +61,6 @@
         
         //- RATING
         div(
-          v-if='id != "plan_to_play"'
           class='slot__cell slot__cell--functional grid__col grid__col--lg-7 grid__col--md-7 grid__col--sm-8'
           :class='{"slot__cell--active" : criteria == "rating"}'
           @click='sortData("rating", "switch")')
@@ -74,7 +72,6 @@
         
         //- HOURS
         div(
-          v-if='id != "plan_to_play"'
           class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
           :class='{"slot__cell--active" : criteria == "hours"}'
           @click='sortData("hours", "switch")')
@@ -118,9 +115,7 @@
             div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
             
             //- TITLE
-            div(
-              class='slot__cell grid__col'
-              :class='titleWidth')
+            div(class='slot__cell grid__col grid__col--lg-18 grid__col--md-20 grid__col--sm-17')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -132,15 +127,11 @@
                 svg(class='slot__redirect'): use(xlink:href='#link')
             
             //- FAVOURITE
-            div(
-              v-if='id != "plan_to_play"'
-              class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
+            div(class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
-            div(
-              v-if='id != "plan_to_play"'
-              class='slot__cell grid__col grid__col--lg-7 grid__col--md-6 grid__col--sm-8')
+            div(class='slot__cell grid__col grid__col--lg-7 grid__col--md-6 grid__col--sm-8')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -152,9 +143,7 @@
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
             
             //- HOURS
-            div(
-              v-if='id != "plan_to_play"'
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
               svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
               span(v-if='slot.hours != undefined') {{slot.hours}}
             
@@ -193,9 +182,7 @@
                   svg(class='slot__redirect'): use(xlink:href='#link')
               svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
 
-            div(
-              class='slot__bottom'
-              v-if='id != "plan_to_play"')
+            div(class='slot__bottom')
 
               div(class='slot__rating')
                 svg(
@@ -382,24 +369,10 @@ export default {
     },
 
     tableHeight() {
-      if (this.windowParams.width <= this.breakpoints.sm && this.id != 'plan_to_play') {
+      if (this.windowParams.width <= this.breakpoints.sm) {
         return 'max-height: ' + ((95 + 7.5) * this.data.length + 40) + 'px'
-      }
-
-      if (this.windowParams.width <= this.breakpoints.sm && this.id == 'plan_to_play') {
-        return 'max-height: ' + ((55 + 7.5) * this.data.length + 40) + 'px'
-      }
-      
-      if (this.windowParams.width > this.breakpoints.sm) {
-        return 'max-height: ' + (40 * this.data.length + 40) + 'px'
-      }
-    },
-
-    titleWidth() {
-      if (this.id != 'plan_to_play') {
-        return 'grid__col--lg-18 grid__col--md-20 grid__col--sm-17'
       } else {
-        return 'grid__col--lg-32 grid__col--md-32 grid__col--sm-32'
+        return 'max-height: ' + (40 * this.data.length + 40) + 'px'
       }
     },
 

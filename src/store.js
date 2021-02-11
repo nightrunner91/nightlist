@@ -80,38 +80,32 @@ export default new Vuex.Store({
         {
           name: "Currently Playing",
           default: true,
-          id: 'currently_playing',
-          excludeFields: false
+          id: 'currently_playing'
         },
         {
           name: "Continuously Playing",
           default: false,
-          id: 'continuously_playing',
-          excludeFields: false
+          id: 'continuously_playing'
         },
         {
           name: "On Hold",
           default: false,
-          id: 'on_hold',
-          excludeFields: false
+          id: 'on_hold'
         },
         {
           name: "Completed",
           default: false,
-          id: 'completed',
-          excludeFields: false
+          id: 'completed'
         },
         {
           name: "Plan to Play",
           default: false,
-          id: 'plan_to_play',
-          excludeFields: true
+          id: 'plan_to_play'
         },
         {
           name: "Dropped",
           default: false,
-          id: 'dropped',
-          excludeFields: false
+          id: 'dropped'
         }
       ],
       platforms: [
@@ -169,32 +163,27 @@ export default new Vuex.Store({
         {
           name: "Currently Watching",
           default: true,
-          id: 'currently_watching',
-          excludeFields: false
+          id: 'currently_watching'
         },
         {
           name: "On Hold",
           default: false,
-          id: 'on_hold',
-          excludeFields: false
+          id: 'on_hold'
         },
         {
           name: "Watched All",
           default: false,
-          id: 'completed',
-          excludeFields: false
+          id: 'completed'
         },
         {
           name: "Plan to Watch",
           default: false,
-          id: 'plan_to_watch',
-          excludeFields: false
+          id: 'plan_to_watch'
         },
         {
           name: "Dropped",
           default: false,
-          id: 'dropped',
-          excludeFields: false
+          id: 'dropped'
         }
       ],
       default: {
@@ -221,20 +210,17 @@ export default new Vuex.Store({
         {
           name: "Watched",
           default: true,
-          id: 'completed',
-          excludeFields: false
+          id: 'completed'
         },
         {
           name: "Plan to Watch",
           default: false,
-          id: 'plan_to_watch',
-          excludeFields: true
+          id: 'plan_to_watch'
         },
         {
           name: "Dropped",
           default: false,
-          id: 'dropped',
-          excludeFields: false
+          id: 'dropped'
         }
       ],
       default: {
@@ -256,32 +242,27 @@ export default new Vuex.Store({
         {
           name: "Currently Watching",
           default: true,
-          id: 'currently_watching',
-          excludeFields: false
+          id: 'currently_watching'
         },
         {
           name: "On Hold",
           default: false,
-          id: 'on_hold',
-          excludeFields: false
+          id: 'on_hold'
         },
         {
           name: "Watched All",
           default: false,
-          id: 'completed',
-          excludeFields: false
+          id: 'completed'
         },
         {
           name: "Plan to Watch",
           default: false,
-          id: 'plan_to_watch',
-          excludeFields: false
+          id: 'plan_to_watch'
         },
         {
           name: "Dropped",
           default: false,
-          id: 'dropped',
-          excludeFields: false
+          id: 'dropped'
         }
       ],
       default: {
@@ -308,26 +289,22 @@ export default new Vuex.Store({
         {
           name: "Currently Reading",
           default: false,
-          id: 'currently_reading',
-          excludeFields: false
+          id: 'currently_reading'
         },
         {
           name: "Read All",
           default: true,
-          id: 'completed',
-          excludeFields: false
+          id: 'completed'
         },
         {
           name: "Plan to Read",
           default: false,
-          id: 'plan_to_read',
-          excludeFields: true
+          id: 'plan_to_read'
         },
         {
           name: "Dropped",
           default: false,
-          id: 'dropped',
-          excludeFields: false
+          id: 'dropped'
         }
       ],
       default: {
