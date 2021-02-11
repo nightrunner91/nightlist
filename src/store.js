@@ -79,7 +79,7 @@ export default new Vuex.Store({
       statuses: [
         {
           name: "Currently Playing",
-          default: true,
+          default: false,
           id: 'currently_playing'
         },
         {
@@ -99,7 +99,7 @@ export default new Vuex.Store({
         },
         {
           name: "Completed",
-          default: false,
+          default: true,
           id: 'completed'
         },
         {
@@ -162,7 +162,7 @@ export default new Vuex.Store({
       statuses: [
         {
           name: "Currently Watching",
-          default: true,
+          default: false,
           id: 'currently_watching'
         },
         {
@@ -177,7 +177,7 @@ export default new Vuex.Store({
         },
         {
           name: "Watched All",
-          default: false,
+          default: true,
           id: 'completed'
         },
         {
@@ -241,7 +241,7 @@ export default new Vuex.Store({
       statuses: [
         {
           name: "Currently Watching",
-          default: true,
+          default: false,
           id: 'currently_watching'
         },
         {
@@ -256,7 +256,7 @@ export default new Vuex.Store({
         },
         {
           name: "Watched All",
-          default: false,
+          default: true,
           id: 'completed'
         },
         {
