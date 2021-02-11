@@ -27,6 +27,7 @@
       div(class='dataset' v-if='!searchState')
         films-data(:id='"plan_to_watch"')
         films-data(:id='"completed"')
+        films-data(:id='"dropped"')
 
       app-placeholder(
         v-if='totalFilms == 0'

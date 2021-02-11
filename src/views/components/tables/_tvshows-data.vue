@@ -193,9 +193,7 @@
                 :currentEpisode='slot.currentEpisode'
                 :progress='slot.progress')
 
-            div(
-              class='slot__bottom'
-              v-if='id != "plan_to_play"')
+            div(class='slot__bottom')
 
               div(class='slot__rating')
                 svg(

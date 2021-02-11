@@ -93,14 +93,14 @@ export default new Vuex.Store({
           id: 'on_hold'
         },
         {
-          name: "Completed",
-          default: false,
-          id: 'completed'
-        },
-        {
           name: "Plan to Play",
           default: false,
           id: 'plan_to_play'
+        },
+        {
+          name: "Completed",
+          default: false,
+          id: 'completed'
         },
         {
           name: "Dropped",
@@ -171,14 +171,14 @@ export default new Vuex.Store({
           id: 'on_hold'
         },
         {
-          name: "Watched All",
-          default: false,
-          id: 'completed'
-        },
-        {
           name: "Plan to Watch",
           default: false,
           id: 'plan_to_watch'
+        },
+        {
+          name: "Watched All",
+          default: false,
+          id: 'completed'
         },
         {
           name: "Dropped",
@@ -208,14 +208,14 @@ export default new Vuex.Store({
     films: {
       statuses: [
         {
-          name: "Watched",
-          default: true,
-          id: 'completed'
-        },
-        {
           name: "Plan to Watch",
           default: false,
           id: 'plan_to_watch'
+        },
+        {
+          name: "Watched",
+          default: true,
+          id: 'completed'
         },
         {
           name: "Dropped",
@@ -250,14 +250,14 @@ export default new Vuex.Store({
           id: 'on_hold'
         },
         {
-          name: "Watched All",
-          default: false,
-          id: 'completed'
-        },
-        {
           name: "Plan to Watch",
           default: false,
           id: 'plan_to_watch'
+        },
+        {
+          name: "Watched All",
+          default: false,
+          id: 'completed'
         },
         {
           name: "Dropped",
@@ -292,14 +292,14 @@ export default new Vuex.Store({
           id: 'currently_reading'
         },
         {
-          name: "Read All",
-          default: true,
-          id: 'completed'
-        },
-        {
           name: "Plan to Read",
           default: false,
           id: 'plan_to_read'
+        },
+        {
+          name: "Read All",
+          default: true,
+          id: 'completed'
         },
         {
           name: "Dropped",

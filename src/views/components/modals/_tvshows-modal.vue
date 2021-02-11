@@ -365,7 +365,7 @@ export default {
         if (prevVal == min) { 
           newVal = min 
         } else { 
-          newVal = prevVal - interval 
+          newVal = prevVal - interval
         }
       }
 

@@ -52,8 +52,7 @@
         div(
           class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
           :class='{"slot__cell--active" : criteria == "favourite"}'
-          @click='sortData("favourite", "switch")'
-          v-if='id != "plan_to_watch"')
+          @click='sortData("favourite", "switch")')
           span Favourite
           svg(
             v-if='criteria == "favourite"'
@@ -64,8 +63,7 @@
         div(
           class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7'
           :class='{"slot__cell--active" : criteria == "rating"}'
-          @click='sortData("rating", "switch")'
-          v-if='id != "plan_to_watch"')
+          @click='sortData("rating", "switch")')
           span Rating
           svg(
             v-if='criteria == "rating"'
@@ -76,8 +74,7 @@
         div(
           class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
           :class='{"slot__cell--active" : criteria == "hours"}'
-          @click='sortData("hours", "switch")'
-          v-if='id != "plan_to_watch"')
+          @click='sortData("hours", "switch")')
           span Hours
           svg(
             v-if='criteria == "hours"'
@@ -119,15 +116,11 @@
                 svg(class='slot__redirect'): use(xlink:href='#link')
             
             //- FAVOURITE
-            div(
-              class='slot__cell grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
-              v-if='id != "plan_to_watch"')
+            div(class='slot__cell grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4')
               svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
             
             //- RATING
-            div(
-              class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7'
-              v-if='id != "plan_to_watch"')
+            div(class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-7')
               div(class='slot__rating')
                 svg(
                   class='slot__star slot__star--active' 
@@ -139,9 +132,7 @@
                   v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
 
             //- HOURS
-            div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
-              v-if='id != "plan_to_watch"') {{slot.hours}}
+            div(class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right') {{slot.hours}}
 
       //- TABLETS & MOBILE -//
       div(
@@ -173,9 +164,7 @@
                   v-if='slot.link.length')
                   svg(class='slot__redirect'): use(xlink:href='#link')
 
-            div(
-              class='slot__bottom'
-              v-if='id != "plan_to_watch"')
+            div(class='slot__bottom')
 
               div(class='slot__rating')
                 svg(
