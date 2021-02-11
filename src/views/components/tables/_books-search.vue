@@ -267,7 +267,7 @@ export default {
 
     searchData() {
       this.searchedData = this.stashedData.filter(i => {
-        return i.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+        return i.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || i.author.toLowerCase().includes(this.searchQuery.toLowerCase())
       })
 
       this.sortData(this.criteria)
