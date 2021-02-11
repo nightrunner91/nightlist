@@ -9,7 +9,7 @@
       div(class='title title--main')
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalLength}}
-      
+
 </template>
 
 <script>
