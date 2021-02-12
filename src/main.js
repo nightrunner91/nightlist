@@ -47,6 +47,19 @@ Vue.component('app-indicator', appIndicator)
 Vue.component('app-preloader', appPreloader)
 Vue.component('app-settings', appSettings)
 
+// UI:
+import appDropdown from "./views/components/ui/_dropdown"
+import appCheckbox from "./views/components/ui/_checkbox"
+import appRating from "./views/components/ui/_rating"
+import appFavourite from "./views/components/ui/_favourite"
+import appProgress from "./views/components/ui/_progress"
+
+Vue.component('app-dropdown', appDropdown)
+Vue.component('app-checkbox', appCheckbox)
+Vue.component('app-rating', appRating)
+Vue.component('app-favourite', appFavourite)
+Vue.component('app-progress', appProgress)
+
 // modals:
 import gamesModal from "./views/components/modals/_games-modal"
 import tvshowsModal from "./views/components/modals/_tvshows-modal"
@@ -62,39 +75,29 @@ Vue.component('books-modal', booksModal)
 
 // tables:
 import gamesData from "./views/components/tables/_games-data"
-import gamesSearch from "./views/components/tables/_games-search"
 import tvshowsData from "./views/components/tables/_tvshows-data"
-import tvshowsSearch from "./views/components/tables/_tvshows-search"
 import filmsData from "./views/components/tables/_films-data"
-import filmsSearch from "./views/components/tables/_films-search"
 import animeData from "./views/components/tables/_anime-data"
-import animeSearch from "./views/components/tables/_anime-search"
 import booksData from "./views/components/tables/_books-data"
-import booksSearch from "./views/components/tables/_books-search"
 
 Vue.component('games-data', gamesData)
-Vue.component('games-search', gamesSearch)
 Vue.component('tvshows-data', tvshowsData)
-Vue.component('tvshows-search', tvshowsSearch)
 Vue.component('films-data', filmsData)
-Vue.component('films-search', filmsSearch)
 Vue.component('anime-data', animeData)
-Vue.component('anime-search', animeSearch)
 Vue.component('books-data', booksData)
+
+// search:
+import gamesSearch from "./views/components/search/_games-search"
+import tvshowsSearch from "./views/components/search/_tvshows-search"
+import filmsSearch from "./views/components/search/_films-search"
+import animeSearch from "./views/components/search/_anime-search"
+import booksSearch from "./views/components/search/_books-search"
+
+Vue.component('games-search', gamesSearch)
+Vue.component('tvshows-search', tvshowsSearch)
+Vue.component('films-search', filmsSearch)
+Vue.component('anime-search', animeSearch)
 Vue.component('books-search', booksSearch)
-
-// UI:
-import appDropdown from "./views/components/ui/_dropdown"
-import appCheckbox from "./views/components/ui/_checkbox"
-import appRating from "./views/components/ui/_rating"
-import appFavourite from "./views/components/ui/_favourite"
-import appProgress from "./views/components/ui/_progress"
-
-Vue.component('app-dropdown', appDropdown)
-Vue.component('app-checkbox', appCheckbox)
-Vue.component('app-rating', appRating)
-Vue.component('app-favourite', appFavourite)
-Vue.component('app-progress', appProgress)
 
 
 // ======================================= //
