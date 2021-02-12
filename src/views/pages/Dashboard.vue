@@ -10,29 +10,75 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalLength}}
 
-      div(class='plate grid__col grid__col--lg-36')
-        div(class='plate__inner')
-          div(class='grid__row')
-            div(class='plate__data grid__col grid__col--lg-18')
-              div(class='grid__row')
-                h2(class='plate__title grid__col grid__col--mb-36')
-                  svg(class='plate__icon'): use(xlink:href='#clock')
-                  span Spent Time
-                div(class='grid__col grid__col--mb-36')
-                  ul(class='plate__list')
-                    li(
-                      class='plate__item'
-                      v-for='item in spentTime') 
-                      div(
-                        class='plate__marker'
-                        :class='"plate__marker--" + item.id')
-                      div(class='plate__name')  {{item.name}}
-                      div(class='plate__hours') {{item.value}} h
-                    li(class='plate__item plate__item--total')
-                      div(class='plate__hours') {{totalSpent}} h
+      div(class='grid__col grid__col--mb-36')
+      
+        div(class='grid__row')
 
-            div(class='plate__chart grid__col grid__col--lg-18')
-              v-chart(:options="chartOptions" style='width: 300px; height: 300px')
+          div(class='plate grid__col grid__col--lg-12')
+            div(class='plate__inner')
+
+              h3(class='plate__title')
+                svg(class='plate__icon'): use(xlink:href='#clock')
+                span Spent Time
+              
+              ul(class='plate__list')
+                li(
+                  class='plate__item'
+                  v-for='item in spentTime') 
+                  div(
+                    class='plate__marker'
+                    :class='"plate__marker--" + item.id')
+                  div(class='plate__name')  {{item.name}}
+                  div(class='plate__hours') {{item.value}} h
+                li(class='plate__item plate__item--total')
+                  div(class='plate__hours') {{totalSpent}} h
+
+              div(class='plate__chart')
+                v-chart(:options="chartOptions" style='width: 200px; height: 200px')
+
+          div(class='plate grid__col grid__col--lg-12')
+            div(class='plate__inner')
+
+              h3(class='plate__title')
+                svg(class='plate__icon'): use(xlink:href='#clock')
+                span Spent Time
+              
+              ul(class='plate__list')
+                li(
+                  class='plate__item'
+                  v-for='item in spentTime') 
+                  div(
+                    class='plate__marker'
+                    :class='"plate__marker--" + item.id')
+                  div(class='plate__name')  {{item.name}}
+                  div(class='plate__hours') {{item.value}} h
+                li(class='plate__item plate__item--total')
+                  div(class='plate__hours') {{totalSpent}} h
+
+              div(class='plate__chart')
+                v-chart(:options="chartOptions" style='width: 200px; height: 200px')
+
+          div(class='plate grid__col grid__col--lg-12')
+            div(class='plate__inner')
+
+              h3(class='plate__title')
+                svg(class='plate__icon'): use(xlink:href='#clock')
+                span Spent Time
+              
+              ul(class='plate__list')
+                li(
+                  class='plate__item'
+                  v-for='item in spentTime') 
+                  div(
+                    class='plate__marker'
+                    :class='"plate__marker--" + item.id')
+                  div(class='plate__name')  {{item.name}}
+                  div(class='plate__hours') {{item.value}} h
+                li(class='plate__item plate__item--total')
+                  div(class='plate__hours') {{totalSpent}} h
+
+              div(class='plate__chart')
+                v-chart(:options="chartOptions" style='width: 200px; height: 200px')
 
 </template>
 
