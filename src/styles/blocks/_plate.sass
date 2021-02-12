@@ -20,9 +20,11 @@
     $padding-x: $gutter-width - $ui-height / 2
     $padding-y: $gutter-width / 1.5
 
+    width: 100%
     padding: $gutter-width
     border-radius: $base-radius
     background: rgba($clr-white, $tiny-opacity)
+    box-shadow: $shadow-1
 
 
   &__list
@@ -42,32 +44,27 @@
 
   
   &__marker
-    @include icon-size(20, 20)
+    @include icon-size(18, 18)
 
-    margin-left: 2px
-    margin-right: 12px
+    margin-left: 3px
+    margin-right: 13px
     border-radius: $round-radius
-    box-shadow: $shadow-1
+    box-shadow: $shadow-2
 
     &--games
-      border: 1px solid lighten($clr-games, 15%)
-      background: $clr-games
+      background: lighten($clr-games, $hover-intensity)
       
     &--tvshows
-      border: 1px solid lighten($clr-tvshows, 15%)
-      background: $clr-tvshows
+      background: lighten($clr-tvshows, $hover-intensity)
 
     &--films
-      border: 1px solid lighten($clr-films, 15%)
-      background: $clr-films
+      background: lighten($clr-films, $hover-intensity)
 
     &--anime
-      border: 1px solid lighten($clr-anime, 15%)
-      background: $clr-anime
+      background: lighten($clr-anime, $hover-intensity)
 
     &--books
-      border: 1px solid lighten($clr-books, 15%)
-      background: $clr-books
+      background: lighten($clr-books, $hover-intensity)
 
   
   &__name
@@ -77,3 +74,9 @@
   
   &__hours
     margin-left: auto
+
+
+  &__chart
+    display: flex;
+    justify-content: center
+    align-items: center

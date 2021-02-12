@@ -25,6 +25,15 @@ export const eventBus = new Vue()
 // =================== //
 export const projectName = 'nightlist_'
 
+export const colors = {
+  dashboard: '#004D40',
+  games: '#981446',
+  tvshows: '#802084',
+  films: '#433e77',
+  anime: '#a6075c',
+  books: '#267941'
+}
+
 
 // ===================================== //
 // Import and regitser global components //
@@ -109,13 +118,14 @@ import Vuebar from './directives/_scrollbar'
 import Ripple from './directives/_ripple'
 import {Vue2Storage} from 'vue2-storage'
 import velocityPlugin from 'velocity-vue'
+import ECharts from 'vue-echarts'
 
 Vue.use(VTooltip)
 Vue.use(Vuebar)
 Vue.directive('ripple', Ripple)
 Vue.use(Vue2Storage, {prefix: projectName})
 Vue.use(velocityPlugin)
-
+Vue.component('v-chart', ECharts)
 
 // ========== //
 // SVG Sprite //

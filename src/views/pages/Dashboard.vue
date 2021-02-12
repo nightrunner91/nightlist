@@ -10,33 +10,44 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalLength}}
 
-      div(class='plate')
+      div(class='plate grid__col grid__col--lg-36')
         div(class='plate__inner')
-          h2(class='plate__title') 
-            svg(class='plate__icon'): use(xlink:href='#clock')
-            span Spent Time
           div(class='grid__row')
             div(class='plate__data grid__col grid__col--lg-18')
-              ul(class='plate__list')
-                li(
-                  class='plate__item'
-                  v-for='item in spentTime') 
-                  div(
-                    class='plate__marker'
-                    :class='"plate__marker--" + item.id')
-                  div(class='plate__name')  {{item.name}}
-                  div(class='plate__hours') {{item.value}} h
-                li(class='plate__item plate__item--total')
-                  div(class='plate__hours') {{totalSpent}} h
+              div(class='grid__row')
+                h2(class='plate__title grid__col grid__col--mb-36')
+                  svg(class='plate__icon'): use(xlink:href='#clock')
+                  span Spent Time
+                div(class='grid__col grid__col--mb-36')
+                  ul(class='plate__list')
+                    li(
+                      class='plate__item'
+                      v-for='item in spentTime') 
+                      div(
+                        class='plate__marker'
+                        :class='"plate__marker--" + item.id')
+                      div(class='plate__name')  {{item.name}}
+                      div(class='plate__hours') {{item.value}} h
+                    li(class='plate__item plate__item--total')
+                      div(class='plate__hours') {{totalSpent}} h
 
             div(class='plate__chart grid__col grid__col--lg-18')
+              v-chart(:options="chartOptions" style='width: 300px; height: 300px')
 
 </template>
 
 <script>
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/pie'
+
+import { colors } from "../../main"
+
 export default {
   name: 'Dashboard',
   pageTitle: 'My Dashboard',
+  components: {
+    'v-chart': ECharts
+  },
   data() {
     return {
       totalSpent: 0,
@@ -44,29 +55,76 @@ export default {
         {
           name: 'Games',
           id: 'games',
-          value: 0
+          value: 0,
+          percent: 0,
+          itemStyle: {
+            color: colors.games
+          }
         },
         {
           name: 'TV Shows',
           id: 'tvshows',
-          value: 0
+          value: 0,
+          percent: 0,
+          itemStyle: {
+            color: colors.tvshows
+          }
         },
         {
           name: 'Films',
           id: 'films',
-          value: 0
+          value: 0,
+          percent: 0,
+          itemStyle: {
+            color: colors.films
+          }
         },
         {
           name: 'Anime',
           id: 'anime',
-          value: 0
+          value: 0,
+          percent: 0,
+          itemStyle: {
+            color: colors.anime
+          }
         },
         {
           name: 'Books',
           id: 'books',
-          value: 0
+          value: 0,
+          percent: 0,
+          itemStyle: {
+            color: colors.books
+          }
         }
-      ]
+      ],
+      chartOptions: {
+        tooltip: {
+          trigger: 'item'
+        },
+        series: [{
+          type: 'pie',
+          radius: ['30%', '90%'],
+          avoidLabelOverlap: true,
+          label: {
+            show: false,
+          },
+          emphasis: {
+            label: {
+              show: false
+            }
+          },
+          labelLine: {
+            show: false
+          },
+          itemStyle: {
+            borderRadius: 6,
+            borderColor: 'rgba(0,0,0,0.3)',
+            borderWidth: 1
+          },
+          data: []
+        }]
+      }
     }
   },
   computed: {
@@ -140,6 +198,8 @@ export default {
       }
 
       this.totalSpent = (total.reduce(reducer)).toFixed(0)
+
+      this.chartOptions.series[0].data = this.spentTime
     }
   },
   mounted() {
