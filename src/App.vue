@@ -131,6 +131,7 @@ export default {
   @import "styles/blocks/modal"
   @import "styles/blocks/page"
   @import "styles/blocks/placeholder"
+  @import "styles/blocks/plate"
   @import "styles/blocks/progress"
   @import "styles/blocks/rating"
   @import "styles/blocks/search"

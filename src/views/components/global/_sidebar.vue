@@ -34,7 +34,7 @@
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
-      h4(class='sidebar__username') {{username}}
+      div(class='sidebar__username') {{username}}
 
     div(class='sidebar__menu')
       router-link(

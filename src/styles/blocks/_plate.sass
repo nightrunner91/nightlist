@@ -1,0 +1,79 @@
+.plate
+  margin-bottom: $gutter-width * 2
+  padding: 0 $gutter-width / 2
+
+  &__title
+    display: flex
+    align-items: center
+    text-shadow: $shadow-2
+
+
+  &__icon
+    @include icon-size(24, 24)
+
+    margin-right: $gutter-width / 3
+    fill: $clr-white
+    opacity: $half-opacity
+
+
+  &__inner
+    $padding-x: $gutter-width - $ui-height / 2
+    $padding-y: $gutter-width / 1.5
+
+    padding: $gutter-width
+    border-radius: $base-radius
+    background: rgba($clr-white, $tiny-opacity)
+
+
+  &__list
+    width: 100%
+
+  
+  &__item
+    display: flex
+    align-items: center
+    height: $ui-height
+
+    &--total
+      @extend .fz5
+
+      font-weight: 700
+      text-shadow: $shadow-1
+
+  
+  &__marker
+    @include icon-size(20, 20)
+
+    margin-left: 2px
+    margin-right: 12px
+    border-radius: $round-radius
+    box-shadow: $shadow-1
+
+    &--games
+      border: 1px solid lighten($clr-games, 15%)
+      background: $clr-games
+      
+    &--tvshows
+      border: 1px solid lighten($clr-tvshows, 15%)
+      background: $clr-tvshows
+
+    &--films
+      border: 1px solid lighten($clr-films, 15%)
+      background: $clr-films
+
+    &--anime
+      border: 1px solid lighten($clr-anime, 15%)
+      background: $clr-anime
+
+    &--books
+      border: 1px solid lighten($clr-books, 15%)
+      background: $clr-books
+
+  
+  &__name
+    font-weight: 700
+    line-height: 1
+
+  
+  &__hours
+    margin-left: auto
