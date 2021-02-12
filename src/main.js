@@ -26,12 +26,12 @@ export const eventBus = new Vue()
 export const projectName = 'nightlist_'
 
 export const colors = {
-  dashboard: '#004D40',
-  games: '#981446',
-  tvshows: '#802084',
-  films: '#433e77',
-  anime: '#a6075c',
-  books: '#267941'
+  dashboard: '#1C282E',
+  games: '#a1154a',
+  tvshows: '#88228c',
+  films: '#47417e',
+  anime: '#b00761',
+  books: '#288145'
 }
 
 

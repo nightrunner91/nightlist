@@ -119,7 +119,7 @@ export default {
           },
           itemStyle: {
             borderRadius: 6,
-            borderColor: 'rgba(0,0,0,0.3)',
+            borderColor: colors.dashboard,
             borderWidth: 1
           },
           data: []
