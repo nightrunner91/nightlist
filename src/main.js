@@ -118,14 +118,12 @@ import Vuebar from './directives/_scrollbar'
 import Ripple from './directives/_ripple'
 import {Vue2Storage} from 'vue2-storage'
 import velocityPlugin from 'velocity-vue'
-import ECharts from 'vue-echarts'
 
 Vue.use(VTooltip)
 Vue.use(Vuebar)
 Vue.directive('ripple', Ripple)
 Vue.use(Vue2Storage, {prefix: projectName})
 Vue.use(velocityPlugin)
-Vue.component('v-chart', ECharts)
 
 // ========== //
 // SVG Sprite //

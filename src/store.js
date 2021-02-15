@@ -64,7 +64,7 @@ export default new Vuex.Store({
       xs: 768,
       sm: 960,
       md: 1280,
-      lg: 1366
+      lg: 1367
     },
     modalState: {
       visibility: false,

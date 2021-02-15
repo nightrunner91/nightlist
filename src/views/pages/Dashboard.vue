@@ -14,17 +14,20 @@
       
         div(class='grid__row')
 
-          div(class='plate grid__col grid__col--lg-12')
+          div(class='plate grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-18 grid__col--xs-18 grid__col--mb-36')
             div(class='plate__inner')
 
-              h3(class='plate__title')
+              h2(class='plate__title')
                 svg(class='plate__icon'): use(xlink:href='#clock')
                 span Spent Time
               
               ul(class='plate__list')
                 li(
                   class='plate__item'
-                  v-for='item in spentTime') 
+                  :class='{"plate__item--selected" : item.selected }'
+                  v-for='item in spentTime'
+                  @mouseover='hoverSeries(item.id)'
+                  @mouseleave='unhoverSeries(item.id)')
                   div(
                     class='plate__marker'
                     :class='"plate__marker--" + item.id')
@@ -33,67 +36,26 @@
                 li(class='plate__item plate__item--total')
                   div(class='plate__hours') {{totalSpent}} h
 
-              div(class='plate__chart')
-                v-chart(:options="chartOptions" style='width: 200px; height: 200px')
-
-          div(class='plate grid__col grid__col--lg-12')
-            div(class='plate__inner')
-
-              h3(class='plate__title')
-                svg(class='plate__icon'): use(xlink:href='#clock')
-                span Spent Time
-              
-              ul(class='plate__list')
+              ul(class='plate__chart')
                 li(
-                  class='plate__item'
-                  v-for='item in spentTime') 
+                  @mouseover='hoverItem(item.id)'
+                  @mouseleave='unHoverItem(item.id)'
+                  class='plate__bar'
+                  v-for='item in spentTime')
                   div(
-                    class='plate__marker'
-                    :class='"plate__marker--" + item.id')
-                  div(class='plate__name')  {{item.name}}
-                  div(class='plate__hours') {{item.value}} h
-                li(class='plate__item plate__item--total')
-                  div(class='plate__hours') {{totalSpent}} h
-
-              div(class='plate__chart')
-                v-chart(:options="chartOptions" style='width: 200px; height: 200px')
-
-          div(class='plate grid__col grid__col--lg-12')
-            div(class='plate__inner')
-
-              h3(class='plate__title')
-                svg(class='plate__icon'): use(xlink:href='#clock')
-                span Spent Time
-              
-              ul(class='plate__list')
-                li(
-                  class='plate__item'
-                  v-for='item in spentTime') 
-                  div(
-                    class='plate__marker'
-                    :class='"plate__marker--" + item.id')
-                  div(class='plate__name')  {{item.name}}
-                  div(class='plate__hours') {{item.value}} h
-                li(class='plate__item plate__item--total')
-                  div(class='plate__hours') {{totalSpent}} h
-
-              div(class='plate__chart')
-                v-chart(:options="chartOptions" style='width: 200px; height: 200px')
+                    v-tooltip='{ content: item.name + ": " + item.percent + "%", offset: 5, trigger: "manual", show: tooltipVisible(item.id) }'
+                    class='plate__series'
+                    :class='"plate__series--" + item.id'
+                    :style='barParams(item.id)')
 
 </template>
 
 <script>
-import ECharts from 'vue-echarts'
-import 'echarts/lib/chart/pie'
-
-import { colors } from "../../main"
+let reducer = (accumulator, currentValue) => accumulator + currentValue
 
 export default {
   name: 'Dashboard',
   pageTitle: 'My Dashboard',
-  components: {
-    'v-chart': ECharts
-  },
   data() {
     return {
       totalSpent: 0,
@@ -103,74 +65,37 @@ export default {
           id: 'games',
           value: 0,
           percent: 0,
-          itemStyle: {
-            color: colors.games
-          }
+          selected: false
         },
         {
           name: 'TV Shows',
           id: 'tvshows',
           value: 0,
           percent: 0,
-          itemStyle: {
-            color: colors.tvshows
-          }
+          selected: false
         },
         {
           name: 'Films',
           id: 'films',
           value: 0,
           percent: 0,
-          itemStyle: {
-            color: colors.films
-          }
+          selected: false
         },
         {
           name: 'Anime',
           id: 'anime',
           value: 0,
           percent: 0,
-          itemStyle: {
-            color: colors.anime
-          }
+          selected: false
         },
         {
           name: 'Books',
           id: 'books',
           value: 0,
           percent: 0,
-          itemStyle: {
-            color: colors.books
-          }
+          selected: false
         }
-      ],
-      chartOptions: {
-        tooltip: {
-          trigger: 'item'
-        },
-        series: [{
-          type: 'pie',
-          radius: ['30%', '90%'],
-          avoidLabelOverlap: true,
-          label: {
-            show: false,
-          },
-          emphasis: {
-            label: {
-              show: false
-            }
-          },
-          labelLine: {
-            show: false
-          },
-          itemStyle: {
-            borderRadius: 6,
-            borderColor: colors.dashboard,
-            borderWidth: 1
-          },
-          data: []
-        }]
-      }
+      ]
     }
   },
   computed: {
@@ -224,8 +149,6 @@ export default {
   },
   methods: {
     calculateTime() {
-      let reducer = (accumulator, currentValue) => accumulator + currentValue
-
       for (let index = 0; index < this.spentTime.length; index++) {
         let collection = this.$store.state.collection.filter(i => i.category == this.spentTime[index].id)
         let hours = []
@@ -245,7 +168,33 @@ export default {
 
       this.totalSpent = (total.reduce(reducer)).toFixed(0)
 
-      this.chartOptions.series[0].data = this.spentTime
+      for (let index = 0; index < this.spentTime.length; index++) {
+        this.spentTime[index].percent = (this.spentTime[index].value * 100 / this.totalSpent).toFixed(0)
+      }
+    },
+
+    barParams(id) {
+      return 'height:' + this.spentTime.filter(i => i.id == id)[0].percent + '%'
+    },
+
+    hoverSeries(id) {
+      this.spentTime.filter(i => i.id == id)[0].selected = true
+    },
+
+    unhoverSeries(id) {
+      this.spentTime.filter(i => i.id == id)[0].selected = false
+    },
+
+    hoverItem(id) {
+      this.spentTime.filter(i => i.id == id)[0].selected = true
+    },
+
+    unHoverItem(id) {
+      this.spentTime.filter(i => i.id == id)[0].selected = false
+    },
+
+    tooltipVisible(id) {
+      return this.spentTime.filter(i => i.id == id)[0].selected
     }
   },
   mounted() {

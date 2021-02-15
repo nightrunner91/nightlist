@@ -1,12 +1,16 @@
 .plate
   margin-bottom: $gutter-width * 2
-  padding: 0 $gutter-width / 2
 
   
   &__title
     display: flex
     align-items: center
+    padding: 0 $gutter-width / 2
     text-shadow: $shadow-2
+    white-space: nowrap
+
+    @media #{$xs-dw}
+      margin-bottom: $gutter-width / 2
 
 
   &__icon
@@ -18,30 +22,38 @@
 
 
   &__inner
-    $padding-x: $gutter-width - $ui-height / 2
-    $padding-y: $gutter-width / 1.5
-
     width: 100%
-    padding: $gutter-width
+    padding: $gutter-width $gutter-width / 2
     border-radius: $base-radius
     background: rgba($clr-white, $tiny-opacity)
     box-shadow: $shadow-1
 
+    @media #{$xs-dw}
+      padding: $gutter-width / 2 0
+
 
   &__list
-    margin-bottom: $gutter-width / 2
+    margin-bottom: $gutter-width
 
   
   &__item
     display: flex
     align-items: center
     height: $ui-height
+    padding: 0 $gutter-width / 2
+    border-radius: $base-radius
+    transition: $base-transition
+    cursor: pointer
 
     &--total
-      @extend .fz5
-
+      font-size: 120%
       font-weight: 700
-      text-shadow: $shadow-1
+      text-shadow: $shadow-2
+      pointer-events: none
+
+    &:hover,
+    &--selected
+      background: rgba($clr-white, $tiny-opacity)
 
   
   &__marker
@@ -50,7 +62,7 @@
     margin-left: 3px
     margin-right: 13px
     border-radius: $round-radius
-    box-shadow: $shadow-2
+    box-shadow: $shadow-1
 
     &--games
       background: lighten($clr-games, $hover-intensity)
@@ -78,6 +90,50 @@
 
 
   &__chart
-    display: flex;
+    position: relative
+    display: flex
+    justify-content: space-between
+    align-items: flex-end
+    width: 100%
+    height: 200px
+    padding: 0 $gutter-width / 2
+      
+
+  &__bar
+    position: relative
+    z-index: 1
+    display: flex
     justify-content: center
-    align-items: center
+    align-items: flex-end
+    width: 15%
+    height: 100%
+    border-top-left-radius: $base-radius
+    border-top-right-radius: $base-radius
+    background: rgba($clr-white, $tiny-opacity)
+    transition: $base-transition
+
+    &:hover,
+    &--selected
+      
+
+
+  &__series
+    width: 100%
+    border-top-left-radius: $base-radius
+    border-top-right-radius: $base-radius
+    box-shadow: $shadow-1
+
+    &--games
+      background: lighten($clr-games, $hover-intensity)
+      
+    &--tvshows
+      background: lighten($clr-tvshows, $hover-intensity)
+
+    &--films
+      background: lighten($clr-films, $hover-intensity)
+
+    &--anime
+      background: lighten($clr-anime, $hover-intensity)
+
+    &--books
+      background: lighten($clr-books, $hover-intensity)
