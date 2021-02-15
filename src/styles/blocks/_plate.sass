@@ -55,6 +55,23 @@
     &--selected
       background: rgba($clr-white, $tiny-opacity)
 
+      .plate
+        &__marker
+          &--games
+            background: lighten($clr-games, $hover-intensity * 2)
+            
+          &--tvshows
+            background: lighten($clr-tvshows, $hover-intensity * 2)
+
+          &--films
+            background: lighten($clr-films, $hover-intensity * 2)
+
+          &--anime
+            background: lighten($clr-anime, $hover-intensity * 2)
+
+          &--books
+            background: lighten($clr-books, $hover-intensity * 2)
+
   
   &__marker
     @include icon-size(18, 18)
@@ -63,6 +80,7 @@
     margin-right: 13px
     border-radius: $round-radius
     box-shadow: $shadow-1
+    transition: $base-transition
 
     &--games
       background: lighten($clr-games, $hover-intensity)
@@ -96,6 +114,7 @@
     align-items: flex-end
     width: 100%
     height: 200px
+    margin-bottom: $gutter-width / 3
     padding: 0 $gutter-width / 2
       
 
@@ -105,7 +124,7 @@
     display: flex
     justify-content: center
     align-items: flex-end
-    width: 15%
+    width: $ui-height
     height: 100%
     border-top-left-radius: $base-radius
     border-top-right-radius: $base-radius
@@ -114,7 +133,25 @@
 
     &:hover,
     &--selected
-      
+      .plate
+        &__series
+          &--games
+            background: lighten($clr-games, $hover-intensity * 2)
+            
+          &--tvshows
+            background: lighten($clr-tvshows, $hover-intensity * 2)
+
+          &--films
+            background: lighten($clr-films, $hover-intensity * 2)
+
+          &--anime
+            background: lighten($clr-anime, $hover-intensity * 2)
+
+          &--books
+            background: lighten($clr-books, $hover-intensity * 2)
+
+        &__percent
+          opacity: $active-opacity
 
 
   &__series
@@ -122,6 +159,7 @@
     border-top-left-radius: $base-radius
     border-top-right-radius: $base-radius
     box-shadow: $shadow-1
+    transition: $base-transition
 
     &--games
       background: lighten($clr-games, $hover-intensity)
@@ -137,3 +175,20 @@
 
     &--books
       background: lighten($clr-books, $hover-intensity)
+
+
+  &__percent
+    position: absolute
+    display: flex
+    justify-content: center
+    align-items: center
+    right: 0
+    bottom: -$gutter-width
+    left: 0
+    width: 100%
+    height: $gutter-width
+    margin: auto
+    font-size: 10px
+    line-height: 1
+    opacity: $half-opacity
+    transition: $base-transition

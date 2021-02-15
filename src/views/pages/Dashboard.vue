@@ -41,9 +41,10 @@
                   @mouseover='hoverItem(item.id)'
                   @mouseleave='unHoverItem(item.id)'
                   class='plate__bar'
+                  :class='{"plate__bar--selected" : item.selected }'
                   v-for='item in spentTime')
+                  div(class='plate__percent') {{item.percent}}%
                   div(
-                    v-tooltip='{ content: item.name + ": " + item.percent + "%", offset: 5, trigger: "manual", show: tooltipVisible(item.id) }'
                     class='plate__series'
                     :class='"plate__series--" + item.id'
                     :style='barParams(item.id)')
