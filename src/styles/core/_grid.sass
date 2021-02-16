@@ -72,7 +72,7 @@ $lg-dw: "screen and (max-width : #{$lg-screen})" !default
       $i: $i + 1
 
     // XS settings
-    @media #{$xs-up}
+    @media #{$xs-sm}
       $i: 1
       @while $i <= $num-cols 
         $perc: unquote((100 / ($num-cols / $i)) + "%")
@@ -91,7 +91,7 @@ $lg-dw: "screen and (max-width : #{$lg-screen})" !default
         $i: $i + 1
 
     // SM settings
-    @media #{$sm-up}
+    @media #{$sm-md}
       $i: 1
       @while $i <= $num-cols 
         $perc: unquote((100 / ($num-cols / $i)) + "%")
@@ -110,7 +110,7 @@ $lg-dw: "screen and (max-width : #{$lg-screen})" !default
         $i: $i + 1
 
     // MD settigns
-    @media #{$md-up}
+    @media #{$md-lg}
       $i: 1
       @while $i <= $num-cols 
         $perc: unquote((100 / ($num-cols / $i)) + "%")

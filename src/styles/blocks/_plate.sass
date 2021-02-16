@@ -23,15 +23,22 @@
 
   &__inner
     width: 100%
-    padding: $gutter-width $gutter-width / 2
+    padding: $gutter-width
     border-radius: $base-radius
     background: rgba($clr-white, $tiny-opacity)
     box-shadow: $shadow-1
 
 
   &__list
+    flex-direction: column
+    padding: 0
     margin-bottom: $gutter-width
 
+    @media #{$md-dw}
+      margin-bottom: 0
+
+    @media #{$xs-dw}
+      margin-bottom: $gutter-width
   
   &__item
     display: flex
