@@ -184,7 +184,11 @@ export default {
 
           // Store summ of each category in data()
           Object.keys(params).forEach(key => {
-            summary[index][key] = parseFloat((params[key].reduce(reducer)).toFixed(0))
+            if (params[key].length > 0) {
+              summary[index][key] = parseFloat((params[key].reduce(reducer)).toFixed(0))
+            } else {
+              summary[index][key] = 0
+            }
           })
         }
 
