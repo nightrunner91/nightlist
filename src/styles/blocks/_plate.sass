@@ -116,7 +116,7 @@
     height: 200px
     margin-bottom: $gutter-width / 3
     padding: 0 $gutter-width / 2
-      
+
 
   &__bar
     position: relative
@@ -130,11 +130,14 @@
     border-top-right-radius: $base-radius
     background: rgba($clr-white, $tiny-opacity)
     transition: $base-transition
+    cursor: pointer
 
     &:hover,
     &--selected
       .plate
         &__series
+          box-shadow: $shadow-2
+
           &--games
             background: lighten($clr-games, $hover-intensity * 2)
             

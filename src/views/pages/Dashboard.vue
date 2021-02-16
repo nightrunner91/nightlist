@@ -14,40 +14,23 @@
       
         div(class='grid__row')
 
-          div(class='plate grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-18 grid__col--xs-18 grid__col--mb-36')
-            div(class='plate__inner')
+          app-plate(
+            :type='"hours"'
+            :icon='"clock"'
+            :title='"Time Spent"'
+            :inputData='platesData')
 
-              h2(class='plate__title')
-                svg(class='plate__icon'): use(xlink:href='#clock')
-                span Spent Time
-              
-              ul(class='plate__list')
-                li(
-                  class='plate__item'
-                  :class='{"plate__item--selected" : item.selected }'
-                  v-for='item in spentTime'
-                  @mouseover='hoverSeries(item.id)'
-                  @mouseleave='unhoverSeries(item.id)')
-                  div(
-                    class='plate__marker'
-                    :class='"plate__marker--" + item.id')
-                  div(class='plate__name')  {{item.name}}
-                  div(class='plate__hours') {{item.value}} h
-                li(class='plate__item plate__item--total')
-                  div(class='plate__hours') {{totalSpent}} h
+          app-plate(
+            :type='"entries"'
+            :icon='"entries"'
+            :title='"Entries"'
+            :inputData='platesData')
 
-              ul(class='plate__chart')
-                li(
-                  @mouseover='hoverItem(item.id)'
-                  @mouseleave='unHoverItem(item.id)'
-                  class='plate__bar'
-                  :class='{"plate__bar--selected" : item.selected }'
-                  v-for='item in spentTime')
-                  div(class='plate__percent') {{item.percent}}%
-                  div(
-                    class='plate__series'
-                    :class='"plate__series--" + item.id'
-                    :style='barParams(item.id)')
+          app-plate(
+            :type='"favourites"'
+            :icon='"favourite"'
+            :title='"Favourites"'
+            :inputData='platesData')
 
 </template>
 
@@ -59,44 +42,65 @@ export default {
   pageTitle: 'My Dashboard',
   data() {
     return {
-      totalSpent: 0,
-      spentTime: [
-        {
-          name: 'Games',
-          id: 'games',
-          value: 0,
-          percent: 0,
-          selected: false
+      platesData: {
+        total: {
+          hours: 0,
+          entries: 0,
+          favourites: 0
         },
-        {
-          name: 'TV Shows',
-          id: 'tvshows',
-          value: 0,
-          percent: 0,
-          selected: false
-        },
-        {
-          name: 'Films',
-          id: 'films',
-          value: 0,
-          percent: 0,
-          selected: false
-        },
-        {
-          name: 'Anime',
-          id: 'anime',
-          value: 0,
-          percent: 0,
-          selected: false
-        },
-        {
-          name: 'Books',
-          id: 'books',
-          value: 0,
-          percent: 0,
-          selected: false
-        }
-      ]
+        summary: [
+          {
+            name: 'Games',
+            id: 'games',
+            hours: 0,
+            hoursPercent: 0,
+            entries: 0,
+            entriesPercent: 0,
+            favourites: 0,
+            favouritesPercent: 0
+          },
+          {
+            name: 'TV Shows',
+            id: 'tvshows',
+            hours: 0,
+            hoursPercent: 0,
+            entries: 0,
+            entriesPercent: 0,
+            favourites: 0,
+            favouritesPercent: 0
+          },
+          {
+            name: 'Films',
+            id: 'films',
+            hours: 0,
+            hoursPercent: 0,
+            entries: 0,
+            entriesPercent: 0,
+            favourites: 0,
+            favouritesPercent: 0
+          },
+          {
+            name: 'Anime',
+            id: 'anime',
+            hours: 0,
+            hoursPercent: 0,
+            entries: 0,
+            entriesPercent: 0,
+            favourites: 0,
+            favouritesPercent: 0
+          },
+          {
+            name: 'Books',
+            id: 'books',
+            hours: 0,
+            hoursPercent: 0,
+            entries: 0,
+            entriesPercent: 0,
+            favourites: 0,
+            favouritesPercent: 0
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -149,57 +153,56 @@ export default {
     }
   },
   methods: {
-    calculateTime() {
-      for (let index = 0; index < this.spentTime.length; index++) {
-        let collection = this.$store.state.collection.filter(i => i.category == this.spentTime[index].id)
-        let hours = []
+    prepareData() {
+      // Store global varaible
+      let summary = this.platesData.summary
 
+      // Scan each category
+      for (let index = 0; index < summary.length; index++) {
+        // Store collection and needed params
+        let collection = this.$store.state.collection.filter(i => i.category == summary[index].id)
+        let params = { hours: [], entries: [], favourites: [] }
+
+        // Pish params object arrays with values from each category
         for (let index = 0; index < collection.length; index++) {
-          hours.push(parseFloat(collection[index].hours))
+          params.hours.push(parseFloat(collection[index].hours))
         }
+        params.entries.push(parseFloat(collection.length))
+        params.favourites.push(parseFloat(collection.filter(i => i.favourite).length))
 
-        this.spentTime[index].value = (hours.reduce(reducer)).toFixed(0)
+        // Store summ of each category in data()
+        Object.keys(params).forEach(key => {
+          summary[index][key] = parseFloat((params[key].reduce(reducer)).toFixed(0))
+        })
       }
 
-      let total = []
+      // Calculate totals
+      let totals = { hours: [], entries: [], favourites: [] }
 
-      for (let index = 0; index < this.spentTime.length; index++) {
-        total.push(parseFloat(this.spentTime[index].value))
+      for (let index = 0; index < summary.length; index++) {
+        totals.hours.push(parseFloat(summary[index].hours))
+        totals.entries.push(parseFloat(summary[index].entries))
+        totals.favourites.push(parseFloat(summary[index].favourites))
       }
 
-      this.totalSpent = (total.reduce(reducer)).toFixed(0)
+      Object.keys(totals).forEach(key => {
+        this.platesData.total[key] = parseFloat((totals[key].reduce(reducer)).toFixed(0))
+      })
 
-      for (let index = 0; index < this.spentTime.length; index++) {
-        this.spentTime[index].percent = (this.spentTime[index].value * 100 / this.totalSpent).toFixed(0)
+      // Calculate percentages
+      function perc(value, total) {
+        return parseFloat((value * 100 / total).toFixed(0))
       }
-    },
 
-    barParams(id) {
-      return 'height:' + this.spentTime.filter(i => i.id == id)[0].percent + '%'
-    },
-
-    hoverSeries(id) {
-      this.spentTime.filter(i => i.id == id)[0].selected = true
-    },
-
-    unhoverSeries(id) {
-      this.spentTime.filter(i => i.id == id)[0].selected = false
-    },
-
-    hoverItem(id) {
-      this.spentTime.filter(i => i.id == id)[0].selected = true
-    },
-
-    unHoverItem(id) {
-      this.spentTime.filter(i => i.id == id)[0].selected = false
-    },
-
-    tooltipVisible(id) {
-      return this.spentTime.filter(i => i.id == id)[0].selected
+      for (let index = 0; index < summary.length; index++) {
+        summary[index].hoursPercent = perc(summary[index].hours, this.platesData.total.hours)
+        summary[index].entriesPercent = perc(summary[index].entries, this.platesData.total.entries)
+        summary[index].favouritesPercent = perc(summary[index].favourites, this.platesData.total.favourites)
+      }
     }
   },
   mounted() {
-    this.calculateTime()
+    this.prepareData()
   }
 }
 </script>
