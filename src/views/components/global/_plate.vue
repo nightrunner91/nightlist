@@ -38,7 +38,7 @@
           div(class='plate__percent' v-if='type == "favourites"') {{item.favouritesPercent}}%
           div(
             class='plate__series'
-            :class='"plate__series--" + item.id'
+            :class='[{"plate__series--animated" : seriesAnimated }, "plate__series--" + item.id]'
             :style='barParams(item.id, type)')
     
 </template>
@@ -55,6 +55,7 @@ export default {
   },
   data() {
     return {
+      seriesAnimated: false,
       localData: [
         {
           id: 'games',
@@ -105,10 +106,14 @@ export default {
 
     itemSelected(id) {
       return this.localData.filter(i => i.id == id)[0].selected
+    },
+
+    animateSeries() {
+      setTimeout(() => { this.seriesAnimated = true }, 100)
     }
   },
   mounted() {
-    
+    this.animateSeries()
   }
 }
 </script>
