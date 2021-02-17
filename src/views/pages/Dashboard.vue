@@ -2,16 +2,19 @@
 
   section(class='section')
 
+    games-modal(
+      :purpose='modalState.purpose'
+      v-show='modalState.visibility')
+
     div(
       class='section__content'
       :class='{"section__content--blured" : modalState.visibility}')
 
-      div(class='title title--main')
+      div(class='title title--dashboard')
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalLength}}
 
       div(class='grid__col grid__col--mb-36')
-      
         div(class='grid__row')
 
           app-plate(
@@ -31,6 +34,8 @@
             :icon='"favourite"'
             :title='"Favourites"'
             :inputData='platesData')
+
+      games-favourites
 
 </template>
 

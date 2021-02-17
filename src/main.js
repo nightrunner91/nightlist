@@ -110,6 +110,11 @@ Vue.component('films-search', filmsSearch)
 Vue.component('anime-search', animeSearch)
 Vue.component('books-search', booksSearch)
 
+// favourites:
+import gamesFavourites from "./views/components/favourites/_games-favourites"
+
+Vue.component('games-favourites', gamesFavourites)
+
 
 // ======================================= //
 // Import and regitser external components //

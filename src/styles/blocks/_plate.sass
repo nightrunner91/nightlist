@@ -1,5 +1,12 @@
 .plate
-  margin-bottom: $gutter-width
+  margin-bottom: $gutter-width * 2
+
+  &:hover
+    .plate__icon
+      opacity: $active-opacity
+
+  @media #{$md-dw}
+    margin-bottom: $gutter-width
 
   
   &__title
@@ -19,6 +26,7 @@
     margin-right: $gutter-width / 3
     fill: $clr-white
     opacity: $half-opacity
+    transition: $base-transition
 
 
   &__inner

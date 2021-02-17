@@ -2,7 +2,7 @@
 
   div(
     class='favourite'
-    :class='"favourite--" + currentClass')
+    :class='"favourite--" + type')
     div(class='favourite__label') Favourite
     div(
       class='favourite__icon'
@@ -17,7 +17,8 @@ import { eventBus } from "../../../main"
 export default {
   name: "Favourite",
   props: {
-    currentFavourite: Boolean
+    currentFavourite: Boolean,
+    type: String
   },
   data() {
     return {
@@ -25,9 +26,7 @@ export default {
     }
   },
   computed: {
-    currentClass() {
-      return this.$router.options.routes.filter(i => i.name == this.$route.name)[0].id
-    }
+    
   },
   methods: {
     changeFavourite() {

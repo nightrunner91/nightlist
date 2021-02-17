@@ -2,7 +2,7 @@
 
   div(
     class='rating'
-    :class='"rating--" + currentClass')
+    :class='"rating--" + type')
     div(class='rating__label') Rating
     div(class='rating__body')
       div(
@@ -21,7 +21,8 @@ import { eventBus } from "../../../main"
 export default {
   name: "Rating",
   props: {
-    currentRating: Number
+    currentRating: Number,
+    type: String
   },
   data() {
     return {
@@ -30,9 +31,7 @@ export default {
     }
   },
   computed: {
-    currentClass() {
-      return this.$router.options.routes.filter(i => i.name == this.$route.name)[0].id
-    }
+    
   },
   methods: {
     setRating(rating) {
