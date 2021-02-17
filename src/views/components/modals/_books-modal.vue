@@ -24,7 +24,7 @@
               input(
                 pattern='_[a-zA-Z0-9]+'
                 minlength='3'
-                maxlength='50'
+                maxlength='70'
                 type='text'
                 ref='title'
                 class='input__field' 
@@ -42,7 +42,7 @@
               input(
                 pattern='_[a-zA-Z0-9]+'
                 minlength='3'
-                maxlength='50'
+                maxlength='70'
                 type='text'
                 ref='author'
                 class='input__field' 
