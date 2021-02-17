@@ -292,7 +292,6 @@ export default {
 
       if (
         this.criteria == 'title' || 
-        this.criteria == 'platform' ||
         this.criteria == 'status') {
         // ascending
         if (this.direction) {

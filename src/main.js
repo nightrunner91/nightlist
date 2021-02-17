@@ -113,10 +113,12 @@ Vue.component('books-search', booksSearch)
 // favourites:
 import gamesFavourites from "./views/components/favourites/_games-favourites"
 import tvshowsFavourites from "./views/components/favourites/_tvshows-favourites"
+import filmsFavourites from "./views/components/favourites/_films-favourites"
 import animeFavourites from "./views/components/favourites/_anime-favourites"
 
 Vue.component('games-favourites', gamesFavourites)
 Vue.component('tvshows-favourites', tvshowsFavourites)
+Vue.component('films-favourites', filmsFavourites)
 Vue.component('anime-favourites', animeFavourites)
 
 

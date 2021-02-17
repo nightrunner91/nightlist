@@ -10,8 +10,8 @@
       @click='switchTable()')
       svg(
         class='title__icon'
-        v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-tvshows')
-      h2(class='title__name') Favourite TV Shows
+        v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-films')
+      h2(class='title__name') Favourite Films
       span(class='title__badge badge badge--medium') {{favouritesLength}}
       svg(
         class='title__chevron'
@@ -40,7 +40,7 @@
         
         //- TITLE
         div(
-          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11'
+          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20'
           :class='[{"slot__cell--active" : criteria == "title"}]'
           @click='sortData("title", "switch")')
           span Title
@@ -57,17 +57,6 @@
           span Status
           svg(
             v-if='criteria == "status"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-
-        //- PROGRESS
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9'
-          :class='{"slot__cell--active" : criteria == "progress"}'
-          @click='sortData("progress", "switch")')
-          span Progress
-          svg(
-            v-if='criteria == "progress"'
             class='table__chevron' 
             :class='chevronPosition'): use(xlink:href='#chevron')
         
@@ -128,7 +117,7 @@
             
             //- TITLE
             div(
-              class='slot__cell grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11')
+              class='slot__cell grid__col grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20')
               span {{slot.title}}
               a(
                 :ref='"redirect"'
@@ -145,15 +134,6 @@
               svg(
                 class='slot__status'
                 v-tooltip='{ content: statusName(slot.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.status")
-
-            //- PROGRESS
-            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
             
             //- FAVOURITE
             div(
@@ -210,14 +190,6 @@
                   svg(class='slot__redirect'): use(xlink:href='#link')
               svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
 
-            div(class='slot__middle')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
-
             div(class='slot__bottom')
 
               div(class='slot__rating')
@@ -247,14 +219,14 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: 'tvshowsFavourites',
+  name: 'filmsFavourites',
   props: {
     
   },
   data() {
     return {
       criteria: 'title',
-      tableVisibilityName: 'favourite_tvshows_' + this.id + '_visible',
+      tableVisibilityName: 'favourite_films_' + this.id + '_visible',
       direction: true,
       stashedData: [],
       favouritesData: [],
@@ -272,7 +244,7 @@ export default {
   },
   methods: {
     stashData() {
-      this.stashedData = this.tvshowsFavourites
+      this.stashedData = this.filmsFavourites
     },
 
     sortData(criteria, situation) {
@@ -308,8 +280,7 @@ export default {
       if (
         this.criteria == 'favourite' || 
         this.criteria == 'rating' || 
-        this.criteria == 'hours' ||
-        this.criteria == 'progress') {
+        this.criteria == 'hours') {
         // descending
         if (this.direction) {
           conditionOne = 1
@@ -367,13 +338,13 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'slot__link') return
       else {
-        this.$store.commit('CHANGE_CONTENT', this.tvshowsFavourites.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit', 'tvshows')
+        this.$store.commit('CHANGE_CONTENT', this.filmsFavourites.filter(i => i.id == id)[0])
+        eventBus.$emit('openModal', 'edit', 'films')
       }
     },
 
     statusName(id) {
-      return this.$store.state['tvshows'].statuses.filter(i => i.id == id)[0].name
+      return this.$store.state['films'].statuses.filter(i => i.id == id)[0].name
     },
 
     handleResize() {
@@ -387,8 +358,8 @@ export default {
     }
   },
   computed: {
-    tvshows() {
-      return this.$store.state.tvshows
+    films() {
+      return this.$store.state.films
     },
 
     windowParams() {
@@ -399,8 +370,8 @@ export default {
       return this.$store.state.breakpoints
     },
 
-    tvshowsFavourites() {
-      return this.$store.state.collection.filter(i => i.category == 'tvshows' && i.favourite)
+    filmsFavourites() {
+      return this.$store.state.collection.filter(i => i.category == 'films' && i.favourite)
     },
 
     chevronPosition() {
