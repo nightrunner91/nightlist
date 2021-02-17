@@ -10,8 +10,8 @@
       @click='switchTable()')
       svg(
         class='title__icon'
-        v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-tvshows')
-      h2(class='title__name') Favourite TV Shows
+        v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-anime')
+      h2(class='title__name') Favourite Anime
       span(class='title__badge badge badge--medium') {{favouritesLength}}
       svg(
         class='title__chevron'
@@ -247,14 +247,14 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: 'tvshowsFavourites',
+  name: 'animeFavourites',
   props: {
     
   },
   data() {
     return {
       criteria: 'title',
-      tableVisibilityName: 'favourite_tvshows_' + this.id + '_visible',
+      tableVisibilityName: 'favourite_anime_' + this.id + '_visible',
       direction: true,
       stashedData: [],
       favouritesData: [],
@@ -272,7 +272,7 @@ export default {
   },
   methods: {
     stashData() {
-      this.stashedData = this.tvshowsFavourites
+      this.stashedData = this.animeFavourites
     },
 
     sortData(criteria, situation) {
@@ -368,13 +368,13 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'slot__link') return
       else {
-        this.$store.commit('CHANGE_CONTENT', this.tvshowsFavourites.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit', 'tvshows')
+        this.$store.commit('CHANGE_CONTENT', this.animeFavourites.filter(i => i.id == id)[0])
+        eventBus.$emit('openModal', 'edit', 'anime')
       }
     },
 
     statusName(id) {
-      return this.$store.state['tvshows'].statuses.filter(i => i.id == id)[0].name
+      return this.$store.state['anime'].statuses.filter(i => i.id == id)[0].name
     },
 
     handleResize() {
@@ -388,8 +388,8 @@ export default {
     }
   },
   computed: {
-    tvshows() {
-      return this.$store.state.tvshows
+    anime() {
+      return this.$store.state.anime
     },
 
     windowParams() {
@@ -400,8 +400,8 @@ export default {
       return this.$store.state.breakpoints
     },
 
-    tvshowsFavourites() {
-      return this.$store.state.collection.filter(i => i.category == 'tvshows' && i.favourite)
+    animeFavourites() {
+      return this.$store.state.collection.filter(i => i.category == 'anime' && i.favourite)
     },
 
     chevronPosition() {

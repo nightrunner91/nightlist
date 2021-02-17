@@ -10,6 +10,10 @@
       :purpose='modalState.purpose'
       v-show='modalState.visibility && modalState.type == "tvshows"')
 
+    anime-modal(
+      :purpose='modalState.purpose'
+      v-show='modalState.visibility && modalState.type == "anime"')
+
     div(
       class='section__content'
       :class='{"section__content--blured" : modalState.visibility}')
@@ -41,6 +45,7 @@
 
       games-favourites
       tvshows-favourites
+      anime-favourites
 
 </template>
 
