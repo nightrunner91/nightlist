@@ -115,11 +115,13 @@ import gamesFavourites from "./views/components/favourites/_games-favourites"
 import tvshowsFavourites from "./views/components/favourites/_tvshows-favourites"
 import filmsFavourites from "./views/components/favourites/_films-favourites"
 import animeFavourites from "./views/components/favourites/_anime-favourites"
+import booksFavourites from "./views/components/favourites/_books-favourites"
 
 Vue.component('games-favourites', gamesFavourites)
 Vue.component('tvshows-favourites', tvshowsFavourites)
 Vue.component('films-favourites', filmsFavourites)
 Vue.component('anime-favourites', animeFavourites)
+Vue.component('books-favourites', booksFavourites)
 
 
 // ======================================= //

@@ -2,36 +2,29 @@
 
   div(class='data')
 
-    //- ====== -//
-    //- SEARCH -//
-    //- ====== -//
-    div(
-      class='search' 
-      :class='{"search--active" : searchQuery.length || searchActive}' )
-      div(class='input')
-        svg(class='input__icon'): use(xlink:href='#search')
-        input(
-          class='input__field' 
-          type='text' 
-          placeholder='Search' 
-          v-model='searchQuery'
-          @input='searchData()'
-          @focus='searchActive = true' 
-          @blur='searchActive = false')
-
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(class='title title--secondary title--inactive' v-if='searchQuery.length')
-      h2(class='title__name') Search results
-      span(class='title__badge badge badge--medium') {{resultsLength}}
+    div(
+      class='title title--secondary'
+      @click='switchTable()')
+      svg(
+        class='title__icon'
+        v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-books')
+      h2(class='title__name') Favourite Books
+      span(class='title__badge badge badge--medium') {{favouritesLength}}
+      svg(
+        class='title__chevron'
+        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- TABLE -//
     //- ===== -//
     div(
       class='table' 
-      v-if='searchQuery.length > 0')
+      :style='tableHeight'
+      :class='[{"table--hidden" : !tableVisible}, {"table--notransition" : noTransition}]'
+      v-if='favouritesLength > 0')
 
       //- ====== -//
       //- HEADER -//
@@ -40,7 +33,7 @@
       //- DESKTOP -//
       div(
         class='table__header'
-        v-if='currentStructure == "desktop" && searchQuery.length > 0 && resultsLength > 0')
+        v-if='currentStructure == "desktop"')
 
         //- ORDER
         div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1')
@@ -127,7 +120,7 @@
             ref='slot'
             :key='slot.id'
             :class='{"slot--refreshed" : slot.refreshed }'
-            v-for='(slot, index) in searchedData'
+            v-for='(slot, index) in favouritesData'
             @click='editSlot(slot.id, $event)')
             
             //- ORDER
@@ -188,7 +181,7 @@
             ref='slot'
             :key='slot.id'
             :class='{"slot--refreshed" : slot.refreshed }'
-            v-for='(slot, index) in searchedData'
+            v-for='(slot, index) in favouritesData'
             @click='editSlot(slot.id, $event)')
 
             //- header
@@ -227,7 +220,7 @@
                 svg(class='slot__clock'): use(xlink:href='#clock')
 
     app-placeholder(
-      v-if='searchQuery.length && resultsLength == 0'
+      v-if='favouritesLength == 0'
       :status='placeholderStatus')
 
 </template>
@@ -236,18 +229,19 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: 'booksSearch',
+  name: 'booksFavourites',
   props: {
     
   },
   data() {
     return {
-      searchQuery: '',
-      searchActive: false,
       criteria: 'title',
+      tableVisibilityName: 'favourite_books_' + this.id + '_visible',
       direction: true,
       stashedData: [],
-      searchedData: [],
+      favouritesData: [],
+      tableVisible: true,
+      noTransition: true,
       currentStructure: undefined
     }
   },
@@ -260,21 +254,7 @@ export default {
   },
   methods: {
     stashData() {
-      this.stashedData = this.booksCollection
-    },
-
-    searchData() {
-      this.searchedData = this.stashedData.filter(i => {
-        return i.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || i.author.toLowerCase().includes(this.searchQuery.toLowerCase())
-      })
-
-      this.sortData(this.criteria)
-      
-      if (this.searchQuery.length > 0) {
-        this.$store.commit('CHANGE_SEARCH_STATE', true)
-      } else {
-        this.$store.commit('CHANGE_SEARCH_STATE', false)
-      }
+      this.stashedData = this.booksFavourites
     },
 
     sortData(criteria, situation) {
@@ -293,8 +273,8 @@ export default {
       this.criteria = criteria
 
       if (
-        this.criteria == 'title' ||
-        this.criteria == 'author' ||
+        this.criteria == 'title' || 
+        this.criteria == 'author' || 
         this.criteria == 'status') {
         // ascending
         if (this.direction) {
@@ -324,20 +304,43 @@ export default {
         }
       }
 
-      result = this.searchedData.sort((a, b) => {
+      result = this.stashedData.sort((a, b) => {
         if (a[criteria] < b[criteria]) { return conditionOne }
         if (a[criteria] > b[criteria]) { return conditionTwo }
         return 0
       })
 
-      this.searchedData = result
+      this.favouritesData = result
+    },
+
+    switchTable(state) {
+      if (state) {
+        this.tableVisible = state
+      } else {
+        this.tableVisible = !this.tableVisible
+      }
+      this.$storage.set(this.tableVisibilityName, { key: this.tableVisible })
+    },
+
+    setDefaultTableState() {
+      this.tableVisible = true
+    },
+
+    setTableState() {
+      let storedState = this.$storage.get(this.tableVisibilityName, this.setDefaultTableState())
+      if (storedState != null) {
+        this.tableVisible = storedState.key
+      }
+    },
+
+    removeNoTransition() {
+      setTimeout(() => { this.noTransition = false }, 300)
     },
 
     subscribeToChanges() {
       this.$store.subscribe((mutation, state) => {
         if (mutation.type == 'APPLY_SLOT' || mutation.type == 'DELETE_SLOT') {
           this.stashData()
-          this.searchData()
           this.sortData(this.criteria)
         }
       })
@@ -346,8 +349,8 @@ export default {
     editSlot(id, event) {
       if (event.target.className == 'slot__link') return
       else {
-        this.$store.commit('CHANGE_CONTENT', this.booksCollection.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit')
+        this.$store.commit('CHANGE_CONTENT', this.booksFavourites.filter(i => i.id == id)[0])
+        eventBus.$emit('openModal', 'edit', 'books')
       }
     },
 
@@ -378,8 +381,8 @@ export default {
       return this.$store.state.breakpoints
     },
 
-    booksCollection() {
-      return this.$store.state.collection.filter(i => i.category == 'books')
+    booksFavourites() {
+      return this.$store.state.collection.filter(i => i.category == 'books' && i.favourite)
     },
 
     chevronPosition() {
@@ -387,20 +390,28 @@ export default {
       else return 'table__chevron--descending'
     },
 
-    resultsLength() {
-      return this.searchedData.length
+    favouritesLength() {
+      return this.favouritesData.length
+    },
+
+    tableHeight() {
+      if (this.windowParams.width > this.breakpoints.sm) {
+        return 'max-height: ' + (40 * this.favouritesData.length + 40) + 'px'
+      }
     },
 
     placeholderStatus() {
       return {
-        title: 'Nothing found',
-        icon: 'no-search'
+        title: 'No favourites yet',
+        icon: 'no-data'
       }
     }
   },
   mounted() {
     this.stashData()
     this.sortData(this.criteria, 'default')
+    this.setTableState()
+    this.removeNoTransition()
     this.subscribeToChanges()
   }
 }

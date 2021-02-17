@@ -17,7 +17,10 @@
     anime-modal(
       :purpose='modalState.purpose'
       v-show='modalState.visibility && modalState.type == "anime"')
-    
+
+    books-modal(
+      :purpose='modalState.purpose'
+      v-show='modalState.visibility && modalState.type == "books"')
 
     div(
       class='section__content'
@@ -52,6 +55,7 @@
       tvshows-favourites
       films-favourites
       anime-favourites
+      books-favourites
 
 </template>
 
