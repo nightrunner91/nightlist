@@ -44,7 +44,7 @@ export default new Vuex.Store({
     requestHeaders: {
       headers: {
         'Content-Type': 'application/json',
-        'secret-key': '$2b$10$bbXKUoQc/wme3lYj.elAGeqve216dZN6LrXNQQTOw8jnNK1SexviO'
+        'secret-key': '$2b$10$urM/kkjj8xEy6lPdhjOZje2yW62U6BSr5ImhJhJSrB512FaT5TDT6'
       }
     },
     preparedBackup: {},
