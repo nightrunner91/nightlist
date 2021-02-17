@@ -330,9 +330,10 @@ export default new Vuex.Store({
       state.windowParams.height = height
     },
 
-    CHANGE_MODAL_STATE(state, { visibility, purpose }) {
+    CHANGE_MODAL_STATE(state, { visibility, purpose, type }) {
       state.modalState.visibility = visibility
       if (purpose != undefined) state.modalState.purpose = purpose
+      if (type != undefined) state.modalState.type = type
     },
 
     CHANGE_SERVER_STATE(state, data) {

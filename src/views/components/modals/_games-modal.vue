@@ -168,7 +168,7 @@ export default {
   },
   methods: {
     closeModal() { 
-      eventBus.$emit('closeModal') 
+      eventBus.$emit('closeModal', 'games') 
     },
 
     assignPayload() { 

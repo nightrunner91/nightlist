@@ -197,7 +197,7 @@ export default {
   },
   methods: {
     closeModal() { 
-      eventBus.$emit('closeModal') 
+      eventBus.$emit('closeModal', 'tvshows') 
     },
 
     assignPayload() { 

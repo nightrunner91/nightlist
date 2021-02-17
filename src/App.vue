@@ -49,10 +49,11 @@ export default {
       })
     },
 
-    openModal(purpose) {
+    openModal(purpose, type) {
       this.$store.commit('CHANGE_MODAL_STATE', {
         visibility: true,
-        purpose: purpose
+        purpose: purpose,
+        type: type
       })
       eventBus.$emit('modalOpened')
     },
@@ -64,8 +65,8 @@ export default {
       eventBus.$emit('modalClosed')
     },
 
-    setDefaultContent() {
-      this.$store.commit('CHANGE_CONTENT', this.$store.state[this.currentPage.toLowerCase()].default)
+    setDefaultContent(type) {
+      this.$store.commit('CHANGE_CONTENT', this.$store.state[type].default)
     }
   },
   mounted() {
@@ -73,13 +74,13 @@ export default {
 
     this.$router.push('/dashboard')
 
-    eventBus.$on('openModal', purpose => {
-      this.openModal(purpose)
+    eventBus.$on('openModal', (purpose, type) => {
+      this.openModal(purpose, type)
     })
     
-    eventBus.$on('closeModal', () => {
+    eventBus.$on('closeModal', type => {
       this.closeModal()
-      this.setDefaultContent()
+      this.setDefaultContent(type)
     })
   }
 }

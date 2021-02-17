@@ -180,7 +180,7 @@ export default {
   },
   methods: {
     closeModal() { 
-      eventBus.$emit('closeModal') 
+      eventBus.$emit('closeModal', 'films') 
     },
 
     assignPayload() { 

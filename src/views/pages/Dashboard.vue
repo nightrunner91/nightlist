@@ -4,7 +4,11 @@
 
     games-modal(
       :purpose='modalState.purpose'
-      v-show='modalState.visibility')
+      v-show='modalState.visibility && modalState.type == "games"')
+
+    tvshows-modal(
+      :purpose='modalState.purpose'
+      v-show='modalState.visibility && modalState.type == "tvshows"')
 
     div(
       class='section__content'
@@ -36,6 +40,7 @@
             :inputData='platesData')
 
       games-favourites
+      tvshows-favourites
 
 </template>
 
