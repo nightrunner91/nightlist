@@ -28,7 +28,7 @@ export const projectName = 'nightlist_'
 export const colors = {
   dashboard: '#28343A',
   games: '#741137',
-  tvshows: '#69236D',
+  tvshows: '#701e67',
   films: '#3A365C',
   anime: '#7F0546',
   books: '#2A5A39'
