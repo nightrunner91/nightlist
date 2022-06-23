@@ -2,7 +2,7 @@
 
 1) Clone repo
 ```
-git clone git@github.com:nightrunner91/nightlist-frontend.git
+git clone git@github.com:nightrunner91/nightlist.git
 ```
 2) Install dependencies
 ```
