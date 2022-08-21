@@ -14,6 +14,7 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalBooks}}
         div(
+          v-if="allowEdit"
           class='button button--books title__button'
           :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
@@ -44,6 +45,10 @@ export default {
   name: 'Books',
   pageTitle: 'My Books',
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     books() {
       return this.$store.state.books
     },

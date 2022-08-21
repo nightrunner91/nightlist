@@ -152,6 +152,7 @@
 
 <script>
 import { eventBus } from "../../../main"
+import backUp from "../../../../backups/backup_21.08.2022.json"
 
 export default {
   name: 'gamesModal',
@@ -238,7 +239,6 @@ export default {
           this.current.refreshed = true
           this.$store.commit('APPLY_SLOT', { content: this.current, scenario: 'change' })
           this.$storage.set('slot_' + this.current.id, { key: this.current })
-          this.$store.dispatch('sendBackup')
           this.closeModal()
           this.changeConfirm(false)
         }
@@ -248,7 +248,6 @@ export default {
     deleteSlot(id) {
       this.$store.commit('DELETE_SLOT', id)
       this.$storage.remove('slot_' + this.current.id)
-      this.$store.dispatch('sendBackup')
     },
 
     changeNumberVal(event, prop) {
@@ -299,6 +298,16 @@ export default {
           this.$refs.title.focus()
         }
       })
+    },
+
+    restoreFromBackup() {
+      // fire this only if localStorage is lost and you want
+      // to restore data from your backup
+      let games = backUp.collection.filter(n => n.category == 'games')
+
+      for (let i = 0; i < games.length; i++) {
+        this.$storage.set('slot_' + games[i].id, { key: games[i] })
+      }
     }
   },
   computed: {
@@ -335,6 +344,8 @@ export default {
     eventBus.$on('rated', data => this.setRating(data))
     eventBus.$on('favourite', data => this.setFavourite(data))
     eventBus.$on('hoursApproximate', data => this.sethoursApproximate(data))
+
+    // this.restoreFromBackup()
   }
 }
 </script>

@@ -107,7 +107,7 @@
             class='slot' 
             ref='slot'
             :key='slot.id'
-            :class='{"slot--refreshed" : slot.refreshed }'
+            :class='[{"slot--refreshed" : slot.refreshed}, { "cursor-pointer" : allowEdit }]'
             v-for='(slot, index) in data'
             @click='editSlot(slot.id, $event)')
             
@@ -336,11 +336,13 @@ export default {
     },
 
     editSlot(id, event) {
-      if (event.target.className == 'slot__link') return
-      else {
-        this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit')
-        eventBus.$emit('closeSettings')
+      if (this.allowEdit) {
+        if (event.target.className == 'slot__link') return
+        else {
+          this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
+          eventBus.$emit('openModal', 'edit')
+          eventBus.$emit('closeSettings')
+        }
       }
     },
 
@@ -355,6 +357,10 @@ export default {
     }
   },
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+
     games() {
       return this.$store.state.games
     },

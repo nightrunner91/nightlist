@@ -13,7 +13,6 @@
     display: flex
     align-items: center
     padding: 0 $gutter-width / 2
-    text-shadow: $shadow-2
     white-space: nowrap
 
     @media #{$xs-dw}
@@ -34,8 +33,6 @@
     padding: $gutter-width
     border-radius: $base-radius
     background: rgba($clr-white, $tiny-opacity)
-    box-shadow: $shadow-1
-
 
   &__list
     flex-direction: column
@@ -60,7 +57,6 @@
     &--total
       font-size: 120%
       font-weight: 700
-      text-shadow: $shadow-2
       pointer-events: none
 
     &:hover,
@@ -70,19 +66,19 @@
       .plate
         &__marker
           &--games
-            background: lighten($clr-games, $hover-intensity * 2)
+            background: lighten($clr-games, $hover-intensity * 2.5)
             
           &--tvshows
-            background: lighten($clr-tvshows, $hover-intensity * 2)
+            background: lighten($clr-tvshows, $hover-intensity * 2.5)
 
           &--films
-            background: lighten($clr-films, $hover-intensity * 2)
+            background: lighten($clr-films, $hover-intensity * 2.5)
 
           &--anime
-            background: lighten($clr-anime, $hover-intensity * 2)
+            background: lighten($clr-anime, $hover-intensity * 2.5)
 
           &--books
-            background: lighten($clr-books, $hover-intensity * 2)
+            background: lighten($clr-books, $hover-intensity * 2.5)
 
   
   &__marker
@@ -95,19 +91,19 @@
     transition: $base-transition
 
     &--games
-      background: lighten($clr-games, $hover-intensity)
+      background: lighten($clr-games, $hover-intensity * 2)
       
     &--tvshows
-      background: lighten($clr-tvshows, $hover-intensity)
+      background: lighten($clr-tvshows, $hover-intensity * 2)
 
     &--films
-      background: lighten($clr-films, $hover-intensity)
+      background: lighten($clr-films, $hover-intensity * 2)
 
     &--anime
-      background: lighten($clr-anime, $hover-intensity)
+      background: lighten($clr-anime, $hover-intensity * 2)
 
     &--books
-      background: lighten($clr-books, $hover-intensity)
+      background: lighten($clr-books, $hover-intensity * 2)
 
   
   &__name
@@ -136,12 +132,12 @@
     display: flex
     justify-content: center
     align-items: flex-end
-    width: $ui-height
+    width: $ui-height * 1.4
     height: 100%
     border-top-left-radius: $base-radius
     border-top-right-radius: $base-radius
     background: rgba($clr-white, $tiny-opacity)
-    transition: $base-transition
+    transition: $fast-transition
     cursor: pointer
 
     &:hover,
@@ -151,19 +147,19 @@
           box-shadow: $shadow-2
 
           &--games
-            background: lighten($clr-games, $hover-intensity * 2)
+            background: lighten($clr-games, $hover-intensity * 2.5)
             
           &--tvshows
-            background: lighten($clr-tvshows, $hover-intensity * 2)
+            background: lighten($clr-tvshows, $hover-intensity * 2.5)
 
           &--films
-            background: lighten($clr-films, $hover-intensity * 2)
+            background: lighten($clr-films, $hover-intensity * 2.5)
 
           &--anime
-            background: lighten($clr-anime, $hover-intensity * 2)
+            background: lighten($clr-anime, $hover-intensity * 2.5)
 
           &--books
-            background: lighten($clr-books, $hover-intensity * 2)
+            background: lighten($clr-books, $hover-intensity * 2.5)
 
         &__percent
           opacity: $active-opacity
@@ -175,25 +171,25 @@
     border-top-left-radius: $base-radius
     border-top-right-radius: $base-radius
     box-shadow: $shadow-1
-    transition: max-height 1s ease-in-out, box-shadow .3s ease, background .3s ease
+    transition: max-height 0.7s ease-in-out, box-shadow .3s ease, background .3s ease
 
     &--animated
       max-height: 100%
 
     &--games
-      background: lighten($clr-games, $hover-intensity)
+      background: lighten($clr-games, $hover-intensity * 2)
       
     &--tvshows
-      background: lighten($clr-tvshows, $hover-intensity)
+      background: lighten($clr-tvshows, $hover-intensity * 2)
 
     &--films
-      background: lighten($clr-films, $hover-intensity)
+      background: lighten($clr-films, $hover-intensity * 2)
 
     &--anime
-      background: lighten($clr-anime, $hover-intensity)
+      background: lighten($clr-anime, $hover-intensity * 2)
 
     &--books
-      background: lighten($clr-books, $hover-intensity)
+      background: lighten($clr-books, $hover-intensity * 2)
 
 
   &__percent

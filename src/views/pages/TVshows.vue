@@ -14,6 +14,7 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalTvshows}}
         div(
+          v-if="allowEdit"
           class='button button--tvshows title__button'
           :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
@@ -45,6 +46,10 @@ export default {
   name: 'TVShows',
   pageTitle: 'My TV Shows',
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     tvshows() {
       return this.$store.state.tvshows
     },

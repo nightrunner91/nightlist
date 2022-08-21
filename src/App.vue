@@ -9,7 +9,6 @@
         transition(name='page' mode='out-in')
           router-view
     app-sidebar(:current='currentPage')
-    app-indicator
 
 </template>
 
@@ -36,6 +35,7 @@ export default {
   },
   created() {
     window.addEventListener('resize', this.handleResize)
+    this.saveAllowState()
     this.handleResize()
   },
   destroyed() {
@@ -67,12 +67,16 @@ export default {
 
     setDefaultContent(type) {
       this.$store.commit('CHANGE_CONTENT', this.$store.state[type].default)
+    },
+
+    saveAllowState() {
+      this.$store.commit('SAVE_ALLOW_STATE', process.env.NODE_ENV)
     }
   },
   mounted() {
-    this.$store.dispatch('getBackup')
-
     this.$router.push('/dashboard')
+
+    this.$store.dispatch('restoreCollection')
 
     eventBus.$on('openModal', (purpose, type) => {
       this.openModal(purpose, type)
@@ -108,7 +112,7 @@ export default {
 
   
   // Fonts
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&Open+Sans:400,700&display=swap')
+  @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&Open+Sans:400,700&display=swap')
     
   // Core
   @import "styles/core/colors"

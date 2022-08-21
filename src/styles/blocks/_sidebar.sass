@@ -2,10 +2,7 @@ $icons-size: 24px
   
 
 @mixin themed-colors($category-color)
-  background: -moz-linear-gradient(top, rgba($category-color, $half-opacity) 0%, rgba($category-color, $light-opacity) 100%)
-  background: -webkit-linear-gradient(top, rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
   background: linear-gradient(to bottom, rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#007db9e8',GradientType=0 )
 
 
 @mixin collapsed-sidebar()
@@ -13,7 +10,7 @@ $icons-size: 24px
     &__profile
       position: absolute
       right: 0
-      bottom: $gutter-width * 2
+      bottom: 0
       left: 0
       margin: auto
     
@@ -65,14 +62,13 @@ $icons-size: 24px
   max-width: $sidebar-width
   height: 100%
   min-width: 320px
-  box-shadow: $shadow-4
   transition: $base-transition
   
   &--notransition
     transition: $no-transition
 
   &--opened
-    background: rgba($clr-black, $barely-opacity) !important
+    background: rgba($clr-dark, $barely-opacity) !important
 
   &--collapsed
     @include collapsed-sidebar
@@ -80,7 +76,7 @@ $icons-size: 24px
     width: $sidebar-collapsed-width
     min-width: $sidebar-collapsed-width
     padding: $gutter-width * 2 0
-    background: rgba($clr-black, $light-opacity)
+    background: rgba($clr-dark, $light-opacity)
 
   &--blured
     @include blur
@@ -89,7 +85,7 @@ $icons-size: 24px
       display: none
 
   @media #{$lg-up}
-    background: rgba($clr-black, $small-opacity)
+    background: rgba($clr-dark, $medium-opacity)
 
   @media #{$lg-dw}
     position: fixed
@@ -97,7 +93,7 @@ $icons-size: 24px
     left: 0
 
   @media #{$sm-dw}
-    background: rgba($clr-black, $half-opacity)
+    background: rgba($clr-dark, $light-opacity)
 
   @media #{$mb-dw}
     position: sticky
@@ -125,7 +121,7 @@ $icons-size: 24px
     transition: $slow-transition
 
     &--active
-      opacity: $half-opacity
+      opacity: $active-opacity
 
     &--dashboard
       @include themed-colors($clr-dashboard)
@@ -258,26 +254,9 @@ $icons-size: 24px
 
   &__name
     font-weight: 700
-    text-shadow: 1px 1px 2px $clr-black
     white-space: nowrap
     line-height: 1
 
   
   &__badge
     margin-left: auto
-
-
-  &__settings
-    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
-
-    position: absolute
-    top: $gutter-width * 2
-    right: $gutter-width
-    z-index: 10
-    fill: $clr-white
-    cursor: pointer
-    opacity: $passive-opacity
-    transition: opacity 0.3s ease
-
-    &:hover
-      opacity: $active-opacity

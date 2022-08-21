@@ -14,6 +14,7 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalAnime}}
         div(
+          v-if="allowEdit"
           class='button button--anime title__button'
           :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
@@ -45,6 +46,10 @@ export default {
   name: 'Anime',
   pageTitle: 'My Anime',
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     anime() {
       return this.$store.state.anime
     },

@@ -4,7 +4,6 @@
   width: 100vw
   height: 100vh
 
-
   &__item
     position: absolute
     width: 100%
@@ -13,6 +12,19 @@
     left: 0
     opacity: $transparent-opacity
     transition: $lazy-transition
+
+    &::before
+      content: ''
+      display: block
+      position: absolute
+      width: 100vw
+      height: 100vh
+      top: 0
+      right: 0
+      background-image: url('./assets/mesh-bg.svg')
+      background-size: 100%
+      opacity: $light-opacity
+      z-index: 1
 
     &--active
       opacity: $active-opacity

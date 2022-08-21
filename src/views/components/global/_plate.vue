@@ -6,7 +6,7 @@
 
       div(class='grid__row')
 
-        h2(class='plate__title grid__col grid__col--mb-36')
+        h3(class='plate__title grid__col grid__col--mb-36')
           svg(class='plate__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + icon")
           span {{title}}
         
@@ -15,6 +15,7 @@
             class='plate__item'
             :class='{"plate__item--selected" : itemSelected(item.id) }'
             v-for='item in inputData.summary'
+            :key="`plate-${item.id}`"
             @mouseover='hoverSeries(item.id)'
             @mouseleave='unhoverSeries(item.id)')
             div(
@@ -62,23 +63,28 @@ export default {
       localData: [
         {
           id: 'games',
-          selected: false
+          selected: false,
+          path: '/games'
         },
         {
           id: 'tvshows',
-          selected: false
+          selected: false,
+          path: '/tvshows'
         },
         {
           id: 'films',
-          selected: false
+          selected: false,
+          path: '/films'
         },
         {
           id: 'anime',
-          selected: false
+          selected: false,
+          path: '/anime'
         },
         {
           id: 'books',
-          selected: false
+          selected: false,
+          path: '/books'
         }
       ]
     }

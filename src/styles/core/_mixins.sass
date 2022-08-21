@@ -41,15 +41,11 @@
 
 @mixin gradient($color)
   background: $color
-  background: -moz-linear-gradient(left, darken($color, 24%) 0%, saturate($color, 4%) 40%, lighten($color, 4%) 50%, darken($color, 6%) 100%)
-  background: -webkit-linear-gradient(left, darken($color, 24%) 0%, saturate($color, 4%) 40%, lighten($color, 4%) 50%, darken($color, 6%) 100%)
-  background: linear-gradient(to right, darken($color, 24%) 0%, saturate($color, 4%) 40%, lighten($color, 4%) 50%, darken($color, 6%) 100%)
+  background: linear-gradient(145deg, darken($color, 26%) 0%, saturate($color, 10%) 40%, lighten($color, 5%) 70%, darken($color, 10%) 100%)
 
   @media #{$sm-dw}
     background: $color
-    background: -moz-linear-gradient(left, darken($color, 10%) 0%, $color 100%)
-    background: -webkit-linear-gradient(left, darken($color, 10%) 0%, $color 100%)
-    background: linear-gradient(to right, darken($color, 10%) 0%, $color 100%)
+    background: linear-gradient(145deg, darken($color, 10%) 0%, $color 100%)
 
 
 @mixin blur($radius)

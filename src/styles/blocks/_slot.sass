@@ -9,7 +9,6 @@ $star-size: 24px
   padding: 0 $gutter-width/2
   overflow: hidden
   border-radius: $base-radius
-  cursor: pointer
   user-select: none
   transition: $base-transition
 
@@ -20,8 +19,8 @@ $star-size: 24px
   &::after
     @include pseudoelem
     
-    opacity: $tiny-opacity
-    background: $clr-white
+    opacity: $light-opacity
+    background: $clr-black
     top: 0
     left: 0
     z-index: -1

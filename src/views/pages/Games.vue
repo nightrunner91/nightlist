@@ -14,6 +14,7 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
+          v-if="allowEdit"
           class='button button--games title__button'
           :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
@@ -51,6 +52,10 @@ export default {
     }
   },
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     games() {
       return this.$store.state.games
     },
