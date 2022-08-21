@@ -65,6 +65,7 @@ export default new Vuex.Store({
       purpose: undefined
     },
     searchState: false,
+    backupIsRestoring: false,
     games: {
       statuses: [
         {
@@ -379,7 +380,11 @@ export default new Vuex.Store({
 
     SAVE_ALLOW_STATE(state, process) {
       state.allowEdit = process == 'development' ? true : false
-    }
+    },
+
+    CHANGE_BACKUP_RESTORE_STATE(state, data) {
+      state.backupIsRestoring = data
+    },
   },
   actions: {
 

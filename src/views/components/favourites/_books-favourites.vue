@@ -119,7 +119,7 @@
             class='slot' 
             ref='slot'
             :key='slot.id'
-            :class='{"slot--refreshed" : slot.refreshed }'
+            :class='[{"slot--refreshed" : slot.refreshed}, { "cursor-pointer" : allowEdit }]'
             v-for='(slot, index) in favouritesData'
             @click='editSlot(slot.id, $event)')
             

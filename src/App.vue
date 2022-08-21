@@ -4,11 +4,12 @@
     app-preloader(:current='currentPage')
     app-gradients(:current='currentPage')
     app-header
-    main(class='content' v-scrollbar)
+    main(class='content' v-if="" v-scrollbar)
       div(class='content__inner')
         transition(name='page' mode='out-in')
           router-view
     app-sidebar(:current='currentPage')
+    app-indicator
 
 </template>
 
@@ -83,7 +84,11 @@ export default {
     if (this.allowEdit) {
       this.$store.dispatch('restoreCollection')
     } else {
-      eventBus.$emit('restoreFromBackup')
+      this.$store.commit('CHANGE_BACKUP_RESTORE_STATE', true)
+      setTimeout(() => {
+        eventBus.$emit('restoreFromBackup')
+        this.$store.commit('CHANGE_BACKUP_RESTORE_STATE', false)
+      }, 500)
     }
 
     eventBus.$on('openModal', (purpose, type) => {
