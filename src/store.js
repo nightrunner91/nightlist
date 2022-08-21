@@ -384,7 +384,7 @@ export default new Vuex.Store({
   actions: {
 
     restoreCollection({ state, commit }) {
-      if (state.allowEdit) {
+      if (process.env.NODE_ENV == 'development') {
         Object.values(localStorage).forEach(item => {
           if (isJson(item)) {
             let parsed = JSON.parse(item)
