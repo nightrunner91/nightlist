@@ -436,7 +436,7 @@ export default {
     eventBus.$on('rated', data => this.setRating(data))
     eventBus.$on('favourite', data => this.setFavourite(data))
 
-    // this.restoreFromBackup()
+    eventBus.$on('restoreFromBackup', () => this.restoreFromBackup())
   }
 }
 </script>

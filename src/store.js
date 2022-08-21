@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import { projectName } from "./main"
+import { projectName, eventBus } from "./main"
 
 Vue.use(Vuex)
 
@@ -383,20 +383,24 @@ export default new Vuex.Store({
   },
   actions: {
 
-    restoreCollection({ commit }) {
-      Object.values(localStorage).forEach(item => {
-        if (isJson(item)) {
-          let parsed = JSON.parse(item)
-          if (parsed.value) {
-            if (parsed.value.key) {
-              if (parsed.value.key.id != undefined && 
-                parsed.value.key.category != undefined) {
-                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
+    restoreCollection({ state, commit }) {
+      if (state.allowEdit) {
+        Object.values(localStorage).forEach(item => {
+          if (isJson(item)) {
+            let parsed = JSON.parse(item)
+            if (parsed.value) {
+              if (parsed.value.key) {
+                if (parsed.value.key.id != undefined && 
+                  parsed.value.key.category != undefined) {
+                  commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
+                }
               }
             }
           }
-        }
-      })
+        })
+      } else {
+        eventBus.$emit('restoreFromBackup')
+      }
     },
 
     restoreSettings({ commit }) {

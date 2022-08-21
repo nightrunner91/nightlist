@@ -345,7 +345,7 @@ export default {
     eventBus.$on('favourite', data => this.setFavourite(data))
     eventBus.$on('hoursApproximate', data => this.sethoursApproximate(data))
 
-    // this.restoreFromBackup()
+    eventBus.$on('restoreFromBackup', () => this.restoreFromBackup())
   }
 }
 </script>
