@@ -365,10 +365,12 @@ export default {
     },
 
     editSlot(id, event) {
-      if (event.target.className == 'slot__link') return
-      else {
-        this.$store.commit('CHANGE_CONTENT', this.animeFavourites.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit', 'anime')
+      if (this.allowEdit) {
+        if (event.target.className == 'slot__link') return
+        else {
+          this.$store.commit('CHANGE_CONTENT', this.animeFavourites.filter(i => i.id == id)[0])
+          eventBus.$emit('openModal', 'edit', 'anime')
+        }
       }
     },
 
@@ -387,6 +389,10 @@ export default {
     }
   },
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     anime() {
       return this.$store.state.anime
     },

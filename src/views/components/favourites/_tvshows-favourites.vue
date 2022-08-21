@@ -387,6 +387,10 @@ export default {
     }
   },
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     tvshows() {
       return this.$store.state.tvshows
     },

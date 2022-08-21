@@ -347,10 +347,12 @@ export default {
     },
 
     editSlot(id, event) {
-      if (event.target.className == 'slot__link') return
-      else {
-        this.$store.commit('CHANGE_CONTENT', this.booksFavourites.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit', 'books')
+      if (this.allowEdit) {
+        if (event.target.className == 'slot__link') return
+        else {
+          this.$store.commit('CHANGE_CONTENT', this.booksFavourites.filter(i => i.id == id)[0])
+          eventBus.$emit('openModal', 'edit', 'books')
+        }
       }
     },
 
@@ -369,6 +371,10 @@ export default {
     }
   },
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     books() {
       return this.$store.state.books
     },
