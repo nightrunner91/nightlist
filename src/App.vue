@@ -23,6 +23,10 @@ export default {
     }
   },
   computed: {
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+    
     currentPage() {
       let rName = this.$route.name
       if (rName != null) return rName.replace(/\s/g, '')
@@ -76,7 +80,11 @@ export default {
   mounted() {
     this.$router.push('/dashboard')
 
-    this.$store.dispatch('restoreCollection')
+    if (this.allowEdit) {
+      this.$store.dispatch('restoreCollection')
+    } else {
+      eventBus.$emit('restoreFromBackup')
+    }
 
     eventBus.$on('openModal', (purpose, type) => {
       this.openModal(purpose, type)

@@ -383,24 +383,20 @@ export default new Vuex.Store({
   },
   actions: {
 
-    restoreCollection({ state, commit }) {
-      if (process.env.NODE_ENV == 'development') {
-        Object.values(localStorage).forEach(item => {
-          if (isJson(item)) {
-            let parsed = JSON.parse(item)
-            if (parsed.value) {
-              if (parsed.value.key) {
-                if (parsed.value.key.id != undefined && 
-                  parsed.value.key.category != undefined) {
-                  commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
-                }
+    restoreCollection({ commit }) {
+      Object.values(localStorage).forEach(item => {
+        if (isJson(item)) {
+          let parsed = JSON.parse(item)
+          if (parsed.value) {
+            if (parsed.value.key) {
+              if (parsed.value.key.id != undefined && 
+                parsed.value.key.category != undefined) {
+                commit('APPLY_SLOT', { content: parsed.value.key, scenario: 'start' })
               }
             }
           }
-        })
-      } else {
-        eventBus.$emit('restoreFromBackup')
-      }
+        }
+      })
     },
 
     restoreSettings({ commit }) {
