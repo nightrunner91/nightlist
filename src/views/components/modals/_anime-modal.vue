@@ -398,6 +398,7 @@ export default {
       let anime = backUp.collection.filter(n => n.category == 'anime')
 
       for (let i = 0; i < anime.length; i++) {
+        this.$store.commit('APPLY_SLOT', { content: anime[i], scenario: 'start' })
         this.$storage.set('slot_' + anime[i].id, { key: anime[i] })
       }
     }

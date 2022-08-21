@@ -306,6 +306,7 @@ export default {
       let games = backUp.collection.filter(n => n.category == 'games')
 
       for (let i = 0; i < games.length; i++) {
+        this.$store.commit('APPLY_SLOT', { content: games[i], scenario: 'start' })
         this.$storage.set('slot_' + games[i].id, { key: games[i] })
       }
     }
