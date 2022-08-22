@@ -19,11 +19,6 @@
       span(class='hamburger-box')
         span(class='hamburger-inner')
 
-    //- svg(
-    //-   v-if='windowParams.width > breakpoints.mb'
-    //-   class='sidebar__settings'
-    //-   @click='openSettings()'): use(xlink:href='#settings')
-
     transition(name='settings-reveal' mode='out-in')
       app-settings(v-if='settingsOpened' :sidebarCollapsed='sidebarCollapsed')
 

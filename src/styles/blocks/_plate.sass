@@ -29,11 +29,13 @@
 
 
   &__inner
+    @include glass();
+    
     width: 100%
     padding: $gutter-width
-    border-radius: $base-radius
-    background: rgba($clr-white, $tiny-opacity)
-
+    border-radius: $big-radius
+    background: rgba($clr-white, $tiny-opacity);
+    box-shadow: $shadow-7;
 
   &__list
     flex-direction: column
@@ -64,26 +66,9 @@
     &--selected
       background: rgba($clr-white, $tiny-opacity)
 
-      .plate
-        &__marker
-          &--games
-            background: lighten($clr-games, $hover-intensity * 2.5)
-            
-          &--tvshows
-            background: lighten($clr-tvshows, $hover-intensity * 2.5)
-
-          &--films
-            background: lighten($clr-films, $hover-intensity * 2.5)
-
-          &--anime
-            background: lighten($clr-anime, $hover-intensity * 2.5)
-
-          &--books
-            background: lighten($clr-books, $hover-intensity * 2.5)
-
   
   &__marker
-    @include icon-size(18, 18)
+    @include icon-size(12, 12)
 
     margin-left: 3px
     margin-right: 13px
@@ -92,19 +77,19 @@
     transition: $base-transition
 
     &--games
-      background: lighten($clr-games, $hover-intensity * 2)
+      background: $clr-games
       
     &--tvshows
-      background: lighten($clr-tvshows, $hover-intensity * 2)
+      background: $clr-tvshows
 
     &--films
-      background: lighten($clr-films, $hover-intensity * 2)
+      background: $clr-films
 
     &--anime
-      background: lighten($clr-anime, $hover-intensity * 2)
+      background: $clr-anime
 
     &--books
-      background: lighten($clr-books, $hover-intensity * 2)
+      background: $clr-books
 
   
   &__name
@@ -148,19 +133,19 @@
           box-shadow: $shadow-2
 
           &--games
-            background: lighten($clr-games, $hover-intensity * 2.5)
+            background: $clr-games
             
           &--tvshows
-            background: lighten($clr-tvshows, $hover-intensity * 2.5)
+            background: $clr-tvshows
 
           &--films
-            background: lighten($clr-films, $hover-intensity * 2.5)
+            background: $clr-films
 
           &--anime
-            background: lighten($clr-anime, $hover-intensity * 2.5)
+            background: $clr-anime
 
           &--books
-            background: lighten($clr-books, $hover-intensity * 2.5)
+            background: $clr-books
 
         &__percent
           opacity: $active-opacity
@@ -171,26 +156,25 @@
     max-height: 0%
     border-top-left-radius: $base-radius
     border-top-right-radius: $base-radius
-    box-shadow: $shadow-1
     transition: max-height 0.7s ease-in-out, box-shadow .3s ease, background .3s ease
 
     &--animated
       max-height: 100%
 
     &--games
-      background: lighten($clr-games, $hover-intensity * 2)
+      background: $clr-games
       
     &--tvshows
-      background: lighten($clr-tvshows, $hover-intensity * 2)
+      background: $clr-tvshows
 
     &--films
-      background: lighten($clr-films, $hover-intensity * 2)
+      background: $clr-films
 
     &--anime
-      background: lighten($clr-anime, $hover-intensity * 2)
+      background: $clr-anime
 
     &--books
-      background: lighten($clr-books, $hover-intensity * 2)
+      background: $clr-books
 
 
   &__percent

@@ -81,7 +81,7 @@ export default {
   mounted() {
     this.$router.push('/dashboard')
 
-    if (this.allowEdit) {
+    if (!this.allowEdit) {
       this.$store.dispatch('restoreCollection')
     } else {
       this.$store.commit('CHANGE_BACKUP_RESTORE_STATE', true)

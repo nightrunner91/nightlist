@@ -52,6 +52,8 @@ $icons-size: 24px
   
 
 .sidebar
+  @include glass()
+
   position: relative
   display: flex
   flex-direction: column
@@ -63,6 +65,7 @@ $icons-size: 24px
   height: 100%
   min-width: 320px
   transition: $base-transition
+  box-shadow: $shadow-6
   
   &--notransition
     transition: $no-transition
@@ -76,7 +79,7 @@ $icons-size: 24px
     width: $sidebar-collapsed-width
     min-width: $sidebar-collapsed-width
     padding: $gutter-width * 2 0
-    background: rgba($clr-dark, $light-opacity)
+    background: rgba($clr-dark, $small-opacity)
 
   &--blured
     @include blur
@@ -93,7 +96,7 @@ $icons-size: 24px
     left: 0
 
   @media #{$sm-dw}
-    background: rgba($clr-dark, $light-opacity)
+    background: rgba($clr-dark, $small-opacity)
 
   @media #{$mb-dw}
     position: sticky
@@ -121,7 +124,7 @@ $icons-size: 24px
     transition: $slow-transition
 
     &--active
-      opacity: $active-opacity
+      opacity: $passive-opacity
 
     &--dashboard
       @include themed-colors($clr-dashboard)
@@ -183,7 +186,7 @@ $icons-size: 24px
 
 
   &__username
-    @extend .fz4
+    @extend .fz3
 
     min-height: 26px
     font-weight: 700
@@ -204,13 +207,13 @@ $icons-size: 24px
     align-items: center
     z-index: 2
     height: $ui-height
-    color: rgba($clr-white, $half-opacity)    
+    color: rgba($clr-white, $passive-opacity)    
 
     &:first-child
       margin-bottom: $gutter-width/2
 
     &:hover
-      color: rgba($clr-white, $passive-opacity)
+      color: rgba($clr-white, $barely-opacity)
 
     @media #{$mb-dw}
       margin-bottom: 0 !important
@@ -253,7 +256,7 @@ $icons-size: 24px
 
 
   &__name
-    font-weight: 700
+    font-weight: 500
     white-space: nowrap
     line-height: 1
 
