@@ -81,15 +81,7 @@ export default {
   mounted() {
     this.$router.push('/dashboard')
 
-    if (this.allowEdit) {
-      this.$store.dispatch('restoreCollection')
-    } else {
-      this.$store.commit('CHANGE_BACKUP_RESTORE_STATE', true)
-      setTimeout(() => {
-        eventBus.$emit('restoreFromBackup')
-        this.$store.commit('CHANGE_BACKUP_RESTORE_STATE', false)
-      }, 500)
-    }
+    this.$store.dispatch('getBackup')
 
     eventBus.$on('openModal', (purpose, type) => {
       this.openModal(purpose, type)

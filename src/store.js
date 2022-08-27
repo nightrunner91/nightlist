@@ -48,10 +48,21 @@ export default new Vuex.Store({
       username: 'Nightrunner',
       avatar: 'https://avatars.steamstatic.com/ee823ca80285bac4553ce8198aa10e1d994528e8_full.jpg',
     },
+    requestHeaders: {
+      headers: {
+        'Content-Type': 'application/json',
+        'secret-key': '$2b$10$urM/kkjj8xEy6lPdhjOZje2yW62U6BSr5ImhJhJSrB512FaT5TDT6'
+      }
+    },
+    preparedBackup: {},
     content: {},
     windowParams: {
       width: undefined,
       height: undefined
+    },
+    serverState: {
+      status: undefined,
+      message: undefined
     },
     breakpoints: {
       mb: 480,
@@ -321,6 +332,16 @@ export default new Vuex.Store({
       state.windowParams.height = height
     },
 
+    CHANGE_SERVER_STATE(state, data) {
+      state.serverState = data
+    },
+
+    PREPARE_BACKUP(state) {
+      state.preparedBackup.date = Date.now()
+      state.preparedBackup.settings = state.settings
+      state.preparedBackup.collection = state.collection
+    },
+
     CHANGE_MODAL_STATE(state, { visibility, purpose, type }) {
       state.modalState.visibility = visibility
       if (purpose != undefined) state.modalState.purpose = purpose
@@ -388,7 +409,7 @@ export default new Vuex.Store({
   },
   actions: {
 
-    restoreCollection({ commit }) {
+    async restoreCollection({ commit }) {
       Object.values(localStorage).forEach(item => {
         if (isJson(item)) {
           let parsed = JSON.parse(item)
@@ -404,7 +425,7 @@ export default new Vuex.Store({
       })
     },
 
-    restoreSettings({ commit }) {
+    async restoreSettings({ commit }) {
       let storage = this._vm.$storage
 
       let binId = storage.get('binId')
@@ -415,6 +436,108 @@ export default new Vuex.Store({
       if (username != null) commit('SAVE_USERNAME', username.key)
       if (avatar != null) commit('SAVE_AVATAR', avatar.key)
     },
+
+    async prepareBackup({ commit }) {
+      commit('PREPARE_BACKUP')
+    },
+
+    async sendBackup({ dispatch, state, commit }) {
+      await dispatch('prepareBackup')
+
+      commit('CHANGE_SERVER_STATE', {
+        status: 'loading',
+        message: 'waiting for response'
+      })
+
+      axios
+        
+        .put('/b/' + state.settings.binId, state.preparedBackup, state.requestHeaders)
+
+        .then(() => {
+          commit('CHANGE_SERVER_STATE', {
+            status: 'success',
+            message: 'saved'
+          })
+        })
+
+        .catch(error => {
+          console.log("%c" + error, errStyle)
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'error',
+            message: 'failed to upload collection!'
+          })
+        })
+    },
+
+    async getBackup({ dispatch, state, commit }) {
+      await dispatch('restoreCollection')
+      await dispatch('restoreSettings')
+
+      commit('CHANGE_SERVER_STATE', {
+        status: 'loading',
+        message: 'loading collection...'
+      })
+      
+      axios
+
+        .get('/b/' + state.settings.binId + '/latest', state.requestHeaders)
+
+        .then(response => {
+          let storage = this._vm.$storage
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'success',
+            message: 'updated'
+          })
+
+          let settings = response.data.settings
+          let items = response.data.collection
+          let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
+
+          for (let index = 0; index < storedItems.length; index++) {
+            storedItems[index] = storedItems[index].replace(projectName, '')
+          }
+
+          if (items.length && Array.isArray(items)) {
+            state.collection = []
+            for (let index = 0; index < items.length; index++) {
+              if (items[index].id != undefined) {
+                removeArrEl(storedItems, 'slot_' + items[index].id)
+                storage.set('slot_' + items[index].id, { key: items[index] })
+                commit('APPLY_SLOT', {
+                  content: items[index], 
+                  scenario: 'start'
+                })
+              }
+            }
+          }
+
+          if (Object.keys(settings).length > 0 && typeof settings == 'object') {
+            Object.keys(settings).forEach(key => {
+              Vue.set(state.settings, key, settings[key])
+              storage.set('username', {key: settings.username})
+              storage.set('avatar', {key: settings.avatar})
+            })
+          }
+
+          if (storedItems.length && Array.isArray(storedItems)) {
+            for (let index = 0; index < storedItems.length; index++) {
+              storage.remove(storedItems[index])
+            }
+          }
+        })
+
+        .catch(error => {
+          console.log("%c" + error.message, errStyle)
+
+          commit('CHANGE_SERVER_STATE', {
+            status: 'error',
+            message: 'failed to restore collection!'
+          })
+        })
+    }
+
 
   }
 })

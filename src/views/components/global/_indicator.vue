@@ -2,8 +2,16 @@
   div(class='indicator')
     transition(name='loader')
       svg(
-        v-if='backupIsRestoring'
+        v-if='serverState.status == "loading"'
         class='indicator__loader'): use(xlink:href='#loader')
+    div(class='indicator__tooltips')
+      transition-group(name='tooltip')
+        div(
+          class='indicator__tooltip'
+          v-for='tooltip in tooltips'
+          :key='tooltip.id'
+          :style='tooltipPosition(tooltip.order)'
+          :class='"indicator__tooltip--" + tooltip.status') {{tooltip.message}}
     
 </template>
 
@@ -15,12 +23,15 @@ export default {
   },
   data() {
     return {
-      
+      tooltips: [],
+      duration: 2000,
+      maxTooltips: 5,
+      margin: 30
     }
   },
   computed: {
-    backupIsRestoring() {
-      return this.$store.state.backupIsRestoring
+    serverState() {
+      return this.$store.state.serverState
     }
   },
   methods: {
@@ -42,7 +53,7 @@ export default {
     tooltipPosition(order) {
       return 'bottom: ' + this.margin * order + 'px'
     },
-
+    
     watchForNotifications() {
       this.$store.subscribe((mutation, state) => {
         if (mutation.type == 'CHANGE_SERVER_STATE') {
