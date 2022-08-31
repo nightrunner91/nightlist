@@ -1,0 +1,61 @@
+.plates
+  display: flex
+  flex-wrap: wrap
+  margin-top: $gutter-width * 2
+  margin-bottom: $gutter-width * 2
+  
+.card
+  width: 100%
+  margin-bottom: $gutter-width
+
+  &:hover
+    .card
+      &__plate
+        background: rgba($clr-white, $tiny-opacity)
+
+      &__title
+        color: $clr-white
+
+      &__image
+        opacity: $active-opacity
+
+  &__plate
+    @include glass()
+
+    position: relative
+    border-radius: $base-radius
+    background: rgba($clr-black, $tiny-opacity)
+    width: 100%
+    padding-top: 146%
+    transition: $base-transition
+
+  &__image
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-size: cover
+    background-position: center center
+    border-radius: $base-radius
+    opacity: $passive-opacity
+    overflow: hidden
+    transition: $base-transition
+
+  &__rating
+    position: absolute
+    bottom: $gutter-width / 2
+    left: $gutter-width / 2
+
+  &__favourite
+    position: absolute
+    bottom: $gutter-width / 2
+    right: $gutter-width / 2
+
+  &__body
+    margin-top: $gutter-width / 3
+
+  &__title
+    text-align: left
+    color: rgba($clr-white, $half-opacity)
+    transition: $base-transition

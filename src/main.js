@@ -48,6 +48,7 @@ import appIndicator from "./views/components/global/_indicator"
 import appPreloader from "./views/components/global/_preloader"
 import appSettings from "./views/components/global/_settings"
 import appPlate from "./views/components/global/_plate"
+import appCard from "./views/components/global/_card"
 
 Vue.component('app-header', appHeader)
 Vue.component('app-sidebar', appSidebar)
@@ -57,6 +58,7 @@ Vue.component('app-indicator', appIndicator)
 Vue.component('app-preloader', appPreloader)
 Vue.component('app-settings', appSettings)
 Vue.component('app-plate', appPlate)
+Vue.component('app-card', appCard)
 
 // UI:
 import appDropdown from "./views/components/ui/_dropdown"

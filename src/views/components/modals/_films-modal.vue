@@ -33,7 +33,7 @@
                 autocomplete='off' 
                 @input='removeValidation("title")'
                 v-if='titleVisible'
-                v-model='current.title'
+                v-model='current.id'
                 required)
 
             //- STATUS -//

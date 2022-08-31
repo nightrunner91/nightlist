@@ -150,6 +150,7 @@ export default {
   @import "styles/blocks/sidebar"
   @import "styles/blocks/slot"
   @import "styles/blocks/table"
+  @import "styles/blocks/card"
   @import "styles/blocks/title"
   
   // Plugins
