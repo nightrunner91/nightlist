@@ -219,7 +219,6 @@
 
 <script>
 import { eventBus } from "../../../main"
-import backUp from "../../../../backups/backup_21.08.2022.json"
 
 export default {
   name: 'animeModal',
@@ -391,17 +390,6 @@ export default {
         }
       })
     },
-
-    restoreFromBackup() {
-      // fire this only if localStorage is lost and you want
-      // to restore data from your backup
-      let anime = backUp.collection.filter(n => n.category == 'anime')
-
-      for (let i = 0; i < anime.length; i++) {
-        this.$store.commit('APPLY_SLOT', { content: anime[i], scenario: 'start' })
-        this.$storage.set('slot_' + anime[i].id, { key: anime[i] })
-      }
-    }
   },
   computed: {
     anime() {

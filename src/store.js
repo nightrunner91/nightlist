@@ -5,7 +5,7 @@ import { projectName, eventBus } from "./main"
 
 Vue.use(Vuex)
 
-axios.defaults.baseURL = 'https://api.jsonbin.io/'
+axios.defaults.baseURL = 'https://storage.googleapis.com/storage/v1/'
 
 let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
 
@@ -481,7 +481,7 @@ export default new Vuex.Store({
       
       axios
 
-        .get('/b/' + state.settings.binId + '/latest', state.requestHeaders)
+        .get('/b/nightlist', state.requestHeaders)
 
         .then(response => {
           let storage = this._vm.$storage

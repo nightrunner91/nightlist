@@ -178,7 +178,6 @@
 
 <script>
 import { eventBus } from "../../../main"
-import backUp from "../../../../backups/backup_21.08.2022.json"
 
 export default {
   name: 'booksModal',
@@ -335,17 +334,6 @@ export default {
         }
       })
     },
-
-    restoreFromBackup() {
-      // fire this only if localStorage is lost and you want
-      // to restore data from your backup
-      let books = backUp.collection.filter(n => n.category == 'books')
-
-      for (let i = 0; i < books.length; i++) {
-        this.$store.commit('APPLY_SLOT', { content: books[i], scenario: 'start' })
-        this.$storage.set('slot_' + books[i].id, { key: books[i] })
-      }
-    }
   },
   computed: {
     books() {

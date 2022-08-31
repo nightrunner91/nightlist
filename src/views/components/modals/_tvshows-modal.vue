@@ -219,7 +219,6 @@
 
 <script>
 import { eventBus } from "../../../main"
-import backUp from "../../../../backups/backup_21.08.2022.json"
 
 export default {
   name: 'tvshowsModal',
@@ -391,17 +390,6 @@ export default {
         }
       })
     },
-
-    restoreFromBackup() {
-      // fire this only if localStorage is lost and you want
-      // to restore data from your backup
-      let tvshows = backUp.collection.filter(n => n.category == 'tvshows')
-
-      for (let i = 0; i < tvshows.length; i++) {
-        this.$store.commit('APPLY_SLOT', { content: tvshows[i], scenario: 'start' })
-        this.$storage.set('slot_' + tvshows[i].id, { key: tvshows[i] })
-      }
-    }
   },
   computed: {
     tvshows() {
