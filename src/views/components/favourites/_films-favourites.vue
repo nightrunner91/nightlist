@@ -15,17 +15,19 @@
       span(class='title__badge badge badge--medium') {{favouritesLength}}
       svg(
         class='title__chevron'
-        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
+        :class='[{"title__chevron--closed" : !cardsVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- CARDS -//
     //- ===== -//
     div(
+      ref="plates"
       v-if='favouritesLength > 0'
-      class='plates')
+      class='plates'
+      :class='{ "plates--hidden" : !cardsVisible }')
 
       div(
-        class='grid__col grid__col--lg-6'
+        class='grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-6 grid__col--xs-9 grid__col--mb-12'
         v-for='(card, index) in favouritesData')
 
         app-card(
@@ -54,7 +56,7 @@ export default {
       direction: true,
       stashedData: [],
       favouritesData: [],
-      tableVisible: true,
+      cardsVisible: true,
       noTransition: true,
       currentStructure: undefined
     }
@@ -128,21 +130,21 @@ export default {
 
     switchTable(state) {
       if (state) {
-        this.tableVisible = state
+        this.cardsVisible = state
       } else {
-        this.tableVisible = !this.tableVisible
+        this.cardsVisible = !this.cardsVisible
       }
-      this.$storage.set(this.tableVisibilityName, { key: this.tableVisible })
+      this.$storage.set(this.tableVisibilityName, { key: this.cardsVisible })
     },
 
     setDefaultTableState() {
-      this.tableVisible = true
+      this.cardsVisible = true
     },
 
     setTableState() {
       let storedState = this.$storage.get(this.tableVisibilityName, this.setDefaultTableState())
       if (storedState != null) {
-        this.tableVisible = storedState.key
+        this.cardsVisible = storedState.key
       }
     },
 
@@ -171,7 +173,16 @@ export default {
       if (this.windowParams.width > this.breakpoints.sm) {
         this.currentStructure = 'desktop'
       }
-    }
+    },
+
+    setPlatesHeight() {
+      this.$nextTick(() => {
+        let target = this.$refs.plates
+        let height = target.clientHeight
+
+        target.style = `max-height: ${height}px`
+      })
+    },
   },
   computed: {
     allowEdit() {
@@ -203,12 +214,6 @@ export default {
       return this.favouritesData.length
     },
 
-    tableHeight() {
-      if (this.windowParams.width > this.breakpoints.sm) {
-        return 'max-height: ' + (40 * this.favouritesData.length + 40) + 'px'
-      }
-    },
-
     placeholderStatus() {
       return {
         title: 'No favourites yet',
@@ -222,6 +227,7 @@ export default {
     this.setTableState()
     this.removeNoTransition()
     this.subscribeToChanges()
+    this.setPlatesHeight()
   }
 }
 </script>

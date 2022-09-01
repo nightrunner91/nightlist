@@ -1,23 +1,27 @@
 .plates
   display: flex
   flex-wrap: wrap
-  margin-top: $gutter-width * 2
   margin-bottom: $gutter-width * 2
+  transition: $base-transition
+  overflow: hidden
+
+  &--hidden
+    max-height: 0px !important
+    opacity: $transparent-opacity
   
 .card
   width: 100%
-  margin-bottom: $gutter-width
+  margin-top: $gutter-width
 
   &:hover
     .card
-      &__plate
-        background: rgba($clr-white, $tiny-opacity)
-
       &__title
         color: $clr-white
 
       &__image
         opacity: $active-opacity
+        filter: grayscale(0%)
+        box-shadow: $level-3
 
   &__plate
     @include glass()
@@ -41,6 +45,7 @@
     opacity: $passive-opacity
     overflow: hidden
     transition: $base-transition
+    filter: grayscale(100%)
 
   &__rating
     position: absolute

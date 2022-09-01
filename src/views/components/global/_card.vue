@@ -1,6 +1,7 @@
 <template lang='pug'>
   div(
-    class='card cursor-pointer'
+    class='card'
+    :class='{ "cursor-pointer" : allowEdit }'
     @click='editSlot(data.id)')
 
     div(class='card__plate')
@@ -8,8 +9,6 @@
       div(
         class='card__image'
         :style='`background-image: url(images/favourites/${data.category}/${data.id}.jpg)`')
-
-      vg(class='slot__favourite card__favourite'): use(xlink:href='#favourite')
 
     div(class='card__body')
       div(class='card__title small') {{ data.title }}
