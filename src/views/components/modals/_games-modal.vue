@@ -35,6 +35,19 @@
                 v-model='current.title'
                 required)
 
+            //- ID -//
+            div(class='input')
+              label(class='input__label') ID
+              input(
+                pattern='_[a-zA-Z0-9]+'
+                minlength='3'
+                maxlength='70'
+                type='text'
+                ref='id'
+                class='input__field' 
+                autocomplete='off' 
+                v-model='current.id')
+
             //- STATUS -//
             app-dropdown(
               :label='"Status"'

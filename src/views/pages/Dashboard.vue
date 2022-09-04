@@ -30,26 +30,7 @@
         h1(class='title__name') {{$options.pageTitle}}
         span(class='title__badge badge badge--medium') {{totalLength}}
 
-      div(class='grid__col grid__col--mb-36')
-        div(class='grid__row')
-
-          app-plate(
-            :type='"hours"'
-            :icon='"clock"'
-            :title='"Time Spent"'
-            :inputData='platesData')
-
-          app-plate(
-            :type='"entries"'
-            :icon='"entries"'
-            :title='"Entries"'
-            :inputData='platesData')
-
-          app-plate(
-            :type='"favourites"'
-            :icon='"favourite"'
-            :title='"Favourites"'
-            :inputData='platesData')
+      games-search
 
       games-favourites
       tvshows-favourites
@@ -64,7 +45,7 @@ let reducer = (accumulator, currentValue) => accumulator + currentValue
 
 export default {
   name: 'Dashboard',
-  pageTitle: 'My Dashboard',
+  pageTitle: 'My Favourites',
   data() {
     return {
       platesData: {

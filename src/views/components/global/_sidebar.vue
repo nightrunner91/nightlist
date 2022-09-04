@@ -4,12 +4,6 @@
     class='sidebar'
     :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--opened" : !sidebarCollapsed && windowParams.width < breakpoints.lg}, {"sidebar--notransition" : noTransition}]')
 
-    div(
-      v-for='route in routes'
-      v-if='route.mainMenu && windowParams.width > breakpoints.mb'
-      class='sidebar__gradient'
-      :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
-
     button(
       v-if='windowParams.width <= breakpoints.lg && windowParams.width > breakpoints.mb'
       class='sidebar__hamburger hamburger hamburger--arrowalt'
@@ -141,11 +135,6 @@ export default {
 
     closeSettings() {
       this.settingsOpened = false
-    },
-
-    gradientActive(name) {
-      if (this.current == name) return true
-      return false
     },
 
     toggleSidebar() {

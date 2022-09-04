@@ -34,7 +34,6 @@
           :data='card'
           :type='"films"')
 
-
     app-placeholder(
       v-if='favouritesLength == 0'
       :status='placeholderStatus')
