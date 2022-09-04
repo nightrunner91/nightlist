@@ -121,17 +121,17 @@ $icons-size: 24px
     position: relative
     display: flex
     flex-direction: column
+    align-items: center
     margin-bottom: $gutter-width * 2
-    padding: $gutter-width
-    background: rgba($clr-grey, $tiny-opacity)
     border-radius: $big-radius
+    text-align: center
 
   
   &__avatar
     position: relative
-    width: 90px
-    height: 90px
-    margin-bottom: $gutter-width/2
+    width: 100px
+    height: 100px
+    margin-bottom: $gutter-width
     border-radius: $round-radius
     box-shadow: $level-1
     background-color: rgba($clr-white, $light-opacity)
@@ -141,7 +141,7 @@ $icons-size: 24px
 
     &:before
       @include pseudoelem
-      @include svg-icon(90, 90, 'avatar')
+      @include svg-icon(100, 100, 'avatar')
       
       top: 0
       right: 0
@@ -153,11 +153,11 @@ $icons-size: 24px
 
 
   &__username
-    @extend .fz2
+    @extend .fz3
 
     min-height: 26px
     font-weight: 700
-    margin-bottom: $gutter-width
+    margin-bottom: $gutter-width / 2
 
   
   &__desc
@@ -165,13 +165,13 @@ $icons-size: 24px
 
 
   &__social
-    margin: $gutter-width / 4 0 0
+    margin: $gutter-width / 2 0 0
 
 
   &__soclink
     position: relative
     margin-right: $gutter-width / 3
-    opacity: $passive-opacity
+    opacity: $half-opacity
     transition: $base-transition
 
     &:hover
@@ -203,18 +203,6 @@ $icons-size: 24px
     &:first-child
       margin-bottom: $gutter-width/2
 
-    &::before
-      content: ''
-      position: absolute
-      left: -$gutter-width
-      top: 0
-      bottom: 0
-      margin: auto
-      width: 2px
-      height: 100%
-      background: $clr-white
-      opacity: $transparent-opacity
-
     &:hover
       color: rgba($clr-white, $barely-opacity)
 
@@ -230,9 +218,6 @@ $icons-size: 24px
 
     &--active
       color: $clr-white !important
-
-      &::before 
-        opacity: $active-opacity
 
       .sidebar
         &__bookmark

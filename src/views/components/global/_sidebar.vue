@@ -23,7 +23,6 @@
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
-      div(class='sidebar__username') {{username}}
       p(class='sidebar__desc') Hello! I'm #[i Nikita].
       p(class='sidebar__desc') And this is everything I've ever played, watched and read.
       div(class='d-flex align-items-center sidebar__social')
