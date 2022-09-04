@@ -23,7 +23,7 @@
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
-      p(class='sidebar__desc') Hello! I'm #[i Nikita].
+      h3(class='sidebar__desc') I'm #[span Nikita].
       p(class='sidebar__desc') And this is everything I've ever played, watched and read.
       div(class='d-flex align-items-center sidebar__social')
         a(

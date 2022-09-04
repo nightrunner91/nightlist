@@ -56,7 +56,7 @@ $icons-size: 24px
   display: flex
   flex-direction: column
   order: 1
-  padding: $gutter-width
+  padding: $gutter-width * 2 $gutter-width
   z-index: 3
   width: 25%
   max-width: $sidebar-width
@@ -129,8 +129,8 @@ $icons-size: 24px
   
   &__avatar
     position: relative
-    width: 100px
-    height: 100px
+    width: 120px
+    height: 120px
     margin-bottom: $gutter-width
     border-radius: $round-radius
     box-shadow: $level-1
@@ -141,7 +141,7 @@ $icons-size: 24px
 
     &:before
       @include pseudoelem
-      @include svg-icon(100, 100, 'avatar')
+      @include svg-icon(120, 120, 'avatar')
       
       top: 0
       right: 0
@@ -161,7 +161,11 @@ $icons-size: 24px
 
   
   &__desc
-    opacity: $half-opacity
+    margin-bottom: $gutter-width / 2
+    color: rgba($clr-white, $passive-opacity)
+
+    span
+      color: rgba($clr-white, $active-opacity)
 
 
   &__social
