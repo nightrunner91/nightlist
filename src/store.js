@@ -52,14 +52,17 @@ export default new Vuex.Store({
       github: {
         id: 'github',
         href: 'https://github.com/nightrunner91',
-      },
-      telegram: {
-        id: 'telegram',
-        href: 'https://t.me/nightrunner91',
+        tooltip: 'See my other projects on GitHub'
       },
       steam: {
         id: 'steam',
         href: 'https://steamcommunity.com/id/nightrunner91/',
+        tooltip: 'Check out my Steam'
+      },
+      telegram: {
+        id: 'telegram',
+        href: 'https://t.me/nightrunner91',
+        tooltip: 'Contact with me via Telegram'
       },
     },
     requestHeaders: {

@@ -33,10 +33,10 @@
       favourites-search
 
       games-favourites(v-if="!searchState")
-      tvshows-favourites(v-if="!searchState")
+      //- tvshows-favourites(v-if="!searchState")
       films-favourites(v-if="!searchState")
-      anime-favourites(v-if="!searchState")
-      books-favourites(v-if="!searchState")
+      //- anime-favourites(v-if="!searchState")
+      //- books-favourites(v-if="!searchState")
 
 </template>
 

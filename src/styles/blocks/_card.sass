@@ -20,8 +20,68 @@
 
       &__image
         opacity: $active-opacity
-        filter: grayscale(0%)
         box-shadow: $level-3
+
+      &__overlay
+        opacity: $active-opacity
+
+  &__overlay
+    position: absolute
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    border-radius: $base-radius
+    background: rgba($clr-black, $half-opacity)
+    z-index: 10
+    transition: $base-transition
+    opacity: $transparent-opacity
+
+    &::before
+      content: ''
+      display: block
+      position: absolute
+      width: 100%
+      height: 100%
+      border-radius: $base-radius
+      background: linear-gradient(0deg, rgba($clr-black, $passive-opacity), transparent)
+      z-index: -1
+
+  &__subtitle
+    display: flex
+    align-items: center
+    margin-bottom: $gutter-width / 4
+    opacity: $passive-opacity
+    color: rgba($clr-white, $barely-opacity)
+    line-height: 1
+
+  &__rating
+    position: absolute
+    bottom: $gutter-width
+    left: 0
+    right: 0
+    opacity: $passive-opacity
+    margin: 0 auto
+
+  &__tilda
+    @include icon-size(16,16)
+
+  &__clock
+    @include icon-size(16,16)
+    margin-right: $gutter-width / 6
+    fill: rgba($clr-white, $barely-opacity)
+
+  &__hours
+    @extend .fz2
+
+    display: flex
+    align-items: center
+    line-height: 1
+    font-weight: 700
 
   &__plate
     @include glass()
@@ -45,12 +105,6 @@
     opacity: $passive-opacity
     overflow: hidden
     transition: $base-transition
-    filter: grayscale(100%)
-
-  &__rating
-    position: absolute
-    bottom: $gutter-width / 2
-    left: $gutter-width / 2
 
   &__favourite
     position: absolute
@@ -61,6 +115,7 @@
     margin-top: $gutter-width / 3
 
   &__title
-    text-align: left
+    padding: 0 $gutter-width / 3
+    text-align: center
     color: rgba($clr-white, $half-opacity)
     transition: $base-transition

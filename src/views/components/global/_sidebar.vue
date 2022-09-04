@@ -20,15 +20,18 @@
       v-if='windowParams.width > breakpoints.mb'
       class='sidebar__profile'
       :class='{"sidebar__profile--collapsed" : sidebarCollapsed}')
-      //- div(class='sidebar__username') {{username}}
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
+      div(class='sidebar__username') {{username}}
+      p(class='sidebar__desc') Hello! I'm #[i Nikita].
+      p(class='sidebar__desc') And this is everything I've ever played, watched and read.
       div(class='d-flex align-items-center sidebar__social')
         a(
           v-for='social in socials'
           :key='social.id'
           :href="social.href"
+          v-tooltip='{ content: social.tooltip, offset: 15}'
           class='sidebar__soclink'
           target='_blank')
           svg(class='sidebar__socicon'): use(:xlink:href='`#social-${social.id}`')

@@ -33,42 +33,42 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'My Favourites',
+    name: 'Favourites',
     id: 'dashboard',
     mainMenu: true,
     component: Dashboard
   },
   {
     path: '/games',
-    name: 'My Games',
+    name: 'Games',
     id: 'games',
     mainMenu: true,
     component: Games
   },
   {
     path: '/tvshows',
-    name: 'My TV Shows',
+    name: 'TV Shows',
     id: 'tvshows',
     mainMenu: true,
     component: TVshows
   },
   {
     path: '/films',
-    name: 'My Films',
+    name: 'Films',
     id: 'films',
     mainMenu: true,
     component: Films
   },
   {
     path: '/anime',
-    name: 'My Anime',
+    name: 'Anime',
     id: 'anime',
     mainMenu: true,
     component: Anime
   },
   {
     path: '/books',
-    name: 'My Books',
+    name: 'Books',
     id: 'books',
     mainMenu: true,
     component: Books
