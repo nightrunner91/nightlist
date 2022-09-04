@@ -28,15 +28,15 @@
 
       div(class='title title--dashboard')
         h1(class='title__name') {{$options.pageTitle}}
-        span(class='title__badge badge badge--medium') {{totalLength}}
+        span(class='title__badge badge badge--medium') {{favouritesLength}}
 
-      games-search
+      favourites-search
 
-      games-favourites
-      tvshows-favourites
-      films-favourites
-      anime-favourites
-      books-favourites
+      games-favourites(v-if="!searchState")
+      tvshows-favourites(v-if="!searchState")
+      films-favourites(v-if="!searchState")
+      anime-favourites(v-if="!searchState")
+      books-favourites(v-if="!searchState")
 
 </template>
 
@@ -154,13 +154,17 @@ export default {
       return this.$store.state.collection
     },
 
-    totalLength() {
-      return this.$store.state.collection.length
+    favouritesLength() {
+      return this.$store.state.collection.filter(i => i.favourite).length
     },
 
     modalState() {
       return this.$store.state.modalState
-    }
+    },
+
+    searchState() {
+      return this.$store.state.searchState
+    },
   },
   watch: {
     collection(oldVal, newVal) {

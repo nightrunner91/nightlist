@@ -1,9 +1,4 @@
 $icons-size: 24px
-  
-
-@mixin themed-colors($category-color)
-  background: linear-gradient(to bottom, rgba($category-color, $half-opacity) 0%,rgba($category-color, $light-opacity) 100%)
-
 
 @mixin collapsed-sidebar()
   .sidebar
@@ -21,6 +16,9 @@ $icons-size: 24px
 
       &:before
         @include svg-icon(strip-unit($gutter-width * 1.5), strip-unit($gutter-width * 1.5), 'avatar')
+
+    &__social
+      display: none
 
 
     &__settings
@@ -87,7 +85,7 @@ $icons-size: 24px
       display: none
 
   @media #{$lg-up}
-    background: rgba($clr-dark, $medium-opacity)
+    background: rgba($clr-black, $light-opacity)
 
   @media #{$lg-dw}
     position: fixed
@@ -124,13 +122,13 @@ $icons-size: 24px
     display: flex
     flex-direction: column
     align-items: center
-    margin-bottom: $gutter-width * 3
+    margin-bottom: $gutter-width * 2
 
   
   &__avatar
     position: relative
-    width: 120px
-    height: 120px
+    width: 180px
+    height: 180px
     margin-bottom: $gutter-width/2
     border-radius: $round-radius
     box-shadow: $level-1
@@ -141,7 +139,7 @@ $icons-size: 24px
 
     &:before
       @include pseudoelem
-      @include svg-icon(120, 120, 'avatar')
+      @include svg-icon(150, 150, 'avatar')
       
       top: 0
       right: 0
@@ -153,10 +151,34 @@ $icons-size: 24px
 
 
   &__username
-    @extend .fz3
+    @extend .fz2
 
     min-height: 26px
     font-weight: 700
+    margin-bottom: $gutter-width / 2
+
+
+  &__social
+    margin: $gutter-width / 4 0
+
+
+  &__soclink
+    position: relative
+    margin: 0 $gutter-width / 3
+    opacity: $medium-opacity
+    transition: $base-transition
+
+    &:hover
+      opacity: $active-opacity
+
+    &:first-child,
+    &:last-child
+      top: -10px
+
+
+  &__socicon
+    @include icon-size(24, 24)
+    fill: $clr-white
 
 
   &__menu

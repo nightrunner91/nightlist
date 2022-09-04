@@ -48,6 +48,20 @@ export default new Vuex.Store({
       username: 'Nightrunner',
       avatar: 'https://avatars.steamstatic.com/ee823ca80285bac4553ce8198aa10e1d994528e8_full.jpg',
     },
+    socials: {
+      github: {
+        id: 'github',
+        href: 'https://github.com/nightrunner91',
+      },
+      telegram: {
+        id: 'telegram',
+        href: 'https://t.me/nightrunner91',
+      },
+      steam: {
+        id: 'steam',
+        href: 'https://steamcommunity.com/id/nightrunner91/',
+      },
+    },
     requestHeaders: {
       headers: {
         'Content-Type': 'application/json',

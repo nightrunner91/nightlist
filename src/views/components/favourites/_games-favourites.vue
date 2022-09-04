@@ -15,7 +15,7 @@
       span(class='title__badge badge badge--medium') {{favouritesLength}}
       svg(
         class='title__chevron'
-        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
+        :class='[{"title__chevron--closed" : !cardsVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- CARDS -//
@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import { eventBus } from "../../../main"
-
 export default {
   name: 'gamesFavourites',
   props: {
@@ -56,7 +54,6 @@ export default {
       stashedData: [],
       favouritesData: [],
       cardsVisible: true,
-      tableVisible: true,
       noTransition: true,
       currentStructure: undefined
     }
@@ -131,22 +128,15 @@ export default {
 
     switchTable(state) {
       if (state) {
-        this.tableVisible = state
+        this.cardsVisible = state
       } else {
-        this.tableVisible = !this.tableVisible
+        this.cardsVisible = !this.cardsVisible
       }
-      this.$storage.set(this.tableVisibilityName, { key: this.tableVisible })
+      this.$storage.set(this.tableVisibilityName, { key: this.cardsVisible })
     },
 
     setDefaultTableState() {
-      this.tableVisible = true
-    },
-
-    setTableState() {
-      let storedState = this.$storage.get(this.tableVisibilityName, this.setDefaultTableState())
-      if (storedState != null) {
-        this.tableVisible = storedState.key
-      }
+      this.cardsVisible = true
     },
 
     removeNoTransition() {
@@ -160,16 +150,6 @@ export default {
           this.sortData(this.criteria)
         }
       })
-    },
-
-    editSlot(id, event) {
-      if (this.allowEdit) {
-        if (event.target.className == 'slot__link') return
-        else {
-          this.$store.commit('CHANGE_CONTENT', this.gamesFavourites.filter(i => i.id == id)[0])
-          eventBus.$emit('openModal', 'edit', 'games')
-        }
-      }
     },
 
     statusName(id) {
@@ -196,10 +176,6 @@ export default {
     }
   },
   computed: {
-    allowEdit() {
-      return this.$store.state.allowEdit
-    },
-    
     games() {
       return this.$store.state.games
     },
@@ -225,14 +201,6 @@ export default {
       return this.favouritesData.length
     },
 
-    tableHeight() {
-      if (this.windowParams.width <= this.breakpoints.sm) {
-        return 'max-height: ' + ((95 + 7.5) * this.favouritesData.length + 40) + 'px'
-      } else {
-        return 'max-height: ' + (40 * this.favouritesData.length + 40) + 'px'
-      }
-    },
-
     placeholderStatus() {
       return {
         title: 'No favourites yet',
@@ -243,7 +211,6 @@ export default {
   mounted() {
     this.stashData()
     this.sortData(this.criteria, 'default')
-    this.setTableState()
     this.removeNoTransition()
     this.subscribeToChanges()
     this.setPlatesHeight()

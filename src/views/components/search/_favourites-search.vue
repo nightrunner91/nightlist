@@ -2,40 +2,49 @@
 
   div(class='data')
 
+    //- ====== -//
+    //- SEARCH -//
+    //- ====== -//
+    div(
+      class='search' 
+      :class='{"search--active" : searchQuery.length || searchActive}' )
+      div(class='input')
+        svg(class='input__icon'): use(xlink:href='#search')
+        input(
+          class='input__field' 
+          type='text' 
+          placeholder='Search' 
+          v-model='searchQuery'
+          @input='searchData()'
+          @focus='searchActive = true' 
+          @blur='searchActive = false')
+
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(
-      class='title title--secondary'
-      @click='switchTable()')
-      svg(
-        class='title__icon'
-        v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-films')
-      h2(class='title__name') Favourite Films
-      span(class='title__badge badge badge--medium') {{favouritesLength}}
-      svg(
-        class='title__chevron'
-        :class='[{"title__chevron--closed" : !cardsVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
+    div(class='title title--secondary title--inactive' v-if='searchQuery.length')
+      h2(class='title__name') Search results
+      span(class='title__badge badge badge--medium') {{resultsLength}}
 
     //- ===== -//
     //- CARDS -//
     //- ===== -//
     div(
       ref="plates"
-      v-if='favouritesLength > 0'
+      v-if='searchQuery.length > 0'
       class='plates'
       :class='{ "plates--hidden" : !cardsVisible }')
 
       div(
         class='grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-6 grid__col--xs-9 grid__col--mb-12'
-        v-for='(card, index) in favouritesData')
+        v-for='(card, index) in searchedData')
 
         app-card(
           :data='card'
-          :type='"films"')
+          :type='card.category')
 
     app-placeholder(
-      v-if='favouritesLength == 0'
+      v-if='searchQuery.length && resultsLength == 0'
       :status='placeholderStatus')
 
 </template>
@@ -44,19 +53,19 @@
 import { eventBus } from "../../../main"
 
 export default {
-  name: 'filmsFavourites',
+  name: 'favouritesSearch',
   props: {
     
   },
   data() {
     return {
+      searchQuery: '',
+      searchActive: false,
       criteria: 'title',
-      tableVisibilityName: 'favourite_films_' + this.id + '_visible',
       direction: true,
       stashedData: [],
-      favouritesData: [],
       cardsVisible: true,
-      noTransition: true,
+      searchedData: [],
       currentStructure: undefined
     }
   },
@@ -69,7 +78,21 @@ export default {
   },
   methods: {
     stashData() {
-      this.stashedData = this.filmsFavourites
+      this.stashedData = this.favouritesCollection
+    },
+
+    searchData() {
+      this.searchedData = this.stashedData.filter(i => {
+        return i.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      })
+
+      this.sortData(this.criteria)
+      
+      if (this.searchQuery.length > 0) {
+        this.$store.commit('CHANGE_SEARCH_STATE', true)
+      } else {
+        this.$store.commit('CHANGE_SEARCH_STATE', false)
+      }
     },
 
     sortData(criteria, situation) {
@@ -89,6 +112,7 @@ export default {
 
       if (
         this.criteria == 'title' || 
+        this.criteria == 'platform' ||
         this.criteria == 'status') {
         // ascending
         if (this.direction) {
@@ -118,43 +142,35 @@ export default {
         }
       }
 
-      result = this.stashedData.sort((a, b) => {
+      result = this.searchedData.sort((a, b) => {
         if (a[criteria] < b[criteria]) { return conditionOne }
         if (a[criteria] > b[criteria]) { return conditionTwo }
         return 0
       })
 
-      this.favouritesData = result
-    },
-
-    switchTable(state) {
-      if (state) {
-        this.cardsVisible = state
-      } else {
-        this.cardsVisible = !this.cardsVisible
-      }
-      this.$storage.set(this.tableVisibilityName, { key: this.cardsVisible })
-    },
-
-    setDefaultTableState() {
-      this.cardsVisible = true
-    },
-
-    removeNoTransition() {
-      setTimeout(() => { this.noTransition = false }, 300)
+      this.searchedData = result
     },
 
     subscribeToChanges() {
       this.$store.subscribe((mutation, state) => {
         if (mutation.type == 'APPLY_SLOT' || mutation.type == 'DELETE_SLOT') {
           this.stashData()
+          this.searchData()
           this.sortData(this.criteria)
         }
       })
     },
 
+    editSlot(id, event) {
+      if (event.target.className == 'slot__link') return
+      else {
+        this.$store.commit('CHANGE_CONTENT', this.favouritesCollection.filter(i => i.id == id)[0])
+        eventBus.$emit('openModal', 'edit')
+      }
+    },
+
     statusName(id) {
-      return this.$store.state['films'].statuses.filter(i => i.id == id)[0].name
+      return this.$store.state['games'].statuses.filter(i => i.id == id)[0].name
     },
 
     handleResize() {
@@ -165,22 +181,9 @@ export default {
       if (this.windowParams.width > this.breakpoints.sm) {
         this.currentStructure = 'desktop'
       }
-    },
-
-    setPlatesHeight() {
-      this.$nextTick(() => {
-        let target = this.$refs.plates
-        let height = target.clientHeight
-
-        target.style = `max-height: ${height}px`
-      })
-    },
+    }
   },
   computed: {
-    films() {
-      return this.$store.state.films
-    },
-
     windowParams() {
       return this.$store.state.windowParams
     },
@@ -189,8 +192,8 @@ export default {
       return this.$store.state.breakpoints
     },
 
-    filmsFavourites() {
-      return this.$store.state.collection.filter(i => i.category == 'films' && i.favourite)
+    favouritesCollection() {
+      return this.$store.state.collection.filter(i => i.favourite)
     },
 
     chevronPosition() {
@@ -198,23 +201,21 @@ export default {
       else return 'table__chevron--descending'
     },
 
-    favouritesLength() {
-      return this.favouritesData.length
+    resultsLength() {
+      return this.searchedData.length
     },
 
     placeholderStatus() {
       return {
-        title: 'No favourites yet',
-        icon: 'no-data'
+        title: 'Nothing found',
+        icon: 'no-search'
       }
     }
   },
   mounted() {
     this.stashData()
     this.sortData(this.criteria, 'default')
-    this.removeNoTransition()
     this.subscribeToChanges()
-    this.setPlatesHeight()
   }
 }
 </script>

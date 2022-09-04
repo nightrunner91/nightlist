@@ -100,12 +100,14 @@ Vue.component('anime-data', animeData)
 Vue.component('books-data', booksData)
 
 // search:
+import favouritesSearch from "./views/components/search/_favourites-search"
 import gamesSearch from "./views/components/search/_games-search"
 import tvshowsSearch from "./views/components/search/_tvshows-search"
 import filmsSearch from "./views/components/search/_films-search"
 import animeSearch from "./views/components/search/_anime-search"
 import booksSearch from "./views/components/search/_books-search"
 
+Vue.component('favourites-search', favouritesSearch)
 Vue.component('games-search', gamesSearch)
 Vue.component('tvshows-search', tvshowsSearch)
 Vue.component('films-search', filmsSearch)

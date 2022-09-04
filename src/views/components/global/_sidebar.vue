@@ -20,10 +20,18 @@
       v-if='windowParams.width > breakpoints.mb'
       class='sidebar__profile'
       :class='{"sidebar__profile--collapsed" : sidebarCollapsed}')
+      //- div(class='sidebar__username') {{username}}
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
-      div(class='sidebar__username') {{username}}
+      div(class='d-flex align-items-center sidebar__social')
+        a(
+          v-for='social in socials'
+          :key='social.id'
+          :href="social.href"
+          class='sidebar__soclink'
+          target='_blank')
+          svg(class='sidebar__socicon'): use(:xlink:href='`#social-${social.id}`')
 
     div(class='sidebar__menu')
       router-link(
@@ -46,7 +54,7 @@
         span(class='sidebar__name') {{route.name}}
         span(
           v-if='route.id == "dashboard"'
-          class='sidebar__badge badge badge--small') {{totalLength()}}
+          class='sidebar__badge badge badge--small') {{favouritesLength()}}
         span(
           v-else
           class='sidebar__badge badge badge--small') {{categoryLength(route.id)}}
@@ -83,6 +91,10 @@ export default {
 
     username() {
       return this.$store.state.settings.username
+    },
+
+    socials() {
+      return this.$store.state.socials
     },
 
     avatarStyles() {
@@ -127,6 +139,10 @@ export default {
 
     totalLength() {
       return this.$store.state.collection.length
+    },
+
+    favouritesLength() {
+      return this.$store.state.collection.filter(i => i.favourite).length
     },
 
     openSettings() {
