@@ -34,16 +34,14 @@
       div(
         v-if='!cardsVisible'
         class='button button--ghosted'
-        @click='toggleCards()'
-        v-ripple)
+        @click='toggleCards()')
         span(class='button__text') View More
         svg(class='expand__chevron'): use(xlink:href='#chevron')
 
       div(
         v-else
         class='button button--ghosted'
-        @click='viewAll()'
-        v-ripple)
+        @click='viewAll()')
         span(class='button__text') View All Games
         svg(class='expand__chevron rotate-minus-90'): use(xlink:href='#chevron')
 

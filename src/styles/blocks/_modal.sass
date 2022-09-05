@@ -58,7 +58,7 @@ $close-button-size: 36px
   width: 50vw
   max-width: 500px
   min-width: 320px
-  border-radius: $base-radius
+  border-radius: $big-radius
   background: $clr-white
   box-shadow: $level-3
   color: $clr-black
@@ -130,7 +130,7 @@ $close-button-size: 36px
 
 
   &__fields
-    padding: $gutter-width / 1.5 $gutter-width  !important
+    padding: $gutter-width / 2 $gutter-width / 1.5 !important
     overflow: hidden !important
 
 
@@ -138,10 +138,9 @@ $close-button-size: 36px
     display: flex
     justify-content: space-between
     align-items: center
-    height: 70px
-    padding: 0 $gutter-width/1.5
-    border-bottom-left-radius: $base-radius !important
-    border-bottom-right-radius: $base-radius !important
+    padding: $gutter-width / 1.5
+    border-bottom-left-radius: $big-radius !important
+    border-bottom-right-radius: $big-radius !important
     background: $clr-grey
 
     @media #{$mb-dw}
