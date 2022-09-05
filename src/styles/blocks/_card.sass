@@ -6,10 +6,12 @@
   overflow: hidden
 
   &--hidden
-    margin-bottom: $gutter-width / 2
+    margin-bottom: 0
 
-    .card
-      mask-image: linear-gradient(to bottom, black 0%, transparent 75%, transparent 100%)
+    .grid__col
+      &:nth-child(n+7)
+        .card
+          mask-image: linear-gradient(to bottom, black 0%, transparent 25%)
 
 .card
   width: 100%
@@ -132,7 +134,7 @@
     transition: $base-transition
 
   &__body
-    margin-top: $gutter-width / 2.2
+    margin-top: $gutter-width / 1.8
 
   &__title
     padding: 0 $gutter-width / 3

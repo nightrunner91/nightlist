@@ -233,8 +233,7 @@ export default {
       this.$nextTick(() => {
         let plates = document.querySelectorAll('.plates')
         let cards = document.querySelectorAll('.card')
-        let cardHeight = cards[0].clientHeight - 30
-
+        let cardHeight = cards[0].clientHeight * 2 - cards[0].clientHeight / 2.3
         for (let n = 0; n < plates.length; n++) {
           plates[n].style = `max-height: ${cardHeight}px`
         }
