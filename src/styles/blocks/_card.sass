@@ -16,6 +16,17 @@
 
   &:hover
     .card
+      &__time
+        opacity: $active-opacity
+        transform: translateY(0px)
+
+      &__subtitle
+        opacity: $passive-opacity
+        transform: translateY(0px)
+
+      &__rating
+        opacity: $passive-opacity
+
       &__title
         color: $clr-white
 
@@ -52,6 +63,16 @@
       background: linear-gradient(0deg, rgba($clr-black, $passive-opacity), transparent)
       z-index: -1
 
+  &__time
+    opacity: $transparent-opacity
+    transform: translateY(15px)
+    transition: all .35s $standard
+
+  &__subtitle
+    opacity: $transparent-opacity
+    transform: translateY(10px)
+    transition: all .35s $standard
+
   &__subtitle
     display: flex
     align-items: center
@@ -65,8 +86,9 @@
     bottom: $gutter-width
     left: 0
     right: 0
-    opacity: $passive-opacity
     margin: 0 auto
+    opacity: $transparent-opacity
+    transition: all .35s $decelerated
 
   &__tilda
     @include icon-size(16,16)
@@ -107,13 +129,8 @@
     overflow: hidden
     transition: $base-transition
 
-  &__favourite
-    position: absolute
-    bottom: $gutter-width / 2
-    right: $gutter-width / 2
-
   &__body
-    margin-top: $gutter-width / 3
+    margin-top: $gutter-width / 2.2
 
   &__title
     padding: 0 $gutter-width / 3

@@ -21,7 +21,7 @@ $close-button-size: 36px
         &--secondary
           margin-right: $gutter-width/4
           background: $clr-white
-          box-shadow: inset 0px 0px 0px 2px rgba($category-color, $half-opacity)
+          box-shadow: inset 0px 0px 0px 1px rgba($category-color, $half-opacity)
           color: rgba($category-color, $half-opacity)
 
           .button
@@ -30,7 +30,7 @@ $close-button-size: 36px
               opacity: $half-opacity
 
           &:hover
-            box-shadow: inset 0px 0px 0px 2px $category-color
+            box-shadow: inset 0px 0px 0px 1px $category-color
             color: $category-color
 
             .button
@@ -54,7 +54,7 @@ $close-button-size: 36px
 .modal
   position: relative
   width: 50vw
-  max-width: 400px
+  max-width: 500px
   min-width: 320px
   border-radius: $base-radius
   background: $clr-white
@@ -128,7 +128,7 @@ $close-button-size: 36px
 
 
   &__fields
-    padding: $gutter-width/2 $gutter-width/1.5 !important
+    padding: $gutter-width $gutter-width $gutter-width / 1.5 !important
     overflow: hidden !important
 
 
