@@ -91,6 +91,8 @@ export default {
       this.closeModal()
       this.setDefaultContent(type)
     })
+
+    console.log(localStorage)
   }
 }
 </script>
