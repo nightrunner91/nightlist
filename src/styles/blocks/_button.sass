@@ -21,6 +21,26 @@
   cursor: pointer
   transition: $slow-transition
 
+  &--ghosted
+    background: transparent
+    color: rgba($clr-grey, $half-opacity)
+    font-weight: 600
+    font-size: 12px
+    letter-spacing: 0.06em
+    box-shadow: none !important
+
+    svg
+      fill: $clr-grey
+      opacity: $half-opacity
+      transition: $base-transition
+
+    &:hover
+      color: $clr-grey
+
+      svg
+        fill: $clr-grey
+        opacity: $active-opacity
+
   &--iconed
     justify-content: center
     width: 40px

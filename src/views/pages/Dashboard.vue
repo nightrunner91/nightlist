@@ -227,10 +227,23 @@ export default {
         }
 
       }
-    }
+    },
+
+    setPlatesHeight() {
+      this.$nextTick(() => {
+        let plates = document.querySelectorAll('.plates')
+        let cards = document.querySelectorAll('.card')
+        let cardHeight = cards[0].clientHeight - 30
+
+        for (let n = 0; n < plates.length; n++) {
+          plates[n].style = `max-height: ${cardHeight}px`
+        }
+      })
+    },
   },
   mounted() {
     this.prepareData()
+    this.setPlatesHeight()
   }
 }
 </script>

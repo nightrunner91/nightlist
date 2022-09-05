@@ -5,17 +5,12 @@
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(
-      class='title title--secondary'
-      @click='switchTable()')
+    div(class='title title--static')
       svg(
         class='title__icon'
         v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-games')
       h2(class='title__name') Favourite Games
       span(class='title__badge badge badge--medium') {{favouritesLength}}
-      svg(
-        class='title__chevron'
-        :class='[{"title__chevron--closed" : !cardsVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- CARDS -//
@@ -24,6 +19,7 @@
       ref="plates"
       v-if='favouritesLength > 0'
       class='plates'
+      :style=' cardsVisible ? "max-height: 100000px" : ""'
       :class='{ "plates--hidden" : !cardsVisible }')
 
       div(
@@ -33,6 +29,23 @@
         app-card(
           :data='card'
           :type='"games"')
+
+    div(class='expand')
+      div(
+        v-if='!cardsVisible'
+        class='button button--ghosted'
+        @click='toggleCards()'
+        v-ripple)
+        span(class='button__text') View More
+        svg(class='expand__chevron'): use(xlink:href='#chevron')
+
+      div(
+        v-else
+        class='button button--ghosted'
+        @click='viewAll()'
+        v-ripple)
+        span(class='button__text') View All Games
+        svg(class='expand__chevron rotate-minus-90'): use(xlink:href='#chevron')
 
     app-placeholder(
       v-if='favouritesLength == 0'
@@ -53,7 +66,7 @@ export default {
       direction: true,
       stashedData: [],
       favouritesData: [],
-      cardsVisible: true,
+      cardsVisible: false,
       noTransition: true,
       currentStructure: undefined
     }
@@ -152,17 +165,16 @@ export default {
       })
     },
 
-    statusName(id) {
-      return this.$store.state['games'].statuses.filter(i => i.id == id)[0].name
+    toggleCards() {
+      this.cardsVisible = !this.cardsVisible
     },
 
-    setPlatesHeight() {
-      this.$nextTick(() => {
-        let target = this.$refs.plates
-        let height = target.clientHeight
+    viewAll() {
+      this.$router.push( { name: 'Games' } )
+    },
 
-        target.style = `max-height: ${height}px`
-      })
+    statusName(id) {
+      return this.$store.state['games'].statuses.filter(i => i.id == id)[0].name
     },
 
     handleResize() {
@@ -213,7 +225,6 @@ export default {
     this.sortData(this.criteria, 'default')
     this.removeNoTransition()
     this.subscribeToChanges()
-    this.setPlatesHeight()
   }
 }
 </script>

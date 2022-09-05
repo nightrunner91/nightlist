@@ -1,14 +1,16 @@
 .plates
+  position: relative
   display: flex
   flex-wrap: wrap
-  margin-bottom: $gutter-width * 2
-  transition: $base-transition
+  margin-bottom: $gutter-width
   overflow: hidden
 
   &--hidden
-    max-height: 0px !important
-    opacity: $transparent-opacity
-  
+    margin-bottom: $gutter-width / 2
+
+    .card
+      mask-image: linear-gradient(to bottom, black 0%, transparent 75%, transparent 100%)
+
 .card
   width: 100%
   margin-top: $gutter-width
@@ -60,7 +62,7 @@
       width: 100%
       height: 100%
       border-radius: $base-radius
-      background: linear-gradient(0deg, rgba($clr-black, $passive-opacity), transparent)
+      background: linear-gradient(0deg, rgba($clr-black, $barely-opacity), transparent)
       z-index: -1
 
   &__time

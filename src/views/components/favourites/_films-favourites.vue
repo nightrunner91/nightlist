@@ -5,17 +5,12 @@
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(
-      class='title title--secondary'
-      @click='switchTable()')
+    div(class='title title--static')
       svg(
         class='title__icon'
         v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-films')
       h2(class='title__name') Favourite Films
       span(class='title__badge badge badge--medium') {{favouritesLength}}
-      svg(
-        class='title__chevron'
-        :class='[{"title__chevron--closed" : !cardsVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
     //- CARDS -//
@@ -24,6 +19,7 @@
       ref="plates"
       v-if='favouritesLength > 0'
       class='plates'
+      :style=' cardsVisible ? "max-height: 100000px" : ""'
       :class='{ "plates--hidden" : !cardsVisible }')
 
       div(
@@ -33,6 +29,23 @@
         app-card(
           :data='card'
           :type='"films"')
+
+    div(class='expand')
+      div(
+        v-if='!cardsVisible'
+        class='button button--ghosted'
+        @click='toggleCards()'
+        v-ripple)
+        span(class='button__text') View More
+        svg(class='expand__chevron'): use(xlink:href='#chevron')
+
+      div(
+        v-else
+        class='button button--ghosted'
+        @click='viewAll()'
+        v-ripple)
+        span(class='button__text') View All Films
+        svg(class='expand__chevron rotate-minus-90'): use(xlink:href='#chevron')
 
     app-placeholder(
       v-if='favouritesLength == 0'
@@ -55,7 +68,7 @@ export default {
       direction: true,
       stashedData: [],
       favouritesData: [],
-      cardsVisible: true,
+      cardsVisible: false,
       noTransition: true,
       currentStructure: undefined
     }
@@ -153,6 +166,14 @@ export default {
       })
     },
 
+    toggleCards() {
+      this.cardsVisible = !this.cardsVisible
+    },
+
+    viewAll() {
+      this.$router.push( { name: 'Films' } )
+    },
+
     statusName(id) {
       return this.$store.state['films'].statuses.filter(i => i.id == id)[0].name
     },
@@ -165,15 +186,6 @@ export default {
       if (this.windowParams.width > this.breakpoints.sm) {
         this.currentStructure = 'desktop'
       }
-    },
-
-    setPlatesHeight() {
-      this.$nextTick(() => {
-        let target = this.$refs.plates
-        let height = target.clientHeight
-
-        target.style = `max-height: ${height}px`
-      })
     },
   },
   computed: {
@@ -214,7 +226,6 @@ export default {
     this.sortData(this.criteria, 'default')
     this.removeNoTransition()
     this.subscribeToChanges()
-    this.setPlatesHeight()
   }
 }
 </script>

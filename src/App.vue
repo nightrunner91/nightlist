@@ -119,7 +119,7 @@ export default {
 
   
   // Fonts
-  @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&Open+Sans:400,700&display=swap')
+  @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&Open+Sans:400,700&display=swap')
     
   // Core
   @import "styles/core/colors"
@@ -128,6 +128,7 @@ export default {
   @import "styles/core/grid"
   @import "styles/core/typography"
   @import "styles/core/mixins"
+  @import "styles/core/rotations"
 
   // Blocks
   @import "styles/blocks/badge"
@@ -139,6 +140,7 @@ export default {
   @import "styles/blocks/gradients"
   @import "styles/blocks/header"
   @import "styles/blocks/indicator"
+  @import "styles/blocks/expand"
   @import "styles/blocks/input"
   @import "styles/blocks/modal"
   @import "styles/blocks/page"
