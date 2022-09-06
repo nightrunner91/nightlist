@@ -10,8 +10,6 @@ $close-button-size: 36px
         background: lighten($category-color, $hover-intensity)
 
     &__footer
-      border-top: 1px solid rgba($category-color, $tiny-opacity)
-
       .button
         &--main
           background: $category-color
@@ -56,7 +54,7 @@ $close-button-size: 36px
 .modal
   position: relative
   width: 50vw
-  max-width: 500px
+  max-width: 480px
   min-width: 320px
   border-radius: $big-radius
   background: $clr-white
@@ -130,24 +128,26 @@ $close-button-size: 36px
 
 
   &__fields
-    padding: $gutter-width / 2 $gutter-width / 1.5 !important
+    padding: $gutter-width !important
     overflow: hidden !important
 
+    @media #{$xs-dw}
+      padding: $gutter-width / 1.5 !important
 
   &__footer
     display: flex
     justify-content: space-between
     align-items: center
-    padding: $gutter-width / 1.5
+    padding: 0 $gutter-width $gutter-width
     border-bottom-left-radius: $big-radius !important
     border-bottom-right-radius: $big-radius !important
-    background: $clr-grey
 
     @media #{$mb-dw}
       position: absolute
       width: 100%
       bottom: 0
       left: 0
+      padding: $gutter-width / 1.5 !important
 
 
   &__confirmation

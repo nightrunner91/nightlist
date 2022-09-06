@@ -9,9 +9,20 @@
     margin-bottom: 0
 
     .grid__col
-      &:nth-child(n+7)
-        .card
-          mask-image: linear-gradient(to bottom, black 0%, transparent 25%)
+      @media #{$sm-dw}
+        &:nth-child(n+5)
+          .card
+            mask-image: linear-gradient(to bottom, black 0%, transparent 25%)
+
+      @media #{$xs-dw}
+        &:nth-child(n+4)
+          .card
+            mask-image: linear-gradient(to bottom, black 0%, transparent 25%)
+
+      @media #{$sm-up}
+        &:nth-child(n+7)
+          .card
+            mask-image: linear-gradient(to bottom, black 0%, transparent 25%)
 
 .card
   width: 100%

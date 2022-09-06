@@ -110,6 +110,18 @@ export default {
     }
   },
   computed: {
+    windowParams() {
+      return this.$store.state.windowParams
+    },
+
+    windowWidth() {
+      return this.windowParams.width
+    },
+
+    breakpoints() {
+      return this.$store.state.breakpoints
+    },
+
     games() { 
       return this.$store.state.games 
     },
@@ -169,6 +181,10 @@ export default {
   watch: {
     collection(oldVal, newVal) {
       this.prepareData()
+    },
+
+    windowWidth(oldVal, newVal) {
+      this.setPlatesHeight()
     }
   },
   methods: {

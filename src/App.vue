@@ -3,7 +3,6 @@
   div(id='app' class='page')
     app-preloader(:current='currentPage')
     app-gradients(:current='currentPage')
-    app-header
     main(class='content' v-if="" v-scrollbar)
       div(class='content__inner')
         transition(name='page' mode='out-in')
@@ -91,8 +90,6 @@ export default {
       this.closeModal()
       this.setDefaultContent(type)
     })
-
-    console.log(localStorage)
   }
 }
 </script>

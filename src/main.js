@@ -40,7 +40,6 @@ export const colors = {
 // ===================================== //
 
 // main:
-import appHeader from "./views/components/global/_header"
 import appSidebar from "./views/components/global/_sidebar"
 import appGradients from "./views/components/global/_gradients"
 import appPlaceholder from "./views/components/global/_placeholder"
@@ -50,7 +49,6 @@ import appSettings from "./views/components/global/_settings"
 import appPlate from "./views/components/global/_plate"
 import appCard from "./views/components/global/_card"
 
-Vue.component('app-header', appHeader)
 Vue.component('app-sidebar', appSidebar)
 Vue.component('app-gradients', appGradients)
 Vue.component('app-placeholder', appPlaceholder)
