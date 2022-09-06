@@ -15,7 +15,7 @@
         span(class='title__badge badge badge--medium') {{totalGames}}
         div(
           v-if="allowEdit"
-          class='button button--games title__button'
+          class='button button--games button--elevated title__button'
           :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
           v-ripple)

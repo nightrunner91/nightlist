@@ -15,7 +15,7 @@
         span(class='title__badge badge badge--medium') {{totalAnime}}
         div(
           v-if="allowEdit"
-          class='button button--anime title__button'
+          class='button button--anime button--elevated title__button'
           :class='{"button--iconed button--rounded" : windowParams.width <= breakpoints.mb}'
           @click='addSlot()'
           v-ripple)

@@ -4,7 +4,6 @@ import store from './store.js'
 
 import NProgress from 'nprogress'
 
-import Home from './views/pages/Home.vue'
 import Dashboard from './views/pages/Dashboard.vue'
 import Games from './views/pages/Games.vue'
 import TVshows from './views/pages/TVshows.vue'
@@ -26,7 +25,6 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
     id: 'home',
     mainMenu: false,
     redirect: '/dashboard'
