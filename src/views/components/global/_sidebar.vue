@@ -4,6 +4,12 @@
     class='sidebar'
     :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--opened" : !sidebarCollapsed && windowParams.width < breakpoints.lg}, {"sidebar--notransition" : noTransition}]')
 
+    //- div(
+    //-   v-for='route in routes'
+    //-   v-if='route.mainMenu && windowParams.width > breakpoints.mb'
+    //-   class='sidebar__gradient'
+    //-   :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
+
     button(
       v-if='windowParams.width <= breakpoints.lg && windowParams.width > breakpoints.mb'
       class='sidebar__hamburger hamburger hamburger--arrowalt'
@@ -23,17 +29,8 @@
       div(
         class='sidebar__avatar'
         :style='avatarStyles')
-      h3(class='sidebar__desc') Hi. I'm #[span Nikita].
+      h2(class='sidebar__title') Hi. I'm #[span Nikita].
       p(class='sidebar__desc') And this is everything I've ever <br />played, watched and read.
-      div(class='d-flex align-items-center sidebar__social')
-        a(
-          v-for='social in socials'
-          :key='social.id'
-          :href="social.href"
-          v-tooltip='{ content: social.tooltip, offset: 15}'
-          class='sidebar__soclink'
-          target='_blank')
-          svg(class='sidebar__socicon'): use(:xlink:href='`#social-${social.id}`')
 
     div(class='sidebar__menu')
       router-link(
@@ -60,6 +57,18 @@
         span(
           v-else
           class='sidebar__badge badge badge--small') {{categoryLength(route.id)}}
+
+    div(class='sidebar__separator')
+
+    div(class='d-flex align-items-center sidebar__social')
+      a(
+        v-for='social in socials'
+        :key='social.id'
+        :href="social.href"
+        v-tooltip='{ content: social.tooltip, offset: 5}'
+        class='sidebar__soclink'
+        target='_blank')
+        svg(class='sidebar__socicon'): use(:xlink:href='`#social-${social.id}`')
 
 </template>
 
@@ -153,6 +162,11 @@ export default {
 
     closeSettings() {
       this.settingsOpened = false
+    },
+
+    gradientActive(name) {
+      if (this.current == name) return true
+      return false
     },
 
     toggleSidebar() {

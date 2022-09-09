@@ -1,5 +1,8 @@
 $icons-size: 24px
 
+@mixin themed-colors($category-color)
+  background: linear-gradient(to bottom, darken($category-color, 10%) 0%, darken($category-color, 20%) 100%)
+
 @mixin collapsed-sidebar()
   .sidebar
     &__profile
@@ -59,8 +62,9 @@ $icons-size: 24px
   display: flex
   flex-direction: column
   order: 1
-  padding: $gutter-width * 2 $gutter-width
+  padding: $gutter-width * 3 $gutter-width $gutter-width / 1.5
   z-index: 3
+  //box-shadow: rgba(0, 0, 0, 0.1) 0px 30px 90px;
   width: 25%
   max-width: $sidebar-width
   height: 100vh
@@ -88,7 +92,7 @@ $icons-size: 24px
       display: none
 
   @media #{$lg-up}
-    background: rgba($clr-black, $light-opacity)
+    background: rgba($clr-white, $tiny-opacity / 2)
 
   @media #{$lg-dw}
     position: fixed
@@ -113,6 +117,38 @@ $icons-size: 24px
     background: rgba($clr-dark, $half-opacity)
 
 
+  &__gradient
+    position: absolute
+    top: 0
+    left: 0
+    z-index: -1
+    width: 100%
+    height: 100%
+    opacity: $transparent-opacity
+    transition: $slow-transition
+
+    &--active
+      opacity: $tiny-opacity
+
+    &--dashboard
+      @include themed-colors($clr-dashboard)
+
+    &--games
+      @include themed-colors($clr-games)
+
+    &--tvshows
+      @include themed-colors($clr-tvshows)
+
+    &--films
+      @include themed-colors($clr-films)
+
+    &--anime
+      @include themed-colors($clr-anime)
+
+    &--books
+      @include themed-colors($clr-books)
+
+
   &__hamburger
     position: absolute
     top: $gutter-width * 2
@@ -124,19 +160,17 @@ $icons-size: 24px
     position: relative
     display: flex
     flex-direction: column
-    align-items: center
-    margin-bottom: $gutter-width * 2
+    margin-bottom: $gutter-width * 3
     border-radius: $big-radius
-    text-align: center
 
   
   &__avatar
     position: relative
-    width: 120px
-    height: 120px
-    margin-bottom: $gutter-width
-    border-radius: $round-radius
-    box-shadow: $level-1
+    width: 100px
+    height: 100px
+    margin-bottom: $gutter-width / 1.5
+    border-radius: $base-radius
+    box-shadow: 0 19px 38px rgba(#701b7e,0.19), 0 15px 12px rgba(#701b7e,0.23)
     background-color: rgba($clr-white, $light-opacity)
     background-repeat: no-repeat
     background-position: center center
@@ -144,7 +178,7 @@ $icons-size: 24px
 
     &:before
       @include pseudoelem
-      @include svg-icon(120, 120, 'avatar')
+      @include svg-icon(100, 100, 'avatar')
       
       top: 0
       right: 0
@@ -153,20 +187,39 @@ $icons-size: 24px
       z-index: -1
       margin: auto
       opacity: $half-opacity
-      
-  
-  &__desc
-    margin-bottom: $gutter-width / 2
+
+
+  &__title
+    font-weight: 400
+    margin-bottom: $gutter-width / 4
     color: rgba($clr-white, $passive-opacity)
 
     span
       color: rgba($clr-white, $active-opacity)
+      font-weight: 600
+  
+  &__desc
+    margin-bottom: 0
+    color: rgba($clr-white, $half-opacity)
 
+  &__separator
+    width: 100%
+    height: 1px
+    background: rgba($clr-grey, $tiny-opacity)
+    margin-top: auto
+
+  &__social
+    display: flex
+    align-items: center
+    margin-top: $gutter-width / 1.5
 
   &__soclink
     position: relative
-    margin: 0 $gutter-width / 3 
-    opacity: $half-opacity
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-right: $gutter-width / 2
+    opacity: $small-opacity
     transition: $base-transition
 
     &:hover
@@ -174,7 +227,7 @@ $icons-size: 24px
 
 
   &__socicon
-    @include icon-size(24, 24)
+    @include icon-size(strip-unit($icons-size), strip-unit($icons-size))
     fill: $clr-white
 
 
