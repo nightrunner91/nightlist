@@ -126,7 +126,7 @@ export default {
 
   
   // Fonts
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&Open+Sans:400,700&display=swap')
+  @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;500;600;700&Open+Sans:400,700&display=swap')
     
   // Core
   @import "styles/core/colors"
