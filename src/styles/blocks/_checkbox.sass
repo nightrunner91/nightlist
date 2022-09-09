@@ -1,4 +1,4 @@
-$border-width: 1px
+$border-width: 2px
 $checkbox-size: 18px
   
 
@@ -15,7 +15,7 @@ $checkbox-size: 18px
     &:hover
       .checkbox
         &__input
-          background: $clr-grey
+          background: lighten($clr-dark, $hover-intensity)
 
 
   &__input
@@ -23,12 +23,12 @@ $checkbox-size: 18px
     width: $checkbox-size + $border-width*2
     height: $checkbox-size + $border-width*2
     margin-right: $gutter-width/3
-    border: $border-width solid $clr-grey
+    border: $border-width solid lighten($clr-dark, $hover-intensity)
     border-radius: $base-radius
     transition: $base-transition
 
     &--active
-      background: $clr-grey
+      background: lighten($clr-dark, $hover-intensity)
       
       &::before
         opacity: $active-opacity !important
@@ -44,6 +44,7 @@ $checkbox-size: 18px
       bottom: 0
       margin: auto
       opacity: $transparent-opacity
+      fill: $clr-grey
       transition: $base-transition
       transform: scale(0.8)
 
@@ -60,3 +61,4 @@ $checkbox-size: 18px
   &__text
     user-select: none
     line-height: 1
+    color: $clr-grey

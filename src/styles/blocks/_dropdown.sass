@@ -12,6 +12,7 @@ $visible-items: 4
     margin-bottom: $gutter-width/5
     font-size: 12px
     white-space: nowrap
+    color: $clr-grey
 
 
   &__toggle
@@ -25,7 +26,8 @@ $visible-items: 4
     border: 0
     outline: 0
     border-radius: $base-radius
-    background: $clr-grey
+    background: lighten($clr-dark, $hover-intensity)
+    color: $clr-grey
     cursor: pointer
     user-select: none
 
@@ -50,7 +52,7 @@ $visible-items: 4
     @include icon-size(18,18)
 
     margin-left: auto
-    fill: $clr-black
+    fill: $clr-grey
     transition: $base-transition
 
   
@@ -89,11 +91,10 @@ $visible-items: 4
     left: 0
     z-index: 1
     padding-right: 0 !important
-    border: 1px solid $clr-grey
-    border-top: none
+    border: 1px solid rgba($clr-dark, $half-opacity)
     border-bottom-left-radius: $base-radius !important
     border-bottom-right-radius: $base-radius !important
-    background: $clr-white
+    background: lighten($clr-dark, $hover-intensity)
     transition: none
     transform: translateY(-100%)
 
@@ -108,7 +109,8 @@ $visible-items: 4
     align-items: center
     height: $ui-height
     padding: 0 $gutter-width/2
-    border-top: 1px solid $clr-grey
+    border-top: 1px solid rgba($clr-dark, $half-opacity)
+    color: $clr-grey
     cursor: pointer
     transition: $base-transition
 
@@ -120,7 +122,7 @@ $visible-items: 4
       border-bottom-right-radius: $base-radius !important
 
     &:hover
-      background: rgba($clr-grey, $passive-opacity)
+      background: $clr-dark
 
 
   &__icon
@@ -128,3 +130,4 @@ $visible-items: 4
 
     margin-right: $gutter-width/4
     opacity: $half-opacity
+    fill: $clr-grey

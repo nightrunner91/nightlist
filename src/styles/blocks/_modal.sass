@@ -3,12 +3,6 @@ $close-button-size: 36px
 
 @mixin themed-colors($category-color)
   .modal
-    &__close
-      background: $category-color
-
-      &:hover
-        background: lighten($category-color, $hover-intensity)
-
     &__footer
       .button
         &--main
@@ -16,13 +10,13 @@ $close-button-size: 36px
           color: $clr-white
           
           &:hover
-            background: lighten($category-color, $hover-intensity)
+            background: darken($category-color, $hover-intensity)
 
         &--secondary
           margin-right: $gutter-width/4
-          background: $clr-white
-          box-shadow: inset 0px 0px 0px 1px rgba($category-color, $passive-opacity)
-          color: rgba($category-color, $passive-opacity)
+          background: $clr-dark
+          box-shadow: inset 0px 0px 0px 2px darken($category-color, $hover-intensity)
+          color: $category-color
 
           .button
             &__icon
@@ -30,12 +24,12 @@ $close-button-size: 36px
               opacity: $passive-opacity
 
           &:hover
-            box-shadow: inset 0px 0px 0px 1px $category-color
-            color: $category-color
+            box-shadow: inset 0px 0px 0px 2px darken($category-color, $hover-intensity)
+            color: darken($category-color, $hover-intensity)
 
             .button
               &__icon
-                opacity: $active-opacity
+                fill: darken($category-color, $hover-intensity)
 
 
 .modal-backdrop
@@ -56,10 +50,10 @@ $close-button-size: 36px
 .modal
   position: relative
   width: 50vw
-  max-width: 520px
+  max-width: 720px
   min-width: 320px
   border-radius: $big-radius
-  background: $clr-white
+  background: $clr-dark
   box-shadow: $level-3
   color: $clr-black
   will-change: opacity
@@ -104,12 +98,14 @@ $close-button-size: 36px
     z-index: 100
     width: $close-button-size
     height: $close-button-size
+    background: $clr-grey
     border-radius: $round-radius
     box-shadow: $level-2
     cursor: pointer
     transition: $base-transition
 
     &:hover
+      background: darken($clr-grey, $hover-intensity)
       box-shadow: $level-3
 
     @media #{$mb-dw}
@@ -120,7 +116,7 @@ $close-button-size: 36px
   &__cross
     @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
 
-    fill: $clr-white
+    fill: $clr-dark
     transition: $base-transition
 
   &__content
@@ -130,7 +126,7 @@ $close-button-size: 36px
 
 
   &__fields
-    padding: $gutter-width !important
+    padding: $gutter-width * 3 $gutter-width * 3 $gutter-width !important
     overflow: hidden !important
 
     @media #{$xs-dw}
@@ -140,7 +136,7 @@ $close-button-size: 36px
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 0 $gutter-width $gutter-width
+    padding: 0 $gutter-width * 3 $gutter-width * 3
     border-bottom-left-radius: $big-radius !important
     border-bottom-right-radius: $big-radius !important
 
