@@ -2,7 +2,7 @@
 
   transition(name='modal-fade')
 
-    div(class='modal-backdrop')
+    div(class='modal-backdrop modal-backdrop--games')
 
       div(class='modal modal--games')
 

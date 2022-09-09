@@ -2,7 +2,7 @@
 
   transition(name='modal-fade')
 
-    div(class='modal-backdrop')
+    div(class='modal-backdrop modal-backdrop--books')
 
       div(class='modal modal--books')
 
