@@ -1,9 +1,21 @@
-::-webkit-scrollbar 
-  width: 0 !important
-  opacity: 0 !important
-  visibility: hidden !important
+::-webkit-scrollbar
+  width: 3px
+  
+::-webkit-scrollbar-track
+  background: $clr-black
+
+::-webkit-scrollbar-thumb
+  background: $clr-grey
+
+::-webkit-scrollbar-thumb:hover
+  background: $clr-black
 
 .vb 
+  ::-webkit-scrollbar 
+    width: 0 !important
+    opacity: 0 !important
+    visibility: hidden !important
+
   flex: 1
 
   .vb-dragger 

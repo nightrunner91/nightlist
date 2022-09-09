@@ -39,6 +39,8 @@ $close-button-size: 36px
 
 
 .modal-backdrop
+  @include glass()
+  
   position: fixed
   display: flex
   justify-content: center
@@ -47,14 +49,14 @@ $close-button-size: 36px
   bottom: 0
   right: 0
   left: 0
-  z-index: 9999
-  background: rgba($clr-black, $half-opacity)
+  z-index: 99999
+  background: rgba($clr-black, $passive-opacity)
 
 
 .modal
   position: relative
   width: 50vw
-  max-width: 480px
+  max-width: 520px
   min-width: 320px
   border-radius: $big-radius
   background: $clr-white

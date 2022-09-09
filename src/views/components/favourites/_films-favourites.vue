@@ -30,7 +30,9 @@
           :data='card'
           :type='"films"')
 
-    div(class='expand')
+    div(
+      v-if='favouritesLength > 0'
+      class='expand')
       div(
         v-if='!cardsVisible'
         class='button button--ghosted'

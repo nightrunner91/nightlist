@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import { projectName, eventBus } from "./main"
+import backUp from "../backup.json"
 
 Vue.use(Vuex)
 
@@ -42,6 +43,7 @@ function removeArrEl(arr, value) {
 export default new Vuex.Store({
   state: {
     allowEdit: false,
+    storageType: 'backup', // local | remote | backup
     collection: [],
     settings: {
       binId: '',
@@ -442,18 +444,6 @@ export default new Vuex.Store({
       })
     },
 
-    async restoreSettings({ commit }) {
-      let storage = this._vm.$storage
-
-      let binId = storage.get('binId')
-      let username = storage.get('username')
-      let avatar = storage.get('avatar')
-
-      if (binId != null) commit('SAVE_BIN_ID', binId.key)
-      if (username != null) commit('SAVE_USERNAME', username.key)
-      if (avatar != null) commit('SAVE_AVATAR', avatar.key)
-    },
-
     async prepareBackup({ commit }) {
       commit('PREPARE_BACKUP')
     },
@@ -488,73 +478,117 @@ export default new Vuex.Store({
     },
 
     async getBackup({ dispatch, state, commit }) {
-      await dispatch('restoreCollection')
-      await dispatch('restoreSettings')
-
       commit('CHANGE_SERVER_STATE', {
         status: 'loading',
         message: 'loading collection...'
       })
-      
-      axios
 
-        .get('/b/nightlist', state.requestHeaders)
+      let storage = this._vm.$storage
+      let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
 
-        .then(response => {
-          let storage = this._vm.$storage
+      // JSONbin storage system
+      if (state.storageType == 'remote') {
+        await dispatch('restoreCollection')
 
-          commit('CHANGE_SERVER_STATE', {
-            status: 'success',
-            message: 'updated'
-          })
+        axios
 
-          let settings = response.data.settings
-          let items = response.data.collection
-          let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
+          .get('/b/nightlist', state.requestHeaders)
 
-          for (let index = 0; index < storedItems.length; index++) {
-            storedItems[index] = storedItems[index].replace(projectName, '')
-          }
+          .then(response => {
+            commit('CHANGE_SERVER_STATE', {
+              status: 'success',
+              message: 'updated'
+            })
 
-          if (items.length && Array.isArray(items)) {
-            state.collection = []
-            for (let index = 0; index < items.length; index++) {
-              if (items[index].id != undefined) {
-                removeArrEl(storedItems, 'slot_' + items[index].id)
-                storage.set('slot_' + items[index].id, { key: items[index] })
-                commit('APPLY_SLOT', {
-                  content: items[index], 
-                  scenario: 'start'
-                })
+            let items = response.data
+
+            for (let index = 0; index < storedItems.length; index++) {
+              storedItems[index] = storedItems[index].replace(projectName, '')
+            }
+
+            if (items.length && Array.isArray(items)) {
+              state.collection = []
+              for (let index = 0; index < items.length; index++) {
+                if (items[index].id != undefined) {
+                  removeArrEl(storedItems, 'slot_' + items[index].id)
+                  storage.set('slot_' + items[index].id, { key: items[index] })
+                  commit('APPLY_SLOT', {
+                    content: items[index], 
+                    scenario: 'start'
+                  })
+                }
               }
             }
-          }
 
-          if (Object.keys(settings).length > 0 && typeof settings == 'object') {
-            Object.keys(settings).forEach(key => {
-              Vue.set(state.settings, key, settings[key])
-              storage.set('username', {key: settings.username})
-              storage.set('avatar', {key: settings.avatar})
+            if (storedItems.length && Array.isArray(storedItems)) {
+              for (let index = 0; index < storedItems.length; index++) {
+                storage.remove(storedItems[index])
+              }
+            }
+          })
+
+          .catch(error => {
+            console.log("%c" + error.message, errStyle)
+
+            commit('CHANGE_SERVER_STATE', {
+              status: 'error',
+              message: 'failed to restore collection!'
             })
-          }
+          })
 
-          if (storedItems.length && Array.isArray(storedItems)) {
-            for (let index = 0; index < storedItems.length; index++) {
-              storage.remove(storedItems[index])
+      } 
+      
+      // Backup file storage system
+      else if (state.storageType == 'backup') {
+        let items = backUp
+
+        for (let index = 0; index < storedItems.length; index++) {
+          storedItems[index] = storedItems[index].replace(projectName, '')
+        }
+
+        if (items.length && Array.isArray(items)) {
+          state.collection = []
+          for (let index = 0; index < items.length; index++) {
+            if (items[index].id != undefined) {
+              removeArrEl(storedItems, 'slot_' + items[index].id)
+              storage.set('slot_' + items[index].id, { key: items[index] })
+              commit('APPLY_SLOT', {
+                content: items[index], 
+                scenario: 'start'
+              })
             }
           }
-        })
+        }
 
-        .catch(error => {
-          console.log("%c" + error.message, errStyle)
+        if (storedItems.length && Array.isArray(storedItems)) {
+          for (let index = 0; index < storedItems.length; index++) {
+            storage.remove(storedItems[index])
+          }
+        }
 
-          commit('CHANGE_SERVER_STATE', {
-            status: 'error',
-            message: 'failed to restore collection!'
-          })
+        commit('CHANGE_SERVER_STATE', {
+          status: 'success',
+          message: 'updated'
         })
+      }
+
+      // localStorage storage system
+      else if (state.storageType == 'local') {
+        dispatch('restoreCollection')
+
+        commit('CHANGE_SERVER_STATE', {
+          status: 'success',
+          message: 'updated'
+        })
+      }
+
+      else {
+        commit('CHANGE_SERVER_STATE', {
+          status: 'error',
+          message: 'failed to restore collection!'
+        })
+      }
     }
-
 
   }
 })

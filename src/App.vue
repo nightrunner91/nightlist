@@ -3,7 +3,7 @@
   div(id='app' class='page')
     app-preloader(:current='currentPage')
     app-gradients(:current='currentPage')
-    main(class='content' v-if="" v-scrollbar)
+    main(class='content' v-if="")
       div(class='content__inner')
         transition(name='page' mode='out-in')
           router-view
@@ -75,7 +75,15 @@ export default {
 
     saveAllowState() {
       this.$store.commit('SAVE_ALLOW_STATE', process.env.NODE_ENV)
-    }
+    },
+
+    lockWindow() {
+      document.body.classList.add('body--locked')
+    },
+
+    unlockWindow() {
+      document.body.classList.remove('body--locked')
+    },
   },
   mounted() {
     this.$router.push('/dashboard')
@@ -84,11 +92,13 @@ export default {
 
     eventBus.$on('openModal', (purpose, type) => {
       this.openModal(purpose, type)
+      this.lockWindow()
     })
     
     eventBus.$on('closeModal', type => {
       this.closeModal()
       this.setDefaultContent(type)
+      this.unlockWindow()
     })
   }
 }

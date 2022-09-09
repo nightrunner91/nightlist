@@ -6,9 +6,7 @@
       :purpose='modalState.purpose'
       v-show='modalState.visibility')
 
-    div(
-      class='section__content'
-      :class='{"section__content--blured" : modalState.visibility && windowParams.width > breakpoints.mb}')
+    div(class='section__content')
 
       div(class='title title--main')
         h1(class='title__name') {{$options.pageTitle}}

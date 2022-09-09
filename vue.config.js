@@ -5,6 +5,9 @@ module.exports = {
     ? '/nightlist/'
     : '/',
   lintOnSave: false,
+  devServer: {
+    port: 9191,
+  },
   configureWebpack: {
     plugins: [
       new webpack.optimize.LimitChunkCountPlugin({

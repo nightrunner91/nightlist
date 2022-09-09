@@ -22,9 +22,7 @@
       :purpose='modalState.purpose'
       v-show='modalState.visibility && modalState.type == "books"')
 
-    div(
-      class='section__content'
-      :class='{"section__content--blured" : modalState.visibility}')
+    div(class='section__content')
 
       div(class='title title--dashboard')
         h1(class='title__name') {{$options.pageTitle}}
@@ -249,9 +247,11 @@ export default {
       this.$nextTick(() => {
         let plates = document.querySelectorAll('.plates')
         let cards = document.querySelectorAll('.card')
-        let cardHeight = cards[0].clientHeight * 2 - cards[0].clientHeight / 2.3
-        for (let n = 0; n < plates.length; n++) {
-          plates[n].style = `max-height: ${cardHeight}px`
+        if (cards && cards.length > 0) {
+          let cardHeight = cards[0].clientHeight * 2 - cards[0].clientHeight / 2.3
+          for (let n = 0; n < plates.length; n++) {
+            plates[n].style = `max-height: ${cardHeight}px`
+          }
         }
       })
     },
