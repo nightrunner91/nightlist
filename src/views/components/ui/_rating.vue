@@ -1,8 +1,6 @@
 <template lang='pug'>
 
-  div(
-    class='rating'
-    :class='"rating--" + type')
+  div(class='rating')
     div(class='rating__label') Rating
     div(class='rating__body')
       div(

@@ -56,10 +56,10 @@
             div(class='grid__row')
               //- RATING -//
               div(class='grid__col grid__col--lg-24 grid__col--md-24 grid__col--sm-24 grid__col--xs-24 grid__col--mb-26')
-                app-rating(:currentRating='current.rating' :type='"games"')
+                app-rating(:currentRating='current.rating')
               //- FAVOURITE -//
               div(class='grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-12 grid__col--xs-12 grid__col--mb-10 grid__col--right')
-                app-favourite(:currentFavourite='current.favourite' :type='"games"')
+                app-favourite(:currentFavourite='current.favourite')
 
             //- PLATFORM -//
             app-dropdown(
@@ -81,7 +81,7 @@
 
             div(class='grid__row')
               //- HOURS -//
-              div(class='grid__col grid__col--lg-16 grid__col--md-16 grid__col--sm-16 grid__col--xs-16 grid__col--mb-12')
+              div(class='grid__col grid__col--mb-12')
                 div(class='input')
                   label(class='input__label') Hours played
                   input(
@@ -93,7 +93,7 @@
                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
                     @wheel='changeNumberVal($event, "hours")')
               //- HOURS APPROXIMATE -//
-              div(class='grid__col grid__col--lg-20 grid__col--md-20 grid__col--sm-20 grid__col--xs-20 grid__col--mb-24 grid__col--right')
+              div(class='grid__col grid__col--mb-24 grid__col--right')
                 app-checkbox(
                   :text='"Approximate value"'
                   :currentCheckbox='current.hoursApproximate'

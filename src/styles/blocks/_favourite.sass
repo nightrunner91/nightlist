@@ -1,41 +1,19 @@
 $favourite-size: 40px
 
 
-@mixin themed-colors($category-name)
-  .favourite
-    &__icon
-      &--active
-        @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-active-' + $category-name)
-
-
 .favourite
   display: flex
   flex-direction: column
   align-items: flex-end
-  margin-bottom: $gutter-width/2
+  margin-bottom: $gutter-width
   text-align: right
-
-  &--games
-    @include themed-colors('games')
-
-  &--tvshows
-    @include themed-colors('tvshows')
-
-  &--films
-    @include themed-colors('films')
-
-  &--anime
-    @include themed-colors('anime')
-
-  &--books
-    @include themed-colors('books')
 
 
   &__label
     display: flex
     margin-bottom: $gutter-width/5
     font-size: 12px
-    color: $clr-grey
+    color: rgba($clr-grey, $half-opacity)
 
   
   &__icon
@@ -47,6 +25,7 @@ $favourite-size: 40px
 
       &:hover
         @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-hovered-neutral')
+        opacity: $passive-opacity
 
     &--active
-      opacity: $passive-opacity
+      @include svg-icon(strip-unit($favourite-size), strip-unit($favourite-size), 'favourite-hovered-neutral')

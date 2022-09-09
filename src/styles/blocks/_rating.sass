@@ -10,29 +10,13 @@ $star-size: 40px
 
 .rating
   position: relative
-  margin-bottom: $gutter-width/2
-
-  &--games
-    @include themed-colors('games')
-
-  &--tvshows
-    @include themed-colors('tvshows')
-
-  &--films
-    @include themed-colors('films')
-
-  &--anime
-    @include themed-colors('anime')
-
-  &--books
-    @include themed-colors('books')
-
+  margin-bottom: $gutter-width/1.2
 
   &__label
     display: flex
     margin-bottom: $gutter-width/5
     font-size: 12px
-    color: $clr-grey
+    color: rgba($clr-grey, $half-opacity)
 
 
   &__body
@@ -46,14 +30,16 @@ $star-size: 40px
 
     position: absolute
     cursor: pointer
+    transition: $base-transition
 
     &--excluded
       @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-passive-neutral')
 
-    &--included
+    &--included,
+    &--active
       @include svg-icon(strip-unit($star-size), strip-unit($star-size), 'star-hovered-neutral')
 
-    &--active
+    &--included
       opacity: $passive-opacity
 
     &--1

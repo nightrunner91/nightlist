@@ -3,6 +3,9 @@ $close-button-size: 36px
 
 @mixin themed-colors($category-color)
   .modal
+    &__cross
+      fill: $category-color 
+
     &__footer
       .button
         &--main
@@ -15,7 +18,7 @@ $close-button-size: 36px
         &--secondary
           margin-right: $gutter-width/4
           background: $clr-dark
-          box-shadow: inset 0px 0px 0px 2px darken($category-color, $hover-intensity)
+          box-shadow: inset 0px 0px 0px 1px darken($category-color, $hover-intensity)
           color: $category-color
 
           .button
@@ -24,7 +27,7 @@ $close-button-size: 36px
               opacity: $passive-opacity
 
           &:hover
-            box-shadow: inset 0px 0px 0px 2px darken($category-color, $hover-intensity)
+            box-shadow: inset 0px 0px 0px 1px darken($category-color, $hover-intensity)
             color: darken($category-color, $hover-intensity)
 
             .button
@@ -50,7 +53,7 @@ $close-button-size: 36px
 .modal
   position: relative
   width: 50vw
-  max-width: 720px
+  max-width: 800px
   min-width: 320px
   border-radius: $big-radius
   background: $clr-dark
@@ -116,7 +119,6 @@ $close-button-size: 36px
   &__cross
     @include icon-size(strip-unit($close-button-size)/1.5, strip-unit($close-button-size)/1.5)
 
-    fill: $clr-dark
     transition: $base-transition
 
   &__content
