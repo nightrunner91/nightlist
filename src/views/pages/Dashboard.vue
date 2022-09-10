@@ -25,8 +25,8 @@
     div(class='section__content')
 
       div(class='title title--dashboard')
-        h1(class='title__name') {{$options.pageTitle}}
-        span(class='title__badge badge badge--medium') {{favouritesLength}}
+        h1(class='title__greeting') Hi. I'm #[span Nikita].
+        p(class='title__desc') And this is everything I've ever played, watched and read.
 
       favourites-search
 

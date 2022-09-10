@@ -5,22 +5,11 @@ $icons-size: 24px
 
 @mixin collapsed-sidebar()
   .sidebar
-    &__title,
-    &__desc,
     &__social,
-    &__username,
     &__name,
-    &__avatar,
     &__badge,
     &__separator
       display: none !important
-
-
-    &__link
-      display: flex
-      justify-content: center
-      align-items: center
-
 
     &__icon
       margin: 0
@@ -33,27 +22,26 @@ $icons-size: 24px
   display: flex
   flex-direction: column
   order: 1
-  padding: $gutter-width * 3 $gutter-width $gutter-width / 1.5
+  padding: $gutter-width * 4 $gutter-width $gutter-width / 1.5
   z-index: 3
   width: 25%
   max-width: $sidebar-width
   height: 100vh
   min-width: 320px
-  background: rgba($clr-white, $tiny-opacity / 2)
+  background: rgba($clr-black, $small-opacity / 2)
   transition: $base-transition
+
+  &--opened
+    background: rgba($clr-black, $half-opacity)
   
   &--notransition
     transition: $no-transition
-
-  &--opened
-    background: rgba($clr-dark, $barely-opacity) !important
 
   &--collapsed
     @include collapsed-sidebar
 
     width: $sidebar-collapsed-width
     min-width: $sidebar-collapsed-width
-    padding: $gutter-width * 2 0
 
   &--blured
     @include blur()
@@ -78,7 +66,6 @@ $icons-size: 24px
     max-height: $sidebar-mobile-height !important
     order: 3
     padding: 0 !important
-    background: rgba($clr-dark, $barely-opacity) !important
 
   &__gradient
     position: absolute
@@ -118,55 +105,8 @@ $icons-size: 24px
     left: $gutter-width
     z-index: 10
 
-
-  &__profile
-    position: relative
-    display: flex
-    flex-direction: column
-    margin-bottom: $gutter-width * 3
-    border-radius: $big-radius
-
-  
-  &__avatar
-    position: relative
-    width: 100px
-    height: 100px
-    margin-bottom: $gutter-width / 1.5
-    border-radius: $base-radius
-    box-shadow: 0 19px 38px rgba(#701b7e,0.19), 0 15px 12px rgba(#701b7e,0.23)
-    background-color: rgba($clr-white, $light-opacity)
-    background-repeat: no-repeat
-    background-position: center center
-    background-size: cover
-    user-select: none
-
-    &:before
-      @include pseudoelem
-      @include svg-icon(100, 100, 'avatar')
-      
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
-      z-index: -1
-      margin: auto
-      opacity: $half-opacity
-
-
-  &__title
-    font-weight: 400
-    margin-bottom: $gutter-width / 4
-    color: rgba($clr-white, $passive-opacity)
-    transform: scale(1)
-
-    span
-      color: rgba($clr-white, $active-opacity)
-      font-weight: 500
-  
-  &__desc
-    margin-bottom: 0
-    color: rgba($clr-white, $half-opacity)
-    transform: scale(1)
+    @media #{$mb-dw}
+      display: none !important
 
   &__separator
     width: 100%

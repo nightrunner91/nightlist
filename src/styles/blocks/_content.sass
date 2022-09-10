@@ -5,20 +5,19 @@
   order: 2
   min-height: 100vh
   overflow: hidden
-  
-  @media #{$lg-up}
-    padding-left: $sidebar-width
+  padding-left: $sidebar-collapsed-width
 
   @media #{$mb-dw}
+    padding-left: 0
     height: calc(100vh - #{$sidebar-mobile-height}*2)
 
 
   &__inner
     @media #{$lg-dw}
-      padding: $gutter-width*2 0 $gutter-width $sidebar-collapsed-width !important
+      padding: $gutter-width*2 0 $gutter-width
 
     @media #{$lg-up}
       padding: $gutter-width*3 0 $gutter-width
 
     @media #{$mb-dw}
-      padding: $gutter-width 0 !important
+      padding: $gutter-width 0

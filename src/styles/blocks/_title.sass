@@ -39,6 +39,8 @@
     padding: 0 $gutter-width / 2
 
   &--dashboard
+    flex-direction: column
+    align-items: flex-start
     margin-bottom: $gutter-width * 1.3
     padding: 0 $gutter-width/2.5
 
@@ -47,6 +49,18 @@
     margin-bottom: 0
     line-height: 1
 
+  
+  &__greeting
+    margin-bottom: $gutter-width / 8
+    color: rgba($clr-white, $passive-opacity)
+
+    span
+      color: $clr-white
+
+  &__desc
+    margin-bottom: $gutter-width / 3
+    font-size: 1.2rem
+    color: rgba($clr-white, $passive-opacity)
 
   &__icon
     @include icon-size(24,24)

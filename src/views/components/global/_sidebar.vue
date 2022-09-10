@@ -2,26 +2,15 @@
   
   aside(
     class='sidebar'
-    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--opened" : !sidebarCollapsed && windowParams.width < breakpoints.lg}, {"sidebar--notransition" : noTransition}]')
+    :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--opened" : !sidebarCollapsed}, {"sidebar--notransition" : noTransition}]')
 
     button(
-      v-if='windowParams.width <= breakpoints.lg && windowParams.width > breakpoints.mb'
       class='sidebar__hamburger hamburger hamburger--arrowalt'
       :class='{ "is-active" : !sidebarCollapsed }'
       type='button'
       @click='toggleSidebar()')
       span(class='hamburger-box')
         span(class='hamburger-inner')
-
-    div(
-      v-if='windowParams.width > breakpoints.mb'
-      class='sidebar__profile'
-      :class='{"sidebar__profile--collapsed" : sidebarCollapsed}')
-      img(
-        class='sidebar__avatar'
-        :src='require(`../../../assets/avatar.jpg`)')
-      h2(class='sidebar__title') Hi. I'm #[span Nikita].
-      p(class='sidebar__desc') And this is everything I've ever <br />played, watched and read.
 
     div(class='sidebar__menu')
       router-link(
@@ -73,7 +62,7 @@ export default {
   },
   data() {
     return {
-      sidebarCollapsed: false,
+      sidebarCollapsed: true,
       noTransition: false
     }
   },
@@ -113,11 +102,11 @@ export default {
   },
   methods: {
     handleResize() {
-      if (this.windowParams.width > this.breakpoints.lg && this.sidebarCollapsed) {
-        this.openSidebar()
-      } else {
-        this.collapseSidebar()
-      }
+      this.collapseSidebar()
+    },
+
+    collapseSidebar() {
+      this.sidebarCollapsed = true
     },
 
     categoryLength(id) {
@@ -144,16 +133,6 @@ export default {
     openSidebar() {
       this.sidebarCollapsed = false
     },
-
-    collapseSidebar(scenario) {
-      if (this.windowParams.width <= this.breakpoints.lg) {
-        if (scenario == 'start') {
-          this.noTransition = true
-          setTimeout(() => this.noTransition = false, 300)
-        }
-        this.sidebarCollapsed = true
-      }
-    }
   },
   mounted() {
     eventBus.$on('openSettings', () => {
@@ -161,7 +140,6 @@ export default {
     })
 
     this.handleResize()
-    this.collapseSidebar('start')
   }
 }
 </script>
