@@ -23,7 +23,7 @@
       :class='{ "plates--hidden" : !cardsVisible }')
 
       div(
-        class='grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-6 grid__col--xs-9 grid__col--mb-12'
+        class='grid__col grid__col--lg-4 grid__col--md-6 grid__col--sm-6 grid__col--xs-9 grid__col--mb-12'
         v-for='(card, index) in favouritesData')
 
         app-card(
