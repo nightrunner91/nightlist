@@ -26,6 +26,10 @@ export default {
     allowEdit() {
       return this.$store.state.allowEdit
     },
+
+    collection() {
+      return this.$store.state.collection
+    },
     
     currentPage() {
       let rName = this.$route.name
@@ -50,6 +54,24 @@ export default {
       this.$store.commit('SAVE_WINDOW_PARAMS', {
         width: window.innerWidth,
         height: window.innerHeight
+      })
+    },
+
+    watchForKeyboard() {
+      document.addEventListener('keydown', e => {
+        const preparedData = this.collection
+
+        // Ctrl + I to save json backup file
+        if (e.keyCode == 73 && e.ctrlKey) {
+          function download(content, fileName, contentType) {
+            var a = document.createElement("a")
+            var file = new Blob([content], {type: contentType})
+            a.href = URL.createObjectURL(file)
+            a.download = fileName
+            a.click()
+          }
+          download(JSON.stringify(preparedData), 'backup.json', 'application/json')
+        }
       })
     },
 
@@ -89,6 +111,8 @@ export default {
     this.$router.push('/dashboard')
 
     this.$store.dispatch('getBackup')
+
+    this.watchForKeyboard()
 
     eventBus.$on('openModal', (purpose, type) => {
       this.openModal(purpose, type)
