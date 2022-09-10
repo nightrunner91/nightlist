@@ -5,237 +5,47 @@
     //- ===== -//
     //- TITLE -//
     //- ===== -//
-    div(
-      class='title title--secondary'
-      @click='switchTable()')
+    div(class='title title--static')
       svg(
         class='title__icon'
         v-if='windowParams.width > breakpoints.mb'): use(xlink:href='#bookmark-active-tvshows')
       h2(class='title__name') Favourite TV Shows
       span(class='title__badge badge badge--medium') {{favouritesLength}}
-      svg(
-        class='title__chevron'
-        :class='[{"title__chevron--closed" : !tableVisible}, {"title__chevron--notransition" : noTransition}]'): use(xlink:href='#chevron')
 
     //- ===== -//
-    //- TABLE -//
+    //- CARDS -//
     //- ===== -//
     div(
-      class='table' 
-      :style='tableHeight'
-      :class='[{"table--hidden" : !tableVisible}, {"table--notransition" : noTransition}]'
-      v-if='favouritesLength > 0')
+      ref="plates"
+      v-if='favouritesLength > 0'
+      class='plates'
+      :style=' cardsVisible ? "max-height: 100000px" : ""'
+      :class='{ "plates--hidden" : !cardsVisible }')
 
-      //- ====== -//
-      //- HEADER -//
-      //- ====== -//
-      
-      //- DESKTOP -//
       div(
-        class='table__header'
-        v-if='currentStructure == "desktop"')
+        class='grid__col grid__col--lg-6 grid__col--md-6 grid__col--sm-6 grid__col--xs-9 grid__col--mb-12'
+        v-for='(card, index) in favouritesData')
 
-        //- ORDER
-        div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1')
-        
-        //- TITLE
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11'
-          :class='[{"slot__cell--active" : criteria == "title"}]'
-          @click='sortData("title", "switch")')
-          span Title
-          svg(
-            v-if='criteria == "title"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
+        app-card(
+          :data='card'
+          :type='"tvshows"')
 
-        //- STATUS
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3'
-          :class='{"slot__cell--active" : criteria == "status"}'
-          @click='sortData("status", "switch")')
-          span Status
-          svg(
-            v-if='criteria == "status"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-
-        //- PROGRESS
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9'
-          :class='{"slot__cell--active" : criteria == "progress"}'
-          @click='sortData("progress", "switch")')
-          span Progress
-          svg(
-            v-if='criteria == "progress"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-        
-        //- FAVOURITE
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-4 grid__col--md-4 grid__col--sm-4'
-          :class='{"slot__cell--active" : criteria == "favourite"}'
-          @click='sortData("favourite", "switch")')
-          span Favourite
-          svg(
-            v-if='criteria == "favourite"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-        
-        //- RATING
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5'
-          :class='{"slot__cell--active" : criteria == "rating"}'
-          @click='sortData("rating", "switch")')
-          span Rating
-          svg(
-            v-if='criteria == "rating"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-        
-        //- HOURS
-        div(
-          class='slot__cell slot__cell--functional grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right'
-          :class='{"slot__cell--active" : criteria == "hours"}'
-          @click='sortData("hours", "switch")')
-          span Hours
-          svg(
-            v-if='criteria == "hours"'
-            class='table__chevron' 
-            :class='chevronPosition'): use(xlink:href='#chevron')
-
-      //- ==== -//
-      //- BODY -//
-      //- ==== -//
-
-      //- DESKTOP -//
+    div(
+      v-if='favouritesLength > 0'
+      class='expand')
       div(
-        class='table__body'
-        v-if='currentStructure == "desktop"')
+        v-if='!cardsVisible'
+        class='button button--ghosted'
+        @click='toggleCards()')
+        span(class='button__text') View More
+        svg(class='expand__chevron'): use(xlink:href='#chevron')
 
-        transition-group
-
-          div(
-            class='slot' 
-            ref='slot'
-            :key='slot.id'
-            :class='[{"slot--refreshed" : slot.refreshed}, { "cursor-pointer" : allowEdit }]'
-            v-for='(slot, index) in favouritesData'
-            @click='editSlot(slot.id, $event)')
-            
-            //- ORDER
-            div(class='slot__cell grid__col grid__col--lg-1 grid__col--md-1 grid__col--sm-1') {{index + 1}}
-            
-            //- TITLE
-            div(
-              class='slot__cell grid__col grid__col grid__col--lg-12 grid__col--md-12 grid__col--sm-11')
-              span {{slot.title}}
-              a(
-                :ref='"redirect"'
-                rel='nofollow'
-                :href='slot.link'
-                target='_blank'
-                class='slot__link'
-                v-if='slot.link.length')
-                svg(class='slot__redirect'): use(xlink:href='#link')
-
-            //- STATUS
-            div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3')
-              svg(
-                class='slot__status'
-                v-tooltip='{ content: statusName(slot.status), offset: 5}'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.status")
-
-            //- PROGRESS
-            div(class='slot__cell grid__col grid__col--lg-8 grid__col--md-8 grid__col--sm-9')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
-            
-            //- FAVOURITE
-            div(
-              class='slot__cell grid__col grid__col--lg-4 grid__col--md-3 grid__col--sm-4')
-              svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
-            
-            //- RATING
-            div(
-              class='slot__cell grid__col grid__col--lg-5 grid__col--md-5 grid__col--sm-5')
-              div(class='slot__rating')
-                svg(
-                  class='slot__star slot__star--active' 
-                  :class='"slot__star--" + (index + 1)'
-                  v-for='(star, index) in slot.rating'): use(xlink:href='#star-active-w')
-                svg(
-                  class='slot__star slot__star--passive' 
-                  :class='"slot__star--" + (index + 1)'
-                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-            
-            //- HOURS
-            div(
-              class='slot__cell grid__col grid__col--lg-3 grid__col--md-3 grid__col--sm-3 grid__col--right')
-              svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
-              span(v-if='slot.hours != undefined') {{slot.hours}}
-
-      //- TABLETS & MOBILE -//
       div(
-        class='table__body'
-        v-if='currentStructure == "tablets"')
-
-        transition-group
-
-          div(
-            class='slot' 
-            ref='slot'
-            :key='slot.id'
-            :class='{"slot--refreshed" : slot.refreshed }'
-            v-for='(slot, index) in favouritesData'
-            @click='editSlot(slot.id, $event)')
-
-            //- header
-            div(class='slot__header')
-
-              div(class='slot__index') {{ index + 1 }}
-              div(class='slot__title')
-                span {{slot.title}}
-                a(
-                  :ref='"redirect"'
-                  rel='nofollow'
-                  :href='slot.link'
-                  target='_blank'
-                  class='slot__link'
-                  v-if='slot.link.length')
-                  svg(class='slot__redirect'): use(xlink:href='#link')
-              svg(class='slot__platform'): use(:xlink:href="require('@/assets/sprite.svg')+ '#' + slot.platform")
-
-            div(class='slot__middle')
-              app-progress(
-                :viewedSeasons='slot.viewedSeasons'
-                :totalSeasons='slot.totalSeasons'
-                :currentSeason='slot.currentSeason'
-                :currentEpisode='slot.currentEpisode'
-                :progress='slot.progress')
-
-            div(class='slot__bottom')
-
-              div(class='slot__rating')
-                svg(
-                  class='slot__star slot__star--active' 
-                  :class='"slot__star--" + (index + 1)'
-                  v-for='(star, index) in slot.rating'): use(xlink:href='#star-active-w')
-                svg(
-                  class='slot__star slot__star--passive' 
-                  :class='"slot__star--" + (index + 1)'
-                  v-for='(rating, index) in 5'): use(xlink:href='#star-passive-w')
-
-              svg(class='slot__favourite' v-if='slot.favourite'): use(xlink:href='#favourite')
-
-              div(class='slot__hours')
-                svg(class='slot__tilda' v-if='slot.hoursApproximate'): use(xlink:href='#tilda')
-                span(v-if='slot.hours != undefined') {{slot.hours}}
-                svg(class='slot__clock'): use(xlink:href='#clock')
+        v-else
+        class='button button--ghosted'
+        @click='viewAll()')
+        span(class='button__text') View All TV Shows
+        svg(class='expand__chevron rotate-minus-90'): use(xlink:href='#chevron')
 
     app-placeholder(
       v-if='favouritesLength == 0'
@@ -258,7 +68,7 @@ export default {
       direction: true,
       stashedData: [],
       favouritesData: [],
-      tableVisible: true,
+      cardsVisible: false,
       noTransition: true,
       currentStructure: undefined
     }
@@ -308,8 +118,7 @@ export default {
       if (
         this.criteria == 'favourite' || 
         this.criteria == 'rating' || 
-        this.criteria == 'hours' ||
-        this.criteria == 'progress') {
+        this.criteria == 'hours') {
         // descending
         if (this.direction) {
           conditionOne = 1
@@ -333,22 +142,15 @@ export default {
 
     switchTable(state) {
       if (state) {
-        this.tableVisible = state
+        this.cardsVisible = state
       } else {
-        this.tableVisible = !this.tableVisible
+        this.cardsVisible = !this.cardsVisible
       }
-      this.$storage.set(this.tableVisibilityName, { key: this.tableVisible })
+      this.$storage.set(this.tableVisibilityName, { key: this.cardsVisible })
     },
 
     setDefaultTableState() {
-      this.tableVisible = true
-    },
-
-    setTableState() {
-      let storedState = this.$storage.get(this.tableVisibilityName, this.setDefaultTableState())
-      if (storedState != null) {
-        this.tableVisible = storedState.key
-      }
+      this.cardsVisible = true
     },
 
     removeNoTransition() {
@@ -364,12 +166,12 @@ export default {
       })
     },
 
-    editSlot(id, event) {
-      if (event.target.className == 'slot__link') return
-      else {
-        this.$store.commit('CHANGE_CONTENT', this.tvshowsFavourites.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit', 'tvshows')
-      }
+    toggleCards() {
+      this.cardsVisible = !this.cardsVisible
+    },
+
+    viewAll() {
+      this.$router.push( { name: 'TV Shows' } )
     },
 
     statusName(id) {
@@ -384,13 +186,9 @@ export default {
       if (this.windowParams.width > this.breakpoints.sm) {
         this.currentStructure = 'desktop'
       }
-    }
+    },
   },
   computed: {
-    allowEdit() {
-      return this.$store.state.allowEdit
-    },
-    
     tvshows() {
       return this.$store.state.tvshows
     },
@@ -416,12 +214,6 @@ export default {
       return this.favouritesData.length
     },
 
-    tableHeight() {
-      if (this.windowParams.width > this.breakpoints.sm) {
-        return 'max-height: ' + (40 * this.favouritesData.length + 40) + 'px'
-      }
-    },
-
     placeholderStatus() {
       return {
         title: 'No favourites yet',
@@ -432,7 +224,6 @@ export default {
   mounted() {
     this.stashData()
     this.sortData(this.criteria, 'default')
-    this.setTableState()
     this.removeNoTransition()
     this.subscribeToChanges()
   }

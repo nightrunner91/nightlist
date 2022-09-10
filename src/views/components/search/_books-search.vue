@@ -13,7 +13,7 @@
         input(
           class='input__field' 
           type='text' 
-          placeholder='Search book...' 
+          placeholder='Find a book...' 
           v-model='searchQuery'
           @input='searchData()'
           @focus='searchActive = true' 

@@ -13,7 +13,7 @@
         input(
           class='input__field' 
           type='text' 
-          placeholder='Search TV Show...' 
+          placeholder='Find a TV Show...' 
           v-model='searchQuery'
           @input='searchData()'
           @focus='searchActive = true' 
