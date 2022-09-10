@@ -95,6 +95,7 @@ export default {
   },
   created() {
     window.addEventListener('resize', this.handleResize)
+    window.addEventListener('scroll', this.handleResize)
     this.handleResize()
   },
   destroyed() {

@@ -57,20 +57,20 @@ export default {
       })
     },
 
+    downloadBackup(content, fileName, contentType) {
+      var a = document.createElement("a")
+      var file = new Blob([content], {type: contentType})
+      a.href = URL.createObjectURL(file)
+      a.download = fileName
+      a.click()
+    },
+
     watchForKeyboard() {
       document.addEventListener('keydown', e => {
         const preparedData = this.collection
 
-        // Ctrl + I to save json backup file
-        if (e.keyCode == 73 && e.ctrlKey) {
-          function download(content, fileName, contentType) {
-            var a = document.createElement("a")
-            var file = new Blob([content], {type: contentType})
-            a.href = URL.createObjectURL(file)
-            a.download = fileName
-            a.click()
-          }
-          download(JSON.stringify(preparedData), 'backup.json', 'application/json')
+        if ((e.keyCode == 73 && e.ctrlKey) && this.allowEdit) {
+          this.downloadBackup(JSON.stringify(preparedData), 'backup.json', 'application/json')
         }
       })
     },

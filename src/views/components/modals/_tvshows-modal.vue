@@ -36,24 +36,6 @@
                 v-model='current.title'
                 required)
 
-            //- ID -//
-            div(class='input')
-              label(class='input__label') ID
-              input(
-                pattern='_[a-zA-Z0-9]+'
-                minlength='3'
-                maxlength='70'
-                type='text'
-                ref='title'
-                class='input__field' 
-                :class='{"input__field--invalid" : valid.title == false}'
-                v-tooltip='{ content: "Title field is required", offset: 5, trigger: "manual", show: valid.title == false}'
-                autocomplete='off' 
-                @input='removeValidation("title")'
-                v-if='titleVisible'
-                v-model='current.id'
-                required)
-
             //- STATUS -//
             app-dropdown(
               :label='"Status"'

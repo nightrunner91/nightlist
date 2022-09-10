@@ -1,6 +1,6 @@
 <template lang='pug'>
   div(class='placeholder')
-    h3(class='placeholder__title') {{status.title}}
+    h4(class='placeholder__title') {{status.title}}
     svg(class='placeholder__icon'): use(:xlink:href="require('@/assets/sprite.svg')+ '#server-' + status.icon")
 </template>
 

@@ -5,20 +5,17 @@
   align-items: center
   padding: $gutter-width 0 $gutter-width * 2
   user-select: none
-  opacity: $half-opacity
+  opacity: $small-opacity
 
 
   &__title
-    margin-bottom: $gutter-width
-
-    @media #{$sm-dw}
-      margin-bottom: $gutter-width/2
+    margin-bottom: $gutter-width/3
 
 
   &__icon
-    @include icon-size(48, 48)
+    @include icon-size(32, 32)
 
     fill: $clr-white
 
     @media #{$sm-dw}
-      @include icon-size(32, 32)
+      @include icon-size(24, 24)
