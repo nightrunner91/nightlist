@@ -409,31 +409,17 @@ export default new Vuex.Store({
       
       // Backup file storage system
       if (process.env.NODE_ENV === 'production') {
-        let storage = this._vm.$storage
-        let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
-        let items = backUp
+        let storedItems = backUp
 
-        for (let index = 0; index < storedItems.length; index++) {
-          storedItems[index] = storedItems[index].replace(projectName, '')
-        }
-
-        if (items.length && Array.isArray(items)) {
+        if (storedItems.length && Array.isArray(storedItems)) {
           state.collection = []
-          for (let index = 0; index < items.length; index++) {
-            if (items[index].id != undefined) {
-              removeArrEl(storedItems, 'slot_' + items[index].id)
-              storage.set('slot_' + items[index].id, { key: items[index] })
+          for (let n = 0; n < storedItems.length; n++) {
+            if (items[n].id != undefined) {
               commit('APPLY_SLOT', {
-                content: items[index], 
+                content: storedItems[n], 
                 scenario: 'start'
               })
             }
-          }
-        }
-
-        if (storedItems.length && Array.isArray(storedItems)) {
-          for (let index = 0; index < storedItems.length; index++) {
-            storage.remove(storedItems[index])
           }
         }
 
