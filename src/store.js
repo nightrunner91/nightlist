@@ -6,8 +6,6 @@ import backUp from "../backup.json"
 
 Vue.use(Vuex)
 
-axios.defaults.baseURL = 'https://storage.googleapis.com/storage/v1/'
-
 let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
 
 function isJson(item) {
@@ -43,13 +41,8 @@ function removeArrEl(arr, value) {
 export default new Vuex.Store({
   state: {
     allowEdit: false,
-    storageType: 'backup', // local | remote | backup
+    storageType: 'backup', // local | backup
     collection: [],
-    settings: {
-      binId: '',
-      username: 'Nightrunner',
-      avatar: 'https://avatars.steamstatic.com/ee823ca80285bac4553ce8198aa10e1d994528e8_full.jpg',
-    },
     socials: {
       github: {
         id: 'github',
@@ -67,21 +60,11 @@ export default new Vuex.Store({
         tooltip: 'Contact with me via Telegram'
       },
     },
-    requestHeaders: {
-      headers: {
-        'Content-Type': 'application/json',
-        'secret-key': '$2b$10$urM/kkjj8xEy6lPdhjOZje2yW62U6BSr5ImhJhJSrB512FaT5TDT6'
-      }
-    },
     preparedBackup: {},
     content: {},
     windowParams: {
       width: undefined,
       height: undefined
-    },
-    serverState: {
-      status: undefined,
-      message: undefined
     },
     breakpoints: {
       mb: 480,
@@ -351,16 +334,6 @@ export default new Vuex.Store({
       state.windowParams.height = height
     },
 
-    CHANGE_SERVER_STATE(state, data) {
-      state.serverState = data
-    },
-
-    PREPARE_BACKUP(state) {
-      state.preparedBackup.date = Date.now()
-      state.preparedBackup.settings = state.settings
-      state.preparedBackup.collection = state.collection
-    },
-
     CHANGE_MODAL_STATE(state, { visibility, purpose, type }) {
       state.modalState.visibility = visibility
       if (purpose != undefined) state.modalState.purpose = purpose
@@ -377,22 +350,6 @@ export default new Vuex.Store({
 
     CHANGE_CONTENT(state, data) {
       state.content = data
-    },
-
-    SAVE_BIN_ID(state, data) {
-      state.settings.binId = data
-    },
-
-    SAVE_USERNAME(state, data) {
-      state.settings.username = data
-    },
-
-    SAVE_AVATAR(state, data) {
-      state.settings.avatar = data
-    },
-
-    SAVE_SYNC_INTERVAL(state, data) {
-      state.settings.syncInterval = data
     },
 
     APPLY_SLOT(state, { content, scenario }) {
@@ -421,14 +378,10 @@ export default new Vuex.Store({
     SAVE_ALLOW_STATE(state, process) {
       state.allowEdit = process == 'development' ? true : false
     },
-
-    CHANGE_BACKUP_RESTORE_STATE(state, data) {
-      state.backupIsRestoring = data
-    },
   },
   actions: {
 
-    async restoreCollection({ commit }) {
+    restoreFromLocalStorage({ commit }) {
       Object.values(localStorage).forEach(item => {
         if (isJson(item)) {
           let parsed = JSON.parse(item)
@@ -444,102 +397,17 @@ export default new Vuex.Store({
       })
     },
 
-    async prepareBackup({ commit }) {
-      commit('PREPARE_BACKUP')
-    },
-
-    async sendBackup({ dispatch, state, commit }) {
-      await dispatch('prepareBackup')
-
-      commit('CHANGE_SERVER_STATE', {
-        status: 'loading',
-        message: 'waiting for response'
-      })
-
-      axios
-        
-        .put('/b/' + state.settings.binId, state.preparedBackup, state.requestHeaders)
-
-        .then(() => {
-          commit('CHANGE_SERVER_STATE', {
-            status: 'success',
-            message: 'saved'
-          })
-        })
-
-        .catch(error => {
-          console.log("%c" + error, errStyle)
-
-          commit('CHANGE_SERVER_STATE', {
-            status: 'error',
-            message: 'failed to upload collection!'
-          })
-        })
-    },
-
-    async getBackup({ dispatch, state, commit }) {
-      commit('CHANGE_SERVER_STATE', {
+    getBackup({ dispatch, state, commit }) {
+      commit('CHANGE_BACKUP_STATE', {
         status: 'loading',
         message: 'loading collection...'
       })
 
       let storage = this._vm.$storage
       let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
-
-      // JSONbin storage system
-      if (state.storageType == 'remote') {
-        await dispatch('restoreCollection')
-
-        axios
-
-          .get('/b/nightlist', state.requestHeaders)
-
-          .then(response => {
-            commit('CHANGE_SERVER_STATE', {
-              status: 'success',
-              message: 'updated'
-            })
-
-            let items = response.data
-
-            for (let index = 0; index < storedItems.length; index++) {
-              storedItems[index] = storedItems[index].replace(projectName, '')
-            }
-
-            if (items.length && Array.isArray(items)) {
-              state.collection = []
-              for (let index = 0; index < items.length; index++) {
-                if (items[index].id != undefined) {
-                  removeArrEl(storedItems, 'slot_' + items[index].id)
-                  storage.set('slot_' + items[index].id, { key: items[index] })
-                  commit('APPLY_SLOT', {
-                    content: items[index], 
-                    scenario: 'start'
-                  })
-                }
-              }
-            }
-
-            if (storedItems.length && Array.isArray(storedItems)) {
-              for (let index = 0; index < storedItems.length; index++) {
-                storage.remove(storedItems[index])
-              }
-            }
-          })
-
-          .catch(error => {
-            console.log("%c" + error.message, errStyle)
-
-            commit('CHANGE_SERVER_STATE', {
-              status: 'error',
-              message: 'failed to restore collection!'
-            })
-          })
-
-      } 
       
       // Backup file storage system
-      else if (state.storageType == 'backup') {
+      if (state.storageType == 'backup') {
         let items = backUp
 
         for (let index = 0; index < storedItems.length; index++) {
@@ -566,7 +434,7 @@ export default new Vuex.Store({
           }
         }
 
-        commit('CHANGE_SERVER_STATE', {
+        commit('CHANGE_BACKUP_STATE', {
           status: 'success',
           message: 'updated'
         })
@@ -574,16 +442,16 @@ export default new Vuex.Store({
 
       // localStorage storage system
       else if (state.storageType == 'local') {
-        dispatch('restoreCollection')
+        dispatch('restoreFromLocalStorage')
 
-        commit('CHANGE_SERVER_STATE', {
+        commit('CHANGE_BACKUP_STATE', {
           status: 'success',
           message: 'updated'
         })
       }
 
       else {
-        commit('CHANGE_SERVER_STATE', {
+        commit('CHANGE_BACKUP_STATE', {
           status: 'error',
           message: 'failed to restore collection!'
         })

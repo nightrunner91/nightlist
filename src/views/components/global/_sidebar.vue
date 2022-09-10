@@ -4,12 +4,6 @@
     class='sidebar'
     :class='[{"sidebar--blured" : modalState.visibility}, {"sidebar--collapsed" : sidebarCollapsed}, {"sidebar--opened" : !sidebarCollapsed && windowParams.width < breakpoints.lg}, {"sidebar--notransition" : noTransition}]')
 
-    //- div(
-    //-   v-for='route in routes'
-    //-   v-if='route.mainMenu && windowParams.width > breakpoints.mb'
-    //-   class='sidebar__gradient'
-    //-   :class='["sidebar__gradient--" + route.id, {"sidebar__gradient--active" : gradientActive(route.name)}]')
-
     button(
       v-if='windowParams.width <= breakpoints.lg && windowParams.width > breakpoints.mb'
       class='sidebar__hamburger hamburger hamburger--arrowalt'
@@ -19,16 +13,13 @@
       span(class='hamburger-box')
         span(class='hamburger-inner')
 
-    transition(name='settings-reveal' mode='out-in')
-      app-settings(v-if='settingsOpened' :sidebarCollapsed='sidebarCollapsed')
-
     div(
       v-if='windowParams.width > breakpoints.mb'
       class='sidebar__profile'
       :class='{"sidebar__profile--collapsed" : sidebarCollapsed}')
-      div(
+      img(
         class='sidebar__avatar'
-        :style='avatarStyles')
+        :src='require(`../../../assets/avatar.jpg`)')
       h2(class='sidebar__title') Hi. I'm #[span Nikita].
       p(class='sidebar__desc') And this is everything I've ever <br />played, watched and read.
 
@@ -82,7 +73,6 @@ export default {
   },
   data() {
     return {
-      settingsOpened: false,
       sidebarCollapsed: false,
       noTransition: false
     }
@@ -100,22 +90,8 @@ export default {
       return this.$store.state.modalState
     },
 
-    username() {
-      return this.$store.state.settings.username
-    },
-
     socials() {
       return this.$store.state.socials
-    },
-
-    avatarStyles() {
-      let storedAvatar = this.$store.state.settings.avatar
-
-      if (storedAvatar.length > 0) {
-        return 'background-image: url(' + storedAvatar + ')'
-      } else {
-        return 'background-image: url()'
-      }
     },
 
     routes() {
@@ -154,14 +130,6 @@ export default {
 
     favouritesLength() {
       return this.$store.state.collection.filter(i => i.favourite).length
-    },
-
-    openSettings() {
-      this.settingsOpened = true
-    },
-
-    closeSettings() {
-      this.settingsOpened = false
     },
 
     gradientActive(name) {
