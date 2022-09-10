@@ -409,10 +409,11 @@ export default new Vuex.Store({
       
       // Backup file storage system
       if (process.env.NODE_ENV === 'production') {
-        let storage = this._vm.$storage
         let storedItems = backUp
 
-        storage.clear({ force: true })
+        console.log(storedItems)
+
+        this._vm.$storage.clear({ force: true })
 
         if (storedItems.length && Array.isArray(storedItems)) {
           state.collection = []
