@@ -2,7 +2,7 @@
   div(class='indicator')
     transition(name='loader')
       svg(
-        v-if='serverState.status == "loading"'
+        v-if='backupState.status == "loading"'
         class='indicator__loader'): use(xlink:href='#loader')
     div(class='indicator__tooltips')
       transition-group(name='tooltip')
@@ -12,7 +12,7 @@
           :key='tooltip.id'
           :style='tooltipPosition(tooltip.order)'
           :class='"indicator__tooltip--" + tooltip.status') {{tooltip.message}}
-    
+
 </template>
 
 <script>
@@ -30,8 +30,8 @@ export default {
     }
   },
   computed: {
-    serverState() {
-      return this.$store.state.serverState
+    backupState() {
+      return this.$store.state.backupState
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
     
     watchForNotifications() {
       this.$store.subscribe((mutation, state) => {
-        if (mutation.type == 'CHANGE_SERVER_STATE') {
+        if (mutation.type == 'CHANGE_BACKUP_STATE') {
           if (mutation.payload.status == 'success' || mutation.payload.status == 'error') {
             this.addTooltip(mutation.payload)
           }

@@ -13,14 +13,7 @@ module.exports = {
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1
       }),
-      // new CompressionPlugin({
-      //   test: /\.js(\?.*)?$/i
-      // })
     ],
-    // optimization: {
-    //   nodeEnv: 'production',
-    //   minimize: true
-    // }
   },
   chainWebpack: config => {
     config.optimization.delete('splitChunks')

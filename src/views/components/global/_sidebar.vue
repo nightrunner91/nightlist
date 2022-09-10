@@ -29,7 +29,7 @@
         v-if='route.mainMenu'
         :to='route.path'
         class='sidebar__link'
-        @click.native='closeSettings(), collapseSidebar()'
+        @click.native='collapseSidebar()'
         :key='route.id')
         div(
           class='sidebar__icon'
@@ -158,10 +158,6 @@ export default {
   mounted() {
     eventBus.$on('openSettings', () => {
       this.openSettings()
-    })
-
-    eventBus.$on('closeSettings', () => {
-      this.closeSettings()
     })
 
     this.handleResize()

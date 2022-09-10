@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import { projectName, eventBus } from "./main"
 import backUp from "../backup.json"
 
 Vue.use(Vuex)
-
-let errStyle = 'background: #b53e38; color: #ffffff; padding: 4px 10px; font-size: 14px; border-radius: 4px;'
 
 function isJson(item) {
   item = typeof item !== "string"
@@ -78,7 +75,10 @@ export default new Vuex.Store({
       purpose: undefined
     },
     searchState: false,
-    backupIsRestoring: false,
+    backupState: {
+      status: undefined,
+      message: undefined
+    },
     games: {
       statuses: [
         {
@@ -375,6 +375,10 @@ export default new Vuex.Store({
       state.collection.splice(target, 1)
     },
 
+    CHANGE_BACKUP_STATE(state, data) {
+      state.backupState = data
+    },
+
     SAVE_ALLOW_STATE(state, process) {
       state.allowEdit = process == 'development' ? true : false
     },
@@ -402,12 +406,11 @@ export default new Vuex.Store({
         status: 'loading',
         message: 'loading collection...'
       })
-
-      let storage = this._vm.$storage
-      let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
       
       // Backup file storage system
-      if (state.storageType == 'backup') {
+      if (process.env.NODE_ENV === 'production') {
+        let storage = this._vm.$storage
+        let storedItems = storage.keys().filter(i => i.includes(projectName + 'slot_'))
         let items = backUp
 
         for (let index = 0; index < storedItems.length; index++) {
@@ -441,7 +444,7 @@ export default new Vuex.Store({
       }
 
       // localStorage storage system
-      else if (state.storageType == 'local') {
+      else if (process.env.NODE_ENV === 'development') {
         dispatch('restoreFromLocalStorage')
 
         commit('CHANGE_BACKUP_STATE', {
