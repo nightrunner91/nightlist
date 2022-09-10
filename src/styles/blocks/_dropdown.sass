@@ -23,7 +23,7 @@ $visible-items: 4
     align-items: center
     width: 100%
     height: $ui-height
-    padding: 0 $gutter-width/2
+    padding: .1em $gutter-width/2 0
     z-index: 2
     border: 0
     outline: 0
@@ -130,6 +130,8 @@ $visible-items: 4
   &__icon
     @include icon-size(24,24)
 
+    position: relative
+    top: -0.1em
     margin-right: $gutter-width/4
     opacity: $half-opacity
     fill: $clr-grey
