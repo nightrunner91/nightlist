@@ -418,7 +418,7 @@ export default new Vuex.Store({
         if (storedItems.length && Array.isArray(storedItems)) {
           state.collection = []
           for (let n = 0; n < storedItems.length; n++) {
-            if (items[n].id != undefined) {
+            if (storedItems[n].id != undefined) {
               commit('APPLY_SLOT', {
                 content: storedItems[n], 
                 scenario: 'start'
