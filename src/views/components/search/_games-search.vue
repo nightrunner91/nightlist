@@ -349,10 +349,13 @@ export default {
     },
 
     editSlot(id, event) {
-      if (event.target.className == 'slot__link') return
-      else {
-        this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
-        eventBus.$emit('openModal', 'edit')
+      if (this.allowEdit) {
+        if (event.target.className == 'slot__link') return
+        else {
+          this.$store.commit('CHANGE_CONTENT', this.gamesCollection.filter(i => i.id == id)[0])
+          eventBus.$emit('openModal', 'edit')
+          eventBus.$emit('closeSettings')
+        }
       }
     },
 
