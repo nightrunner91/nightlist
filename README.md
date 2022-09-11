@@ -6,7 +6,7 @@ Since you are using this app on your device at localhost it will use localStorag
 
 ## Preview
 
-[Github pages]([https://www.creative-tim.com/vuematerial/](https://nightrunner91.github.io/nightlist/))
+[Github pages](https://nightrunner91.github.io/nightlist/)
 
 ## How to use it?
 
