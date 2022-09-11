@@ -391,6 +391,10 @@ export default {
       return this.$store.state.anime
     },
 
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+
     windowParams() {
       return this.$store.state.windowParams
     },

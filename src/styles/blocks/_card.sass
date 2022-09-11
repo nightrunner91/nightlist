@@ -104,7 +104,9 @@
     margin-bottom: $gutter-width / 4
     opacity: $passive-opacity
     color: rgba($clr-white, $barely-opacity)
-    line-height: 1
+
+    @media #{$xs-dw}
+      font-size: 14px
 
   &__rating
     position: absolute
@@ -114,6 +116,11 @@
     margin: 0 auto
     opacity: $transparent-opacity
     transition: all .35s $decelerated
+    transform-origin: bottom center
+
+    @media #{$xs-dw}
+      bottom: $gutter-width / 2
+      transform: scale(0.6)
 
   &__tilda
     @include icon-size(16,16)

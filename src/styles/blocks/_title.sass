@@ -1,7 +1,7 @@
 .title
   display: flex
   align-items: center
-  white-space: nowrap
+  width: 100%
 
   &--main
     margin-bottom: $gutter-width
@@ -61,6 +61,9 @@
     margin-bottom: $gutter-width / 3
     font-size: 1.2rem
     color: rgba($clr-white, $passive-opacity)
+
+    @media #{$xs-dw}
+      font-size: 1rem
 
   &__icon
     @include icon-size(24,24)

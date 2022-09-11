@@ -363,6 +363,10 @@ export default {
       return this.$store.state.films
     },
 
+    allowEdit() {
+      return this.$store.state.allowEdit
+    },
+
     windowParams() {
       return this.$store.state.windowParams
     },
