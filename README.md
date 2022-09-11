@@ -1,4 +1,4 @@
-# Summary
+## Summary
 
 This is Front-end project for personal usage. It uses localStorage and/or local JSON file to store all my games, movies and books statistics in one pretty looking app. You can use it too, but be prepared to fill it with your data as I did.
 
