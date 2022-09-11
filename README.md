@@ -1,4 +1,4 @@
-# Summary 📋
+## Summary 📋
 
 This is a front-end project for personal usage. It uses localStorage and/or local JSON file to store all my games, movies and books statistics in one pretty looking app. You can use it too, but be prepared to fill it with your data as I did.
 
@@ -6,11 +6,11 @@ Since you are using this app on your device at localhost it will use localStorag
 
 If you have any questions or you need some help feel free to contact me. Good luck. 😉
 
-# Preview 🖥
+## Preview 🖥
 
 [Github pages](https://nightrunner91.github.io/nightlist/)
 
-# How to use it? 🖱
+## How to use it? 🖱
 
 Clone repo and install dependencies 
 ```
@@ -25,7 +25,7 @@ Build your project
 ```
 npm run build
 ```
-# Ideas for future 💭
+## Ideas for future 💭
 
 - Add history routing
 - Add "About Me" page
