@@ -28,8 +28,8 @@ npm run build
 ## Ideas for future
 
 - Add history routing
-- Add 'About me' page
-- Add 'My PC' page
-- Add 'Statistics' page
+- Add "About Me" page
+- Add "My PC" page
+- Add "My Statistics" page
 - Add statistics widgets for each category
 - Show replay/rewatch counter in cards and tables
