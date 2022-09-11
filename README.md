@@ -25,3 +25,10 @@ Build your project
 ```
 npm run build
 ```
+## Ideas for future
+
+- [] Add 'About me' page
+- [] Add 'My PC' page
+- [] Add 'Statistics' page
+- [] Add statistics widgets for each category
+- [] Show replay counter for movies, tv shows and anime
