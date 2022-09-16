@@ -9,7 +9,7 @@
 
   &--static
     margin-bottom: $gutter-width/1.5
-    padding: 0 $gutter-width
+    padding: 0 $gutter-width / 2
     border-radius: $base-radius
     user-select: none
 
@@ -19,7 +19,7 @@
 
   &--secondary
     margin-bottom: $gutter-width/1.5
-    padding: 0 $gutter-width
+    padding: 0 $gutter-width / 2
     border-radius: $base-radius
     cursor: pointer
     user-select: none
@@ -69,8 +69,8 @@
     @include icon-size(24,24)
 
     position: relative
-    left: -$gutter-width/2
     top: -.1em
+    margin-right: $gutter-width / 1.5
     fill: $clr-white
     opacity: $half-opacity
     transition: $base-transition
@@ -98,9 +98,6 @@
 
     &--notransition
       transition: $no-transition
-
-    @media #{$mb-up}
-      right: -$gutter-width/2
 
     @media #{$mb-dw}
       @include icon-size(24, 24)

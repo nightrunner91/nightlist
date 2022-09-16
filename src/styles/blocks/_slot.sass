@@ -4,6 +4,7 @@ $star-size: 20px
 .slot
   position: relative
   display: flex
+  justify-content: space-between
   align-items: center
   flex-wrap: wrap
   padding: 0 $gutter-width/2
@@ -108,6 +109,7 @@ $star-size: 20px
     padding: 0
 
     &:first-child
+      max-width: $gutter-width !important
       opacity: $half-opacity
       font-size: 12px
 
