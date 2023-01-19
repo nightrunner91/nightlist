@@ -411,8 +411,6 @@ export default new Vuex.Store({
       if (process.env.NODE_ENV === 'production') {
         let storedItems = backUp
 
-        console.log(storedItems)
-
         this._vm.$storage.clear({ force: true })
 
         if (storedItems.length && Array.isArray(storedItems)) {
